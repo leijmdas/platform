@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>platform</artifactId>
+        <groupId>kunlong</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>System</artifactId>
+    <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>kunlong</groupId>
+            <artifactId>Platform</artifactId>
+            <version>1.0-SNAPSHOT</version>
+
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>system</finalName>
+        <plugins>
+
+
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--<version>2.1.8.RELEASE</version>-->
+
+                <!--<configuration>-->
+                    <!--<mainClass>com.kunlong.system.Application</mainClass>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>repackage</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
+
+            <!--<plugin>-->
+                <!--<groupId>com.spotify</groupId>-->
+                <!--<artifactId>dockerfile-maven-plugin</artifactId>-->
+                <!--<version>${dockerfile-maven-version}</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>default</id>-->
+                        <!--<goals>-->
+                            <!--&lt;!&ndash;<goal>build</goal>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<goal>push</goal>&ndash;&gt;-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<repository>platform/system</repository>-->
+                    <!--<tag>${project.version}</tag>-->
+                    <!--<buildArgs>-->
+                        <!--<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>-->
+                    <!--</buildArgs>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
+</project>

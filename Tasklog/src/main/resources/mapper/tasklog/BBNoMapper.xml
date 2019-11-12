@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kunlong.tasklog.dao.BBNoMapper" >
+
+
+	<select id="selectBBNo" resultType="com.kunlong.tasklog.model.BBNoModel">
+      SELECT  * FROM bb_no
+    </select>
+
+	<select id="getBBNoByUUId" resultType="com.kunlong.tasklog.model.BBNoModel">
+      SELECT  * FROM bb_no where UUID = #{uuId}
+    </select>
+
+    <insert id="addBBNOInfo" parameterType="com.kunlong.tasklog.model.BBNoModel" useGeneratedKeys="true" keyProperty="id">
+		insert into bb_no (UUID,create_time)
+		VALUES (#{uuId},now())
+	</insert>
+
+</mapper>

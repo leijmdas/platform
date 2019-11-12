@@ -1,0 +1,10 @@
+#公共默认配置
+
+spring:
+  application:
+    name: kunlong-system
+  profiles:
+    active: dev
+server:
+  port: 18001
+  contextPath: /
