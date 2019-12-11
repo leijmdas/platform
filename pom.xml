@@ -144,12 +144,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.1.20</version>
-            <!--<version>1.1.20</version>-->
         </dependency>
 
         <dependency>
@@ -207,12 +206,12 @@
         <repository>
             <id>MyReleasesNexus</id>
             <name>Nexus Releases Repository</name>
-            <url>http://system-db-host:8081/repository/maven-releases/</url>
+            <url>http://122.51.227.25:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>MySnapshotNexus</id>
             <name>Nexus snapshots Repository</name>
-            <url>http://system-db-host:8081/repository/maven-snapshots/</url>
+            <url>http://122.51.227.25:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
