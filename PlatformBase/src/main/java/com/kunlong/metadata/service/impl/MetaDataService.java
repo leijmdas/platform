@@ -1,7 +1,7 @@
 package com.kunlong.metadata.service.impl;
 
 import com.kunlong.metadata.model.*;
-import com.kunlong.mybatis.YtbSql;
+import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.model.KunlongError;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class MetaDataService {
         StringBuilder sql = new StringBuilder(128);
         sql.append("select * from ytb_manager.metadata_dict ");
         sql.append(" where metadata_name='").append(metadataName).append("'");
-        return YtbSql.selectOne(sql, MetadataDict.class);
+        return KunlongSql.selectOne(sql, MetadataDict.class);
     }
 
     public List<MetadataField> getMetadataFields(int metadataId) {
@@ -46,7 +46,7 @@ public class MetaDataService {
         sql.append("select * from ytb_manager.metadata_field ");
         sql.append(" where metadata_id='").append(metadataId).append("'");
         sql.append(" order by field_order ");
-        return YtbSql.selectList(sql, MetadataField.class);
+        return KunlongSql.selectList(sql, MetadataField.class);
     }
 
     public List<MetadataDict> getDictTableAndField(String metadataName) {
@@ -101,7 +101,7 @@ public class MetaDataService {
         if (selectSql.getOrderBy() != null && !selectSql.getOrderBy().isEmpty()) {
             sql.append(" order by ").append(selectSql.getOrderBy()).append(" asc ");
         }
-        return YtbSql.selectList(sql);
+        return KunlongSql.selectList(sql);
 
     }
 }

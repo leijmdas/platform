@@ -1,15 +1,13 @@
 package com.kunlong.metadata.service.impl;
 
-import com.github.abel533.sql.SqlMapper;
 import com.kunlong.metadata.dao.*;
 import com.kunlong.metadata.model.*;
 import com.kunlong.metadata.service.SysMetaDataService;
-import com.kunlong.mybatis.YtbSql;
+import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
@@ -32,6 +30,8 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
     SubsysDictMapper subsysDictMapper ;
     @Autowired
     SysMetaDataDictMapper sysMetaDataDictDao;
+    @Autowired
+    MetadataDictMapper metadataDictMapper;
     @Autowired
     MetadataFieldMapper sysMetaDataFieldDao ;
     @Autowired
@@ -113,11 +113,8 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
 
     public List<MetadataDict> selectByExample(MetadataDictExample getDictMetadataName) {
-        SqlSession sq = MyBatisUtil.getSession();
-        MetadataDictMapper sysMetaDataFieldDao = sq.getMapper(MetadataDictMapper.class);
-        List<MetadataDict> metadataDicts = sysMetaDataFieldDao.selectByExample(getDictMetadataName);
-        sq.close();
-        return metadataDicts;
+        return metadataDictMapper.selectByExample(getDictMetadataName);
+
     }
 
 
@@ -136,18 +133,12 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
     @Override
     public void addDictDataType(Sys_DictDataTypeModel sysDictDataTypeModel) {
-        SqlSession sq = MyBatisUtil.getSession();
-        SysDictDataTypeMapper sysDictDataTypeDao = sq.getMapper(SysDictDataTypeMapper.class);
-        try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date now = new Date();
             String createTime = df.format(now);
             sysDictDataTypeModel.setCreateTime(createTime);
             sysDictDataTypeDao.addDictDataType(sysDictDataTypeModel);
-            sq.commit();
-        } finally {
-            sq.close();
-        }
+
     }
 
     @Override
@@ -159,42 +150,21 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
     @Override
     public void deleteDictDataTypeById(int dataInnerId) {
-        SqlSession sq = MyBatisUtil.getSession();
-        SysDictDataTypeMapper sysDictDataTypeDao = sq.getMapper(SysDictDataTypeMapper.class);
 
-        try {
             sysDictDataTypeDao.deleteDictDataTypeById(dataInnerId);
-            sq.commit();
-        } finally {
-            sq.close();
-        }
+
     }
 
     @Override
     public List<Map<String, Object>> getTree(int typeId) {
-        SqlSession sq = MyBatisUtil.getSession();
-        List<Map<String, Object>> list;
-        try {
-            SysDictDataTypeMapper sysDictDataTypeDao = sq.getMapper(SysDictDataTypeMapper.class);
-            list = sysDictDataTypeDao.getTree(typeId);
-        } finally {
-            sq.close();
-        }
-        return list;
+            return  sysDictDataTypeDao.getTree(typeId);
     }
 
 
     @Override
     public int getTotalCount() {
-        SqlSession sq = MyBatisUtil.getSession();
-        int i = 0;
-        try {
-            SysMetaDataDictMapper sysMetaDataDictDao = sq.getMapper(SysMetaDataDictMapper.class);
-            i = sysMetaDataDictDao.getTotalCount();
-        } finally {
-            sq.close();
-        }
-        return i;
+
+       return sysMetaDataDictDao.getTotalCount();
     }
 
     boolean isDate(String dtype) {
@@ -335,20 +305,17 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
         sql.deleteCharAt(sql.length() - 1);
         sql.append(")" + "ENGINE=Innodb DEFAULT CHARSET=UTF8 COLLATE UTF8_BIN;");
 
-        YtbSql.update(sql);
+        KunlongSql.update(sql);
         msgBody = "{'sql': 'make Table OK'}";
         return handler.buildMsg(retcode, retmsg, msgBody);
     }
 
     @Override
     public void deleteFieldsByDictId(int metaDataId) {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            SqlMapper m = new SqlMapper(sq);
-            m.delete("delete from metadata_field where metadata_id =" + metaDataId);
-        } finally {
-            sq.close();
-        }
+        StringBuilder sql = new StringBuilder();
+        sql.append("delete from metadata_field where metadata_id =" + metaDataId);
+        KunlongSql.delete(sql);
+
     }
 
     @Override
@@ -362,15 +329,13 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
         if (selectSql.getOrderBy() != null && !selectSql.getOrderBy().isEmpty()) {
             sql.append(" order by ").append(selectSql.getOrderBy()).append(" asc ");
         }
-        return YtbSql.selectList(sql);
+        return KunlongSql.selectList(sql);
 
     }
 
     @Override
     public List<Map<String, Object>> selectByTableLimit(SelectSql selectSql) {
-        SqlSession ss = MyBatisUtil.getSession();
-        try {
-            SqlMapper m = new SqlMapper(ss);
+
             StringBuilder sql=new StringBuilder(256);
             sql.append(" select * from " ).append( selectSql.getTable() );
             if( selectSql.getsWhere()!=null ){
@@ -378,18 +343,15 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
             }
             sql.append( "  limit " ).append(selectSql.getLimitFirstIndex() );
             sql.append( ",").append( selectSql.getLimitpageSize() );
-            List<Map<String, Object>> data = m.selectList(sql.toString());
+            List<Map<String, Object>> data = KunlongSql.selectList(sql);
             return data;
-        } finally {
-            ss.close();
-        }
+
 
     }
 
     @Override
     public List<Map<String, Object>> selectByTableLimitOrderBy(SelectSql selectSql) {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
+
             StringBuilder sql = new StringBuilder();
             sql.append("select * from ").append(selectSql.getTable());
             if( selectSql.getsWhere()!=null ){
@@ -400,11 +362,9 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
             }
             sql.append("  limit ").append(selectSql.getLimitFirstIndex());
             sql.append(",").append(selectSql.getLimitpageSize());
-            SqlMapper m = new SqlMapper(sq);
-            return m.selectList(sql.toString());
-        } finally {
-            sq.close();
-        }
+
+            return KunlongSql.selectList(sql);
+
 
     }
 

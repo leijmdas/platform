@@ -6,7 +6,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.Map;
 
-public final class YtbSql {
+public final class KunlongSql {
     public static SqlSessionBuilder sqlSessionBuilder = new SqlSessionBuilder();
 
     public static List<Map<String, Object>> selectList(StringBuilder sql) {
@@ -65,7 +65,7 @@ public final class YtbSql {
     public static int selectAutoID(SqlSession session) {
         return sqlSessionBuilder.selectAutoID(session);
     }
-    //YtbSql 提供了两个函数：分别是调存贮，函数返回
+    //KunlongSql 提供了两个函数：分别是调存贮，函数返回
     //fnDb   spDb
 
     public static String fnDb(String fnName, Object... p) {

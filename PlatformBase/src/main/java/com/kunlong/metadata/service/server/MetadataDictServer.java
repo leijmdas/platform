@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.kunlong.metadata.model.*;
 import com.kunlong.metadata.service.impl.*;
-import com.kunlong.mybatis.YtbSql;
+import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
@@ -30,7 +30,7 @@ public class MetadataDictServer {
             StringBuilder sql = new StringBuilder();
             sql.append("update ytb_manager.metadata_field set field_order=").append(field_order++);
             sql.append(" where field_id=").append(fieldId);
-            YtbSql.update(sql);
+            KunlongSql.update(sql);
         }
         msgBody = "{}";
         return handler.buildMsg(retcode, retmsg, msgBody);
@@ -42,7 +42,7 @@ public class MetadataDictServer {
         StringBuilder sql = new StringBuilder();
         sql.append("select metadata_alias,metadata_name from ytb_manager.metadata_dict ");
         sql.append(" where metadata_cached=1");
-        List<MetadataDict> lst=YtbSql.selectList(sql,MetadataDict.class);
+        List<MetadataDict> lst=KunlongSql.selectList(sql,MetadataDict.class);
         msgBody = "{'list':" +  KunlongUtils.toJSONStringSkipNull(lst) + "}";
         return handler.buildMsg(retcode, retmsg, msgBody);
 
@@ -54,7 +54,7 @@ public class MetadataDictServer {
         StringBuilder sql = new StringBuilder();
         sql.append("call ytb_manager.spCheckMetadata");
         sql.append("(").append(metadataId).append(")");
-        List<Map<String, Object>> lst = YtbSql.selectList(sql);
+        List<Map<String, Object>> lst = KunlongSql.selectList(sql);
         msgBody = "{'list':" + KunlongUtils.toJSONStringPretty(lst) + "}";
         return handler.buildMsg(retcode, retmsg, msgBody);
     }

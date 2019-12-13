@@ -5,9 +5,8 @@ import com.kunlong.metadata.model.MetadataDict;
 import com.kunlong.metadata.model.MetadataDictExample;
 import com.kunlong.metadata.model.MetadataField;
 import com.kunlong.metadata.service.MetadataDictService;
-import com.kunlong.mybatis.YtbSql;
+import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.model.KunlongError;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -89,7 +88,7 @@ public class MetadataDictServiceImpl implements MetadataDictService {
         StringBuilder sql1 = new StringBuilder();
         sql1.append(" select * from ytb_manager.metadata_dict ");
         sql1.append(" where metadata_id= ").append(metadataId);
-        MetadataDict md = YtbSql.selectOne(sql1, MetadataDict.class);
+        MetadataDict md = KunlongSql.selectOne(sql1, MetadataDict.class);
 
         md.setMetadataAlias(md.getMetadataAlias() + System.currentTimeMillis());
         md.setMetadataName(md.getMetadataName() + System.currentTimeMillis());
@@ -101,7 +100,7 @@ public class MetadataDictServiceImpl implements MetadataDictService {
         MetadataFieldServiceImpl mfs = new MetadataFieldServiceImpl();
         md.setMetadataId(metadataId);
 
-        List<MetadataField> lst = YtbSql.selectList(sql, MetadataField.class);
+        List<MetadataField> lst = KunlongSql.selectList(sql, MetadataField.class);
         for (MetadataField mf : lst) {
             mf.setFieldId(null);
             mf.setMetadataId(id);
@@ -116,7 +115,7 @@ public class MetadataDictServiceImpl implements MetadataDictService {
         sql.append("select 1 from information_schema.TABLES");
         sql.append(" where  TABLE_SCHEMA='").append(db).append("'");
         sql.append(" and table_name='").append(tbl).append("'");
-        List lst = YtbSql.selectList(sql);
+        List lst = KunlongSql.selectList(sql);
         return lst.size() > 0;
     }
 
@@ -124,7 +123,7 @@ public class MetadataDictServiceImpl implements MetadataDictService {
         StringBuilder sql1 = new StringBuilder();
         sql1.append(" select * from ytb_manager.metadata_dict ");
         sql1.append(" where metadata_id= ").append(metadataId);
-        MetadataDict md = YtbSql.selectOne(sql1, MetadataDict.class);
+        MetadataDict md = KunlongSql.selectOne(sql1, MetadataDict.class);
         if (!checkTableExists(md.getMetadataDb(), md.getMetadataName())) {
             throw new KunlongError(KunlongError.CODE_NOTEXISTS_RECORD, " 表不存在！");
         }
@@ -133,7 +132,7 @@ public class MetadataDictServiceImpl implements MetadataDictService {
         sql1.append(" select 1 from ").append(md.getMetadataDb());
         sql1.append(".").append(md.getMetadataName());
         sql1.append(" limit 1");
-        List<Map<String, Object>> lst = YtbSql.selectList(sql1);
+        List<Map<String, Object>> lst = KunlongSql.selectList(sql1);
         //有记录不能删除的
         if (lst.size() > 0) {
             return 0;
@@ -141,7 +140,7 @@ public class MetadataDictServiceImpl implements MetadataDictService {
         sql1.delete(0, sql1.length());
         sql1.append(" drop table ").append(md.getMetadataDb());
         sql1.append(".").append(md.getMetadataName());
-        YtbSql.update(sql1);
+        KunlongSql.update(sql1);
         return metadataId;
 
     }
