@@ -1,7 +1,7 @@
 package com.kunlong.metadata.model;
 
 import com.kunlong.platform.model.KunlongModel;
-import org.apache.poi.util.StringUtil;
+//import org.apache.poi.util.StringUtil;
 import org.mockito.internal.util.StringUtil;
 
 /**

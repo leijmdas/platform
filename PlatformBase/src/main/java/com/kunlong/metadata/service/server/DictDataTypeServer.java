@@ -9,10 +9,12 @@ import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
+import com.kunlong.platform.utils.KunlongUtils;
+
 import java.util.List;
 
 public class DictDataTypeServer {
-    int retcode = 0;
+     int retcode = 0;
     String retmsg = "成功";
     String msgBody = "{}";
 

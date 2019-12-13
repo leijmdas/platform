@@ -4,9 +4,11 @@ import com.github.abel533.sql.SqlMapper;
 import com.kunlong.metadata.dao.*;
 import com.kunlong.metadata.model.*;
 import com.kunlong.metadata.service.SysMetaDataService;
+import com.kunlong.mybatis.YtbSql;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
+import com.kunlong.platform.model.KunlongError;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static com.kunlong.metadata.service.impl.MetadataDictServiceImpl.checkTableExists;
 
 /**
  * Package: ytb.manager.metadata.service.impl
@@ -26,6 +30,12 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
     SysDictDataTypeMapper sysDictDataTypeDao ;
     @Autowired
     SubsysDictMapper subsysDictMapper ;
+    @Autowired
+    SysMetaDataDictMapper sysMetaDataDictDao;
+    @Autowired
+    MetadataFieldMapper sysMetaDataFieldDao ;
+    @Autowired
+    SysMetaDataFieldMapper sysMetaDataFieldMapper;
 
     /*
             @Override
@@ -91,24 +101,14 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 */
     @Override
     public void deleteDictById(int metaDataId) {
-        SqlSession sq = MyBatisUtil.getSession();
-        SysMetaDataDictMapper sysMetaDataDictDao = sq.getMapper(SysMetaDataDictMapper.class);
 
-        try {
             sysMetaDataDictDao.deleteDictById(metaDataId);
-            sq.commit();
-        } finally {
-            sq.close();
-        }
+
     }
 
     public MetadataField selectByPrimaryKey(Integer metaDataId) {
-        SqlSession sq = MyBatisUtil.getSession();
+        return sysMetaDataFieldDao.selectByPrimaryKey(metaDataId);
 
-        MetadataFieldMapper sysMetaDataFieldDao = sq.getMapper(MetadataFieldMapper.class);
-        MetadataField field = sysMetaDataFieldDao.selectByPrimaryKey(metaDataId);
-        sq.close();
-        return field;
     }
 
 
@@ -123,29 +123,15 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
     @Override
     public void deleteFieldById(int fieldId) {
-        SqlSession sq = MyBatisUtil.getSession();
-        SysMetaDataFieldMapper sysMetaDataFieldDao = sq.getMapper(SysMetaDataFieldMapper.class);
 
-        try {
-            sysMetaDataFieldDao.deleteFieldById(fieldId);
-            sq.commit();
-        } finally {
-            sq.close();
-        }
+            sysMetaDataFieldMapper.deleteFieldById(fieldId);
+
     }
 
 
     @Override
     public List<Sys_DictDataTypeModel> getDictDataTypeList() {
-        SqlSession sq = MyBatisUtil.getSession();
-        List list;
-        try {
-            SysDictDataTypeMapper sysDictDataTypeDao = sq.getMapper(SysDictDataTypeMapper.class);
-            list = sysDictDataTypeDao.getDictDataTypeList();
-        } finally {
-            sq.close();
-        }
-        return list;
+        return sysDictDataTypeDao.getDictDataTypeList();
     }
 
     @Override

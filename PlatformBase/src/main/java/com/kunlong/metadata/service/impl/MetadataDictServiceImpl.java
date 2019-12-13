@@ -5,6 +5,7 @@ import com.kunlong.metadata.model.MetadataDict;
 import com.kunlong.metadata.model.MetadataDictExample;
 import com.kunlong.metadata.model.MetadataField;
 import com.kunlong.metadata.service.MetadataDictService;
+import com.kunlong.mybatis.YtbSql;
 import com.kunlong.platform.model.KunlongError;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
