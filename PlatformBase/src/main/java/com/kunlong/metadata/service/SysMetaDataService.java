@@ -3,10 +3,6 @@ package com.kunlong.metadata.service;
 import com.kunlong.metadata.model.*;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.rest.RestHandler;
-import ytb.common.RestMessage.MsgRequest;
-import ytb.common.context.rest.RestHandler;
-import ytb.manager.metadata.model.*;
-
 import java.util.List;
 import java.util.Map;
 

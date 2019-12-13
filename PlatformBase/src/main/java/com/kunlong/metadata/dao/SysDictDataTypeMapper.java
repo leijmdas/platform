@@ -1,6 +1,6 @@
 package com.kunlong.metadata.dao;
 
-import ytb.manager.metadata.model.Sys_DictDataTypeModel;
+import com.kunlong.metadata.model.Sys_DictDataTypeModel;
 
 import java.util.List;
 import java.util.Map;

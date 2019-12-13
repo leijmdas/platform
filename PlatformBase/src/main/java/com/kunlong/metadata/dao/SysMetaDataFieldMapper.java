@@ -1,6 +1,6 @@
 package com.kunlong.metadata.dao;
 
-import ytb.manager.metadata.model.Sys_MetaDataFieldModel;
+import com.kunlong.metadata.model.Sys_MetaDataFieldModel;
 
 import java.util.List;
 

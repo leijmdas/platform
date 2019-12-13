@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ytb.common.RestMessage.MsgResponse;
-import ytb.common.context.model.YtbError;
+import ytb.common.context.model.KunlongError;
 import ytb.common.context.rest.RestHandler;
 import ytb.manager.metadata.rest.impl.ConfigCenterRestProcess;
 import ytb.manager.metadata.rest.impl.MetaDataProcess;
@@ -26,12 +26,12 @@ public class RestMetaDataManager extends RestHandler {
         try {
             parseRequest(data);
             resp = process();
-        } catch (YtbError e) {
+        } catch (KunlongError e) {
             e.printStackTrace();
             resp = buildMsg(e.getRetcode(), e.getMsg(), "{}");
         } catch (Exception e) {
             e.printStackTrace();
-            YtbError ye = new YtbError(YtbError.CODE_UNKNOWN_ERROR);
+            KunlongError ye = new KunlongError(KunlongError.CODE_UNKNOWN_ERROR);
             resp = buildMsg(ye.getRetcode(), e.getMessage(), "{}");
         }
         return resp.toJSONString();
@@ -43,12 +43,12 @@ public class RestMetaDataManager extends RestHandler {
         try {
             parseRequest(data);
             resp = process();
-        } catch (YtbError e) {
+        } catch (KunlongError e) {
             e.printStackTrace();
             resp = buildMsg(e.getRetcode(), e.getMsg(), "{}");
         } catch (Exception e) {
             e.printStackTrace();
-            YtbError ye = new YtbError(YtbError.CODE_UNKNOWN_ERROR);
+            KunlongError ye = new KunlongError(KunlongError.CODE_UNKNOWN_ERROR);
             resp = buildMsg(ye.getRetcode(), e.getMessage(), "{}");
         }
         return resp.toJSONString();
@@ -61,7 +61,7 @@ public class RestMetaDataManager extends RestHandler {
         } else if (req.cmdtype.equals("configCenter")) {
             return new ConfigCenterRestProcess().process(req, this);
         }
-        throw new YtbError(YtbError.CODE_INVALID_REST);
+        throw new KunlongError(KunlongError.CODE_INVALID_REST);
 
     }
 

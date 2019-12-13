@@ -3,7 +3,9 @@ package com.kunlong.metadata.service.impl;
 import com.kunlong.metadata.dao.MetadataDictMapper;
 import com.kunlong.metadata.model.MetadataDict;
 import com.kunlong.metadata.model.MetadataDictExample;
+import com.kunlong.metadata.model.MetadataField;
 import com.kunlong.metadata.service.MetadataDictService;
+import com.kunlong.platform.model.KunlongError;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,72 +52,35 @@ public class MetadataDictServiceImpl implements MetadataDictService {
 
     @Override
     public List<MetadataDict> selectByExample(MetadataDictExample example) {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            MetadataDictMapper sysMetaDataFieldDao = sq.getMapper(MetadataDictMapper.class);
-            return sysMetaDataFieldDao.selectByExample(example);
-        } finally {
-            sq.close();
-        }
+             return metadataDictMapper.selectByExample(example);
+
     }
 
     @Override
     public MetadataDict selectByPrimaryKey(Integer metadataId) {
-        SqlSession sq = MyBatisUtil.getSession();
-        MetadataDict list = null;
-        try {
-            MetadataDictMapper metadataDictMapper = sq.getMapper(MetadataDictMapper.class);
-            list = metadataDictMapper.selectByPrimaryKey(metadataId);
-        } finally {
-            sq.close();
-        }
-        return list;
+        return  metadataDictMapper.selectByPrimaryKey(metadataId);
+
     }
 
-    @Override
     public int updateByExampleSelective(MetadataDict record, MetadataDictExample example) {
         return 0;
     }
 
-    @Override
     public int updateByExample(MetadataDict record, MetadataDictExample example) {
-        SqlSession sq = MyBatisUtil.getSession();
+        return metadataDictMapper.updateByExample(record, example);
 
-        try {
-            MetadataDictMapper metadataDictMapper = sq.getMapper(MetadataDictMapper.class);
-            int list = metadataDictMapper.updateByExample(record, example);
-            return list;
-        } finally {
-            sq.close();
-        }
 
     }
 
-    @Override
     public int updateByPrimaryKeySelective(MetadataDict record) {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            MetadataDictMapper metadataDictMapper = sq.getMapper(MetadataDictMapper.class);
-            metadataDictMapper.updateByPrimaryKeySelective(record);
+         metadataDictMapper.updateByPrimaryKeySelective(record);
             return record.getMetadataId();
-        } finally {
-            sq.close();
-        }
+
 
     }
 
-    @Override
     public int updateByPrimaryKey(MetadataDict record) {
-
-        SqlSession sq = MyBatisUtil.getSession();
-        int list = 0;
-        try {
-            MetadataDictMapper metadataDictMapper = sq.getMapper(MetadataDictMapper.class);
-            list = metadataDictMapper.updateByPrimaryKey(record);
-            return list;
-        } finally {
-            sq.close();
-        }
+          return metadataDictMapper.updateByPrimaryKey(record);
 
     }
 
@@ -160,7 +125,7 @@ public class MetadataDictServiceImpl implements MetadataDictService {
         sql1.append(" where metadata_id= ").append(metadataId);
         MetadataDict md = YtbSql.selectOne(sql1, MetadataDict.class);
         if (!checkTableExists(md.getMetadataDb(), md.getMetadataName())) {
-            throw new YtbError(YtbError.CODE_NOTEXISTS_RECORD, " 表不存在！");
+            throw new KunlongError(KunlongError.CODE_NOTEXISTS_RECORD, " 表不存在！");
         }
 
         sql1.delete(0, sql1.length());

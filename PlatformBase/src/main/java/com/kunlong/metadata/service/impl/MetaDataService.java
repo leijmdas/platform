@@ -1,7 +1,7 @@
 package com.kunlong.metadata.service.impl;
 
-import com.kunlong.metadata.model.MetadataDict;
-import com.kunlong.metadata.model.MetadataDictExample;
+import com.kunlong.metadata.model.*;
+import com.kunlong.platform.model.KunlongError;
 
 import java.util.List;
 import java.util.Map;
@@ -61,7 +61,7 @@ public class MetaDataService {
             metadataDicts.get(0).setField(lst);
             return metadataDicts;
         }
-        throw new YtbError(YtbError.CODE_NOTEXISTS_RECORD);
+        throw new KunlongError(KunlongError.CODE_NOTEXISTS_RECORD);
 
     }
 

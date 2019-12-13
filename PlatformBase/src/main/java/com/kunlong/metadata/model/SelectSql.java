@@ -1,12 +1,13 @@
 package com.kunlong.metadata.model;
 
+import com.kunlong.platform.model.KunlongModel;
 import org.apache.poi.util.StringUtil;
-import ytb.common.context.model.Ytb_ModelSkipNull;
+import org.mockito.internal.util.StringUtil;
 
 /**
  * Created by ZYB on 2018/9/13 14:43
  */
-public class SelectSql extends Ytb_ModelSkipNull {
+public class SelectSql extends KunlongModel {
 
 
     private String table;

@@ -4,7 +4,7 @@ import com.kunlong.metadata.dao.DictDatatypeMapper;
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.model.DictDatatypeExample;
 import com.kunlong.metadata.service.DictDataTypeService;
-import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.util.List;
@@ -15,7 +15,8 @@ import java.util.List;
  * Date: Created in 2018/8/23 16:50
  */
 public class DictDataTypeServiceImpl implements DictDataTypeService {
-
+    @Autowired
+    DictDatatypeMapper dictDatatypeMapper;
 
     @Override
     public long countByExample(DictDatatypeExample example) {
@@ -30,28 +31,14 @@ public class DictDataTypeServiceImpl implements DictDataTypeService {
     @Override
     public int deleteByPrimaryKey(Integer datainnerid) {
 
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            DictDatatypeMapper dictDatatypeMapper = sq.getMapper(DictDatatypeMapper.class);
-            return dictDatatypeMapper.deleteByPrimaryKey(datainnerid);
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        finally {
-            sq.close();
-        }
-        return 0;
+          return dictDatatypeMapper.deleteByPrimaryKey(datainnerid);
+
     }
 
     @Override
     public int insert(DictDatatype record) {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            DictDatatypeMapper dictDatatypeMapper = sq.getMapper(DictDatatypeMapper.class);
-            return dictDatatypeMapper.insert(record );
-        } finally {
-            sq.close();
-        }
+         return dictDatatypeMapper.insert(record );
+
     }
 
     @Override
@@ -61,24 +48,14 @@ public class DictDataTypeServiceImpl implements DictDataTypeService {
 
     @Override
     public List<DictDatatype> selectByExample(DictDatatypeExample example) {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            DictDatatypeMapper dictDatatypeMapper = sq.getMapper(DictDatatypeMapper.class);
-            return dictDatatypeMapper.selectByExample(example);
-        } finally {
-            sq.close();
-        }
+         return dictDatatypeMapper.selectByExample(example);
+
     }
 
     @Override
     public DictDatatype selectByPrimaryKey(Integer datainnerid) {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            DictDatatypeMapper dictDatatypeMapper = sq.getMapper(DictDatatypeMapper.class);
-            return dictDatatypeMapper.selectByPrimaryKey(datainnerid);
-        } finally {
-            sq.close();
-        }
+        return dictDatatypeMapper.selectByPrimaryKey(datainnerid);
+
     }
 
     @Override
@@ -98,24 +75,15 @@ public class DictDataTypeServiceImpl implements DictDataTypeService {
 
     @Override
     public int updateByPrimaryKey(DictDatatype record) {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            DictDatatypeMapper dictDatatypeMapper = sq.getMapper(DictDatatypeMapper.class);
-            return dictDatatypeMapper.updateByPrimaryKey(record );
-        } finally {
-            sq.close();
-        }
+         return dictDatatypeMapper.updateByPrimaryKey(record );
+
     }
 
     @Override
     public List<DictDatatype> selectDatatype() {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            DictDatatypeMapper dictDatatypeMapper = sq.getMapper(DictDatatypeMapper.class);
-            return dictDatatypeMapper.selectDatatype();
-        } finally {
-            sq.close();
-        }
+
+             return dictDatatypeMapper.selectDatatype();
+
     }
 
 

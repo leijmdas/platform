@@ -4,13 +4,13 @@ package com.kunlong.metadata.service.server;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import ytb.common.RestMessage.MsgRequest;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.context.rest.RestHandler;
-import ytb.manager.metadata.model.MetadataField;
-import ytb.manager.metadata.model.MetadataFieldExample;
-import ytb.manager.metadata.service.impl.MetadataFieldServiceImpl;
-import ytb.manager.metadata.service.impl.SysMetaDataServiceImpl;
+import com.kunlong.metadata.model.MetadataField;
+import com.kunlong.metadata.model.MetadataFieldExample;
+import com.kunlong.metadata.service.impl.MetadataFieldServiceImpl;
+import com.kunlong.metadata.service.impl.SysMetaDataServiceImpl;
+import com.kunlong.platform.context.RestMessage.MsgRequest;
+import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.context.rest.RestHandler;
 
 import java.util.List;
 

@@ -1,12 +1,9 @@
 package com.kunlong.metadata.dao;
 
+import com.kunlong.metadata.model.Sub_SysDictModel;
 import com.kunlong.metadata.model.SubsysDict;
 import com.kunlong.metadata.model.SubsysDictExample;
 import org.apache.ibatis.annotations.Param;
-import ytb.manager.metadata.model.Sub_SysDictModel;
-import ytb.manager.metadata.model.SubsysDict;
-import ytb.manager.metadata.model.SubsysDictExample;
-
 import java.util.List;
 
 /**

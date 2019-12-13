@@ -1,18 +1,14 @@
 package com.kunlong.metadata.service.impl;
 
 import com.github.abel533.sql.SqlMapper;
-import com.kunlong.metadata.dao.MetadataDictMapper;
-import com.kunlong.metadata.dao.MetadataFieldMapper;
-import com.kunlong.metadata.dao.SysDictDataTypeMapper;
-import com.kunlong.metadata.model.MetadataDict;
-import com.kunlong.metadata.model.MetadataDictExample;
-import com.kunlong.metadata.model.MetadataField;
-import com.kunlong.metadata.model.Sys_DictDataTypeModel;
+import com.kunlong.metadata.dao.*;
+import com.kunlong.metadata.model.*;
 import com.kunlong.metadata.service.SysMetaDataService;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,7 +22,10 @@ import java.util.Map;
  * Date: Created in 2018/8/23 16:50
  */
 public class SysMetaDataServiceImpl implements SysMetaDataService {
-
+    @Autowired
+    SysDictDataTypeMapper sysDictDataTypeDao ;
+    @Autowired
+    SubsysDictMapper subsysDictMapper ;
 
     /*
             @Override
@@ -167,15 +166,9 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
     @Override
     public void updateDictDataTypeById(Sys_DictDataTypeModel sysDictDataTypeModel) {
-        SqlSession sq = MyBatisUtil.getSession();
-        SysDictDataTypeMapper sysDictDataTypeDao = sq.getMapper(SysDictDataTypeMapper.class);
 
-        try {
             sysDictDataTypeDao.updateDictDataTypeById(sysDictDataTypeModel);
-            sq.commit();
-        } finally {
-            sq.close();
-        }
+
     }
 
     @Override
@@ -262,16 +255,16 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
         String msgBody = "";
 
         if (metadataId == null) {
-            throw new YtbError(YtbError.CODE_PARAMETER_IS_WRONG);
+            throw new KunlongError(KunlongError.CODE_PARAMETER_IS_WRONG);
         }
         MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
         MetadataDict metadataDict = metadataDictService.selectByPrimaryKey(metadataId);
         if (metadataDict == null) {
-            throw new YtbError(YtbError.CODE_DEFINE_ERROR,"字典未定义");
+            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR,"字典未定义");
         }
 
         if(checkTableExists(metadataDict.getMetadataDb(),metadataDict.getMetadataName())){
-            throw new YtbError(YtbError.CODE_DEFINE_ERROR," 表已经存在！");
+            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR," 表已经存在！");
         }
 
         MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
@@ -421,7 +414,6 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
             }
             sql.append("  limit ").append(selectSql.getLimitFirstIndex());
             sql.append(",").append(selectSql.getLimitpageSize());
-            //System.out.println(sql);
             SqlMapper m = new SqlMapper(sq);
             return m.selectList(sql.toString());
         } finally {
@@ -433,13 +425,8 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
     public List<SubsysDict> getSubSysDictList() {
 
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            SubsysDictMapper sqMapper = sq.getMapper(SubsysDictMapper.class);
-            return sqMapper.getSubSysDictList();
-        } finally {
-            sq.close();
-        }
+       return subsysDictMapper.getSubSysDictList();
+
 
     }
 

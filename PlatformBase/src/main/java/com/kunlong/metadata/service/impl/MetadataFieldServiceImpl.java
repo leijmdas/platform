@@ -1,13 +1,10 @@
 package com.kunlong.metadata.service.impl;
 
+import com.kunlong.metadata.dao.MetadataFieldMapper;
+import com.kunlong.metadata.model.MetadataField;
 import com.kunlong.metadata.model.MetadataFieldExample;
 import com.kunlong.metadata.service.MetadataFieldService;
-import org.apache.ibatis.session.SqlSession;
-import ytb.manager.context.MyBatisUtil;
-import ytb.manager.metadata.dao.*;
-import ytb.manager.metadata.model.*;
-import ytb.manager.metadata.service.MetadataFieldService;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
@@ -16,7 +13,10 @@ import java.util.List;
  * Date: Created in 2018/8/23 16:50
  */
 public class MetadataFieldServiceImpl implements MetadataFieldService {
-
+    @Autowired
+    MetadataFieldMapper metadataFieldMapper;
+    @Autowired
+    MetadataFieldMapper sysMetaDataFieldMapper;
 
     @Override
     public long countByExample(MetadataFieldExample example) {
@@ -25,76 +25,41 @@ public class MetadataFieldServiceImpl implements MetadataFieldService {
 
     @Override
     public int deleteByExample(MetadataFieldExample example) {
-        SqlSession sq = MyBatisUtil.getSession();
-        int list = 0;
-        try {
-            MetadataFieldMapper metadataFieldMapper = sq.getMapper(MetadataFieldMapper.class);
-            list = metadataFieldMapper.deleteByExample(example);
-            return list;
-        } finally {
-            sq.close();
-        }
+       return metadataFieldMapper.deleteByExample(example);
 
     }
 
     @Override
     public int deleteByPrimaryKey(Integer fieldId) {
-        SqlSession sq = MyBatisUtil.getSession();
-        int list = 0;
-        try {
-            MetadataFieldMapper metadataFieldMapper = sq.getMapper(MetadataFieldMapper.class);
-            list = metadataFieldMapper.deleteByPrimaryKey(fieldId);
-            return list;
-        } finally {
-            sq.close();
-        }
+        return  metadataFieldMapper.deleteByPrimaryKey(fieldId);
+
 
     }
 
-    @Override
     public int insert(MetadataField record) {
         return 0;
     }
 
     @Override
     public int insertSelective(MetadataField record) {
-        SqlSession sq = MyBatisUtil.getSession();
-        int list = 0;
-        try {
-            MetadataFieldMapper metadataFieldMapper = sq.getMapper(MetadataFieldMapper.class);
-            list = metadataFieldMapper.insertSelective(record);
-            return list;
-        } finally {
-            sq.close();
-        }
+        return  metadataFieldMapper.insertSelective(record);
+
 
     }
 
     @Override
     public List<MetadataField> selectByExample(MetadataFieldExample example) {
-        SqlSession sq = MyBatisUtil.getSession();
-        try {
-            MetadataFieldMapper sysMetaDataFieldDao = sq.getMapper(MetadataFieldMapper.class);
-            List<MetadataField> sysMetaDataFieldModel = sysMetaDataFieldDao.selectByExample(example);
-            return sysMetaDataFieldModel;
-        } finally {
-            sq.close();
-        }
+        return  sysMetaDataFieldMapper.selectByExample(example);
+
+
     }
 
 
 
     @Override
     public MetadataField selectByPrimaryKey(Integer fieldId) {
-        SqlSession sq = MyBatisUtil.getSession();
-        MetadataField list = null;
-        try {
-            MetadataFieldMapper metadataFieldMapper = sq.getMapper(MetadataFieldMapper.class);
-            list = metadataFieldMapper.selectByPrimaryKey(fieldId);
-            return list;
-        } finally {
-            sq.close();
-        }
+        return metadataFieldMapper.selectByPrimaryKey(fieldId);
+
 
     }
 
@@ -105,42 +70,20 @@ public class MetadataFieldServiceImpl implements MetadataFieldService {
 
     @Override
     public int updateByExample(MetadataField record, MetadataFieldExample example) {
-        SqlSession sq = MyBatisUtil.getSession();
-        int list = 0;
-        try {
-            MetadataFieldMapper metadataFieldMapper = sq.getMapper(MetadataFieldMapper.class);
-            list = metadataFieldMapper.updateByExample(record, example);
-        } finally {
-            sq.close();
-        }
-        return list;
+        return  metadataFieldMapper.updateByExample(record, example);
+
     }
 
     @Override
     public int updateByPrimaryKeySelective(MetadataField record) {
-        SqlSession sq = MyBatisUtil.getSession();
-        int list = 0;
-        try {
-            MetadataFieldMapper metadataFieldMapper = sq.getMapper(MetadataFieldMapper.class);
-            list = metadataFieldMapper.updateByPrimaryKeySelective(record);
-            return list;
-        } finally {
-            sq.close();
-        }
+        return metadataFieldMapper.updateByPrimaryKeySelective(record);
 
     }
 
     @Override
     public int updateByPrimaryKey(MetadataField record) {
-        SqlSession sq = MyBatisUtil.getSession();
-        int list = 0;
-        try {
-            MetadataFieldMapper metadataFieldMapper = sq.getMapper(MetadataFieldMapper.class);
-            list = metadataFieldMapper.updateByPrimaryKeySelective(record);
-            return list;
-        } finally {
-            sq.close();
-        }
+        return  metadataFieldMapper.updateByPrimaryKeySelective(record);
+
 
     }
 }

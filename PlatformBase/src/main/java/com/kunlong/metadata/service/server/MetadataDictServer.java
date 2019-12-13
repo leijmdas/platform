@@ -6,10 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.kunlong.metadata.model.*;
-import com.kunlong.metadata.service.impl.DictDataTypeServiceImpl;
-import com.kunlong.metadata.service.impl.MetadataDictServiceImpl;
-import com.kunlong.metadata.service.impl.MetadataFieldServiceImpl;
-import com.kunlong.metadata.service.impl.SysMetaDataServiceImpl;
+import com.kunlong.metadata.service.impl.*;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
@@ -315,7 +312,7 @@ public class MetadataDictServer {
         int id = metadataDictService.dpMaster(mid);
         String msgBody = "{'id':" + id + "}";
         if(id==0){
-            throw new YtbError(YtbError.CODE_DEFINE_ERROR," 有表记录不能删除!");
+            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR," 有表记录不能删除!");
         }
         return handler.buildMsg(retcode, retmsg, msgBody);
 

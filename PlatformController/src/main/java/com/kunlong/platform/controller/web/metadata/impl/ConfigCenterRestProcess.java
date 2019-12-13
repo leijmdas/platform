@@ -6,7 +6,7 @@ import ytb.common.RestMessage.MsgResponse;
 import ytb.common.basic.config.model.Dict_ConfigModel;
 import ytb.common.basic.config.model.Dict_ErrorCode;
 import ytb.common.basic.config.service.ConfigDAOService;
-import ytb.common.context.model.YtbError;
+import ytb.common.context.model.KunlongError;
 import ytb.common.context.rest.RestHandler;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class ConfigCenterRestProcess {
             return handler.buildMsg(0,"success",  msgBody);
         }
 
-        throw new YtbError(YtbError.CODE_INVALID_REST);
+        throw new KunlongError(KunlongError.CODE_INVALID_REST);
 
 
     }

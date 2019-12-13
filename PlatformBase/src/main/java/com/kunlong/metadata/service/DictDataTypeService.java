@@ -3,9 +3,6 @@ package com.kunlong.metadata.service;
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.model.DictDatatypeExample;
 import org.apache.ibatis.annotations.Param;
-import ytb.manager.metadata.model.DictDatatype;
-import ytb.manager.metadata.model.DictDatatypeExample;
-
 import java.util.List;
 
 /**

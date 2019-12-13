@@ -1,9 +1,9 @@
 package com.kunlong.metadata.dao;
 
 
+import com.kunlong.metadata.model.MetadataField;
+import com.kunlong.metadata.model.MetadataFieldExample;
 import org.apache.ibatis.annotations.Param;
-import ytb.manager.metadata.model.MetadataField;
-import ytb.manager.metadata.model.MetadataFieldExample;
 
 import java.util.List;
 

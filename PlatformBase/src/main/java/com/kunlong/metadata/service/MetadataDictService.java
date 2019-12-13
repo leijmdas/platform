@@ -1,8 +1,8 @@
 package com.kunlong.metadata.service;
 
+import com.kunlong.metadata.model.MetadataDict;
+import com.kunlong.metadata.model.MetadataDictExample;
 import org.apache.ibatis.annotations.Param;
-import ytb.manager.metadata.model.MetadataDict;
-import ytb.manager.metadata.model.MetadataDictExample;
 
 import java.util.List;
 

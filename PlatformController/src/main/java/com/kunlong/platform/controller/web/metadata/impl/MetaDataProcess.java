@@ -2,7 +2,7 @@ package com.kunlong.platform.controller.web.metadata.impl;
 
 import ytb.common.RestMessage.MsgRequest;
 import ytb.common.RestMessage.MsgResponse;
-import ytb.common.context.model.YtbError;
+import ytb.common.context.model.KunlongError;
 import ytb.common.context.rest.RestHandler;
 import ytb.manager.metadata.service.server.DictDataTypeServer;
 import ytb.manager.metadata.service.server.MetadataDictServer;
@@ -268,7 +268,7 @@ public class MetaDataProcess {
         }
 
 
-        throw new YtbError(YtbError.CODE_INVALID_REST);
+        throw new KunlongError(KunlongError.CODE_INVALID_REST);
 
 
     }

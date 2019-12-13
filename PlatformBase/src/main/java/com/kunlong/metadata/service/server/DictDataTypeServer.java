@@ -2,14 +2,13 @@ package com.kunlong.metadata.service.server;
 
 
 import com.alibaba.fastjson.JSONObject;
-import ytb.common.RestMessage.MsgRequest;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.context.model.YtbError;
-import ytb.common.context.rest.RestHandler;
-import ytb.common.utils.YtbUtils;
-import ytb.manager.metadata.model.*;
-import ytb.manager.metadata.service.impl.DictDataTypeServiceImpl;
-
+import com.kunlong.metadata.model.DictDatatype;
+import com.kunlong.metadata.model.DictDatatypeExample;
+import com.kunlong.metadata.service.impl.DictDataTypeServiceImpl;
+import com.kunlong.platform.context.RestMessage.MsgRequest;
+import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.context.rest.RestHandler;
+import com.kunlong.platform.model.KunlongError;
 import java.util.List;
 
 public class DictDataTypeServer {
@@ -26,7 +25,7 @@ public class DictDataTypeServer {
             dictDatatypeExample.createCriteria().andTypeIdEqualTo(typeId);
         }
         List<DictDatatype> lst = dictDataTypeService.selectByExample(dictDatatypeExample);
-        msgBody = "{\"list\":" + YtbUtils.toJSONString(lst) + "}";
+        msgBody = "{\"list\":" + KunlongUtils.toJSONString(lst) + "}";
         return handler.buildMsg(retcode, retmsg, msgBody);
     }
 
@@ -40,7 +39,7 @@ public class DictDataTypeServer {
             msgBody = "{\"list\":[" + JSONObject.toJSONString(dictDatatype) + "]}";
             return handler.buildMsg(retcode, retmsg, msgBody);
         }
-        throw new YtbError(YtbError.CODE_PARAMETER_IS_WRONG);
+        throw new KunlongError(KunlongError.CODE_PARAMETER_IS_WRONG);
     }
 
     public MsgResponse addDictDataType(MsgRequest req, RestHandler handler) {
@@ -73,7 +72,7 @@ public class DictDataTypeServer {
             return handler.buildMsg(retcode, retmsg, msgBody);
         }
 
-        throw new YtbError(YtbError.CODE_PARAMETER_IS_WRONG);
+        throw new KunlongError(KunlongError.CODE_PARAMETER_IS_WRONG);
     }
 
     public MsgResponse selectDatatype(MsgRequest req, RestHandler handler) {

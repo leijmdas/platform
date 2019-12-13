@@ -1,7 +1,7 @@
 package com.kunlong.metadata.model;
 
 import com.google.gson.Gson;
-import ytb.common.context.model.Ytb_Model;
+import com.kunlong.platform.model.KunlongModel;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author
  */
-public class MetadataDict extends Ytb_Model implements Serializable {
+public class MetadataDict extends KunlongModel implements Serializable {
     /**
      * 元数据标识号
      */

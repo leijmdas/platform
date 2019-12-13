@@ -5,14 +5,15 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import ytb.common.RestMessage.MsgRequest;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.context.model.YtbError;
-import ytb.common.context.rest.RestHandler;
-import ytb.common.utils.YtbUtils;
-import ytb.manager.metadata.model.SelectSql;
-import ytb.manager.metadata.service.impl.MetadataDictServiceImpl;
-import ytb.manager.metadata.service.impl.SysMetaDataServiceImpl;
+import com.kunlong.metadata.model.SelectSql;
+import com.kunlong.metadata.service.impl.MetadataDictServiceImpl;
+import com.kunlong.metadata.service.impl.SysMetaDataServiceImpl;
+import com.kunlong.platform.context.RestMessage.MsgRequest;
+import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.context.rest.RestHandler;
+import com.kunlong.platform.model.KunlongError;
+import com.kunlong.platform.utils.KunlongUtils;
+
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class TableServer {
         String [] names=tbl.split("\\.");
         if(names.length>1) {
             if(!MetadataDictServiceImpl.checkTableExists(names[0],names[1])){
-                throw new YtbError(YtbError.CODE_UNKNOWN_ERROR," 表不存在！");
+                throw new KunlongError(KunlongError.CODE_UNKNOWN_ERROR," 表不存在！");
             }
         }
     }
@@ -63,7 +64,7 @@ public class TableServer {
         SelectSql selectSql = JSONObject.parseObject(req.msgBody.toString(), SelectSql.class);
         checkTableExists(selectSql);
         List<Map<String, Object>> list = sysMetaDataService.selectByTable(selectSql);
-        msgBody = "{\"list\":" + YtbUtils.toJSONStringPretty(list) + "}";
+        msgBody = "{\"list\":" + KunlongUtils.toJSONStringPretty(list) + "}";
 
         return handler.buildMsg(retcode, retmsg, msgBody);
     }
