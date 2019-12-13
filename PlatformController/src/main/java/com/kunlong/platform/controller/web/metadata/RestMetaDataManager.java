@@ -1,14 +1,14 @@
 package com.kunlong.platform.controller.web.metadata;
 
+import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.context.rest.RestHandler;
+import com.kunlong.platform.controller.web.metadata.impl.ConfigCenterRestProcess;
+import com.kunlong.platform.controller.web.metadata.impl.MetaDataProcess;
+import com.kunlong.platform.model.KunlongError;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.context.model.KunlongError;
-import ytb.common.context.rest.RestHandler;
-import ytb.manager.metadata.rest.impl.ConfigCenterRestProcess;
-import ytb.manager.metadata.rest.impl.MetaDataProcess;
 
 /**
  * 后台元数据字典模块的Rest类
@@ -58,9 +58,10 @@ public class RestMetaDataManager extends RestHandler {
     protected MsgResponse process() {
         if (req.cmdtype.equals("metadata")) {
             return new MetaDataProcess().process(req, this);
-        } else if (req.cmdtype.equals("configCenter")) {
-            return new ConfigCenterRestProcess().process(req, this);
         }
+//        else if (req.cmdtype.equals("configCenter")) {
+//            //return new ConfigCenterRestProcess().process(req, this);
+//        }
         throw new KunlongError(KunlongError.CODE_INVALID_REST);
 
     }

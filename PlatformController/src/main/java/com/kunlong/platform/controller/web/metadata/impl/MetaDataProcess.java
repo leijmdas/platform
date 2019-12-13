@@ -1,13 +1,14 @@
 package com.kunlong.platform.controller.web.metadata.impl;
 
-import ytb.common.RestMessage.MsgRequest;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.context.model.KunlongError;
-import ytb.common.context.rest.RestHandler;
-import ytb.manager.metadata.service.server.DictDataTypeServer;
-import ytb.manager.metadata.service.server.MetadataDictServer;
-import ytb.manager.metadata.service.server.MetadataFieldServer;
-import ytb.manager.metadata.service.server.TableServer;
+import com.kunlong.metadata.service.server.DictDataTypeServer;
+import com.kunlong.metadata.service.server.MetadataDictServer;
+import com.kunlong.metadata.service.server.MetadataFieldServer;
+import com.kunlong.metadata.service.server.TableServer;
+import com.kunlong.platform.context.RestMessage.MsgRequest;
+import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.context.rest.RestHandler;
+import com.kunlong.platform.model.KunlongError;
+
 
 /**
  * Package: ytb.manager.metadata.rest.impl

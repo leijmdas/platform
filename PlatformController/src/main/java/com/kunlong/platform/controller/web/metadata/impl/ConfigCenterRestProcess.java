@@ -1,13 +1,8 @@
 package com.kunlong.platform.controller.web.metadata.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import ytb.common.RestMessage.MsgRequest;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.basic.config.model.Dict_ConfigModel;
-import ytb.common.basic.config.model.Dict_ErrorCode;
-import ytb.common.basic.config.service.ConfigDAOService;
-import ytb.common.context.model.KunlongError;
-import ytb.common.context.rest.RestHandler;
+import com.kunlong.platform.model.KunlongError;
+
 
 import java.util.List;
 
@@ -18,31 +13,31 @@ import java.util.List;
  */
 public class ConfigCenterRestProcess {
 
-    ConfigDAOService configManagerService = new ConfigDAOService();
-
-    public MsgResponse process(MsgRequest req, RestHandler handler) {
-
-        //handler.buildMsg(0, "success", "{}");
-        if (req.cmd.equals("getDictConfig")) {
-            List<Dict_ConfigModel> lst = configManagerService.getDictConfig();
-            String msgBody = "{\"list\":" + JSONObject.toJSONString(lst) + "}";
-            return handler.buildMsg(0,"success",  msgBody);
-        } else
-        if (req.cmd.equals("selectDictConfig")) {
-            List<Dict_ConfigModel> lst = configManagerService.selectDictConfig();
-            String msgBody = "{\"list\":" + JSONObject.toJSONString(lst) + "}";
-            return handler.buildMsg(0,"success",  msgBody);
-        }
-        else if (req.cmd.equals("getDictErrorCode")) {
-            List<Dict_ErrorCode> lst = configManagerService.getDictErrorCode();
-            String msgBody = "{\"list\":" + JSONObject.toJSONString(lst) + "}";
-            return handler.buildMsg(0,"success",  msgBody);
-        }
-
-        throw new KunlongError(KunlongError.CODE_INVALID_REST);
-
-
-    }
+//    ConfigDAOService configManagerService = new ConfigDAOService();
+//
+//    public MsgResponse process(MsgRequest req, RestHandler handler) {
+//
+//        //handler.buildMsg(0, "success", "{}");
+//        if (req.cmd.equals("getDictConfig")) {
+//            List<Dict_ConfigModel> lst = configManagerService.getDictConfig();
+//            String msgBody = "{\"list\":" + JSONObject.toJSONString(lst) + "}";
+//            return handler.buildMsg(0,"success",  msgBody);
+//        } else
+//        if (req.cmd.equals("selectDictConfig")) {
+//            List<Dict_ConfigModel> lst = configManagerService.selectDictConfig();
+//            String msgBody = "{\"list\":" + JSONObject.toJSONString(lst) + "}";
+//            return handler.buildMsg(0,"success",  msgBody);
+//        }
+//        else if (req.cmd.equals("getDictErrorCode")) {
+//            //List<Dict_ErrorCode> lst = configManagerService.getDictErrorCode();
+//            //String msgBody = "{\"list\":" + JSONObject.toJSONString(lst) + "}";
+//            return handler.buildMsg(0,"success",  msgBody);
+//        }
+//
+//        throw new KunlongError(KunlongError.CODE_INVALID_REST);
+//
+//
+//    }
 
 
 }
