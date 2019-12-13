@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest")
 @Scope("prototype")
-public class RestMetaDataManager extends RestHandler {
+public class MetaDataController extends RestHandler {
 
     @PostMapping(value = "/sysmetadata", produces = "application/json;charset=UTF-8")
     public String metaDataRest(@RequestBody String data) {
