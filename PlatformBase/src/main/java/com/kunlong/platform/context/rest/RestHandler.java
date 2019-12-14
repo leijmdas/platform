@@ -25,7 +25,7 @@ import java.io.IOException;
 
 
 /*@RestController
-@RequestMapping("/rest")
+@RequestMapping("/sysuser")
 */
 public class RestHandler extends MsgHandler implements IRestProcess
 {

@@ -7,7 +7,7 @@ import com.kunlong.platform.model.KunlongError;
 import java.util.List;
 
 /**
- * Package: ytb.manager.metadata.rest.impl
+ * Package: ytb.manager.metadata.sysuser.impl
  * Author: XZW
  * Date: Created in 2018/8/23 18:11
  */

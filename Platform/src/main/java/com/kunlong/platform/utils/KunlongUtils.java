@@ -150,10 +150,10 @@ public final class KunlongUtils {
     }   */
 
 
-    //String url="http://admin.youtobon.com/rest/sysuser"; rest
+    //String url="http://admin.youtobon.com/rest/sysuser"; sysuser
     /*
      * sub_sysNo=ISubSystem.SS_Project
-     * url=rest/common
+     * url=sysuser/common
      * data="{...}"
      * */
 

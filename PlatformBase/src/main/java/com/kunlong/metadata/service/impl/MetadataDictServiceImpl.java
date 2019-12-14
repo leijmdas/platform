@@ -44,7 +44,7 @@ public class MetadataDictServiceImpl implements MetadataDictService {
 
     public int insertSelective(MetadataDict record) {
         metadataDictMapper.insertSelective(record);
-        //int id = YtbContext.getSqlSessionBuilder().selectAutoID(sq);
+        //int id = SqlSessionBuilder.selectAutoID(sq);
         return record.getMetadataId();
 
 

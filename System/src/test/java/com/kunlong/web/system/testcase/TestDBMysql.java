@@ -30,7 +30,7 @@ public class TestDBMysql extends ITestImpl {
     @JTest
     @JTestClass.title("test0001_select")
     @JTestClass.pre("")
-    @JTestClass.step("post http://mysql.kunlong.com:80/rest/tagTableService/manager")
+    @JTestClass.step("post http://mysql.kunlong.com:80/sysuser/tagTableService/manager")
     @JTestClass.exp("ok")
     public void test0001_select() throws Exception {
 
