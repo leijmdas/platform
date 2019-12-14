@@ -2,14 +2,15 @@ package com.kunlong.platform.controller.web.sysuser.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Sets;
-import ytb.common.RestMessage.MsgHandler;
-import ytb.common.RestMessage.MsgRequest;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.context.model.KunlongError;
-import ytb.common.utils.KunlongUtils;
-import ytb.manager.sysuser.model.Sys_RoleModel;
-import ytb.manager.sysuser.service.SysRoleService;
-import ytb.manager.sysuser.service.impl.SysRoleServiceImpl;
+import com.kunlong.platform.context.RestMessage.MsgHandler;
+import com.kunlong.platform.context.RestMessage.MsgRequest;
+import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.model.KunlongError;
+import com.kunlong.platform.utils.KunlongUtils;
+import com.kunlong.sysuser.model.Sys_RoleModel;
+import com.kunlong.sysuser.service.SysRoleService;
+import com.kunlong.sysuser.service.impl.SysRoleServiceImpl;
+
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -26,7 +27,7 @@ public class SysRole {
     String retmsg = "成功";
     String msgBody = "{}";
 
-    public MsgResponse process(  MsgHandler handler) {
+    public MsgResponse process(MsgHandler handler) {
         MsgRequest req = handler.req;
         SysRoleService sysRoleService = new SysRoleServiceImpl();
 

@@ -1,13 +1,13 @@
 package com.kunlong.service.impl;
 
 
+import com.kunlong.dao.LoginSsoMapper;
+import com.kunlong.model.LoginSso;
+import com.kunlong.model.LoginSsoExample;
+import com.kunlong.service.LoginSsoService;
+import com.kunlong.service.SafeContext;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
-import ytb.common.basic.safecontext.dao.LoginSsoMapper;
-import ytb.common.basic.safecontext.model.LoginSso;
-import ytb.common.basic.safecontext.model.LoginSsoExample;
-import ytb.common.basic.safecontext.service.LoginSsoService;
-import ytb.common.context.service.impl.YtbContext;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class LoginSsoServiceImpl implements LoginSsoService {
     @Override
     public int addLoginSso(LoginSso loginSso) {
 
-        SqlSession session = YtbContext.getSqlSessionBuilder().getSession_tasklog(true);
+        SqlSession session = SafeContext.sqlSessionBuilder.getSession_tasklog(true);
 
         try {
             LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);
@@ -32,7 +32,7 @@ public class LoginSsoServiceImpl implements LoginSsoService {
     @Override
     public List<LoginSso> selectByExample(LoginSsoExample example) {
 
-        SqlSession session = YtbContext.getSqlSessionBuilder().getSession_tasklog(true);
+        SqlSession session = SafeContext.sqlSessionBuilder.getSession_tasklog(true);
         try {
             LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);
             return tnMapper.selectByExample(example);
@@ -45,7 +45,7 @@ public class LoginSsoServiceImpl implements LoginSsoService {
     @Override
     public int deleteByExample(LoginSsoExample example) {
 
-        SqlSession session = YtbContext.getSqlSessionBuilder().getSession_tasklog(true);
+        SqlSession session = SafeContext.sqlSessionBuilder.getSession_tasklog(true);
 
         try {
             LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);
@@ -59,7 +59,7 @@ public class LoginSsoServiceImpl implements LoginSsoService {
 
     @Override
     public int updateByPrimaryKeySelective(LoginSso record) {
-        SqlSession session = YtbContext.getSqlSessionBuilder().getSession_tasklog(true);
+        SqlSession session = SafeContext.sqlSessionBuilder.getSession_tasklog(true);
 
         try {
             LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);
@@ -72,7 +72,7 @@ public class LoginSsoServiceImpl implements LoginSsoService {
 
     @Override
     public int insertSelective(LoginSso record) {
-        SqlSession session = YtbContext.getSqlSessionBuilder().getSession_tasklog(true);
+        SqlSession session = SafeContext.sqlSessionBuilder.getSession_tasklog(true);
 
         try {
             LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);

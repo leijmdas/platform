@@ -1,10 +1,11 @@
 package com.kunlong.platform.service;
 
+import com.kunlong.model.LoginSso;
 import com.kunlong.platform.dao.IUserContext;
 import com.kunlong.platform.model.KunlongModel;
 
 public class DefaultUserContext extends KunlongModel implements IUserContext {
-    //LoginSso sso;
+    LoginSso sso;
     Boolean testFlag;
 
 
@@ -18,14 +19,14 @@ public class DefaultUserContext extends KunlongModel implements IUserContext {
     }
 
 
-//    @Override
-//    public LoginSso getLoginSso() {
-//        return sso;
-//    }
-//
-//    @Override
-//    public void setLoginSso(LoginSso sso) {
-//        this.sso = sso;
-//
-//    }
+    @Override
+    public LoginSso getLoginSso() {
+        return sso;
+    }
+
+    @Override
+    public void setLoginSso(LoginSso sso) {
+        this.sso = sso;
+
+    }
 }

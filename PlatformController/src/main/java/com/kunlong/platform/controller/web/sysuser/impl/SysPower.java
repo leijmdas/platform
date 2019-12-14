@@ -3,15 +3,19 @@ package com.kunlong.platform.controller.web.sysuser.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Sets;
+import com.kunlong.platform.context.RestMessage.MsgHandler;
+import com.kunlong.platform.context.RestMessage.MsgRequest;
+import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.model.KunlongError;
+import com.kunlong.sysuser.model.LeftMenuModel;
+import com.kunlong.sysuser.model.SysRestListSimpleModel;
+import com.kunlong.sysuser.model.Sys_MenuModel;
+import com.kunlong.sysuser.model.Sys_RestListModel;
+import com.kunlong.sysuser.service.SysPowerService;
+import com.kunlong.sysuser.service.impl.SysPowerServiceImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import ytb.common.RestMessage.MsgHandler;
-import ytb.common.RestMessage.MsgRequest;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.context.model.KunlongError;
-import ytb.manager.sysuser.model.*;
-import ytb.manager.sysuser.service.SysPowerService;
-import ytb.manager.sysuser.service.impl.SysPowerServiceImpl;
+
 
 import java.util.*;
 
@@ -29,7 +33,7 @@ public class SysPower {
     String retmsg = "成功";
     String msgBody = "{}";
 
-    public MsgResponse process( MsgHandler handler) {
+    public MsgResponse process(MsgHandler handler) {
         MsgRequest req = handler.req;
 
         SysPowerService sysPowerService = new SysPowerServiceImpl();

@@ -1,19 +1,19 @@
 package com.kunlong.platform.controller.web.sysuser;
 
+import com.kunlong.platform.context.RestMessage.MsgHandler;
+import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.context.rest.IRestProcess;
+import com.kunlong.platform.controller.web.sysuser.impl.SysPower;
+import com.kunlong.platform.controller.web.sysuser.impl.SysRole;
+import com.kunlong.platform.controller.web.sysuser.impl.SysUser;
+import com.kunlong.platform.model.KunlongError;
+import com.kunlong.platform.utils.KunlongUtils;
+import com.kunlong.service.SafeContext;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import ytb.common.RestMessage.MsgHandler;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.basic.safecontext.service.SafeContext;
-import ytb.common.context.model.KunlongError;
-import ytb.common.context.rest.IRestProcess;
-import ytb.common.utils.KunlongUtils;
-import ytb.manager.sysuser.rest.impl.SysPower;
-import ytb.manager.sysuser.rest.impl.SysRole;
-import ytb.manager.sysuser.rest.impl.SysUser;
-import ytb.manager.sysuser.service.impl.SysUserContext;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,8 +35,8 @@ public class RestSysUserManager implements IRestProcess {
     @RequestMapping(value = "sysuser", produces = {"Application/json;charset=UTF-8"})
     @ResponseBody
     public String sysUserRest(@RequestBody String data, HttpServletRequest request, HttpServletResponse response) {
-        SysUserContext suc = new SysUserContext();
-        return new MsgHandler(suc).parseRequest(this, data, request, response);
+        //SysUserContext suc = new SysUserContext();
+        return new MsgHandler( ).parseRequest(this, data, request, response);
     }
 
 

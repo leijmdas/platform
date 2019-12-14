@@ -7,6 +7,7 @@ import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.mybatis.SqlSessionBuilder;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
+import com.kunlong.service.SafeContext;
 import com.kunlong.sysuser.dao.SysUserMapper;
 import com.kunlong.sysuser.model.SysUserModel;
 import com.kunlong.sysuser.service.SysUserService;
@@ -93,7 +94,7 @@ public class SysUserServiceImpl extends SysUserDAOService implements SysUserServ
         body.put("login_mobile", sysUserModel.getMobile());
         loginSso.setJson(JSONObject.toJSONString(body));
         loginSso.setLoginTime(new Date());
-        YtbContext.getYtb_context().getSafeContext().save2DB(token, loginSso);
+        SafeContext.save2DB(token, loginSso);
 
         return body;
     }

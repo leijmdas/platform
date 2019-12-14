@@ -6,7 +6,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.Map;
 
-public final class KunlongSql {
+public class KunlongSql {
     public static SqlSessionBuilder sqlSessionBuilder = new SqlSessionBuilder();
 
     public static List<Map<String, Object>> selectList(StringBuilder sql) {

@@ -2,8 +2,9 @@ package com.kunlong.service;
 
 
 
-import ytb.common.basic.safecontext.model.LoginSso;
-import ytb.common.basic.safecontext.model.LoginSsoExample;
+
+import com.kunlong.model.LoginSso;
+import com.kunlong.model.LoginSsoExample;
 
 import java.util.List;
 

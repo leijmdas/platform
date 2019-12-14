@@ -5,14 +5,11 @@
  */
 package com.kunlong.service.impl;
 
+import com.kunlong.mybatis.SysCacheService;
+import com.kunlong.mybatis.UserCacheService;
 import org.springframework.cache.Cache;
 import org.springframework.stereotype.Service;
-import ytb.common.ehcache.CacheService.ICacheService;
-import ytb.common.ehcache.CacheService.ICacheServiceUser;
-import ytb.common.ehcache.EhcacheContext;
-import ytb.common.ehcache.SysCacheService;
-import ytb.common.ehcache.UserCacheService;
-import ytb.common.ytblog.YtbLog;
+
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +17,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class RestRightCacheService implements ICacheService, ICacheServiceUser {
+public class RestRightCacheService { //implements ICacheService, ICacheServiceUser {
     final static RestRightCacheService checkRestRight = new RestRightCacheService();
     public static RestRightCacheService getCheckRestRight() {
         return checkRestRight;
@@ -45,18 +42,17 @@ public class RestRightCacheService implements ICacheService, ICacheServiceUser {
     final static String ROLE_CompanyAdmin = "CompanyAdmin";
     final static String ROLE_guest = "guest";
 
-    @Override
     public Cache getCache() {
-        return EhcacheContext.getEhcacheContext().getCache();
+        return null;//EhcacheContext.getEhcacheContext().getCache();
     }
 
     public void refresh(Long user_id) {
         String key = makeUserKey(KEY_getList_right, user_id);
-        UserCacheService.evict(key);
+        //UserCacheService.evict(key);
     }
 
     public void refresh() {
-        SysCacheService.evict(KEY_getList);
+        //SysCacheService.evict(KEY_getList);
     }
 
     String makeUserKey(String key, Long user_id) {
@@ -104,7 +100,7 @@ public class RestRightCacheService implements ICacheService, ICacheServiceUser {
     }
     public boolean checkValid_Rest(Long user_id, String cmdType, String cmd) {
         int id = findCheckRight_restId(cmdType, cmd);
-        YtbLog.logDebug(" now checkRight --> " + cmdType + "::" + cmd+ " id:"+id);
+        //YtbLog.logDebug(" now checkRight --> " + cmdType + "::" + cmd+ " id:"+id);
         for (Map<String, Object> item : getList_right(user_id)) {
             if (item.get("restId").equals(id)) {
                 return true;
@@ -115,7 +111,7 @@ public class RestRightCacheService implements ICacheService, ICacheServiceUser {
 
     public boolean checkValid_RoleRest_BBUser( String cmdType, String cmd ) {
         int roleId = getRole(USER_TYPE_BBUser);
-        YtbLog.logDebug(roleId+"=roleId");
+        //YtbLog.logDebug(roleId+"=roleId");
         List<Map<String, Object>> lst= getList_roleRight_rest(roleId);
 
         return lst.stream().filter(item -> item.get("cmdType").equals(cmdType) &&
@@ -124,7 +120,7 @@ public class RestRightCacheService implements ICacheService, ICacheServiceUser {
 
     public boolean checkValid_RoleRest(int userType, String cmdType, String cmd) {
         int roleId = getRole(userType);
-        YtbLog.logDebug(roleId+"=roleId");
+        //YtbLog.logDebug(roleId+"=roleId");
         List<Map<String, Object>> lst= getList_roleRight_rest(roleId);
         return lst.stream().filter(item -> item.get("cmdType").equals(cmdType) &&
                 item.get("cmd").equals(cmd)).collect(Collectors.toList()).size() > 0;

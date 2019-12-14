@@ -2,23 +2,21 @@ package com.kunlong.platform.controller.web.sysuser.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.kunlong.model.Api_KeyModel;
+import com.kunlong.model.LoginSso;
+import com.kunlong.model.LoginSsoJson;
+import com.kunlong.platform.context.RestMessage.MsgHandler;
+import com.kunlong.platform.context.RestMessage.MsgRequest;
+import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.dao.IUserContext;
+import com.kunlong.platform.model.KunlongError;
+import com.kunlong.platform.utils.KunlongUtils;
+import com.kunlong.service.SafeContext;
+import com.kunlong.sysuser.model.SysUserModel;
+import com.kunlong.sysuser.service.SysUserService;
+import com.kunlong.sysuser.service.impl.SysUserServiceImpl;
 import org.apache.commons.codec.digest.DigestUtils;
-import ytb.common.RestMessage.MsgHandler;
-import ytb.common.RestMessage.MsgRequest;
-import ytb.common.RestMessage.MsgResponse;
-import ytb.common.basic.safecontext.model.Api_KeyModel;
-import ytb.common.basic.safecontext.model.LoginSso;
-import ytb.common.basic.safecontext.model.LoginSsoJson;
-import ytb.common.basic.safecontext.service.SafeContext;
-import ytb.common.basic.userid.model.User_IdModel;
-import ytb.common.basic.userid.service.UserIdService;
-import ytb.common.basic.userid.service.impl.UserIdServiceImpl;
-import ytb.common.context.model.KunlongError;
-import ytb.common.context.service.IUserContext;
-import ytb.common.utils.KunlongUtils;
-import ytb.manager.sysuser.model.SysUserModel;
-import ytb.manager.sysuser.service.SysUserService;
-import ytb.manager.sysuser.service.impl.SysUserServiceImpl;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -112,9 +110,9 @@ public class SysUser {
         //添加用户
         else if(req.cmd.equals("addUserInfo")){
             SysUserModel userModel = req.msgBody.toJavaObject(req.msgBody,SysUserModel.class);
-            UserIdService userIdService = new UserIdServiceImpl();
-            User_IdModel userIdModel = new User_IdModel();
-            userIdModel.setUuId(KunlongUtils.getUUID(true));
+//            UserIdService userIdService = new UserIdServiceImpl();
+//            User_IdModel userIdModel = new User_IdModel();
+//            userIdModel.setUuId(KunlongUtils.getUUID(true));
 
             //新增ytb_log库的user_id信息
             userModel.setPassword(DigestUtils.md5Hex(default_pwd));
@@ -122,7 +120,7 @@ public class SysUser {
 
             //新增用户信息
             //userModel.setUserId(userIdModel.getId());
-            userModel.setUserId(KunlongUtils.fsGetUID());
+            //userModel.setUserId(KunlongUtils.fsGetUID());
             sysUserService.addUserInfo(userModel);
             userModel.setCreateBy(context.getLoginSso().getUserId());
             if(userModel.getUserId() == 0){

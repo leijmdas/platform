@@ -1,5 +1,6 @@
 package com.kunlong.platform.dao;
 
+import com.kunlong.model.LoginSso;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 
 public interface IUserContext {
@@ -7,11 +8,11 @@ public interface IUserContext {
 
     void setTestFlag(Boolean testFlag);
 
-    //LoginSso getLoginSso();
+    LoginSso getLoginSso();
 
     //static Tasklog_UserServiceImpl u = new Tasklog_UserServiceImpl();
 
-    //void setLoginSso(LoginSso sso);
+    void setLoginSso(LoginSso sso);
 
     default boolean isUserManager() {
         return true;//getLoginSso().isUserManager();

@@ -6,8 +6,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.kunlong.model.Api_KeyModel;
 import com.kunlong.model.LoginConcurrentHashMap;
 import com.kunlong.model.LoginSso;
+import com.kunlong.model.LoginSsoExample;
+import com.kunlong.mybatis.KunlongSql;
+import com.kunlong.mybatis.SqlSessionBuilder;
+import com.kunlong.platform.context.RestMessage.MsgRequest;
+import com.kunlong.platform.dao.IUserContext;
 import com.kunlong.platform.model.KunlongError;
+import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.service.impl.LoginSsoServiceImpl;
+import com.kunlong.service.impl.RestRightCacheService;
 import org.springframework.cache.Cache;
 
 
@@ -27,6 +34,7 @@ import java.util.Map;
  * Date: Created in 2018年9月12日
  */
 public final class SafeContext {
+    public static SqlSessionBuilder sqlSessionBuilder = new SqlSessionBuilder();
     private static long l_timeout = 240 * 60;
     private static long expires_in = 240 * 60;
 
@@ -82,8 +90,8 @@ public final class SafeContext {
         JSONObject json = JSONObject.parseObject(sso.getJson().toString());
         if (token.equals(json.getString("token"))
                 && refresh_token.equals(json.getString("refresh_token"))) {
-            token = YtbUtils.getUUID(true);
-            refresh_token = YtbUtils.getUUID(true);
+            token = KunlongUtils.getUUID(true);
+            refresh_token = KunlongUtils.getUUID(true);
 
             json.put("token", token);
             json.put("refresh_token", refresh_token);
@@ -256,49 +264,48 @@ public final class SafeContext {
     }
 
     public static void genPicCode(String ip, HttpServletResponse response) throws IOException {
-        response.setDateHeader("Expires", 0);
-        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-        response.addHeader("Cache-Control", "post-ytb.check=0, pre-ytb.check=0");
-        response.setHeader("Pragma", "no-cache");
-        response.setContentType("image/jpeg");
-        DefaultKaptcha captchaProducer = YtbContext.getYtb_context().getAppContext().getBean("captchaProducer", DefaultKaptcha.class);
-        String capText =  captchaProducer.createText();
-        EhcacheContext.getEhcacheContext().getCachePicCode().put(ip,capText);
-        BufferedImage bi = captchaProducer.createImage(capText);
-        ServletOutputStream out = response.getOutputStream();
-        ImageIO.write(bi, "jpg", out);
-        try {
-            out.flush();
-        } finally {
-            out.close();
-        }
-        YtbLog.logDebug(capText);
+//        response.setDateHeader("Expires", 0);
+//        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+//        response.addHeader("Cache-Control", "post-ytb.check=0, pre-ytb.check=0");
+//        response.setHeader("Pragma", "no-cache");
+//        response.setContentType("image/jpeg");
+//        DefaultKaptcha captchaProducer = YtbContext.getYtb_context().getAppContext().getBean("captchaProducer", DefaultKaptcha.class);
+//        String capText =  captchaProducer.createText();
+//        //EhcacheContext.getEhcacheContext().getCachePicCode().put(ip,capText);
+//        BufferedImage bi = captchaProducer.createImage(capText);
+//        ServletOutputStream out = response.getOutputStream();
+//        ImageIO.write(bi, "jpg", out);
+//        try {
+//            out.flush();
+//        } finally {
+//            out.close();
+//        }
+        //YtbLog.logDebug(capText);
     }
 
-    public static byte[] genPicCode2Byte(String ip, HttpServletResponse response) throws IOException {
-
-        DefaultKaptcha captchaProducer = YtbContext.getYtb_context().getAppContext().getBean("captchaProducer", DefaultKaptcha.class);
-        String capText = captchaProducer.createText();
-        EhcacheContext.getEhcacheContext().getCachePicCode().put(ip, capText);
-        BufferedImage bi = captchaProducer.createImage(capText);
-        ServletOutputStream out = response.getOutputStream();
-        ByteArrayOutputStream outs = new ByteArrayOutputStream(1024);
-        ImageIO.write(bi, "jpg", outs);
-        try {
-            outs.flush();
-        } finally {
-            outs.close();
-        }
-        /*System.out.println(capText);
-        System.out.println(outs.size());*/
-        return outs.toByteArray();
-    }
+//    public static byte[] genPicCode2Byte(String ip, HttpServletResponse response) throws IOException {
+//
+//        DefaultKaptcha captchaProducer = YtbContext.getYtb_context().getAppContext().getBean("captchaProducer", DefaultKaptcha.class);
+//        String capText = captchaProducer.createText();
+//        //EhcacheContext.getEhcacheContext().getCachePicCode().put(ip, capText);
+//        BufferedImage bi = captchaProducer.createImage(capText);
+//        ServletOutputStream out = response.getOutputStream();
+//        ByteArrayOutputStream outs = new ByteArrayOutputStream(1024);
+//        ImageIO.write(bi, "jpg", outs);
+//        try {
+//            outs.flush();
+//        } finally {
+//            outs.close();
+//        }
+//
+//        return outs.toByteArray();
+//    }
 
     public static void checkPicCode(String ip, String picCode) throws IOException {
-        Cache.ValueWrapper cv=EhcacheContext.getEhcacheContext().getCachePicCode().get(ip);
-        if (cv==null || !picCode.equalsIgnoreCase(cv.get().toString())) {
-            throw new KunlongError(KunlongError.CODE_PICCODE_INVALID);
-        }
+//        Cache.ValueWrapper cv=EhcacheContext.getEhcacheContext().getCachePicCode().get(ip);
+//        if (cv==null || !picCode.equalsIgnoreCase(cv.get().toString())) {
+//            throw new KunlongError(KunlongError.CODE_PICCODE_INVALID);
+//        }
     }
 
     //select * from login_sso where login_time <= '2018-10-26';
@@ -322,7 +329,7 @@ public final class SafeContext {
         StringBuilder sql=new StringBuilder();
         sql.append("delete from ytb_tasklog.login_sso ");
         sql.append( " where login_time<DATE_ADD(now(), interval -2 day)")  ;
-        YtbContext.getYtb_context().getSqlSessionBuilder().updateSql(sql);
+        sqlSessionBuilder.updateSql(sql);
     }
 
     public static void clearSessionTimeout(){
@@ -338,7 +345,7 @@ public final class SafeContext {
       static void deleteApiKey(int userId){
         StringBuilder sql=new StringBuilder();
         sql.append(" delete from ytb_tasklog.api_key where user_id=#{userId}");
-          YtbSql.delete(sql,userId);
+         KunlongSql.delete(sql,userId);
     }
 
     public static int insertApiKey(int userId) {
@@ -352,14 +359,14 @@ public final class SafeContext {
         keyModel.setUserId(userId);
         keyModel.setApiKey(System.currentTimeMillis() + "");
         keyModel.setSecurityKey(System.currentTimeMillis() + "");
-        return YtbSql.insert(sql, keyModel);
+        return KunlongSql.insert(sql, keyModel);
     }
 
     public static Api_KeyModel selectApiKey(int userId) {
         StringBuilder sql = new StringBuilder();
         sql.append(" select * from ytb_tasklog.api_key ");
         sql.append(" where user_id=#{userId}");
-        return YtbSql.selectOne(sql,userId,Api_KeyModel.class);
+        return KunlongSql.selectOne(sql,userId,Api_KeyModel.class);
 
     }
 

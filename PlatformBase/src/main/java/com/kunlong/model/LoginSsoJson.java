@@ -1,5 +1,6 @@
 package com.kunlong.model;
 
+import com.kunlong.platform.context.RestMessage.MsgHandler;
 import com.kunlong.platform.model.KunlongModel;
 import java.io.Serializable;
 

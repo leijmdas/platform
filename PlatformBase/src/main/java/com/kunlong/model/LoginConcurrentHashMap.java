@@ -2,6 +2,8 @@ package com.kunlong.model;
 
 
 
+import com.kunlong.service.SafeContext;
+
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
