@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ytb.manager.metadata.dao.MetadataDictMapper">
-  <resultMap id="BaseResultMap" type="ytb.manager.metadata.model.MetadataDict">
+<mapper namespace="com.kunlong.metadata.dao.MetadataDictMapper">
+  <resultMap id="BaseResultMap" type="com.kunlong.metadata.model.MetadataDict">
     <id column="metadata_id" jdbcType="INTEGER" property="metadataId" />
     <result column="subsys_id" jdbcType="INTEGER" property="subsysId" />
     <result column="metadata_name" jdbcType="VARCHAR" property="metadataName" />
@@ -89,7 +89,7 @@
     metadata_order, metadata_remark,metadata_sort_fields,ref_src,ref_object,ref_param,
     metadata_readonly,metadata_add_del
   </sql>
-  <select id="selectByExample" parameterType="ytb.manager.metadata.model.MetadataDictExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.kunlong.metadata.model.MetadataDictExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -121,13 +121,13 @@
     delete from metadata_dict
     where metadata_id = #{metadataId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="ytb.manager.metadata.model.MetadataDictExample">
+  <delete id="deleteByExample" parameterType="com.kunlong.metadata.model.MetadataDictExample">
     delete from metadata_dict
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="ytb.manager.metadata.model.MetadataDict">
+  <insert id="insert" parameterType="com.kunlong.metadata.model.MetadataDict">
     insert into metadata_dict (metadata_id, subsys_id, metadata_name,
       metadata_alias, metadata_memo, metadata_parentid,
       metadata_type, metadata_cached, metadata_db,
@@ -144,7 +144,7 @@
        , #{metadataAddDel,jdbcType=BIT}, #{metadataReadonly,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="ytb.manager.metadata.model.MetadataDict">
+  <insert id="insertSelective" parameterType="com.kunlong.metadata.model.MetadataDict">
     insert into metadata_dict
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="metadataId != null">
@@ -273,7 +273,7 @@
 
     </trim>
   </insert>
-  <select id="countByExample" parameterType="ytb.manager.metadata.model.MetadataDictExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.kunlong.metadata.model.MetadataDictExample" resultType="java.lang.Long">
     select count(*) from metadata_dict
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -369,7 +369,7 @@
     metadata_add_del = #{record.metadataAddDel,jdbcType=VARCHAR}
 
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="ytb.manager.metadata.model.MetadataDict">
+  <update id="updateByPrimaryKeySelective" parameterType="com.kunlong.metadata.model.MetadataDict">
     update metadata_dict
     <set>
       <if test="subsysId != null">
@@ -433,7 +433,7 @@
     </set>
     where metadata_id = #{metadataId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="ytb.manager.metadata.model.MetadataDict">
+  <update id="updateByPrimaryKey" parameterType="com.kunlong.metadata.model.MetadataDict">
     update metadata_dict
     set subsys_id = #{subsysId,jdbcType=INTEGER},
       metadata_name = #{metadataName,jdbcType=VARCHAR},

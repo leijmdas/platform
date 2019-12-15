@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * 系统用户Dao类
- * Package: ytb.manager.sysuser.dao
+ * Package: com.kunlong.sysuser.dao
  * Author: ZCS
  * Date: Created in 2018/8/21 13:10
  */

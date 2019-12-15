@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Package: ytb.manager.sysuser.sysuser.impl
+ * Package: com.kunlong.sysuser.sysuser.impl
  * Author: ZCS
  * Date: Created in 2018/8/22 14:11
  */
@@ -64,12 +64,10 @@ public class SysUser {
                 Map<String, Object> map = sysUserService.checkUserByUserName(userName, password, ip);
                 int userId = Integer.parseInt(map.get("userId").toString());
 
-                Api_KeyModel keyModel = SafeContext.genApiKey(userId);
-                insertUserLog(handler.req, userId);
                 String token = map.get("token").toString();
                 LoginSso loginSso = SafeContext.getLog_ssoAndApiKey(token);
                 req.setToken(token);
-
+                loginSso.getLoginSsoJson().setToken(token);
                 msgBody = "{\"list\":[" + loginSso.getLoginSsoJson() + "]}";
                 return handler.buildMsg(retcode, retmsg, msgBody);
 

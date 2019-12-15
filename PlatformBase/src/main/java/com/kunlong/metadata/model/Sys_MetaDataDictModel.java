@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * 元数据主表实体类
- * Package: ytb.manager.metadata.model
+ * Package: com.kunlong.metadata.model
  * Author: XZW
  * Date: Created in 2018/8/23 15:51
  */

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 后台元数据字典模块的Rest类
- * Package: ytb.manager.metadata.sysuser
+ * Package: com.kunlong.metadata.sysuser
  * Author: XZW
  * Date: Created in 2018/8/23 16:50
  */

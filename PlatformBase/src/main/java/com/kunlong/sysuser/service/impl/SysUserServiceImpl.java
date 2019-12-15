@@ -18,7 +18,7 @@ import org.apache.ibatis.session.SqlSession;
 import java.util.*;
 
 /**
- * Package: ytb.manager.sysuser.service.impl
+ * Package: com.kunlong.sysuser.service.impl
  * Author: ZCS
  * Date: Created in 2018/8/21 20:01
  */

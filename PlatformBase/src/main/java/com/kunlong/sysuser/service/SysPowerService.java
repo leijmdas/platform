@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * 权限Service
- * Package: ytb.manager.sysuser.service
+ * Package: com.kunlong.sysuser.service
  * Author: ZCS
  * Date: Created in 2018/8/21 13:16
  */

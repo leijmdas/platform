@@ -7,7 +7,7 @@ import com.kunlong.sysuser.model.Sys_MenuModel;
 import java.util.List;
 
 /**
- * Package: ytb.manager.sysuser.dao
+ * Package: com.kunlong.sysuser.dao
  * Author: ZCS
  * Date: Created in 2018/8/22 11:07
  */

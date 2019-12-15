@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ytb.manager.metadata.dao.DictDatatypeMapper">
-  <resultMap id="BaseResultMap" type="ytb.manager.metadata.model.DictDatatype">
+<mapper namespace="com.kunlong.metadata.dao.DictDatatypeMapper">
+  <resultMap id="BaseResultMap" type="com.kunlong.metadata.model.DictDatatype">
     <id column="data_inner_id" jdbcType="INTEGER" property="dataInnerId" />
     <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="type_name" jdbcType="VARCHAR" property="typeName" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List">
     data_inner_id, type_id, type_name, data_id, data_name, remark, create_by, create_time
   </sql>
-  <select id="selectByExample" parameterType="ytb.manager.metadata.model.DictDatatypeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.kunlong.metadata.model.DictDatatypeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -104,13 +104,13 @@
     delete from dict_datatype
     where data_inner_id = #{dataInnerId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="ytb.manager.metadata.model.DictDatatypeExample">
+  <delete id="deleteByExample" parameterType="com.kunlong.metadata.model.DictDatatypeExample">
     delete from dict_datatype
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="ytb.manager.metadata.model.DictDatatype">
+  <insert id="insert" parameterType="com.kunlong.metadata.model.DictDatatype">
     insert into dict_datatype (data_inner_id, type_id, type_name,
       data_id, data_name, remark,
       create_by, create_time)
@@ -118,7 +118,7 @@
       #{dataId,jdbcType=INTEGER}, #{dataName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
       #{createBy,jdbcType=INTEGER}, now())
   </insert>
-  <insert id="insertSelective" parameterType="ytb.manager.metadata.model.DictDatatype">
+  <insert id="insertSelective" parameterType="com.kunlong.metadata.model.DictDatatype">
     insert into dict_datatype
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="dataInnerId != null">
@@ -173,7 +173,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="ytb.manager.metadata.model.DictDatatypeExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.kunlong.metadata.model.DictDatatypeExample" resultType="java.lang.Long">
     select count(*) from dict_datatype
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -225,7 +225,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="ytb.manager.metadata.model.DictDatatype">
+  <update id="updateByPrimaryKeySelective" parameterType="com.kunlong.metadata.model.DictDatatype">
     update dict_datatype
     <set>
       <if test="typeId != null">
@@ -252,7 +252,7 @@
     </set>
     where data_inner_id = #{dataInnerId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="ytb.manager.metadata.model.DictDatatype">
+  <update id="updateByPrimaryKey" parameterType="com.kunlong.metadata.model.DictDatatype">
     update dict_datatype
     set type_id = #{typeId,jdbcType=INTEGER},
       type_name = #{typeName,jdbcType=VARCHAR},
@@ -264,7 +264,7 @@
     where data_inner_id = #{dataInnerId,jdbcType=INTEGER}
   </update>
 
-  <select id="selectDatatype" resultType="ytb.manager.metadata.model.DictDatatype">
+  <select id="selectDatatype" resultType="com.kunlong.metadata.model.DictDatatype">
      select type_id,type_name from dict_datatype group by type_id,type_name
   </select>
 

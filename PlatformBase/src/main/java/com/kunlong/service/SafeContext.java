@@ -48,8 +48,8 @@ public final class SafeContext {
         if (loginSso == null) {
             throw new KunlongError(KunlongError.CODE_NOTEXISTS_RECORD);
         }
-        Api_KeyModel keyModel = selectApiKey( loginSso.getUserId().intValue());
-        loginSso.getLoginSsoJson().setApi_keyModel(keyModel==null?new Api_KeyModel():keyModel);
+        //Api_KeyModel keyModel = selectApiKey( loginSso.getUserId().intValue());
+        //loginSso.getLoginSsoJson().setApi_keyModel(keyModel==null?new Api_KeyModel():keyModel);
         return loginSso;
     }
 
@@ -253,13 +253,13 @@ public final class SafeContext {
 
     public static int save2DB(String token, LoginSso loginSso) {
         int a = 0;
-        try {
+//        try {
             LoginConcurrentHashMap.put(token, loginSso);
-            LoginSsoService loginSsoService = new LoginSsoServiceImpl();
-            a = loginSsoService.insertSelective(loginSso);
-        } catch (Exception e) {
-            a = 0;
-        }
+//            LoginSsoService loginSsoService = new LoginSsoServiceImpl();
+//            a = loginSsoService.insertSelective(loginSso);
+//        } catch (Exception e) {
+//            a = 0;
+//        }
         return a;
     }
 

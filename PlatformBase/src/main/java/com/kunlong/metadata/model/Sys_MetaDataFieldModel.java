@@ -4,7 +4,7 @@ package com.kunlong.metadata.model;
 
 /**
  * 元数据子表实体类
- * Package: ytb.manager.metadata.model
+ * Package: com.kunlong.metadata.model
  * Author: XZW
  * Date: Created in 2018/8/23 16:00
  */

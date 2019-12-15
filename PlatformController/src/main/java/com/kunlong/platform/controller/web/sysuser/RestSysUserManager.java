@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 后台管理系统的Rest类
- * Package: ytb.manager.sysuser.sysuser
+ * Package: com.kunlong.sysuser.sysuser
  * Author: ZCS
  * Date: Created in 2018/8/21 13:20
  * Copyright: Copyright (c) 2018

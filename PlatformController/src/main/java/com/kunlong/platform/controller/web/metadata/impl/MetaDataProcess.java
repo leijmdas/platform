@@ -11,7 +11,7 @@ import com.kunlong.platform.model.KunlongError;
 
 
 /**
- * Package: ytb.manager.metadata.sysuser.impl
+ * Package: com.kunlong.metadata.sysuser.impl
  * Author: XZW
  * Date: Created in 2018/8/23 18:11
  */

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ytb.manager.metadata.dao.SysMetaDataFieldMapper" >
+<mapper namespace="com.kunlong.metadata.dao.SysMetaDataFieldMapper" >
 
-	<select id="getFieldListByDictId" resultType="ytb.manager.metadata.model.Sys_MetaDataFieldModel" resultMap="MetaDataFieldResultMap">
+	<select id="getFieldListByDictId" resultType="com.kunlong.metadata.model.Sys_MetaDataFieldModel" resultMap="MetaDataFieldResultMap">
 		SELECT * FROM metadata_field WHERE metadata_id = #{metaDataId} ORDER BY field_order
 	</select>
 
-	<select id="getFieldById" resultType="ytb.manager.metadata.model.Sys_MetaDataFieldModel" parameterType="int" resultMap="MetaDataFieldResultMap">
+	<select id="getFieldById" resultType="com.kunlong.metadata.model.Sys_MetaDataFieldModel" parameterType="int" resultMap="MetaDataFieldResultMap">
 		SELECT * FROM metadata_field WHERE field_id = #{fieldId}
 	</select>
 
-	<insert id="addField" parameterType="ytb.manager.metadata.model.Sys_MetaDataFieldModel">
+	<insert id="addField" parameterType="com.kunlong.metadata.model.Sys_MetaDataFieldModel">
 		INSERT INTO metadata_field
 		(
 		    metadata_id,
@@ -57,7 +57,7 @@
 		)
 	</insert>
 
-	<update id="updateFieldById" parameterType="ytb.manager.metadata.model.Sys_MetaDataFieldModel">
+	<update id="updateFieldById" parameterType="com.kunlong.metadata.model.Sys_MetaDataFieldModel">
 		UPDATE metadata_field
 		<set>
 			<if test="metaDataId != null">`metadata_id` = #{metaDataId}, </if>
@@ -87,7 +87,7 @@
 		delete from metadata_field WHERE field_id = #{fieldId}
 	</delete>
 
-    <resultMap type="ytb.manager.metadata.model.Sys_MetaDataFieldModel" id="MetaDataFieldResultMap">
+    <resultMap type="com.kunlong.metadata.model.Sys_MetaDataFieldModel" id="MetaDataFieldResultMap">
         <!-- 用id属性来映射主键字段 -->
         <id property="fieldId" column="field_id"/>
         <!-- 用result属性来映射非主键字段 -->

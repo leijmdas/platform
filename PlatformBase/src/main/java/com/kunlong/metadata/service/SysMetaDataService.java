@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Package: ytb.manager.metadata.service
+ * Package: com.kunlong.metadata.service
  * Author: XZW
  * Date: Created in 2018/8/23 16:33
  */

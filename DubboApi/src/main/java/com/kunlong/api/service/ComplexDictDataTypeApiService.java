@@ -4,7 +4,7 @@ import com.kunlong.api.model.DictDatatypeApiModel;
 
 
 /**
- * Package: ytb.manager.metadata.service
+ * Package: com.kunlong.metadata.service
  * Author: XZW
  * Date: Created in 2018/8/23 16:33
  */

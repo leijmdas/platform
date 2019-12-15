@@ -3,7 +3,7 @@ package com.kunlong.sysuser.model;
 import java.util.Date;
 
 /**
- * Package: ytb.manager.sysuser.model
+ * Package: com.kunlong.sysuser.model
  * Author: ZCS
  * Date: Created in 2018/8/22 12:09
  */

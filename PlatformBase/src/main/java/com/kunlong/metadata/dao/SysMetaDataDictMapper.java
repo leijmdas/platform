@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Package: ytb.manager.metadata.dao
+ * Package: com.kunlong.metadata.dao
  * Author: XZW
  * Date: Created in 2018/8/23 16:16
  */

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Package: ytb.manager.metadata.service.impl
+ * Package: com.kunlong.metadata.service.impl
  * Author: XZW
  * Date: Created in 2018/8/23 16:50
  */

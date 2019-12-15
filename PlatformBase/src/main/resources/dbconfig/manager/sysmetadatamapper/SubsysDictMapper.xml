@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ytb.manager.metadata.dao.SubsysDictMapper">
-    <resultMap id="BaseResultMap" type="ytb.manager.metadata.model.SubsysDict">
+<mapper namespace="com.kunlong.metadata.dao.SubsysDictMapper">
+    <resultMap id="BaseResultMap" type="com.kunlong.metadata.model.SubsysDict">
         <id column="subsys_id" jdbcType="INTEGER" property="subsysId"/>
         <result column="subsys_no" jdbcType="VARCHAR" property="subsysNo"/>
         <result column="subsys_name" jdbcType="VARCHAR" property="subsysName"/>
@@ -41,15 +41,15 @@
     </sql>
 
 
-    <select id="getSubSysDictList" resultType="ytb.manager.metadata.model.SubsysDict" resultMap="SysDictResultMap">
+    <select id="getSubSysDictList" resultType="com.kunlong.metadata.model.SubsysDict" resultMap="SysDictResultMap">
         SELECT * FROM subsys_dict order by ip,subsys_no
     </select>
 
-    <select id="getSubSysDictById" resultType="ytb.manager.metadata.model.SubsysDict" parameterType="int">
+    <select id="getSubSysDictById" resultType="com.kunlong.metadata.model.SubsysDict" parameterType="int">
         SELECT * FROM subsys_dict where subsys_id = #{subsysId}
     </select>
 
-    <resultMap type="ytb.manager.metadata.model.Sub_SysDictModel" id="SysDictResultMap">
+    <resultMap type="com.kunlong.metadata.model.Sub_SysDictModel" id="SysDictResultMap">
         <!-- 用result属性来映射非主键字段 -->
         <result property="subsysId" column="subsys_id"/>
         <result property="subsysNo" column="subsys_no"/>
@@ -93,7 +93,7 @@
     <sql id="Base_Column_List">
     subsys_id, subsys_no, subsys_name, remark, ip, port
   </sql>
-    <select id="selectByExample" parameterType="ytb.manager.metadata.model.SubsysDictExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.kunlong.metadata.model.SubsysDictExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -125,19 +125,19 @@
     delete from subsys_dict
     where subsys_id = #{subsysId,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="ytb.manager.metadata.model.SubsysDictExample">
+    <delete id="deleteByExample" parameterType="com.kunlong.metadata.model.SubsysDictExample">
         delete from subsys_dict
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="ytb.manager.metadata.model.SubsysDict">
+    <insert id="insert" parameterType="com.kunlong.metadata.model.SubsysDict">
     insert into subsys_dict (subsys_id, subsys_no, subsys_name,
       remark, ip, port)
     values (#{subsysId,jdbcType=INTEGER}, #{subsysNo,jdbcType=VARCHAR}, #{subsysName,jdbcType=VARCHAR},
       #{remark,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{port,jdbcType=SMALLINT})
   </insert>
-    <insert id="insertSelective" parameterType="ytb.manager.metadata.model.SubsysDict">
+    <insert id="insertSelective" parameterType="com.kunlong.metadata.model.SubsysDict">
         insert into subsys_dict
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="subsysId != null">
@@ -180,7 +180,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="ytb.manager.metadata.model.SubsysDictExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.kunlong.metadata.model.SubsysDictExample" resultType="java.lang.Long">
         select count(*) from subsys_dict
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -224,7 +224,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="ytb.manager.metadata.model.SubsysDict">
+    <update id="updateByPrimaryKeySelective" parameterType="com.kunlong.metadata.model.SubsysDict">
         update subsys_dict
         <set>
             <if test="subsysNo != null">
@@ -245,7 +245,7 @@
         </set>
         where subsys_id = #{subsysId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="ytb.manager.metadata.model.SubsysDict">
+    <update id="updateByPrimaryKey" parameterType="com.kunlong.metadata.model.SubsysDict">
     update subsys_dict
     set subsys_no = #{subsysNo,jdbcType=VARCHAR},
       subsys_name = #{subsysName,jdbcType=VARCHAR},

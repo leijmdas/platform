@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Package: ytb.manager.metadata.sysuser.impl
+ * Package: com.kunlong.metadata.sysuser.impl
  * Author: leijming
  * Date: Created in 2018/10/17 18:11
  */

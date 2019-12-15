@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Package: ytb.manager.metadata.service
+ * Package: com.kunlong.metadata.service
  * Author: XZW
  * Date: Created in 2018/8/23 16:33
  */

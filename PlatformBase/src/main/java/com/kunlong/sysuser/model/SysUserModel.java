@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * 系统用户实体类
- * Package: ytb.manager.sysuser.model
+ * Package: com.kunlong.sysuser.model
  * Author: ZCS
  * Date: Created in 2018/8/21 9:44
  */

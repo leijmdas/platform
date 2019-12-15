@@ -12,10 +12,10 @@
     <!-- 类型命名  定义别名-->
     <typeAliases>
 
-        <typeAlias type="ytb.common.MyBatis.DruidDataSourceFactory" alias="DRUID"/>
+        <typeAlias type="com.kunlong.mybatis.DruidDataSourceFactory" alias="DRUID"/>
     </typeAliases>
 
-    <typeHandlers/><!--类型处理器 -->
+    <typeHandlers/>
 
 
     <environments default="development"><!-- 配置环境 -->

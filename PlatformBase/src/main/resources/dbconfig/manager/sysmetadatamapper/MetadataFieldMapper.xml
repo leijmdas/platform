@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ytb.manager.metadata.dao.MetadataFieldMapper">
-  <resultMap id="BaseResultMap" type="ytb.manager.metadata.model.MetadataField">
+<mapper namespace="com.kunlong.metadata.dao.MetadataFieldMapper">
+  <resultMap id="BaseResultMap" type="com.kunlong.metadata.model.MetadataField">
     <id column="field_id" jdbcType="INTEGER" property="fieldId" />
     <result column="metadata_id" jdbcType="INTEGER" property="metadataId" />
     <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
@@ -93,7 +93,7 @@
     ref_pool, ref_table, ref_field, ref_displayID, ref_filter, field_pk, field_auto, 
     field_isNull, field_iscal, ref_object, ref_parameter,field_format,field_component
   </sql>
-  <select id="selectByExample" parameterType="ytb.manager.metadata.model.MetadataFieldExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.kunlong.metadata.model.MetadataFieldExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -125,13 +125,13 @@
     delete from metadata_field
     where field_id = #{fieldId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="ytb.manager.metadata.model.MetadataFieldExample">
+  <delete id="deleteByExample" parameterType="com.kunlong.metadata.model.MetadataFieldExample">
     delete from metadata_field
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="ytb.manager.metadata.model.MetadataField">
+  <insert id="insert" parameterType="com.kunlong.metadata.model.MetadataField">
     insert into metadata_field (field_id, metadata_id, field_name, 
       field_memo, field_type, field_remark,
       field_size, field_visible, field_displaysize, 
@@ -152,7 +152,7 @@
       #{fieldFormat,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="ytb.manager.metadata.model.MetadataField">
+  <insert id="insertSelective" parameterType="com.kunlong.metadata.model.MetadataField">
     insert into metadata_field
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="fieldId != null">
@@ -318,7 +318,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="ytb.manager.metadata.model.MetadataFieldExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.kunlong.metadata.model.MetadataFieldExample" resultType="java.lang.Long">
     select count(*) from metadata_field
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -440,7 +440,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="ytb.manager.metadata.model.MetadataField">
+  <update id="updateByPrimaryKeySelective" parameterType="com.kunlong.metadata.model.MetadataField">
     update metadata_field
     <set>
       <if test="metadataId != null">
@@ -523,7 +523,7 @@
     </set>
     where field_id = #{fieldId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="ytb.manager.metadata.model.MetadataField">
+  <update id="updateByPrimaryKey" parameterType="com.kunlong.metadata.model.MetadataField">
     update metadata_field
     set metadata_id = #{metadataId,jdbcType=INTEGER},
       field_name = #{fieldName,jdbcType=VARCHAR},

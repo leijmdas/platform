@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Package: ytb.manager.sysuser.dao
+ * Package: com.kunlong.sysuser.dao
  * Author: ZCS
  * Date: Created in 2018/8/22 12:11
  * Company: 公司

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Package: ytb.manager.sysuser.sysuser.impl
+ * Package: com.kunlong.sysuser.sysuser.impl
  * Author: ZCS
  * Date: Created in 2018/8/22 14:11
  */

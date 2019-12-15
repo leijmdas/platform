@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Package: ytb.manager.sysuser.service.impl
+ * Package: com.kunlong.sysuser.service.impl
  * Author: ZCS
  * Date: Created in 2018/8/21 13:13
  */

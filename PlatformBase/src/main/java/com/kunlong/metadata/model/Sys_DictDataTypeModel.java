@@ -2,7 +2,7 @@ package com.kunlong.metadata.model;
 
 /**
  * 数据字典表实体类
- * Package: ytb.manager.metadata.model
+ * Package: com.kunlong.metadata.model
  * Author: XZW
  */
 public class Sys_DictDataTypeModel {

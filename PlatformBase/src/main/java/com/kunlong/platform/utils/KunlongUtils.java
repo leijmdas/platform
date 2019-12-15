@@ -20,8 +20,8 @@ public final class KunlongUtils {
     public static String getUUID(boolean flag) {
         String s = UUID.randomUUID().toString();
         if (flag) {
-            return getObjectId();
-            //return s.replace("-", "");
+            //return getObjectId();
+            return s.replace("-", "");
         }
 
         return s;

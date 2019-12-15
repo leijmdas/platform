@@ -19,7 +19,7 @@ import java.util.Map;
 import static com.kunlong.metadata.service.impl.MetadataDictServiceImpl.checkTableExists;
 
 /**
- * Package: ytb.manager.metadata.service.impl
+ * Package: com.kunlong.metadata.service.impl
  * Author: XZW
  * Date: Created in 2018/8/23 16:50
  */
