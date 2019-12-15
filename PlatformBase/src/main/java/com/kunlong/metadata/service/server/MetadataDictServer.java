@@ -6,6 +6,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.kunlong.metadata.model.*;
+import com.kunlong.metadata.service.DictDataTypeService;
+import com.kunlong.metadata.service.MetadataDictService;
+import com.kunlong.metadata.service.MetadataFieldService;
 import com.kunlong.metadata.service.SysMetaDataService;
 import com.kunlong.metadata.service.impl.*;
 import com.kunlong.mybatis.KunlongSql;
@@ -24,7 +27,16 @@ import java.util.Map;
 @Component
 public class MetadataDictServer {
     @Autowired
+    MetaDataService metaDataService;
+    @Autowired
     SysMetaDataService sysMetaDataService;
+    @Autowired
+    MetadataDictService metadataDictService;
+
+    @Autowired
+    MetadataFieldService metadataFieldService;//aFieldServiceImpl();
+    @Autowired
+    DictDataTypeService dictDataTypeService;//= new DictDataTypeServiceImpl();
 
     int retcode = 0;
     String retmsg = "成功";
@@ -49,8 +61,8 @@ public class MetadataDictServer {
         StringBuilder sql = new StringBuilder();
         sql.append("select metadata_alias,metadata_name from ytb_manager.metadata_dict ");
         sql.append(" where metadata_cached=1");
-        List<MetadataDict> lst=KunlongSql.selectList(sql,MetadataDict.class);
-        msgBody = "{'list':" +  KunlongUtils.toJSONStringSkipNull(lst) + "}";
+        List<MetadataDict> lst = KunlongSql.selectList(sql, MetadataDict.class);
+        msgBody = "{'list':" + KunlongUtils.toJSONStringSkipNull(lst) + "}";
         return handler.buildMsg(retcode, retmsg, msgBody);
 
     }
@@ -67,7 +79,6 @@ public class MetadataDictServer {
     }
 
     public MsgResponse getDictList(MsgRequest req, RestHandler handler) {
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
 
         MetadataDictExample metadataDictExample = new MetadataDictExample();
         MetadataDictExample.Criteria criteria = metadataDictExample.createCriteria();
@@ -91,19 +102,18 @@ public class MetadataDictServer {
 
 
     public MsgResponse getDictFieldsDefaultValueList(MsgRequest req, RestHandler handler) {
-        MetadataDictServiceImpl mddService = new MetadataDictServiceImpl();
+
         int metadataId = 109;//req.msgBody.getInteger("metadataId");
         MetadataFieldServiceImpl mdfService = new MetadataFieldServiceImpl();
         MetadataFieldExample mdfExample = new MetadataFieldExample();
         mdfExample.createCriteria().andMetadataIdEqualTo(metadataId);
         mdfExample.setOrderByClause("field_order asc");
-        List<MetadataField> lst = mdfService.selectByExample(mdfExample);
-        msgBody = "{\"list\":" + JSONObject.toJSONString(lst)+ "}";
+        List<MetadataField> lst = metadataFieldService.selectByExample(mdfExample);
+        msgBody = "{\"list\":" + JSONObject.toJSONString(lst) + "}";
         return handler.buildMsg(retcode, retmsg, msgBody);
     }
 
     public MsgResponse getDictListAndField(MsgRequest req, RestHandler handler) {
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
 
         int metadataId = req.msgBody.getInteger("metadataId");
 
@@ -115,7 +125,6 @@ public class MetadataDictServer {
         metadataDictExample.setOrderByClause("metadata_order asc");
         metadataDicts = metadataDictService.selectByExample(metadataDictExample);
 
-        MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
         if (metadataDicts.size() > 0) {
             for (MetadataDict metadataDict : metadataDicts) {
 
@@ -143,7 +152,7 @@ public class MetadataDictServer {
     public MsgResponse getDictTableAndField(MsgRequest req, RestHandler handler) {
         String metadataName = req.msgBody.getString("metadataName");
 
-        List<MetadataDict> lst = MetaDataService.getMetaDataService().getDictTableAndField(metadataName);
+        List<MetadataDict> lst = metaDataService.getDictTableAndField(metadataName);
         msgBody = "{\"list\":" + JSONObject.toJSONString(lst, SerializerFeature.WriteMapNullValue) + "}";
         return handler.buildMsg(retcode, retmsg, msgBody);
     }
@@ -151,7 +160,6 @@ public class MetadataDictServer {
 
     public MsgResponse getDictListByType(MsgRequest req, RestHandler handler) {
 
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
         Integer metadataType = req.msgBody.getInteger("metadataType");
         MetadataDictExample metadataDictExample = new MetadataDictExample();
         metadataDictExample.createCriteria().andMetadataTypeEqualTo(metadataType);
@@ -170,7 +178,6 @@ public class MetadataDictServer {
 
         MetadataDictExample metadataDictExample = new MetadataDictExample();
         metadataDictExample.createCriteria().andMetadataTypeEqualTo(metadataType);
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
         List<MetadataDict> metadataDicts = metadataDictService.selectByExample(metadataDictExample);
 
 
@@ -179,7 +186,6 @@ public class MetadataDictServer {
 
                 MetadataFieldExample metadataFieldExample = new MetadataFieldExample();
                 metadataFieldExample.createCriteria().andMetadataIdEqualTo(sysMetaDataDictModel.getMetadataId());
-                MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
                 List<MetadataField> metadataFields = metadataFieldService.selectByExample(metadataFieldExample);
                 sysMetaDataDictModel.setField(metadataFields);
             }
@@ -194,14 +200,12 @@ public class MetadataDictServer {
     public MsgResponse getDictAndFieldByType(MsgRequest req, RestHandler handler) {
 
         Integer metadataId = req.msgBody.getInteger("metadataId");
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
         MetadataDict sysMetaDataDictModel = metadataDictService.selectByPrimaryKey(metadataId);
 
 
         if (sysMetaDataDictModel != null) {
             MetadataFieldExample metadataFieldExample = new MetadataFieldExample();
             metadataFieldExample.createCriteria().andMetadataIdEqualTo(metadataId);
-            MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
             List<MetadataField> metadataFields = metadataFieldService.selectByExample(metadataFieldExample);
             sysMetaDataDictModel.setField(metadataFields);
         }
@@ -224,7 +228,6 @@ public class MetadataDictServer {
 
                 MetadataDictExample example = new MetadataDictExample();
                 example.createCriteria().andMetadataNameEqualTo(req.msgBody.getString("metadataName"));
-                SysMetaDataServiceImpl sysMetaDataService = new SysMetaDataServiceImpl();
                 List<MetadataDict> sysMetaDataFieldModelList = sysMetaDataService.selectByExample(example);
                 JSONArray array = JSONArray.parseArray(JSON.toJSONString(sysMetaDataFieldModelList));
                 msgBody = "{\"list\":" + JSONObject.toJSONString(array, SerializerFeature.WriteMapNullValue) + "}";
@@ -256,7 +259,6 @@ public class MetadataDictServer {
                     MetadataDictExample example = new MetadataDictExample();
                     example.setOrderByClause("metadata_order  " + req.msgBody.getString("orderBy") + " ");
                     example.createCriteria().andMetadataNameEqualTo(req.msgBody.getString("metadataName"));
-                    SysMetaDataServiceImpl sysMetaDataService = new SysMetaDataServiceImpl();
                     List<MetadataDict> sysMetaDataFieldModelList = sysMetaDataService.selectByExample(example);
 
 
@@ -266,7 +268,6 @@ public class MetadataDictServer {
                             MetadataFieldExample.Criteria criteria = mbe.createCriteria();
                             criteria.andMetadataIdEqualTo(sysMetaDataFieldModelList.get(i).getMetadataId());
                             mbe.setOrderByClause("field_order " + req.msgBody.getString("orderBy") + " ");
-                            MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
                             List<MetadataField> FetadataField = metadataFieldService.selectByExample(mbe);
 
 
@@ -301,35 +302,32 @@ public class MetadataDictServer {
 
         MetadataDict metadataDict = JSONObject.parseObject(req.msgBody.toString(), MetadataDict.class);
         System.err.println(JSONObject.toJSONString(req));
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
         int id = metadataDictService.insertSelective(metadataDict);
         String msgBody = "{'id':" + id + "}";
         return handler.buildMsg(retcode, retmsg, msgBody);
 
     }
 
-    public MsgResponse copyMaster( int mid,RestHandler handler) {
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
+    public MsgResponse copyMaster(int mid, RestHandler handler) {
         int id = metadataDictService.copyMaster(mid);
         String msgBody = "{'id':" + id + "}";
         return handler.buildMsg(retcode, retmsg, msgBody);
 
     }
 
-    public MsgResponse dpMaster( int mid,RestHandler handler) {
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
+    public MsgResponse dpMaster(int mid, RestHandler handler) {
         int id = metadataDictService.dpMaster(mid);
         String msgBody = "{'id':" + id + "}";
-        if(id==0){
-            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR," 有表记录不能删除!");
+        if (id == 0) {
+            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, " 有表记录不能删除!");
         }
         return handler.buildMsg(retcode, retmsg, msgBody);
 
     }
+
     public MsgResponse dictByUpdateByKey(MsgRequest req, RestHandler handler) {
 
         MetadataDict metadataDict = JSONObject.parseObject(req.msgBody.toString(), MetadataDict.class);
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
         int id = metadataDictService.updateByPrimaryKeySelective(metadataDict);
         String msgBody = "{'id':" + id + "}";
         return handler.buildMsg(retcode, retmsg, msgBody);
@@ -342,13 +340,11 @@ public class MetadataDictServer {
             Integer metadataId = Integer.parseInt(req.msgBody.getString("metadataId"));
             if (metadataId != null) {
 
-                MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
                 /*     MetadataDict metadataDict = metadataDictService.selectByPrimaryKey(metadataId);*/
 
                 MetadataFieldExample metadataFieldExample = new MetadataFieldExample();
                 metadataFieldExample.createCriteria().andMetadataIdEqualTo(metadataId);
 
-                MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
 
                 List<MetadataField> metadataFields = metadataFieldService.selectByExample(metadataFieldExample);
 
@@ -393,7 +389,6 @@ public class MetadataDictServer {
             if (metadataDict.getSubsysId() != null) {
                 criteria.andMetadataIdEqualTo(metadataDict.getSubsysId());
             }
-            MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
             int sysDictDataTypeModel = metadataDictService.updateByExampleSelective(metadataDict, metadataDictExample);
 
             if (sysDictDataTypeModel >= 0) {
@@ -419,7 +414,6 @@ public class MetadataDictServer {
         try {
             Integer metadataId = Integer.parseInt(req.msgBody.getString("metadataId"));
             if (metadataId != null) {
-                MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
                 MetadataDict sta = metadataDictService.selectByPrimaryKey(metadataId);
 
                 JSONObject array = JSONObject.parseObject(JSON.toJSONString(sta));
@@ -444,7 +438,6 @@ public class MetadataDictServer {
 
     public MsgResponse getDictById(MsgRequest req, RestHandler handler) {
         Integer metadataType = req.msgBody.getInteger("metadataId");
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
         MetadataDict metadataDicts = metadataDictService.selectByPrimaryKey(metadataType);
 
 
@@ -458,7 +451,6 @@ public class MetadataDictServer {
 
 
     public MsgResponse deleteDictById(MsgRequest req, RestHandler handler) {
-        SysMetaDataServiceImpl sysMetaDataService = new SysMetaDataServiceImpl();
         int metadataId = req.msgBody.getInteger("metadataId");
         //删除主表的数据
         sysMetaDataService.deleteDictById(metadataId);
@@ -493,9 +485,8 @@ public class MetadataDictServer {
 
 
     public MsgResponse addDictDataType(MsgRequest req, RestHandler handler) {
-        DictDataTypeServiceImpl sysMetaDataService = new DictDataTypeServiceImpl();
         DictDatatype dictDatatype = req.msgBody.toJavaObject(req.msgBody, DictDatatype.class);
-        sysMetaDataService.insert(dictDatatype);
+        dictDataTypeService.insert(dictDatatype);
         return handler.buildMsg(retcode, retmsg, msgBody);
 
     }
@@ -503,18 +494,16 @@ public class MetadataDictServer {
 
     public MsgResponse updateDictDataTypeById(MsgRequest req, RestHandler handler) {
 
-        DictDataTypeServiceImpl sysMetaDataService = new DictDataTypeServiceImpl();
         DictDatatype dictDatatype = req.msgBody.toJavaObject(req.msgBody, DictDatatype.class);
-        sysMetaDataService.updateByPrimaryKey(dictDatatype);
+        dictDataTypeService.updateByPrimaryKey(dictDatatype);
         return handler.buildMsg(retcode, retmsg, msgBody);
 
     }
 
     public MsgResponse deleteDictDataTypeById(MsgRequest req, RestHandler handler) {
         int dataInnerId = Integer.parseInt(req.msgBody.getString("dataInnerId"));
-        DictDataTypeServiceImpl sysMetaDataService = new DictDataTypeServiceImpl();
         DictDatatype dictDatatype = req.msgBody.toJavaObject(req.msgBody, DictDatatype.class);
-        sysMetaDataService.deleteByPrimaryKey(dataInnerId);
+        dictDataTypeService.deleteByPrimaryKey(dataInnerId);
 
         return handler.buildMsg(retcode, retmsg, msgBody);
 

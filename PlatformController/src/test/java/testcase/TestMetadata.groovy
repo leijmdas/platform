@@ -22,6 +22,7 @@ public class TestMetadata extends ITestImpl {
     HttpClientNode httpclient;
 
     ManagerLogin login = new ManagerLogin();
+    String data;
 
     public void suiteSetUp() {
         req.token = token;
@@ -54,19 +55,19 @@ public class TestMetadata extends ITestImpl {
         String body = '''
         {"metadataName":"work_group_plan_landmark","metadataAlias":"work_group_plan_landmark","metadataMemo":"work_group_plan_landmark","metadataParentid":"","isCached":0,"metadataDb":"ytb_project","metadataAutocreate":1,"metadataStmt":"","metadataIndex":"","metadataOrder":"","metadataRemark":"","subsysId":"3","metadataType":6}'''
 
-        body = '''{"metadataName":"d","metadataAlias":"dd","metadataMemo":"dd","metadataParentid":"","isCached":0,"metadataDb":"ytb_account","metadataAutocreate":1,"metadataStmt":"1","metadataIndex":"1","metadataOrder":"1","metadataRemark":"1","subsysId":"3","metadataType":1}'''
+        body = """{"metadataName":"metadn${System.currentTimeMillis()}","metadataAlias":"dd","metadataMemo":"dd","metadataParentid":"","isCached":0,"metadataDb":"ytb_account","metadataAutocreate":1,"metadataStmt":"1","metadataIndex":"1","metadataOrder":"1","metadataRemark":"1","subsysId":"3","metadataType":1}"""
         req.msgBody = JSONObject.parseObject(body);
 
         data = JSONObject.toJSONString(req);
         System.err.println(data);
-        String ret = httpclient.post("http://localhost/rest/sysmetadata", data, "application/json");
+        String ret = httpclient.post("http://localhost:10080/rest/sysmetadata", data, "application/json");
         httpclient.checkStatusCode(200);
 
         MsgResponse resp = MsgResponse.parseResponse(ret);
         checkEQ(0, resp.getRetcode());
         System.out.println(resp);
     }
-    //"getDictDataTypeList"
+
     @JTest
     @JTestClass.title(" test0002_getDictDataTypeList")
     @JTestClass.pre("getDictTableAndField")
@@ -351,9 +352,31 @@ public class TestMetadata extends ITestImpl {
 
 
     }
-    //getCachedTableList
+    @JTest
+    @JTestClass.title(" test0014_makeTableByDictId")
+    @JTestClass.pre("getDictTableAndField")
+    @JTestClass.step("post http://mysql.kunlong.com:8080/rest/sysmetadata")
+    @JTestClass.exp("ok")
+    public void test0014_makeTableByDictId() {
+        req.reqtime = System.currentTimeMillis();
+        req.seqno = System.currentTimeMillis();
+        req.cmdtype = "metadata";
+        req.cmd = "makeTableByDictId";
+        String body = "{metadataId: 315}"
+
+        req.msgBody = JSONObject.parseObject(body);
+
+        data = JSONObject.toJSONString(req);
+        String ret = httpclient.post("http://localhost:10080/rest/sysmetadata",
+                data, "application/json");
+        httpclient.checkStatusCode(200);
+
+        MsgResponse resp = MsgResponse.parseResponse(ret);
+        checkEQ(0, resp.getRetcode());
+        System.out.println(resp);
+    }
 
     public static void main(String[] args) {
-      run(TestMetadata.class, 2);
+        run(TestMetadata.class, 14);
     }
 }

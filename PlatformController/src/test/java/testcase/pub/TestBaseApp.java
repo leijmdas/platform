@@ -1,6 +1,9 @@
 package testcase.pub;
 
+import com.jtest.testframe.ITestImpl;
 import com.jtest.utility.testlog.TestLog;
+import com.kunlong.metadata.service.MetadataDictService;
+import com.kunlong.metadata.service.impl.MetadataDictServiceImpl;
 import com.kunlong.platform.PfControllerApp;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +27,7 @@ import java.net.URL;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = PfControllerApp.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
-public class TestBaseApp {
+public class TestBaseApp extends ITestImpl {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
@@ -49,5 +52,13 @@ public class TestBaseApp {
 
     }
 
+    @Autowired
+    MetadataDictService metadataDictService;
+
+    @Test
+    public void checkTableExist() {
+        Boolean ret = metadataDictService.checkTableExists("ytb_manager", "dict_area");
+        TestLog.logJtest(ret);
+    }
 
 }

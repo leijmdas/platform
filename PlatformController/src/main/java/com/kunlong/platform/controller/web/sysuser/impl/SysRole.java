@@ -33,6 +33,10 @@ public class SysRole {
     SysRoleService sysRoleService ;//= new SysRoleServiceImpl();
 
     public MsgResponse process(MsgHandler handler) {
+        retcode = 0;
+        retmsg = "成功";
+        msgBody = null;
+
         MsgRequest req = handler.req;
 
 

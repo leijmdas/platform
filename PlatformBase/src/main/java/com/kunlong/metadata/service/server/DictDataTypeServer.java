@@ -83,7 +83,7 @@ public class DictDataTypeServer {
     }
 
     public MsgResponse selectDatatype(MsgRequest req, RestHandler handler) {
-        //DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
+
         DictDatatype dictDatatype = JSONObject.parseObject(JSONObject.toJSONString(req.getMsgBody()), DictDatatype.class);
         List<DictDatatype> lst = dictDataTypeService.selectDatatype( );
         msgBody = "{\"list\":" +JSONObject.toJSONString(lst) + " }";

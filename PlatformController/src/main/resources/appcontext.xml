@@ -23,14 +23,14 @@
                         <prop key="kaptcha.session.key">code</prop>
                         <prop key="kaptcha.textproducer.char.length">6</prop>
                         <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
-                        <prop key="kaptcha.textproducer.char.string">0123456789abcdef</prop>
+                        <prop key="kaptcha.textproducer.char.string">123456789</prop>
                         <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
                         <prop key="kaptcha.noise.color">black</prop>
                         <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
                         <!--<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.DefaultNoise</prop>-->
                         <prop key="kaptcha.background.clear.from">185,56,213</prop>
                         <prop key="kaptcha.background.clear.to">white</prop>
-                        <prop key="kaptcha.textproducer.char.space">2</prop>
+                        <prop key="kaptcha.textproducer.char.space">4</prop>
                     </props>
                 </constructor-arg>
             </bean>

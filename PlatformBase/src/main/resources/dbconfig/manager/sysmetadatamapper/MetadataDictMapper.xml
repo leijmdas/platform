@@ -144,317 +144,318 @@
        , #{metadataAddDel,jdbcType=BIT}, #{metadataReadonly,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.kunlong.metadata.model.MetadataDict">
-    insert into metadata_dict
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="metadataId != null">
-        metadata_id,
-      </if>
-      <if test="subsysId != null">
-        subsys_id,
-      </if>
-      <if test="metadataName != null">
-        metadata_name,
-      </if>
-      <if test="metadataAlias != null">
-        metadata_alias,
-      </if>
-      <if test="metadataMemo != null">
-        metadata_memo,
-      </if>
-      <if test="metadataParentid != null">
-        metadata_parentid,
-      </if>
-      <if test="metadataType != null">
-        metadata_type,
-      </if>
-      <if test="metadataCached != null">
-        metadata_cached,
-      </if>
-      <if test="metadataDb != null">
-        metadata_db,
-      </if>
-      <if test="metadataAutocreate != null">
-        metadata_autocreate,
-      </if>
-      <if test="metadataStmt != null">
-        metadata_stmt,
-      </if>
-      <if test="metadataIndex != null">
-        metadata_index,
-      </if>
-      <if test="metadataOrder != null">
-        metadata_order,
-      </if>
-      <if test="metadataRemark != null">
-        metadata_remark,
-      </if>
-      <if test="metadataSortFields != null">
-        metadata_sort_fields,
-      </if>
 
-      <if test="refSrc != null">
-        ref_src,
-      </if>
-      <if test="refObject != null">
-        ref_object,
-      </if>
-      <if test="refParam != null">
-        ref_param,
-      </if>
-      <if test="metadataReadonly != null">
-        metadata_readonly,
-      </if>
-      <if test="metadataAddDel != null">
-        metadata_add_del
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="metadataId != null">
-        #{metadataId,jdbcType=INTEGER},
-      </if>
-      <if test="subsysId != null">
-        #{subsysId,jdbcType=INTEGER},
-      </if>
-      <if test="metadataName != null">
-        #{metadataName,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataAlias != null">
-        #{metadataAlias,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataMemo != null">
-        #{metadataMemo,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataParentid != null">
-        #{metadataParentid,jdbcType=INTEGER},
-      </if>
-      <if test="metadataType != null">
-        #{metadataType,jdbcType=INTEGER},
-      </if>
-      <if test="metadataCached != null">
-        #{metadataCached,jdbcType=BIT},
-      </if>
-      <if test="metadataDb != null">
-        #{metadataDb,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataAutocreate != null">
-        #{metadataAutocreate,jdbcType=BIT},
-      </if>
-      <if test="metadataStmt != null">
-        #{metadataStmt,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataIndex != null">
-        #{metadataIndex,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataOrder != null">
-        #{metadataOrder,jdbcType=INTEGER},
-      </if>
-      <if test="metadataRemark != null">
-        #{metadataRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataSortFields != null">
-        #{metadataSortFields,jdbcType=VARCHAR},
-      </if>
-      <if test="refSrc != null">
-        #{refSrc,jdbcType=INTEGER},
-      </if>
-      <if test="refObject != null">
-        #{refObject,jdbcType=VARCHAR},
-      </if>
-      <if test="refParam != null">
-        #{refParam,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataReadonly != null">
-        #{metadataReadonly,jdbcType=BIT},
-      </if>
-      <if test="metadataAddDel != null">
-        #{metadataAddDel,jdbcType=BIT}
-      </if>
+    <insert id="insertSelective" parameterType="com.kunlong.metadata.model.MetadataDict" useGeneratedKeys="true" keyProperty="metadataId">
+      insert into metadata_dict
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="metadataId != null">
+          metadata_id,
+        </if>
+        <if test="subsysId != null">
+          subsys_id,
+        </if>
+        <if test="metadataName != null">
+          metadata_name,
+        </if>
+        <if test="metadataAlias != null">
+          metadata_alias,
+        </if>
+        <if test="metadataMemo != null">
+          metadata_memo,
+        </if>
+        <if test="metadataParentid != null">
+          metadata_parentid,
+        </if>
+        <if test="metadataType != null">
+          metadata_type,
+        </if>
+        <if test="metadataCached != null">
+          metadata_cached,
+        </if>
+        <if test="metadataDb != null">
+          metadata_db,
+        </if>
+        <if test="metadataAutocreate != null">
+          metadata_autocreate,
+        </if>
+        <if test="metadataStmt != null">
+          metadata_stmt,
+        </if>
+        <if test="metadataIndex != null">
+          metadata_index,
+        </if>
+        <if test="metadataOrder != null">
+          metadata_order,
+        </if>
+        <if test="metadataRemark != null">
+          metadata_remark,
+        </if>
+        <if test="metadataSortFields != null">
+          metadata_sort_fields,
+        </if>
 
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.kunlong.metadata.model.MetadataDictExample" resultType="java.lang.Long">
-    select count(*) from metadata_dict
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update metadata_dict
-    <set>
-      <if test="record.metadataId != null">
-        metadata_id = #{record.metadataId,jdbcType=INTEGER},
-      </if>
-      <if test="record.subsysId != null">
-        subsys_id = #{record.subsysId,jdbcType=INTEGER},
-      </if>
-      <if test="record.metadataName != null">
-        metadata_name = #{record.metadataName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.metadataAlias != null">
-        metadata_alias = #{record.metadataAlias,jdbcType=VARCHAR},
-      </if>
-      <if test="record.metadataMemo != null">
-        metadata_memo = #{record.metadataMemo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.metadataParentid != null">
-        metadata_parentid = #{record.metadataParentid,jdbcType=INTEGER},
-      </if>
-      <if test="record.metadataType != null">
-        metadata_type = #{record.metadataType,jdbcType=INTEGER},
-      </if>
-      <if test="record.metadataCached != null">
-        metadata_cached = #{record.metadataCached,jdbcType=BIT},
-      </if>
-      <if test="record.metadataDb != null">
-        metadata_db = #{record.metadataDb,jdbcType=VARCHAR},
-      </if>
-      <if test="record.metadataAutocreate != null">
-        metadata_autocreate = #{record.metadataAutocreate,jdbcType=BIT},
-      </if>
-      <if test="record.metadataStmt != null">
-        metadata_stmt = #{record.metadataStmt,jdbcType=VARCHAR},
-      </if>
-      <if test="record.metadataIndex != null">
-        metadata_index = #{record.metadataIndex,jdbcType=VARCHAR},
-      </if>
-      <if test="record.metadataOrder != null">
-        metadata_order = #{record.metadataOrder,jdbcType=INTEGER},
-      </if>
-      <if test="record.metadataRemark != null">
-        metadata_remark = #{record.metadataRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.metadataSortFields != null">
-        metadata_sort_fields = #{record.metadataSortFields,jdbcType=VARCHAR},
-      </if>
-      <if test="record.refSrc != null">
-        ref_src = #{record.refSrc,jdbcType=INTEGER},
-      </if>
-      <if test="record.refObject != null">
-        ref_object = #{record.refObject,jdbcType=VARCHAR},
-      </if>
-      <if test="record.metadataReadonly != null">
-        metadata_readonly = #{record.metadataReadonly,jdbcType=BIT},
-      </if>
-      <if test="record.metadataAddDel != null">
-        metadata_add_del = #{record.metadataAddDel,jdbcType=BIT}
-      </if>
+        <if test="refSrc != null">
+          ref_src,
+        </if>
+        <if test="refObject != null">
+          ref_object,
+        </if>
+        <if test="refParam != null">
+          ref_param,
+        </if>
+        <if test="metadataReadonly != null">
+          metadata_readonly,
+        </if>
+        <if test="metadataAddDel != null">
+          metadata_add_del
+        </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="metadataId != null">
+          #{metadataId,jdbcType=INTEGER},
+        </if>
+        <if test="subsysId != null">
+          #{subsysId,jdbcType=INTEGER},
+        </if>
+        <if test="metadataName != null">
+          #{metadataName,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataAlias != null">
+          #{metadataAlias,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataMemo != null">
+          #{metadataMemo,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataParentid != null">
+          #{metadataParentid,jdbcType=INTEGER},
+        </if>
+        <if test="metadataType != null">
+          #{metadataType,jdbcType=INTEGER},
+        </if>
+        <if test="metadataCached != null">
+          #{metadataCached,jdbcType=BIT},
+        </if>
+        <if test="metadataDb != null">
+          #{metadataDb,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataAutocreate != null">
+          #{metadataAutocreate,jdbcType=BIT},
+        </if>
+        <if test="metadataStmt != null">
+          #{metadataStmt,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataIndex != null">
+          #{metadataIndex,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataOrder != null">
+          #{metadataOrder,jdbcType=INTEGER},
+        </if>
+        <if test="metadataRemark != null">
+          #{metadataRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataSortFields != null">
+          #{metadataSortFields,jdbcType=VARCHAR},
+        </if>
+        <if test="refSrc != null">
+          #{refSrc,jdbcType=INTEGER},
+        </if>
+        <if test="refObject != null">
+          #{refObject,jdbcType=VARCHAR},
+        </if>
+        <if test="refParam != null">
+          #{refParam,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataReadonly != null">
+          #{metadataReadonly,jdbcType=BIT},
+        </if>
+        <if test="metadataAddDel != null">
+          #{metadataAddDel,jdbcType=BIT}
+        </if>
 
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update metadata_dict
-    set metadata_id = #{record.metadataId,jdbcType=INTEGER},
-    subsys_id = #{record.subsysId,jdbcType=INTEGER},
-    metadata_name = #{record.metadataName,jdbcType=VARCHAR},
-    metadata_alias = #{record.metadataAlias,jdbcType=VARCHAR},
-    metadata_memo = #{record.metadataMemo,jdbcType=VARCHAR},
-    metadata_parentid = #{record.metadataParentid,jdbcType=INTEGER},
-    metadata_type = #{record.metadataType,jdbcType=INTEGER},
-    metadata_cached = #{record.metadataCached,jdbcType=BIT},
-    metadata_db = #{record.metadataDb,jdbcType=VARCHAR},
-    metadata_autocreate = #{record.metadataAutocreate,jdbcType=BIT},
-    metadata_stmt = #{record.metadataStmt,jdbcType=VARCHAR},
-    metadata_index = #{record.metadataIndex,jdbcType=VARCHAR},
-    metadata_order = #{record.metadataOrder,jdbcType=INTEGER},
-    metadata_remark = #{record.metadataRemark,jdbcType=VARCHAR},
-    metadata_sort_fields = #{record.metadataSortFields,jdbcType=VARCHAR},
-    ref_src = #{record.refSrc,jdbcType=INTEGER},
-    ref_object = #{record.refObject,jdbcType=VARCHAR},
-    ref_param = #{record.refParam,jdbcType=VARCHAR},
-    metadata_readonly = #{record.metadataReadonly,jdbcType=VARCHAR},
-    metadata_add_del = #{record.metadataAddDel,jdbcType=VARCHAR}
-
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.kunlong.metadata.model.MetadataDict">
-    update metadata_dict
-    <set>
-      <if test="subsysId != null">
-        subsys_id = #{subsysId,jdbcType=INTEGER},
+      </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.kunlong.metadata.model.MetadataDictExample" resultType="java.lang.Long">
+      select count(*) from metadata_dict
+      <if test="_parameter != null">
+        <include refid="Example_Where_Clause" />
       </if>
-      <if test="metadataName != null">
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+      update metadata_dict
+      <set>
+        <if test="record.metadataId != null">
+          metadata_id = #{record.metadataId,jdbcType=INTEGER},
+        </if>
+        <if test="record.subsysId != null">
+          subsys_id = #{record.subsysId,jdbcType=INTEGER},
+        </if>
+        <if test="record.metadataName != null">
+          metadata_name = #{record.metadataName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.metadataAlias != null">
+          metadata_alias = #{record.metadataAlias,jdbcType=VARCHAR},
+        </if>
+        <if test="record.metadataMemo != null">
+          metadata_memo = #{record.metadataMemo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.metadataParentid != null">
+          metadata_parentid = #{record.metadataParentid,jdbcType=INTEGER},
+        </if>
+        <if test="record.metadataType != null">
+          metadata_type = #{record.metadataType,jdbcType=INTEGER},
+        </if>
+        <if test="record.metadataCached != null">
+          metadata_cached = #{record.metadataCached,jdbcType=BIT},
+        </if>
+        <if test="record.metadataDb != null">
+          metadata_db = #{record.metadataDb,jdbcType=VARCHAR},
+        </if>
+        <if test="record.metadataAutocreate != null">
+          metadata_autocreate = #{record.metadataAutocreate,jdbcType=BIT},
+        </if>
+        <if test="record.metadataStmt != null">
+          metadata_stmt = #{record.metadataStmt,jdbcType=VARCHAR},
+        </if>
+        <if test="record.metadataIndex != null">
+          metadata_index = #{record.metadataIndex,jdbcType=VARCHAR},
+        </if>
+        <if test="record.metadataOrder != null">
+          metadata_order = #{record.metadataOrder,jdbcType=INTEGER},
+        </if>
+        <if test="record.metadataRemark != null">
+          metadata_remark = #{record.metadataRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.metadataSortFields != null">
+          metadata_sort_fields = #{record.metadataSortFields,jdbcType=VARCHAR},
+        </if>
+        <if test="record.refSrc != null">
+          ref_src = #{record.refSrc,jdbcType=INTEGER},
+        </if>
+        <if test="record.refObject != null">
+          ref_object = #{record.refObject,jdbcType=VARCHAR},
+        </if>
+        <if test="record.metadataReadonly != null">
+          metadata_readonly = #{record.metadataReadonly,jdbcType=BIT},
+        </if>
+        <if test="record.metadataAddDel != null">
+          metadata_add_del = #{record.metadataAddDel,jdbcType=BIT}
+        </if>
+
+      </set>
+      <if test="_parameter != null">
+        <include refid="Update_By_Example_Where_Clause" />
+      </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+      update metadata_dict
+      set metadata_id = #{record.metadataId,jdbcType=INTEGER},
+      subsys_id = #{record.subsysId,jdbcType=INTEGER},
+      metadata_name = #{record.metadataName,jdbcType=VARCHAR},
+      metadata_alias = #{record.metadataAlias,jdbcType=VARCHAR},
+      metadata_memo = #{record.metadataMemo,jdbcType=VARCHAR},
+      metadata_parentid = #{record.metadataParentid,jdbcType=INTEGER},
+      metadata_type = #{record.metadataType,jdbcType=INTEGER},
+      metadata_cached = #{record.metadataCached,jdbcType=BIT},
+      metadata_db = #{record.metadataDb,jdbcType=VARCHAR},
+      metadata_autocreate = #{record.metadataAutocreate,jdbcType=BIT},
+      metadata_stmt = #{record.metadataStmt,jdbcType=VARCHAR},
+      metadata_index = #{record.metadataIndex,jdbcType=VARCHAR},
+      metadata_order = #{record.metadataOrder,jdbcType=INTEGER},
+      metadata_remark = #{record.metadataRemark,jdbcType=VARCHAR},
+      metadata_sort_fields = #{record.metadataSortFields,jdbcType=VARCHAR},
+      ref_src = #{record.refSrc,jdbcType=INTEGER},
+      ref_object = #{record.refObject,jdbcType=VARCHAR},
+      ref_param = #{record.refParam,jdbcType=VARCHAR},
+      metadata_readonly = #{record.metadataReadonly,jdbcType=VARCHAR},
+      metadata_add_del = #{record.metadataAddDel,jdbcType=VARCHAR}
+
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.kunlong.metadata.model.MetadataDict">
+      update metadata_dict
+      <set>
+        <if test="subsysId != null">
+          subsys_id = #{subsysId,jdbcType=INTEGER},
+        </if>
+        <if test="metadataName != null">
+          metadata_name = #{metadataName,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataAlias != null">
+          metadata_alias = #{metadataAlias,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataMemo != null">
+          metadata_memo = #{metadataMemo,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataParentid != null">
+          metadata_parentid = #{metadataParentid,jdbcType=INTEGER},
+        </if>
+        <if test="metadataType != null">
+          metadata_type = #{metadataType,jdbcType=INTEGER},
+        </if>
+        <if test="metadataCached != null">
+          metadata_cached = #{metadataCached,jdbcType=BIT},
+        </if>
+        <if test="metadataDb != null">
+          metadata_db = #{metadataDb,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataAutocreate != null">
+          metadata_autocreate = #{metadataAutocreate,jdbcType=BIT},
+        </if>
+        <if test="metadataStmt != null">
+          metadata_stmt = #{metadataStmt,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataIndex != null">
+          metadata_index = #{metadataIndex,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataOrder != null">
+          metadata_order = #{metadataOrder,jdbcType=INTEGER},
+        </if>
+        <if test="metadataRemark != null">
+          metadata_remark = #{metadataRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="metadataSortFields != null">
+          metadata_sort_fields = #{metadataSortFields,jdbcType=VARCHAR},
+        </if>
+        <if test="refSrc != null">
+          ref_src = #{refSrc,jdbcType=INTEGER},
+        </if>
+        <if test="refObject != null">
+          ref_object = #{refObject,jdbcType=VARCHAR},
+        </if>
+        <if test="refParam != null">
+          ref_param = #{refParam,jdbcType=VARCHAR},
+        </if>
+        <if test="refParam != null">
+          metadata_readonly = #{metadataReadonly,jdbcType=BIT},
+        </if>
+        <if test="refParam != null">
+          metadata_add_del = #{metadataAddDel,jdbcType=BIT}
+        </if>
+
+      </set>
+      where metadata_id = #{metadataId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.kunlong.metadata.model.MetadataDict">
+      update metadata_dict
+      set subsys_id = #{subsysId,jdbcType=INTEGER},
         metadata_name = #{metadataName,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataAlias != null">
         metadata_alias = #{metadataAlias,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataMemo != null">
         metadata_memo = #{metadataMemo,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataParentid != null">
         metadata_parentid = #{metadataParentid,jdbcType=INTEGER},
-      </if>
-      <if test="metadataType != null">
         metadata_type = #{metadataType,jdbcType=INTEGER},
-      </if>
-      <if test="metadataCached != null">
         metadata_cached = #{metadataCached,jdbcType=BIT},
-      </if>
-      <if test="metadataDb != null">
         metadata_db = #{metadataDb,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataAutocreate != null">
         metadata_autocreate = #{metadataAutocreate,jdbcType=BIT},
-      </if>
-      <if test="metadataStmt != null">
         metadata_stmt = #{metadataStmt,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataIndex != null">
         metadata_index = #{metadataIndex,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataOrder != null">
         metadata_order = #{metadataOrder,jdbcType=INTEGER},
-      </if>
-      <if test="metadataRemark != null">
         metadata_remark = #{metadataRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="metadataSortFields != null">
-        metadata_sort_fields = #{metadataSortFields,jdbcType=VARCHAR},
-      </if>
-      <if test="refSrc != null">
-        ref_src = #{refSrc,jdbcType=INTEGER},
-      </if>
-      <if test="refObject != null">
-        ref_object = #{refObject,jdbcType=VARCHAR},
-      </if>
-      <if test="refParam != null">
-        ref_param = #{refParam,jdbcType=VARCHAR},
-      </if>
-      <if test="refParam != null">
-        metadata_readonly = #{metadataReadonly,jdbcType=BIT},
-      </if>
-      <if test="refParam != null">
-        metadata_add_del = #{metadataAddDel,jdbcType=BIT}
-      </if>
+      metadata_sort_fields = #{metadataSortFields,jdbcType=VARCHAR},
+      ref_src = #{refSrc,jdbcType=INTEGER},
+      ref_object = #{refObject,jdbcType=VARCHAR},
+      ref_param = #{refParam,jdbcType=VARCHAR}，
+      metadata_readonly = #{metadataReadonly,jdbcType=BIT}，
+      metadata_add_del = #{metadataAddDel,jdbcType=BIT}
 
-    </set>
-    where metadata_id = #{metadataId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.kunlong.metadata.model.MetadataDict">
-    update metadata_dict
-    set subsys_id = #{subsysId,jdbcType=INTEGER},
-      metadata_name = #{metadataName,jdbcType=VARCHAR},
-      metadata_alias = #{metadataAlias,jdbcType=VARCHAR},
-      metadata_memo = #{metadataMemo,jdbcType=VARCHAR},
-      metadata_parentid = #{metadataParentid,jdbcType=INTEGER},
-      metadata_type = #{metadataType,jdbcType=INTEGER},
-      metadata_cached = #{metadataCached,jdbcType=BIT},
-      metadata_db = #{metadataDb,jdbcType=VARCHAR},
-      metadata_autocreate = #{metadataAutocreate,jdbcType=BIT},
-      metadata_stmt = #{metadataStmt,jdbcType=VARCHAR},
-      metadata_index = #{metadataIndex,jdbcType=VARCHAR},
-      metadata_order = #{metadataOrder,jdbcType=INTEGER},
-      metadata_remark = #{metadataRemark,jdbcType=VARCHAR},
-    metadata_sort_fields = #{metadataSortFields,jdbcType=VARCHAR},
-    ref_src = #{refSrc,jdbcType=INTEGER},
-    ref_object = #{refObject,jdbcType=VARCHAR},
-    ref_param = #{refParam,jdbcType=VARCHAR}，
-    metadata_readonly = #{metadataReadonly,jdbcType=BIT}，
-    metadata_add_del = #{metadataAddDel,jdbcType=BIT}
-
-    where metadata_id = #{metadataId,jdbcType=INTEGER}
-  </update>
-</mapper>
+      where metadata_id = #{metadataId,jdbcType=INTEGER}
+    </update>
+  </mapper>

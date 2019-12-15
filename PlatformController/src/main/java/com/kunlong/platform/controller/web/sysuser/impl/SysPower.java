@@ -36,6 +36,10 @@ public class SysPower {
     String msgBody = "{}";
 
     public MsgResponse process(MsgHandler handler) {
+        retcode = 0;
+        retmsg = "成功";
+        msgBody = null;
+
         MsgRequest req = handler.req;
 
 

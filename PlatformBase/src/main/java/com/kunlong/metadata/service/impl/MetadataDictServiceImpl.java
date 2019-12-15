@@ -5,9 +5,12 @@ import com.kunlong.metadata.model.MetadataDict;
 import com.kunlong.metadata.model.MetadataDictExample;
 import com.kunlong.metadata.model.MetadataField;
 import com.kunlong.metadata.service.MetadataDictService;
+import com.kunlong.metadata.service.MetadataFieldService;
 import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.model.KunlongError;
+import com.kunlong.platform.utils.KunlongUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -17,10 +20,13 @@ import java.util.Map;
  * Author: XZW
  * Date: Created in 2018/8/23 16:50
  */
+@Service
 public class MetadataDictServiceImpl implements MetadataDictService {
 
     @Autowired
     MetadataDictMapper metadataDictMapper;
+    @Autowired
+    MetadataFieldService metadataFieldService;
 
     public long countByExample(MetadataDictExample example) {
         return 0;
@@ -39,14 +45,19 @@ public class MetadataDictServiceImpl implements MetadataDictService {
     }
 
     public int insert(MetadataDict record) {
-        return 0;
+        metadataDictMapper.insert(record);
+        System.err.println(KunlongUtils.toJSONStringPretty(record));
+        System.err.println(record.getMetadataId());
+        return record.getMetadataId();
+
     }
 
     public int insertSelective(MetadataDict record) {
         metadataDictMapper.insertSelective(record);
-        //int id = SqlSessionBuilder.selectAutoID(sq);
+        System.err.println(KunlongUtils.toJSONStringPretty(record));
+        System.err.println(record.getMetadataId());
+        //int id = KunlongSql.selectAutoID(sq);
         return record.getMetadataId();
-
 
     }
 
@@ -94,23 +105,23 @@ public class MetadataDictServiceImpl implements MetadataDictService {
         md.setMetadataName(md.getMetadataName() + System.currentTimeMillis());
         md.setMetadataId(null);
         Integer id = this.insertSelective(md);
+
         StringBuilder sql = new StringBuilder();
         sql.append(" select * from ytb_manager.metadata_field ");
         sql.append(" where metadata_id= ").append(metadataId);
-        MetadataFieldServiceImpl mfs = new MetadataFieldServiceImpl();
         md.setMetadataId(metadataId);
 
         List<MetadataField> lst = KunlongSql.selectList(sql, MetadataField.class);
-        for (MetadataField mf : lst) {
-            mf.setFieldId(null);
-            mf.setMetadataId(id);
-            mfs.insertSelective(mf);
+        for (MetadataField metadataField : lst) {
+            metadataField.setFieldId(null);
+            metadataField.setMetadataId(id);
+            metadataFieldService.insertSelective(metadataField);
         }
         return id;
     }
 
     //SELECT  *  FROM information_schema.TABLES WHERE  TABLE_SCHEMA='ytb_manager'
-    public static boolean checkTableExists(String db, String tbl) {
+    public Boolean checkTableExists(String db, String tbl) {
         StringBuilder sql = new StringBuilder(128);
         sql.append("select 1 from information_schema.TABLES");
         sql.append(" where  TABLE_SCHEMA='").append(db).append("'");
@@ -120,6 +131,7 @@ public class MetadataDictServiceImpl implements MetadataDictService {
     }
 
     public Integer dpMaster(Integer metadataId) {
+
         StringBuilder sql1 = new StringBuilder();
         sql1.append(" select * from ytb_manager.metadata_dict ");
         sql1.append(" where metadata_id= ").append(metadataId);

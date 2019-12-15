@@ -651,7 +651,6 @@ public class TestSysMetadata extends ITestImpl {
     @JTestClass.exp("ok")
     public void insertMaster() {
 
-        //sysmetadata	sysmetadata	sysmetadata	sysmetadata	sysmetadata
         req.reqtime = System.currentTimeMillis();// DateFormat(new Date())
         req.token = token;
         req.seqno = System.currentTimeMillis();
@@ -661,7 +660,7 @@ public class TestSysMetadata extends ITestImpl {
 
         data = JSONObject.toJSONString(req);
         System.out.println(data);
-        String ret = httpclient.post("http://localhost/rest/sysmetadata", data, "application/json");
+        String ret = httpclient.post("http://localhost:10080/rest/sysmetadata", data, "application/json");
         httpclient.checkStatusCode(200);
 
         MsgResponse resp=MsgResponse.parseResponse(ret);

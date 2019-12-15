@@ -1,20 +1,21 @@
 package com.kunlong.metadata.service.impl;
 
 import com.kunlong.metadata.model.*;
+import com.kunlong.metadata.service.MetadataDictService;
+import com.kunlong.metadata.service.MetadataFieldService;
 import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.model.KunlongError;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
+@Service
 public class MetaDataService {
-    public static MetaDataService getMetaDataService() {
-        return metaDataService;
-    }
-    static MetaDataService metaDataService=new MetaDataService();
-
-    MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
-    MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
+    @Autowired
+    MetadataDictService metadataDictService  ;
+    @Autowired
+    MetadataFieldService metadataFieldService  ;
 
 
     public List<MetadataDict> getDictTableAndField(String dbName, String metadataName){

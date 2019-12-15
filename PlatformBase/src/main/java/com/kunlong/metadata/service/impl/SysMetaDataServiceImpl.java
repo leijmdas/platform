@@ -2,6 +2,8 @@ package com.kunlong.metadata.service.impl;
 
 import com.kunlong.metadata.dao.*;
 import com.kunlong.metadata.model.*;
+import com.kunlong.metadata.service.MetadataDictService;
+import com.kunlong.metadata.service.MetadataFieldService;
 import com.kunlong.metadata.service.SysMetaDataService;
 import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
@@ -18,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static com.kunlong.metadata.service.impl.MetadataDictServiceImpl.checkTableExists;
 
 /**
  * Package: com.kunlong.metadata.service.impl
@@ -27,6 +28,11 @@ import static com.kunlong.metadata.service.impl.MetadataDictServiceImpl.checkTab
  */
 @Service
 public class SysMetaDataServiceImpl implements SysMetaDataService {
+    @Autowired
+    MetadataDictService metadataDictService ;//= new MetadataDictServiceImpl();
+    @Autowired
+    MetadataFieldService metadataFieldService ;//= new MetadataFieldServiceImpl();
+
     @Autowired
     SysDictDataTypeMapper sysDictDataTypeDao ;
     @Autowired
@@ -216,18 +222,17 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
         if (metadataId == null) {
             throw new KunlongError(KunlongError.CODE_PARAMETER_IS_WRONG);
         }
-        MetadataDictServiceImpl metadataDictService = new MetadataDictServiceImpl();
+
         MetadataDict metadataDict = metadataDictService.selectByPrimaryKey(metadataId);
         if (metadataDict == null) {
             throw new KunlongError(KunlongError.CODE_DEFINE_ERROR,"字典未定义");
         }
 
-        if(checkTableExists(metadataDict.getMetadataDb(),metadataDict.getMetadataName())){
+        if(metadataDictService.checkTableExists(metadataDict.getMetadataDb(),metadataDict.getMetadataName())){
             throw new KunlongError(KunlongError.CODE_DEFINE_ERROR," 表已经存在！");
         }
 
-        MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
-        MetadataFieldExample metadataFieldExampleKey = new MetadataFieldExample();
+         MetadataFieldExample metadataFieldExampleKey = new MetadataFieldExample();
         MetadataFieldExample.Criteria fieldExampleCriteriaKey = metadataFieldExampleKey.createCriteria();
         fieldExampleCriteriaKey.andFieldPkEqualTo(true);
         fieldExampleCriteriaKey.andMetadataIdEqualTo(metadataId);

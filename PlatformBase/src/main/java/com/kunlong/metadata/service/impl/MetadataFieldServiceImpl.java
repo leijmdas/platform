@@ -5,6 +5,8 @@ import com.kunlong.metadata.model.MetadataField;
 import com.kunlong.metadata.model.MetadataFieldExample;
 import com.kunlong.metadata.service.MetadataFieldService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 /**
@@ -12,6 +14,7 @@ import java.util.List;
  * Author: XZW
  * Date: Created in 2018/8/23 16:50
  */
+@Component
 public class MetadataFieldServiceImpl implements MetadataFieldService {
     @Autowired
     MetadataFieldMapper metadataFieldMapper;

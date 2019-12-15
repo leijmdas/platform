@@ -15,6 +15,7 @@ public interface MetadataDictService {
 
     Integer copyMaster(Integer mid);
     Integer dpMaster(Integer mid);
+    Boolean checkTableExists(String db,String tbl);
 
     long countByExample(MetadataDictExample example);
 

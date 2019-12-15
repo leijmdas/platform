@@ -25,6 +25,7 @@ public class MetaDataProcess {
 
     @Resource(name = "metadataDictServer")
     MetadataDictServer metadataDictServer;
+
     @Resource(name = "metadataFieldServer")
     MetadataFieldServer metadataFieldServer;
 
@@ -36,13 +37,17 @@ public class MetaDataProcess {
     String msgBody = null;
 
     public MsgResponse process(MsgRequest req, RestHandler handler) {
-
+        retcode = 0;
+        retmsg = "成功";
+        msgBody = null;
         if (req.cmd.equals("getCachedTableList")) {
             return metadataDictServer.getCachedTableList(req, handler);
         } else if (req.cmd.equals("updateFieldOrder")) {
             return metadataDictServer.updateFieldOrder(req, handler);
+
         } else if (req.cmd.equals("getDictList")) {
             return metadataDictServer.getDictList(req, handler);
+
         } else if (req.cmd.equals("checkDict")) {
             return metadataDictServer.checkDict(req, handler);
         }

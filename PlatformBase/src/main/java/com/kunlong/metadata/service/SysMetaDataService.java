@@ -2,6 +2,7 @@ package com.kunlong.metadata.service;
 
 import com.kunlong.metadata.model.*;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
+import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +80,7 @@ public interface SysMetaDataService {
     int getTotalCount();
 
     //通过主键id创建数据表
-    MsgRequest makeTableByDictId(Integer metadataId, MsgRequest req, RestHandler handler);
+    MsgResponse makeTableByDictId(Integer metadataId, MsgRequest req, RestHandler handler);
 
     //通过主表主键删除该表对应的所有字段
     void deleteFieldsByDictId(int metaDataId);

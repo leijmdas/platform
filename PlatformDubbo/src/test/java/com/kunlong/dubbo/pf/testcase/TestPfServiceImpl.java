@@ -2,6 +2,7 @@ package com.kunlong.dubbo.pf.testcase;
 
 import com.kunlong.dubbo.PfDubboApp;
 import com.kunlong.platform.model.DictDatatypeDemo;
+import com.kunlong.platform.service.DictDatatypeServiceExample;
 import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.system.model.DictDatatype;
 import com.kunlong.system.service.DictDataTypeService;

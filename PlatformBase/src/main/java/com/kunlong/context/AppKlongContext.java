@@ -3,10 +3,13 @@ package com.kunlong.context;
 
 import com.kunlong.service.LoginContext;
 import com.kunlong.service.RedisService;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
 
 @Component
 public class AppKlongContext implements ApplicationContextAware {
@@ -34,6 +37,12 @@ public class AppKlongContext implements ApplicationContextAware {
 
         }
         return loginContext;
+    }
+
+
+    public static SqlSessionFactory getSqlSessionFactory(){
+        return appCtxt.getBean("primarySqlSessionFactory", SqlSessionFactory.class);
+
     }
 
     private static ApplicationContext appCtxt;

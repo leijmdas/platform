@@ -41,6 +41,10 @@ public class SysUser {
 
 
     public MsgResponse process(MsgHandler handler) {
+        retcode = 0;
+        retmsg = "成功";
+        msgBody = null;
+
         IUserContext context = handler.getUserContext();
         //getLogSso
         MsgRequest req = handler.req;
