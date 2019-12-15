@@ -8,7 +8,8 @@ import com.kunlong.platform.controller.web.sysuser.impl.SysRole;
 import com.kunlong.platform.controller.web.sysuser.impl.SysUser;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
-import com.kunlong.service.SafeContext;
+import com.kunlong.service.LoginContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/rest")
-public class RestSysUserManager implements IRestProcess {
+public class SysUserController implements IRestProcess {
 
     @Resource(name = "sysUser")
     SysUser sysUser;
@@ -37,11 +38,13 @@ public class RestSysUserManager implements IRestProcess {
     SysRole sysRole;
     @Resource(name = "sysPower")
     SysPower sysPower;
+    @Autowired
+    LoginContext loginContext;
 
     @RequestMapping(value = "sysuser", produces = {"Application/json;charset=UTF-8"})
     @ResponseBody
     public String sysUserRest(@RequestBody String data, HttpServletRequest request, HttpServletResponse response) {
-        return new MsgHandler( ).parseRequest(this, data, request, response);
+        return new MsgHandler().parseRequest(this, data, request, response);
     }
 
 
@@ -49,7 +52,7 @@ public class RestSysUserManager implements IRestProcess {
         if (handler.req.cmdtype.equals("user") && handler.req.cmd.equals("login")) {
 
         } else {
-            handler.getUserContext().setLoginSso(SafeContext.getLog_ssoAndApiKey(handler.req.token));
+            handler.getUserContext().setLoginSso(loginContext.getLoginSso(handler.req.token));
             handler.req.msgBody.put("login_userId", handler.getUserContext().getLoginSso().getUserId());
         }
         handler.req.msgBody.put("ip", KunlongUtils.getIpAddr(request));

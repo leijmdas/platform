@@ -23,7 +23,7 @@
     </dependencies>
 
     <build>
-        <finalName>kunlong-pf-manager</finalName>
+        <finalName>pf-kl</finalName>
         <plugins>
 
             <plugin>

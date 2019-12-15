@@ -11,20 +11,23 @@ import com.jtest.testframe.ITestImpl;
 import com.jtest.utility.testlog.TestLog;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.utils.KunlongUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import testcase.pub.ManagerLogin;
 
-
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @JTestClass.author("leijm")
 public class TestSysUser extends ITestImpl {
 	private static final Logger logger = LoggerFactory.getLogger(TestSysUser.class);
 
+	String url_sysuser="http://127.0.0.1:10080/rest/sysuser";
 	String url_base="http://mysql.kunlong.com/rest/sysuser";
-	String url_context="http://127.0.0.1:10080/rest/context";
+	String url_context="http://127.0.0.1:10080/rest/sysuser";
 	@Inject(filename = "node.xml", value = "httpclient")
 	HttpClientNode httpclient;
 
@@ -64,10 +67,10 @@ public class TestSysUser extends ITestImpl {
 
 		req.reqtime = System.currentTimeMillis();
 		req.seqno = System.currentTimeMillis();
-		req.cmdtype = "context";
-		req.cmd = "getLogSso";
+		req.cmdtype = "user";
+		req.cmd = "getLoginSso";
 
-		String ret = httpclient.post(url_context, req.toJSONString(), "application/json");
+		String ret = httpclient.post(url_sysuser, req.toJSONString(), "application/json");
 		MsgResponse resp = MsgResponse.parseResponse(ret);
 		TestLog.logJtest("req", req);
 		TestLog.logJtest("resp", resp);
@@ -84,7 +87,6 @@ public class TestSysUser extends ITestImpl {
 	@JTestClass.exp("ok")
 	public void test_0002_addUser() {
 
-		//req.token = UUID.randomUUID().toString();
 		req.reqtime = System.currentTimeMillis();
 
 		req.seqno = System.currentTimeMillis();
@@ -584,13 +586,29 @@ public class TestSysUser extends ITestImpl {
 	@JTestClass.exp("ok")
 	public void test_022login() {
 	}
+	@JTest
+	@JTestClass.title("获取图形码")
+	@JTestClass.pre("")
+	@JTestClass.step("post http://mysql.kunlong.com:80/rest/context/getPicCode")
+	@JTestClass.exp("ok")
+	public void test_023_genPicCode() {
+		req.cmdtype = "context";
+		req.cmd = "getPicCode";
 
-	public static void main(String[] args) {
-
-		 run(TestSysUser.class,22);
+		String url_getPicCode = "http://127.0.0.1:10080/rest/context/getPicCode";
+		String ret = httpclient.post(url_getPicCode, KunlongUtils.toJSONStringPretty(req), "application/json");
+		httpclient.checkStatusCode(200);
+		TestLog.logJtest(url_getPicCode);
+		TestLog.logJtest(KunlongUtils.toJSONStringPretty(req));
 
 	}
 
+	public static void main(String[] args) {
+
+		 run(TestSysUser.class,23);
+
+	}
+
+
 }
-		
 		

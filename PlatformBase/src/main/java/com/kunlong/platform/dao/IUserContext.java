@@ -10,8 +10,6 @@ public interface IUserContext {
 
     LoginSso getLoginSso();
 
-    //static Tasklog_UserServiceImpl u = new Tasklog_UserServiceImpl();
-
     void setLoginSso(LoginSso sso);
 
     default boolean isUserManager() {

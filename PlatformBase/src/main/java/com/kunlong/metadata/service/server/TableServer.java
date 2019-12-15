@@ -13,11 +13,12 @@ import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
+import org.springframework.stereotype.Component;
 
 
 import java.util.List;
 import java.util.Map;
-
+@Component
 public class TableServer {
     int retcode = 0;
     String retmsg = "成功";

@@ -11,9 +11,10 @@ import com.kunlong.metadata.service.impl.SysMetaDataServiceImpl;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class MetadataFieldServer {
     int retcode = 0;
     String retmsg = "成功";

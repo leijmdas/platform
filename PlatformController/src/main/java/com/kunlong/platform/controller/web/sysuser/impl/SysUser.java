@@ -10,7 +10,7 @@ import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.dao.IUserContext;
 import com.kunlong.platform.model.KunlongError;
-import com.kunlong.service.SafeContext;
+import com.kunlong.service.LoginContext;
 import com.kunlong.sysuser.model.SysUserModel;
 import com.kunlong.sysuser.service.SysUserService;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -23,13 +23,15 @@ import java.util.Map;
 
 /**
  * Package: com.kunlong.sysuser.sysuser.impl
- * Author: ZCS
- * Date: Created in 2018/8/22 14:11
+ * Author: ljm
+ * Date: Created in 2017/8/22 14:11
  */
 @Service
 public class SysUser {
     @Autowired
     SysUserService sysUserService ;// = new SysUserServiceImpl();
+    @Autowired
+    LoginContext loginContext;
 
     static String default_pwd = "www.163.com";
     int retcode = 0;
@@ -40,10 +42,15 @@ public class SysUser {
 
     public MsgResponse process(MsgHandler handler) {
         IUserContext context = handler.getUserContext();
-
+        //getLogSso
         MsgRequest req = handler.req;
+        if (req.cmd.equals("getLoginSso")||req.cmd.equals("getLogSso")) {
+            LoginSso loginSso=loginContext.getLoginSso(req.getToken());
+            msgBody = "{\"list\":[" +  loginSso + "]}";
+            return handler.buildMsg(retcode, retmsg, msgBody);
+        }
          //用户登录
-        if (req.cmd.equals("login")) {
+        else if (req.cmd.equals("login")) {
 
             retcode = 0;
             retmsg = "登录成功";
@@ -59,10 +66,10 @@ public class SysUser {
                 int userId = Integer.parseInt(map.get("userId").toString());
 
                 String token = map.get("token").toString();
-                LoginSso loginSso = SafeContext.getLog_ssoAndApiKey(token);
+                LoginSso loginSso = loginContext.getLoginSso(token);
                 req.setToken(token);
-                loginSso.getLoginSsoJson().setToken(token);
-                msgBody = "{\"list\":[" + loginSso.getLoginSsoJson() + "]}";
+
+                msgBody = "{\"list\":[" + loginSso.toString() + "]}";
                 return handler.buildMsg(retcode, retmsg, msgBody);
 
 
@@ -74,13 +81,11 @@ public class SysUser {
                 Map<String, Object> map = sysUserService.checkUserByMobile(mobile,ip);
                 int userId = Integer.parseInt(map.get("userId").toString());
 
-                Api_KeyModel keyModel = SafeContext.genApiKey(userId);
-                //insertUserLog(handler.req, userId);
                 String token = map.get("token").toString();
                 req.setToken(token);
-                LoginSso loginSso = SafeContext.getLog_ssoAndApiKey(token);
+                LoginSso loginSso = loginContext.getLoginSso(token);
 
-                msgBody = "{\"list\":[" + loginSso.getLoginSsoJson() + "]}";
+                msgBody = "{\"list\":[" + loginSso + "]}";
                 return handler.buildMsg( retcode, retmsg,msgBody );
 
 
@@ -163,7 +168,7 @@ public class SysUser {
 
 
     private LoginSsoJson getLoginSsoJson(String token){
-        LoginSso loginSso = SafeContext.getLog_ssoAndApiKey(token);
+        LoginSso loginSso = loginContext.getLoginSso(token);
 
         LoginSsoJson loginSsoJson = JSONObject.parseObject(loginSso.getJson().toString(), LoginSsoJson.class);
         return loginSsoJson;

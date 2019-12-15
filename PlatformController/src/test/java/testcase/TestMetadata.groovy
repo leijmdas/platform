@@ -66,7 +66,7 @@ public class TestMetadata extends ITestImpl {
         checkEQ(0, resp.getRetcode());
         System.out.println(resp);
     }
-
+    //"getDictDataTypeList"
     @JTest
     @JTestClass.title(" test0002_getDictDataTypeList")
     @JTestClass.pre("getDictTableAndField")
@@ -78,9 +78,9 @@ public class TestMetadata extends ITestImpl {
         req.seqno = System.currentTimeMillis();
         req.cmdtype = "metadata";
         req.cmd = "getDictDataTypeList";
-        data = JSONObject.toJSONString(req);
+        String data = JSONObject.toJSONString(req);
         System.err.println(data);
-        String ret = httpclient.post("http://localhost/rest/sysmetadata", data, "application/json");
+        String ret = httpclient.post("http://localhost:10080/rest/sysmetadata", data, "application/json");
         httpclient.checkStatusCode(200);
 
         MsgResponse resp = MsgResponse.parseResponse(ret);
@@ -348,13 +348,12 @@ public class TestMetadata extends ITestImpl {
         checkEQ(0, resp.getRetcode());
         System.err.println(req.toJSONStringPretty());
         System.out.println(resp.toJSONStringPretty());
-        //System.err.println(url);
 
 
     }
     //getCachedTableList
 
     public static void main(String[] args) {
-      run(TestMetadata.class, 6);
+      run(TestMetadata.class, 2);
     }
 }

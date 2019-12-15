@@ -10,16 +10,21 @@ import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DictDataTypeServer {
-     int retcode = 0;
+    @Autowired
+    DictDataTypeServiceImpl dictDataTypeService ;
+
+    int retcode = 0;
     String retmsg = "成功";
     String msgBody = "{}";
 
     public MsgResponse getDictDataTypeList(MsgRequest req, RestHandler handler) {
-        DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
         DictDatatypeExample dictDatatypeExample = new DictDatatypeExample();
         dictDatatypeExample.setOrderByClause("type_id,data_id");
         Integer typeId = req.msgBody.getInteger("typeId");
@@ -32,7 +37,7 @@ public class DictDataTypeServer {
     }
 
     public MsgResponse getDictDataTypeById(MsgRequest req, RestHandler handler) {
-        DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
+        //DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
         DictDatatypeExample dictDatatypeExample = new DictDatatypeExample();
         Integer dataInnerId = req.msgBody.getInteger("dataInnerId");
         if (dataInnerId != null) {
@@ -45,7 +50,7 @@ public class DictDataTypeServer {
     }
 
     public MsgResponse addDictDataType(MsgRequest req, RestHandler handler) {
-        DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
+        //DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
         DictDatatype dictDatatype = JSONObject.parseObject(JSONObject.toJSONString(req.getMsgBody()), DictDatatype.class);
         int id = dictDataTypeService.insert(dictDatatype);
         msgBody = "{\"id\":" + id + " }";
@@ -54,7 +59,7 @@ public class DictDataTypeServer {
     }
 
     public MsgResponse updateDictDataTypeById(MsgRequest req, RestHandler handler) {
-        DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
+        //DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
         DictDatatype dictDatatype = JSONObject.parseObject(JSONObject.toJSONString(req.getMsgBody()), DictDatatype.class);
         int id = dictDataTypeService.updateByPrimaryKey(dictDatatype);
         msgBody = "{\"id\":" + id + " }";
@@ -64,7 +69,7 @@ public class DictDataTypeServer {
 
 
     public MsgResponse deleteDictDataTypeById(MsgRequest req, RestHandler handler) {
-        DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
+        //DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
         //DictDatatypeExample dictDatatypeExample = new DictDatatypeExample();
         Integer dataInnerId = req.msgBody.getInteger("dataInnerId");
         if (dataInnerId != null) {
@@ -78,7 +83,7 @@ public class DictDataTypeServer {
     }
 
     public MsgResponse selectDatatype(MsgRequest req, RestHandler handler) {
-        DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
+        //DictDataTypeServiceImpl dictDataTypeService = new DictDataTypeServiceImpl();
         DictDatatype dictDatatype = JSONObject.parseObject(JSONObject.toJSONString(req.getMsgBody()), DictDatatype.class);
         List<DictDatatype> lst = dictDataTypeService.selectDatatype( );
         msgBody = "{\"list\":" +JSONObject.toJSONString(lst) + " }";

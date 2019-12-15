@@ -2,7 +2,8 @@ package com.kunlong.model;
 
 
 
-import com.kunlong.service.SafeContext;
+import com.kunlong.service.LoginContext;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 import java.util.UUID;
@@ -16,6 +17,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class LoginConcurrentHashMap {
     static Map<String, LoginSso> map_logininfo = new ConcurrentHashMap<>();
     static Map<String, Long> map_timeout = new ConcurrentHashMap<>();
+    @Autowired
+    LoginContext loginContext;
 
     /**
      * 预缓存信息
@@ -88,7 +91,7 @@ public final class LoginConcurrentHashMap {
         for (String key : map_logininfo.keySet()) {
             LoginSso ls = get(key);
             if (ls != null) {
-                SafeContext.delete(ls);
+               // SafeContext.delete(ls);
             }
         }
     }
@@ -99,7 +102,7 @@ public final class LoginConcurrentHashMap {
             long t = map_timeout.get(key);
             if (System.currentTimeMillis() - t > CACHE_HOLD_TIME_24H) {
                 LoginSso ls = map_logininfo.get(key);
-                SafeContext.delete(ls);
+               // loginContext.delete(ls);
             }
         }
     }

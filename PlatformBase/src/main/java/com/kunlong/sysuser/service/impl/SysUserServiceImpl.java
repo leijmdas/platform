@@ -4,15 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.kunlong.model.LoginSso;
 import com.kunlong.model.LoginSsoJson;
 import com.kunlong.mybatis.KunlongSql;
-import com.kunlong.mybatis.SqlSessionBuilder;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
-import com.kunlong.service.SafeContext;
-import com.kunlong.sysuser.dao.SysUserMapper;
+import com.kunlong.service.LoginContext;
 import com.kunlong.sysuser.model.SysUserModel;
 import com.kunlong.sysuser.service.SysUserService;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +24,8 @@ import java.util.*;
 @Service
 public class SysUserServiceImpl extends SysUserDAOService implements SysUserService {
 
+    @Autowired
+    LoginContext loginContext;
 
     @Override
     public void updatePassword(String newPassword, int userId, String oldPwd) {
@@ -97,7 +96,7 @@ public class SysUserServiceImpl extends SysUserDAOService implements SysUserServ
         body.put("login_mobile", sysUserModel.getMobile());
         loginSso.setJson(JSONObject.toJSONString(body));
         loginSso.setLoginTime(new Date());
-        SafeContext.save2DB(token, loginSso);
+        loginContext.login(token, loginSso);
 
         return body;
     }

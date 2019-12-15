@@ -5,6 +5,7 @@ import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.model.DictDatatypeExample;
 import com.kunlong.metadata.service.DictDataTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * Author: XZW
  * Date: Created in 2018/8/23 16:50
  */
+@Service
 public class DictDataTypeServiceImpl implements DictDataTypeService {
     @Autowired
     DictDatatypeMapper dictDatatypeMapper;

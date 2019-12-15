@@ -8,8 +8,9 @@ import java.sql.Date;
 public final class Api_KeyModel extends KunlongModel {
 
     int userId;
-    String apiKey;
-    String securityKey;
+    String apiKey = System.currentTimeMillis()+"";
+    String securityKey = System.currentTimeMillis()+"";
+
     Date genTime;
 
 

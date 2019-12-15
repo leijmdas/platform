@@ -6,10 +6,12 @@ import com.kunlong.platform.context.rest.IRestProcess;
 import com.kunlong.platform.dao.IUserContext;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.service.DefaultUserContext;
+import com.kunlong.context.AppKlongContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
+@Service
 public class MsgHandler {
     public final static String UTF_8 = "UTF-8";
     public MsgRequest req;
@@ -68,12 +71,11 @@ public class MsgHandler {
             userContext = new DefaultUserContext();
         }
         if (req.token != null) {
-            //userContext.setLoginSso(YtbContext.getSafeContext().getLog_sso_catch(req.token));
-            userContext.setTestFlag(req.getTestFlag());
+            userContext.setLoginSso(AppKlongContext.getLoginContext().getLoginSso(req.token));
+
         }
 
         userContext.checkUserRightValid(req);
-        userContext.insertUserLog(req);
     }
 
 
@@ -122,7 +124,6 @@ public class MsgHandler {
 
         try {
             parseRequest(reqBody);
-            //YtbLog.logDebug("Enter " + req.buildCmdInfo(), this.req);
             restProcess.process(this, request, response);
 
         } catch (KunlongError e) {
@@ -140,6 +141,7 @@ public class MsgHandler {
 
         return resp.toJSONString();
     }
+
     public MsgResponse parse (IRestProcess restProcess, String reqBody, HttpServletRequest request, HttpServletResponse response) {
 
         this.restProcess = restProcess;
@@ -147,7 +149,6 @@ public class MsgHandler {
 
         try {
             parseRequest(reqBody);
-            //YtbLog.logDebug("Enter " + req.buildCmdInfo(), this.req);
             restProcess.process(this, request, response);
 
         } catch (KunlongError e) {

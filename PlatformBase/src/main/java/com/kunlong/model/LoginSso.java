@@ -12,9 +12,21 @@ import java.util.Date;
  */
 public class LoginSso extends KunlongModel implements Serializable {
 
+    public Api_KeyModel getApiKeyModel() {
+        return apiKeyModel;
+    }
 
+    public void setApiKeyModel(Api_KeyModel apiKeyModel) {
+        this.apiKeyModel = apiKeyModel;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    Api_KeyModel apiKeyModel = new Api_KeyModel();
     //LoginSsoJson
-    private LoginSsoJson loginSsoJson;
+    //private LoginSsoJson loginSsoJson;
 
     //@ExcelProperty(value = "ssoid", index = 0)
     private Integer ssoid;
@@ -110,40 +122,16 @@ public class LoginSso extends KunlongModel implements Serializable {
         this.json = json;
     }
 
-    public LoginSsoJson getLoginSsoJson() {
-        return loginSsoJson;
-    }
-
-    public void setLoginSsoJson(LoginSsoJson loginSsoJson) {
-        this.loginSsoJson = loginSsoJson;
-    }
-
-
-    public LoginSsoJson  parseLoginSsoJson(){
-
-        loginSsoJson =  JSONObject.parseObject(json,LoginSsoJson.class);
-        return loginSsoJson;
-    }
 
 
     public boolean isUserManager(){
-        if(loginSsoJson==null){
-            return false;
-        }
-        if(loginSsoJson.getTestFlag()==null){
-            return false;
-        }
-        return  this.loginSsoJson.getUserType().equals(LoginSsoJson.USER_TYPE_MANAGER);
+
+        return  true;
     }
 
     public boolean isTest(){
-        if(loginSsoJson==null){
-            return false;
-        }
-        if(loginSsoJson.getTestFlag()==null){
-            return false;
-        }
-        return  loginSsoJson.getTestFlag().equals(LoginSsoJson.TEST_FLAG_TEST_USER);
+
+        return false;
     }
 
 

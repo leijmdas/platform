@@ -6,10 +6,7 @@ import com.kunlong.api.service.DictDataTypeApiService;
 
 
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("system")
