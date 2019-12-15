@@ -10,13 +10,12 @@ import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.dao.IUserContext;
 import com.kunlong.platform.model.KunlongError;
-import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.service.SafeContext;
 import com.kunlong.sysuser.model.SysUserModel;
 import com.kunlong.sysuser.service.SysUserService;
-import com.kunlong.sysuser.service.impl.SysUserServiceImpl;
 import org.apache.commons.codec.digest.DigestUtils;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,28 +26,23 @@ import java.util.Map;
  * Author: ZCS
  * Date: Created in 2018/8/22 14:11
  */
+@Service
 public class SysUser {
+    @Autowired
+    SysUserService sysUserService ;// = new SysUserServiceImpl();
 
     static String default_pwd = "www.163.com";
     int retcode = 0;
     String retmsg = "成功";
     String msgBody = "{}";
 
-    int insertUserLog(MsgRequest req, int userId) {
-//        Tasklog_UserServiceImpl us = new Tasklog_UserServiceImpl();
-//        Tasklog_UserModel m = new Tasklog_UserModel();
-//        m.setUserId(userId);
-//        m.setUserIp(req.msgBody.getString("ip"));
-//        m.setOprtName(req.getCmdtype() + ":" + req.getCmd());
-        return 0;//us.insert(m);
-    }
+
 
     public MsgResponse process(MsgHandler handler) {
         IUserContext context = handler.getUserContext();
 
         MsgRequest req = handler.req;
-        SysUserService sysUserService = new SysUserServiceImpl();
-        //用户登录
+         //用户登录
         if (req.cmd.equals("login")) {
 
             retcode = 0;
@@ -81,7 +75,7 @@ public class SysUser {
                 int userId = Integer.parseInt(map.get("userId").toString());
 
                 Api_KeyModel keyModel = SafeContext.genApiKey(userId);
-                insertUserLog(handler.req, userId);
+                //insertUserLog(handler.req, userId);
                 String token = map.get("token").toString();
                 req.setToken(token);
                 LoginSso loginSso = SafeContext.getLog_ssoAndApiKey(token);

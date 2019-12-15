@@ -13,7 +13,8 @@ import com.kunlong.sysuser.model.SysUserModel;
 import com.kunlong.sysuser.service.SysUserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.ibatis.session.SqlSession;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -22,23 +23,25 @@ import java.util.*;
  * Author: ZCS
  * Date: Created in 2018/8/21 20:01
  */
-public class SysUserServiceImpl extends SysUserDAOService implements SysUserService, SysUserMapper {
-    SqlSessionBuilder sqlSessionBuilder=new SqlSessionBuilder();
+//
+@Service
+public class SysUserServiceImpl extends SysUserDAOService implements SysUserService {
+
+
     @Override
     public void updatePassword(String newPassword, int userId, String oldPwd) {
-        try (SqlSession ss = sqlSessionBuilder.getSession_manager(true)) {
+
             StringBuilder sql = new StringBuilder(128);
             sql.append(" select * from ytb_manager.sys_user");
             sql.append(" where userId=").append(userId);
             sql.append(" where password=").append(oldPwd);
             SysUserModel sysUserModel = KunlongSql.selectOne(sql, SysUserModel.class);
             if (sysUserModel != null) {
-                SysUserMapper userDao = ss.getMapper(SysUserMapper.class);
-                userDao.updatePassword(newPassword, userId);
+                updatePassword(newPassword, userId);
             }
 
-        }
     }
+
     //判断后台用户登录
     @Override
     public Map<String, Object> checkUserByUserName(String userName, String password, String ip) {

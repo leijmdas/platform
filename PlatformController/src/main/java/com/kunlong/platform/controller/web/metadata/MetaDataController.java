@@ -1,5 +1,6 @@
 package com.kunlong.platform.controller.web.metadata;
 
+import com.kunlong.metadata.service.server.MetadataDictServer;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.controller.web.metadata.impl.ConfigCenterRestProcess;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 /**
  * 后台元数据字典模块的Rest类
  * Package: com.kunlong.metadata.sysuser
@@ -21,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest")
 @Scope("prototype")
 public class MetaDataController extends RestHandler {
+    @Resource(name="metaDataProcess")
+    MetaDataProcess metaDataProcess ;
 
     @PostMapping(value = "/sysmetadata", produces = "application/json;charset=UTF-8")
     public String metaDataRest(@RequestBody String data) {
@@ -55,14 +60,14 @@ public class MetaDataController extends RestHandler {
 //        return resp.toJSONString();
 //
 //    }
-
-    protected MsgResponse process() {
-        if (req.cmdtype.equals("metadata")) {
-            return new MetaDataProcess().process(req, this);
-        }
 //        else if (req.cmdtype.equals("configCenter")) {
 //            //return new ConfigCenterRestProcess().process(req, this);
 //        }
+    protected MsgResponse process() {
+        if (req.cmdtype.equals("metadata")) {
+            return metaDataProcess.process(req, this);
+        }
+
         throw new KunlongError(KunlongError.CODE_INVALID_REST);
 
     }

@@ -7,9 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // mvn deploy:deploy-file -DgroupId=app -DartifactId=app-support -Dversion=1.1 -Dpackaging=jar -Dfile=app-support-1.1.jar -Durl=http://localhost:8081/repository/maven-releases/ -DrepositoryId=nexus
 
 @SpringBootApplication(scanBasePackages = {"com.kunlong"})
-
-@EnableDubbo
-@EnableDubboConfig
+//@EnableDubbo
+//@EnableDubboConfig
 public class PfControllerApp {
     public static void main(String[] args) {
         Class[] classes = new Class[]{

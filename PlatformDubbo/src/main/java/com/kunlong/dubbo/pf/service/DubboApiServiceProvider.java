@@ -3,8 +3,6 @@ package com.kunlong.dubbo.pf.service;
 import com.alibaba.fastjson.JSON;
 import com.kunlong.api.model.DictDatatypeApiModel;
 import com.kunlong.api.service.DictDataTypeApiService;
-import com.kunlong.platform.model.DictDatatypeDemo;
-import com.kunlong.platform.service.DictDatatypeServiceExample;
 import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.system.model.DictDatatype;
 import com.kunlong.system.service.DictDataTypeService;

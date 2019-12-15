@@ -10,6 +10,8 @@ import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.sysuser.model.Sys_RoleModel;
 import com.kunlong.sysuser.service.SysRoleService;
 import com.kunlong.sysuser.service.impl.SysRoleServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 import java.util.Collections;
@@ -22,14 +24,16 @@ import java.util.Set;
  * Author: ZCS
  * Date: Created in 2018/8/22 14:11
  */
+@Component
 public class SysRole {
     int retcode = 0;
     String retmsg = "成功";
     String msgBody = "{}";
+    @Autowired
+    SysRoleService sysRoleService ;//= new SysRoleServiceImpl();
 
     public MsgResponse process(MsgHandler handler) {
         MsgRequest req = handler.req;
-        SysRoleService sysRoleService = new SysRoleServiceImpl();
 
 
         //查询角色列表

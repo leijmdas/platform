@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,14 +29,18 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/rest")
-//@Scope("prototype")
 public class RestSysUserManager implements IRestProcess {
 
+    @Resource(name = "sysUser")
+    SysUser sysUser;
+    @Resource(name = "sysRole")
+    SysRole sysRole;
+    @Resource(name = "sysPower")
+    SysPower sysPower;
 
     @RequestMapping(value = "sysuser", produces = {"Application/json;charset=UTF-8"})
     @ResponseBody
     public String sysUserRest(@RequestBody String data, HttpServletRequest request, HttpServletResponse response) {
-        //SysUserContext suc = new SysUserContext();
         return new MsgHandler( ).parseRequest(this, data, request, response);
     }
 
@@ -50,11 +55,11 @@ public class RestSysUserManager implements IRestProcess {
         handler.req.msgBody.put("ip", KunlongUtils.getIpAddr(request));
 
         if (handler.req.cmdtype.equals("user")) {
-            return new SysUser().process(handler);
+            return sysUser.process(handler);
         } else if (handler.req.cmdtype.equals("role")) {
-            return new SysRole().process(handler);
+            return sysRole.process(handler);
         } else if (handler.req.cmdtype.equals("menu")) {
-            return new SysPower().process(handler);
+            return sysPower.process(handler);
         }
 
         throw new KunlongError(KunlongError.CODE_INVALID_REST);

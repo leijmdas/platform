@@ -15,7 +15,7 @@ public class TestMetadata extends ITestImpl {
     MsgRequest req = new MsgRequest();
     String token = "f1fb2fca892d4e7aac0dd7d02d7d99e1";
 
-    String url = "http://localhost/rest/sysmetadata";
+    String url = "http://localhost:10080/rest/sysmetadata";
     String url_base = "http://localhost/rest";
 
     @Inject(filename = "node.xml", value = "httpclient")
@@ -34,12 +34,9 @@ public class TestMetadata extends ITestImpl {
     public void setUp() {
         token = login.login();
         req.token = token;
-        req.setApiKey(login.getApiKey());
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "projectType";
-        req.cmd = "getProjectTypeList";
         req.msgBody = JSONObject.parseObject("{ }");
 
     }
@@ -351,7 +348,7 @@ public class TestMetadata extends ITestImpl {
         checkEQ(0, resp.getRetcode());
         System.err.println(req.toJSONStringPretty());
         System.out.println(resp.toJSONStringPretty());
-        System.err.println(url);
+        //System.err.println(url);
 
 
     }

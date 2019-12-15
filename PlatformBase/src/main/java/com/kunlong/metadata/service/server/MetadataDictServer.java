@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.kunlong.metadata.model.*;
+import com.kunlong.metadata.service.SysMetaDataService;
 import com.kunlong.metadata.service.impl.*;
 import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
@@ -13,12 +14,18 @@ import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class MetadataDictServer {
+    @Autowired
+    SysMetaDataService sysMetaDataService;
+
     int retcode = 0;
     String retmsg = "成功";
     String msgBody = "{}";
@@ -476,8 +483,8 @@ public class MetadataDictServer {
 
 
     public MsgResponse getSubSysDictList(MsgRequest req, RestHandler handler) {
-        SysMetaDataServiceImpl sysMetaDataService = new SysMetaDataServiceImpl();
-        SubsysDictExample example = new SubsysDictExample();
+        //SysMetaDataServiceImpl sysMetaDataService = new SysMetaDataServiceImpl();
+        //SubsysDictExample example = new SubsysDictExample();
         List<SubsysDict> subSysDictList = sysMetaDataService.getSubSysDictList();
 
         msgBody = "{\"list\":" + JSONObject.toJSONString(subSysDictList) + "}";

@@ -8,14 +8,22 @@ import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 
 /**
  * Package: com.kunlong.metadata.sysuser.impl
- * Author: XZW
- * Date: Created in 2018/8/23 18:11
+ * Author: ljm
+ * Date: Created in 2019/8/23 18:11
  */
+@Service
 public class MetaDataProcess {
+
+    @Resource(name="metadataDictServer")
+    MetadataDictServer metadataDictServer ;
+
     int retcode = 0;
     String retmsg = "成功";
     String msgBody = null;
@@ -118,7 +126,7 @@ public class MetaDataProcess {
 
         //获取subsys_dict表中的所有数据
         else if (req.cmd.equals("getSubSysDictList")) {
-            MetadataDictServer metadataDictServer = new MetadataDictServer();
+            //MetadataDictServer metadataDictServer = new MetadataDictServer();
             return  metadataDictServer.getSubSysDictList(req, handler);
         }
 

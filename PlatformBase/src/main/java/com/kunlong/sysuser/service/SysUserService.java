@@ -1,5 +1,6 @@
 package com.kunlong.sysuser.service;
 
+import com.kunlong.sysuser.dao.SysUserMapper;
 import com.kunlong.sysuser.model.SysUserModel;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Map;
  * Author: ZCS
  * Date: Created in 2018/8/21 13:13
  */
-public interface SysUserService {
+public interface SysUserService extends SysUserMapper {
 
     /*
      获取系统用户列表

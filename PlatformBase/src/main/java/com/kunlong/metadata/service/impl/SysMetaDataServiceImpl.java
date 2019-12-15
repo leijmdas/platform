@@ -9,6 +9,8 @@ import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,6 +25,7 @@ import static com.kunlong.metadata.service.impl.MetadataDictServiceImpl.checkTab
  * Author: XZW
  * Date: Created in 2018/8/23 16:50
  */
+@Service
 public class SysMetaDataServiceImpl implements SysMetaDataService {
     @Autowired
     SysDictDataTypeMapper sysDictDataTypeDao ;

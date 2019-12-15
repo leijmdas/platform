@@ -13,6 +13,7 @@ import com.kunlong.sysuser.model.Sys_MenuModel;
 import com.kunlong.sysuser.model.Sys_RestListModel;
 import com.kunlong.sysuser.service.SysPowerService;
 import com.kunlong.sysuser.service.impl.SysPowerServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -26,8 +27,9 @@ import java.util.*;
  */
 
 @Component
-@Controller
 public class SysPower {
+    @Autowired
+    SysPowerService sysPowerService;// = new SysPowerServiceImpl();
 
     int retcode = 0;
     String retmsg = "成功";
@@ -36,7 +38,6 @@ public class SysPower {
     public MsgResponse process(MsgHandler handler) {
         MsgRequest req = handler.req;
 
-        SysPowerService sysPowerService = new SysPowerServiceImpl();
 
         //添加菜单信息
         if(req.cmd.equals("addMenu")){
