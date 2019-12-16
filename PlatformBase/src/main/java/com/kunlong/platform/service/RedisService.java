@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 
@@ -41,12 +42,12 @@ public class RedisService {
     }
 
     public String getKey(String key) {
-
         return redisTemplate.opsForValue().get(key);
 
     }
 
     public void setLoginSso(String key, LoginSso value) {
+        redisTemplate.expire(key,1, TimeUnit.DAYS);
         redisTemplate.opsForValue().set(key, value.toString());
 
     }
