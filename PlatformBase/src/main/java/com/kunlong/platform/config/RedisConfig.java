@@ -28,7 +28,7 @@
 //    @ConfigurationProperties(prefix="spring.redis")
 //    public JedisConnectionFactory JedisConnectionFactory(JedisPoolConfig jedisPoolConfig){
 //        JedisConnectionFactory factory = new JedisConnectionFactory(jedisPoolConfig);
-//        factory.setUsePool(false);
+//        factory.setUsePool(true);
 //        factory.setPoolConfig(jedisPoolConfig());
 //        System.err.println(factory.getPassword());
 //        return factory;
