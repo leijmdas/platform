@@ -377,6 +377,6 @@ public class TestMetadata extends ITestImpl {
     }
 
     public static void main(String[] args) {
-        run(TestMetadata.class, 1);
+        run(TestMetadata.class, 6);
     }
 }
