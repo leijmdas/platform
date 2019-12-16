@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.model.LoginSso;
-import com.kunlong.mybatis.SqlSessionBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,6 @@ import java.io.IOException;
  */
 @Service
 public final class LoginContext {
-    public static SqlSessionBuilder sqlSessionBuilder = new SqlSessionBuilder();
 
     @Autowired
     RedisService redisService;

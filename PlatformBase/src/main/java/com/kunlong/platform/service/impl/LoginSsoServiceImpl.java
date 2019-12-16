@@ -1,12 +1,14 @@
 package com.kunlong.platform.service.impl;
 
 
+import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.dao.LoginSsoMapper;
 import com.kunlong.platform.model.LoginSso;
 import com.kunlong.platform.model.LoginSsoExample;
 import com.kunlong.platform.service.LoginContext;
 import com.kunlong.platform.service.LoginSsoService;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,73 +16,44 @@ import java.util.List;
 @Service
 public class LoginSsoServiceImpl implements LoginSsoService {
 
-
+    @Autowired
+    LoginSsoMapper loginSsoMapper;
 
     @Override
     public int addLoginSso(LoginSso loginSso) {
 
-        SqlSession session = LoginContext.sqlSessionBuilder.getSession_tasklog(true);
+       return loginSsoMapper.insertSelective(loginSso);
 
-        try {
-            LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);
-            return tnMapper.insertSelective(loginSso);
-        } finally {
-            session.close();
-        }
 
     }
 
     @Override
     public List<LoginSso> selectByExample(LoginSsoExample example) {
 
-        SqlSession session = LoginContext.sqlSessionBuilder.getSession_tasklog(true);
-        try {
-            LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);
-            return tnMapper.selectByExample(example);
-        } finally {
-            session.close();
-        }
+         return loginSsoMapper.selectByExample(example);
+
 
     }
 
     @Override
     public int deleteByExample(LoginSsoExample example) {
 
-        SqlSession session = LoginContext.sqlSessionBuilder.getSession_tasklog(true);
+         return loginSsoMapper.deleteByExample(example);
 
-        try {
-            LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);
-            return tnMapper.deleteByExample(example);
-        } finally {
-            session.close();
-        }
 
     }
 
 
     @Override
     public int updateByPrimaryKeySelective(LoginSso record) {
-        SqlSession session = LoginContext.sqlSessionBuilder.getSession_tasklog(true);
+           return loginSsoMapper.updateByPrimaryKeySelective(record);
 
-        try {
-            LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);
-            return tnMapper.updateByPrimaryKeySelective(record);
-        } finally {
-            session.close();
-        }
 
     }
 
     @Override
     public int insertSelective(LoginSso record) {
-        SqlSession session = LoginContext.sqlSessionBuilder.getSession_tasklog(true);
-
-        try {
-            LoginSsoMapper tnMapper = session.getMapper(LoginSsoMapper.class);
-            return tnMapper.insertSelective(record);
-        } finally {
-            session.close();
-        }
+         return loginSsoMapper.insertSelective(record);
 
     }
 
