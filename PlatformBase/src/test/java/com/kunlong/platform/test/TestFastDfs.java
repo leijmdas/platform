@@ -4,7 +4,7 @@ import com.jtest.annotation.JTest;
 import com.jtest.annotation.JTestClass;
 import com.jtest.testframe.ITestImpl;
 import com.jtest.utility.testlog.JTestLog;
-import com.kunlong.platform.PfApp;
+import com.kunlong.PfApp;
 
 public class TestFastDfs extends ITestImpl {
 

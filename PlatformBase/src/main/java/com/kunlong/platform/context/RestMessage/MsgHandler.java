@@ -6,7 +6,7 @@ import com.kunlong.platform.context.rest.IRestProcess;
 import com.kunlong.platform.dao.IUserContext;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.service.DefaultUserContext;
-import com.kunlong.context.AppKlongContext;
+import com.kunlong.platform.context.AppKlongContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;

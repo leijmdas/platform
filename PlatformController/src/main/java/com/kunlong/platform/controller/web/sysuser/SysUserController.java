@@ -8,7 +8,7 @@ import com.kunlong.platform.controller.web.sysuser.impl.SysRole;
 import com.kunlong.platform.controller.web.sysuser.impl.SysUser;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
-import com.kunlong.service.LoginContext;
+import com.kunlong.platform.service.LoginContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

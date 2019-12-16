@@ -1,6 +1,6 @@
 package com.kunlong.mybatis;
 
-import com.kunlong.utils.SqlSessionUtil;
+import com.kunlong.platform.utils.SqlSessionUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.util.StringUtils;
 

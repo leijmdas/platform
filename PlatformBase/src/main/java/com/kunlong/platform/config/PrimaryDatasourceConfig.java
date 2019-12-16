@@ -1,7 +1,7 @@
-package com.kunlong.config.datasource;
+package com.kunlong.platform.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.kunlong.constKunlong.ApplicationConsts;
+import com.kunlong.platform.consts.PrimaryAppConsts;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 //import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;
@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-public class DatasourceConfig extends ApplicationConsts {
+public class PrimaryDatasourceConfig extends PrimaryAppConsts {
 
 	@Qualifier("DataSource")
 

@@ -1,10 +1,10 @@
-package com.kunlong.service;
+package com.kunlong.platform.service;
 
 
 import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.kunlong.context.AppKlongContext;
-import com.kunlong.model.LoginSso;
+import com.kunlong.platform.context.AppKlongContext;
+import com.kunlong.platform.model.LoginSso;
 import com.kunlong.mybatis.SqlSessionBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,6 @@
-package com.kunlong.model;
+package com.kunlong.platform.model;
 
 //import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.fastjson.JSONObject;
-import com.kunlong.platform.model.KunlongModel;
 
 import java.io.Serializable;
 import java.util.Date;

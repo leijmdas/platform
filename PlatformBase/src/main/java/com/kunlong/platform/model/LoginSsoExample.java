@@ -1,4 +1,4 @@
-package com.kunlong.model;
+package com.kunlong.platform.model;
 
 import java.util.ArrayList;
 import java.util.Date;

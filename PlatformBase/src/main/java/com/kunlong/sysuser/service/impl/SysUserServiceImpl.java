@@ -1,12 +1,12 @@
 package com.kunlong.sysuser.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.kunlong.model.LoginSso;
-import com.kunlong.model.LoginSsoJson;
+import com.kunlong.platform.model.LoginSso;
+import com.kunlong.platform.model.LoginSsoJson;
 import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
-import com.kunlong.service.LoginContext;
+import com.kunlong.platform.service.LoginContext;
 import com.kunlong.sysuser.model.SysUserModel;
 import com.kunlong.sysuser.service.SysUserService;
 import org.apache.commons.codec.digest.DigestUtils;

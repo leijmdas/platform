@@ -1,6 +1,6 @@
 package com.kunlong.platform.service;
 
-import com.kunlong.model.LoginSso;
+import com.kunlong.platform.model.LoginSso;
 import com.kunlong.platform.dao.IUserContext;
 import com.kunlong.platform.model.KunlongModel;
 

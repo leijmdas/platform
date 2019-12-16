@@ -1,7 +1,7 @@
-package com.kunlong.dao;
+package com.kunlong.platform.dao;
 
-import com.kunlong.model.LoginSso;
-import com.kunlong.model.LoginSsoExample;
+import com.kunlong.platform.model.LoginSso;
+import com.kunlong.platform.model.LoginSsoExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

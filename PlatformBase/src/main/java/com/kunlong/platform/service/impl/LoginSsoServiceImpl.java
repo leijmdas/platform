@@ -1,11 +1,11 @@
-package com.kunlong.service.impl;
+package com.kunlong.platform.service.impl;
 
 
-import com.kunlong.dao.LoginSsoMapper;
-import com.kunlong.model.LoginSso;
-import com.kunlong.model.LoginSsoExample;
-import com.kunlong.service.LoginContext;
-import com.kunlong.service.LoginSsoService;
+import com.kunlong.platform.dao.LoginSsoMapper;
+import com.kunlong.platform.model.LoginSso;
+import com.kunlong.platform.model.LoginSsoExample;
+import com.kunlong.platform.service.LoginContext;
+import com.kunlong.platform.service.LoginSsoService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
