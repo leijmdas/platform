@@ -17,7 +17,7 @@ import java.io.IOException;
 
 
 /**
- * Package: ytb.user.rest.impl
+ * Package:
  * Author: ljm
  * Date: Created in 2017年9月12日
  */
@@ -28,8 +28,7 @@ public final class LoginContext {
     RedisService redisService;
 
     public LoginSso getLoginSso(String token) {
-        String ret = redisService.getKey(token);
-        return JSON.parseObject(ret,LoginSso.class);
+        return  redisService.getLoginSso(token);
 
     }
 
@@ -37,7 +36,7 @@ public final class LoginContext {
         if (token == null) {
             return;
         }
-        redisService.setKey(token,value.toString());
+        redisService.setLoginSso(token,value );
 
     }
 

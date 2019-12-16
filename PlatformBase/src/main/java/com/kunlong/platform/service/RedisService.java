@@ -1,5 +1,8 @@
 package com.kunlong.platform.service;
 
+import com.alibaba.fastjson.JSON;
+import com.kunlong.platform.model.LoginSso;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,6 +24,8 @@ public class RedisService {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+//    @Autowired
+//    private RedisTemplate<String, LoginSso> loginRedisTemplate;
 
     @Resource(name = "redisTemplate")
     private ListOperations<String, String> listOps;
@@ -41,5 +46,13 @@ public class RedisService {
 
     }
 
+    public void setLoginSso(String key, LoginSso value) {
+        redisTemplate.opsForValue().set(key, value.toString());
 
+    }
+
+    public LoginSso getLoginSso(String key) {
+        return JSON.parseObject(redisTemplate.opsForValue().get(key),LoginSso.class);
+
+    }
 }
