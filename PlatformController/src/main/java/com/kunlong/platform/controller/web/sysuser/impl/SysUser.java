@@ -12,7 +12,10 @@ import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.service.LoginContext;
 import com.kunlong.sysuser.model.SysUserModel;
 import com.kunlong.sysuser.service.SysUserService;
+import com.kunlong.sysuser.service.impl.SysUserServiceImpl;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +30,10 @@ import java.util.Map;
  */
 @Service
 public class SysUser {
+    private static final Logger logger = LoggerFactory.getLogger(SysUser.class);
+
     @Autowired
-    SysUserService sysUserService ;// = new SysUserServiceImpl();
+    SysUserService sysUserService ;
     @Autowired
     LoginContext loginContext;
 
@@ -73,6 +78,7 @@ public class SysUser {
                 req.setToken(token);
 
                 msgBody = "{\"list\":[" + loginSso.toString() + "]}";
+                logger.debug("msgBody: {}", msgBody);
                 return handler.buildMsg(retcode, retmsg, msgBody);
 
 
