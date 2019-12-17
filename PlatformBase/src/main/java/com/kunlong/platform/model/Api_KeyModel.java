@@ -1,4 +1,4 @@
-package com.kunlong.model;
+package com.kunlong.platform.model;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kunlong.platform.model.KunlongModel;

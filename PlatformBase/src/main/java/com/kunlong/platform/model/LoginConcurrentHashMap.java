@@ -1,8 +1,8 @@
-package com.kunlong.model;
+package com.kunlong.platform.model;
 
 
 
-import com.kunlong.service.LoginContext;
+import com.kunlong.platform.service.LoginContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;

@@ -3,7 +3,7 @@
  * author:leijm
  * 20181009
  */
-package com.kunlong.service.impl;
+package com.kunlong.platform.service.impl;
 
 import com.kunlong.mybatis.SysCacheService;
 import com.kunlong.mybatis.UserCacheService;

@@ -6,6 +6,7 @@ import com.jtest.NodesFactroy.Node.HttpClientNode
 import com.jtest.annotation.JTest
 import com.jtest.annotation.JTestClass
 import com.jtest.testframe.ITestImpl
+import com.jtest.utility.testlog.TestLog
 import com.kunlong.platform.context.RestMessage.MsgRequest
 import com.kunlong.platform.context.RestMessage.MsgResponse
 import testcase.pub.ManagerLogin
@@ -59,7 +60,7 @@ public class TestMetadata extends ITestImpl {
         req.msgBody = JSONObject.parseObject(body);
 
         data = JSONObject.toJSONString(req);
-        System.err.println(data);
+        TestLog.logJtest(data);
         String ret = httpclient.post("http://localhost:10080/rest/sysmetadata", data, "application/json");
         httpclient.checkStatusCode(200);
 
@@ -377,6 +378,6 @@ public class TestMetadata extends ITestImpl {
     }
 
     public static void main(String[] args) {
-        run(TestMetadata.class, 1);
+        run(TestMetadata.class, 6);
     }
 }

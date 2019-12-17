@@ -1,7 +1,7 @@
 package com.kunlong.system.context.config;
 /**
  * 
- * @className: ApplicationConsts  
+ * @className: PfAppConsts
  * @description: 应用基本配置常量 
  * @author zz  | www.integriti.cn
  * @date 2018年4月18日  

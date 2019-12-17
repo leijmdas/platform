@@ -1,6 +1,7 @@
 package com.kunlong.platform.controller.web.sysuser;
 
 import com.kunlong.platform.context.RestMessage.MsgHandler;
+import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.IRestProcess;
 import com.kunlong.platform.controller.web.sysuser.impl.SysPower;
@@ -8,7 +9,7 @@ import com.kunlong.platform.controller.web.sysuser.impl.SysRole;
 import com.kunlong.platform.controller.web.sysuser.impl.SysUser;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
-import com.kunlong.service.LoginContext;
+import com.kunlong.platform.service.LoginContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,12 +42,17 @@ public class SysUserController implements IRestProcess {
     @Autowired
     LoginContext loginContext;
 
+//    @RequestMapping(value = "sysuser", produces = {"Application/json;charset=UTF-8"})
+//    @ResponseBody
+//    public String sysUserRest(@RequestBody String data, HttpServletRequest request, HttpServletResponse response) {
+//        return new MsgHandler().parseRequest(this, data, request, response);
+//    }
+
     @RequestMapping(value = "sysuser", produces = {"Application/json;charset=UTF-8"})
     @ResponseBody
-    public String sysUserRest(@RequestBody String data, HttpServletRequest request, HttpServletResponse response) {
-        return new MsgHandler().parseRequest(this, data, request, response);
+    public String sysUserRest(@RequestBody MsgRequest msgRequest, HttpServletRequest request, HttpServletResponse response) {
+        return new MsgHandler().parseRequest(this, msgRequest, request, response);
     }
-
 
     public MsgResponse process(MsgHandler handler, HttpServletRequest request, HttpServletResponse response) {
 

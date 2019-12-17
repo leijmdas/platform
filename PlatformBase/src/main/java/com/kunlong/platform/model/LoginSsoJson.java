@@ -1,7 +1,7 @@
-package com.kunlong.model;
+package com.kunlong.platform.model;
 
 import com.kunlong.platform.context.RestMessage.MsgHandler;
-import com.kunlong.platform.model.KunlongModel;
+
 import java.io.Serializable;
 
 /**

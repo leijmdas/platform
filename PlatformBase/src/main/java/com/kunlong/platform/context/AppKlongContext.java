@@ -1,15 +1,13 @@
-package com.kunlong.context;
+package com.kunlong.platform.context;
 
 
-import com.kunlong.service.LoginContext;
-import com.kunlong.service.RedisService;
+import com.kunlong.platform.service.LoginContext;
+import com.kunlong.platform.service.RedisService;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-
-import javax.sql.DataSource;
 
 @Component
 public class AppKlongContext implements ApplicationContextAware {

@@ -8,6 +8,8 @@ import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +22,8 @@ import javax.annotation.Resource;
  */
 @Service
 public class MetaDataProcess {
+    private static final Logger logger = LoggerFactory.getLogger(MetaDataProcess.class);
+
     @Resource(name = "dictDataTypeServer")
     DictDataTypeServer dictDataTypeServer;
 
@@ -37,6 +41,7 @@ public class MetaDataProcess {
     String msgBody = null;
 
     public MsgResponse process(MsgRequest req, RestHandler handler) {
+        logger.info("MetaDataProcess req: {}",req);
         retcode = 0;
         retmsg = "成功";
         msgBody = null;

@@ -6,7 +6,7 @@ import com.kunlong.platform.context.rest.IRestProcess;
 import com.kunlong.platform.dao.IUserContext;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.service.DefaultUserContext;
-import com.kunlong.context.AppKlongContext;
+import com.kunlong.platform.context.AppKlongContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -60,6 +60,20 @@ public class MsgHandler {
 
     public void setResp(MsgResponse resp) {
         this.resp = resp;
+    }
+    public void parseRequest(MsgRequest preq) {
+        req = preq;//req.parse(reqBody);
+        resp = new MsgResponse(req);
+        resp = success_default();
+        if (userContext == null) {
+            userContext = new DefaultUserContext();
+        }
+        if (req.token != null) {
+            userContext.setLoginSso(AppKlongContext.getLoginContext().getLoginSso(req.token));
+
+        }
+
+        userContext.checkUserRightValid(req);
     }
 
 
@@ -117,13 +131,13 @@ public class MsgHandler {
     }
 
 
-    public String parseRequest(IRestProcess restProcess, String reqBody, HttpServletRequest request, HttpServletResponse response) {
+    public String parseRequest(IRestProcess restProcess, MsgRequest preq, HttpServletRequest request, HttpServletResponse response) {
 
         this.restProcess = restProcess;
         response.setCharacterEncoding("utf-8");
 
         try {
-            parseRequest(reqBody);
+            parseRequest(preq);
             restProcess.process(this, request, response);
 
         } catch (KunlongError e) {
@@ -141,7 +155,30 @@ public class MsgHandler {
 
         return resp.toJSONString();
     }
+    public String parseRequest(IRestProcess restProcess, String reqBody, HttpServletRequest request, HttpServletResponse response) {
 
+        this.restProcess = restProcess;
+        response.setCharacterEncoding("utf-8");
+
+        try {
+            parseRequest(reqBody);
+            restProcess.process(this, request, response);
+
+        } catch (KunlongError e) {
+            e.printStackTrace();
+
+            failure(e.getRetcode(), e.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            KunlongError ye = new KunlongError(KunlongError.CODE_UNKNOWN_ERROR);
+            failure(ye.getRetcode(), e.toString());
+        }finally {
+            //YtbLog.logDebug("Exit " + req.buildCmdInfo(), this.resp);
+        }
+
+        return resp.toJSONString();
+    }
     public MsgResponse parse (IRestProcess restProcess, String reqBody, HttpServletRequest request, HttpServletResponse response) {
 
         this.restProcess = restProcess;

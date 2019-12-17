@@ -1,10 +1,10 @@
-package com.kunlong.service;
+package com.kunlong.platform.service;
 
 
 
 
-import com.kunlong.model.LoginSso;
-import com.kunlong.model.LoginSsoExample;
+import com.kunlong.platform.model.LoginSso;
+import com.kunlong.platform.model.LoginSsoExample;
 
 import java.util.List;
 

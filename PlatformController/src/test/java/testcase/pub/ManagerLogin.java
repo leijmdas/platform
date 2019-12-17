@@ -5,10 +5,9 @@ import com.jtest.NodesFactroy.Inject.Inject;
 import com.jtest.NodesFactroy.Node.HttpClientNode;
 import com.jtest.testframe.ITestImpl;
 import com.jtest.utility.testlog.TestLog;
-import com.kunlong.model.LoginSsoJson;
+import com.kunlong.platform.model.LoginSsoJson;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
-import org.junit.Test;
 
 public class ManagerLogin extends ITestImpl {
     String url_login = ManagerConst.url_login;

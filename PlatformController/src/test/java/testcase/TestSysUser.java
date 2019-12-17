@@ -17,8 +17,6 @@ import org.slf4j.LoggerFactory;
 import testcase.pub.ManagerLogin;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @JTestClass.author("leijm")
@@ -50,7 +48,8 @@ public class TestSysUser extends ITestImpl {
 	public void setUp() {
 		req = login.defaultReq();
 		token = login.login(req);
-		logger.info(req.toJSONStringPretty());
+		logger.info("aaa--req:{} ******",req.toJSONStringPretty());
+		logger.info("bbb req:{} ******",req.toJSONStringPretty());
 	}
 	
 	@Override
@@ -605,7 +604,7 @@ public class TestSysUser extends ITestImpl {
 
 	public static void main(String[] args) {
 
-		 run(TestSysUser.class,23);
+		 run(TestSysUser.class,22);
 
 	}
 

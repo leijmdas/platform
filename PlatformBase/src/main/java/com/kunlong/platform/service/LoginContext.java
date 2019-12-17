@@ -1,11 +1,10 @@
-package com.kunlong.service;
+package com.kunlong.platform.service;
 
 
 import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.kunlong.context.AppKlongContext;
-import com.kunlong.model.LoginSso;
-import com.kunlong.mybatis.SqlSessionBuilder;
+import com.kunlong.platform.context.AppKlongContext;
+import com.kunlong.platform.model.LoginSso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,20 +17,18 @@ import java.io.IOException;
 
 
 /**
- * Package: ytb.user.rest.impl
+ * Package:
  * Author: ljm
  * Date: Created in 2017年9月12日
  */
 @Service
 public final class LoginContext {
-    public static SqlSessionBuilder sqlSessionBuilder = new SqlSessionBuilder();
 
     @Autowired
     RedisService redisService;
 
     public LoginSso getLoginSso(String token) {
-        String ret = redisService.getKey(token);
-        return JSON.parseObject(ret,LoginSso.class);
+        return  redisService.getLoginSso(token);
 
     }
 
@@ -39,7 +36,7 @@ public final class LoginContext {
         if (token == null) {
             return;
         }
-        redisService.setKey(token,value.toString());
+        redisService.setLoginSso(token,value );
 
     }
 
