@@ -17,6 +17,8 @@ import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +28,9 @@ import java.util.Map;
 
 @Component
 public class MetadataDictServer {
+
+    private static final Logger logger = LoggerFactory.getLogger(MetadataDictServer.class);
+
     @Autowired
     MetaDataService metaDataService;
     @Autowired
@@ -475,11 +480,11 @@ public class MetadataDictServer {
 
 
     public MsgResponse getSubSysDictList(MsgRequest req, RestHandler handler) {
-        //SysMetaDataServiceImpl sysMetaDataService = new SysMetaDataServiceImpl();
-        //SubsysDictExample example = new SubsysDictExample();
+
         List<SubsysDict> subSysDictList = sysMetaDataService.getSubSysDictList();
 
         msgBody = "{\"list\":" + JSONObject.toJSONString(subSysDictList) + "}";
+        logger.info("msgBody: {}",KunlongUtils.toJSONStringPretty(subSysDictList));
         return handler.buildMsg(retcode, retmsg, msgBody);
     }
 
