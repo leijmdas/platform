@@ -6,7 +6,8 @@
 	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
 	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
 	the specific language governing permissions and limitations under the License. -->
-<configuration debug="true">
+    <!--<configuration debug="false">-->
+	<configuration scan="false" scanPeriod="60 seconds" debug="false">
 
 	<!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
 	<property name="LOG_HOME" value="/opt/pf/logs" />
@@ -67,8 +68,9 @@
 	<logger name="org.springframework.amqp.rabbit" level="INFO" />
 	<!-- quartz -->
 	<logger name="org.quartz.core.QuartzSchedulerThread" level="INFO" />
-	
+
 	<logger name="org.activiti" level="INFO"></logger>
+	<logger name="com.kunlong"  level="DEBUG"></logger>
 	<!-- async log -->
 	<logger name="AsyncLog" level="INFO" additivity="false">
 		<appender-ref ref="ASYNCOUT" />
@@ -78,7 +80,7 @@
 	<!-- 日志输出级别 -->
 	<!--开发环境 -->
 	<springProfile name="dev">
-		<root level="INFO">
+		<root level="DEBUG">
 			<appender-ref ref="FILE" />
 			<appender-ref ref="STDOUT" />
 		</root>

@@ -17,8 +17,6 @@ import org.slf4j.LoggerFactory;
 import testcase.pub.ManagerLogin;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @JTestClass.author("leijm")

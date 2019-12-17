@@ -101,6 +101,7 @@ public class SysUserServiceImpl extends SysUserDAOService implements SysUserServ
         loginSso.setLoginTime(new Date());
         loginContext.login(token, loginSso);
         logger.debug("token:{}", loginSso);
+        logger.info("token:{}", loginSso);
         return body;
     }
 
