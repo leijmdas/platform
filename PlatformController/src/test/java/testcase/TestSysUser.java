@@ -48,7 +48,8 @@ public class TestSysUser extends ITestImpl {
 	public void setUp() {
 		req = login.defaultReq();
 		token = login.login(req);
-		logger.info(req.toJSONStringPretty());
+		logger.info("aaa--req:{} ******",req.toJSONStringPretty());
+		logger.info("bbb req:{} ******",req.toJSONStringPretty());
 	}
 	
 	@Override
