@@ -27,6 +27,7 @@
         <module>PlatformDubbo</module>
         <module>PlatformController</module>
         <module>DubboApi</module>
+        <module>plat</module>
     </modules>
 
     <properties>
