@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class JsonResult<T> extends KunlongModel implements java.io.Serializable {
 
 	static String CODE_FAILER = "10001";
-	static String CODE_SUCCESS = "10000";
+	static String CODE_SUCCESS = "0";
 	/**
 	 * 是否成功
 	 */
