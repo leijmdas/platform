@@ -29,6 +29,10 @@
     <orderEntry type="library" name="Maven: kunlong:System:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: kunlong:Platform:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: kunlong:PlatformBase:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="Tasklog" />
+    <orderEntry type="module" module-name="System" />
+    <orderEntry type="module" module-name="plat" />
+    <orderEntry type="module" module-name="PlatformBase" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-activemq:2.1.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jms:5.1.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-messaging:5.1.9.RELEASE" level="project" />
@@ -229,5 +233,8 @@
     <orderEntry type="library" name="Maven: org.apache.curator:curator-framework:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.curator:curator-client:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.curator:curator-recipes:4.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis.hbatis:hbatis-core:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis.hbatis:hbatis-orm:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis.hbatis:hbatis-spring:2.3.1" level="project" />
   </component>
 </module>
