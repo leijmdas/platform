@@ -17,7 +17,6 @@ public class TestMetadata extends ITestImpl {
     String token = "f1fb2fca892d4e7aac0dd7d02d7d99e1";
 
     String url = "http://localhost:10080/rest/sysmetadata";
-    String url_base = "http://localhost/rest";
 
     @Inject(filename = "node.xml", value = "httpclient")
     HttpClientNode httpclient;
