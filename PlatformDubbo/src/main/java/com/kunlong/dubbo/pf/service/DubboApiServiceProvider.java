@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
-@Service(interfaceClass = DictDataTypeApiService.class)
+//@Service(@com.alibaba.dubbo.config.annotation.Service(version = "${dubbo.service.version}")interfaceClass = DictDataTypeApiService.class)
 
+@Service(version = "${dubbo.service.version}",interfaceClass = DictDataTypeApiService.class)
 public class DubboApiServiceProvider implements DictDataTypeApiService {
     private static final Logger logger = LoggerFactory.getLogger(DubboApiServiceProvider.class);
     //@Autowired

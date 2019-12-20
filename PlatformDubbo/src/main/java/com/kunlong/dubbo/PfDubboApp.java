@@ -5,7 +5,7 @@ import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {"com.kunlong.dubbo.pf","com.kunlong","com.kunlong.platform"})
+@SpringBootApplication(scanBasePackages = {"com.kunlong.dubbo.pf", "com.kunlong", "com.kunlong.platform"})
 
 @EnableDubbo
 @EnableDubboConfig

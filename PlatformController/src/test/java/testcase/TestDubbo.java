@@ -1,10 +1,10 @@
-package com.kunlong.dubbo.pf.testcase;
+package testcase;
 
-import com.kunlong.api.model.DictDatatypeApiModel;
-import com.kunlong.api.service.DictDataTypeApiService;
-import com.kunlong.dubbo.PfDubboApp;
+import cn.integriti.center.api.service.SysUserApiService;
+
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.service.DictDataTypeService;
+import com.kunlong.platform.PfControllerApp;
 import com.kunlong.platform.model.DictDatatypeDemo;
 import com.kunlong.platform.service.DictDatatypeServiceExample;
 import com.kunlong.platform.utils.KunlongUtils;
@@ -24,18 +24,17 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @description:
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = PfDubboApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = PfControllerApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
-public class TestPfServiceImpl {
+public class TestDubbo {
     @Autowired
     DictDatatypeServiceExample dictDatatypeServiceExample;
 
     @Autowired
     DictDataTypeService dictDataTypeService;
 
-    @Reference(lazy = true)
-    DictDataTypeApiService dictDataTypeApiService;
-
+    @Reference
+    SysUserApiService sysUserApiService;
 
 
     @Before
@@ -66,9 +65,7 @@ public class TestPfServiceImpl {
     @Test
     public void test0003_dictDataTypeApiService() {
 
-        DictDatatypeApiModel dictDatatypeDemo = dictDataTypeApiService.selectByPrimaryKey(3);
-        String ret = KunlongUtils.toJSONStringPretty(dictDatatypeDemo);
-        System.out.println(ret);
+
     }
 
 }
