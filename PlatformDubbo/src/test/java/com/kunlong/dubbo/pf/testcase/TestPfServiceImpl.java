@@ -1,11 +1,14 @@
 package com.kunlong.dubbo.pf.testcase;
 
+import com.kunlong.api.model.DictDatatypeApiModel;
+import com.kunlong.api.service.DictDataTypeApiService;
 import com.kunlong.dubbo.PfDubboApp;
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.service.DictDataTypeService;
 import com.kunlong.platform.model.DictDatatypeDemo;
 import com.kunlong.platform.service.DictDatatypeServiceExample;
 import com.kunlong.platform.utils.KunlongUtils;
+import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +31,8 @@ public class TestPfServiceImpl {
     DictDatatypeServiceExample dictDatatypeServiceExample;
     @Autowired
     DictDataTypeService dictDataTypeService;
+    @Reference(lazy = true)
+    DictDataTypeApiService dictDataTypeApiService;
 
     @Before
     public void setup() {
@@ -44,10 +49,20 @@ public class TestPfServiceImpl {
         String ret = KunlongUtils.toJSONStringPretty(dictDatatypeDemo);
         System.out.println(ret);
     }
+
     @Test
     public void test0002_dictDataTypeService() {
 
         DictDatatype dictDatatypeDemo = dictDataTypeService.selectByPrimaryKey(3);
+        String ret = KunlongUtils.toJSONStringPretty(dictDatatypeDemo);
+        System.out.println(ret);
+    }
+
+    //dictDataTypeApiService
+    @Test
+    public void test0003_dictDataTypeApiService() {
+
+        DictDatatypeApiModel dictDatatypeDemo = dictDataTypeApiService.selectByPrimaryKey(3);
         String ret = KunlongUtils.toJSONStringPretty(dictDatatypeDemo);
         System.out.println(ret);
     }
