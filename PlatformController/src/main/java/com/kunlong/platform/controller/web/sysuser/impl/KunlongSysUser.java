@@ -2,17 +2,16 @@ package com.kunlong.platform.controller.web.sysuser.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.kunlong.platform.model.LoginSso;
-import com.kunlong.platform.model.LoginSsoJson;
 import com.kunlong.platform.context.RestMessage.MsgHandler;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.dao.IUserContext;
 import com.kunlong.platform.model.KunlongError;
+import com.kunlong.platform.model.LoginSso;
+import com.kunlong.platform.model.LoginSsoJson;
 import com.kunlong.platform.service.LoginContext;
 import com.kunlong.sysuser.model.SysUserModel;
 import com.kunlong.sysuser.service.SysUserService;
-import com.kunlong.sysuser.service.impl.SysUserServiceImpl;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +28,8 @@ import java.util.Map;
  * Date: Created in 2017/8/22 14:11
  */
 @Service
-public class SysUser {
-    private static final Logger logger = LoggerFactory.getLogger(SysUser.class);
+public class KunlongSysUser {
+    private static final Logger logger = LoggerFactory.getLogger(KunlongSysUser.class);
 
     @Autowired
     SysUserService sysUserService ;

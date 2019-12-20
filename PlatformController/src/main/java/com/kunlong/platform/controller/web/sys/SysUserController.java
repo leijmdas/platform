@@ -7,6 +7,7 @@ import cn.integriti.center.api.model.SysUserDTO;
 import cn.integriti.center.api.service.SysUserApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,8 @@ import java.util.List;
 @Controller
 public class SysUserController extends BaseController {
 
-	@Autowired
+	//@Autowired
+	@Reference
 	private SysUserApiService sysUserService;
 
 	@RequestMapping(value = "query", method = RequestMethod.POST)

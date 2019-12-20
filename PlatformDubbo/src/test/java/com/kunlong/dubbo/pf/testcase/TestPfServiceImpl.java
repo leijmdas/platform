@@ -1,11 +1,11 @@
 package com.kunlong.dubbo.pf.testcase;
 
 import com.kunlong.dubbo.PfDubboApp;
+import com.kunlong.metadata.model.DictDatatype;
+import com.kunlong.metadata.service.DictDataTypeService;
 import com.kunlong.platform.model.DictDatatypeDemo;
 import com.kunlong.platform.service.DictDatatypeServiceExample;
 import com.kunlong.platform.utils.KunlongUtils;
-import com.kunlong.system.model.DictDatatype;
-import com.kunlong.system.service.DictDataTypeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

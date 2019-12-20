@@ -17,8 +17,8 @@ import org.springframework.context.annotation.ImportResource;
 @EnableAutoConfiguration
 @Configuration
 @SpringBootApplication(scanBasePackages = {"com.kunlong"})
-//@EnableDubbo
-//@EnableDubboConfig
+@EnableDubbo
+@EnableDubboConfig
 @ImportResource({"classpath:appcontext.xml"})
 public class PfControllerApp {
     private static final Logger logger = LoggerFactory.getLogger(PfControllerApp.class);
