@@ -26,6 +26,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.mybatis.hbatis:hbatis-core:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis.hbatis:hbatis-orm:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis.hbatis:hbatis-spring:2.3.1" level="project" />
     <orderEntry type="module" module-name="plat" />
     <orderEntry type="module" module-name="PlatformBase" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-activemq:2.1.8.RELEASE" level="project" />

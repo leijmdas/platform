@@ -25,10 +25,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: kunlong:Tasklog:1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: kunlong:System:1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: kunlong:Platform:1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: kunlong:PlatformBase:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis.hbatis:hbatis-core:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis.hbatis:hbatis-orm:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis.hbatis:hbatis-spring:2.3.1" level="project" />
     <orderEntry type="module" module-name="Tasklog" />
     <orderEntry type="module" module-name="System" />
     <orderEntry type="module" module-name="plat" />
