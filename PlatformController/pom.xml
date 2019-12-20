@@ -13,6 +13,12 @@
     <!--<packaging>jar</packaging>-->
 
     <artifactId>PlatformController</artifactId>
+    <properties>
+        <ipark-api.version>1.0.0-SNAPSHOT</ipark-api.version>
+        <integriti-center.version>1.0.0-SNAPSHOT</integriti-center.version>
+        <poi.version>3.17</poi.version>
+
+    </properties>
 
     <dependencies>
         <dependency>
@@ -20,6 +26,60 @@
             <artifactId>PlatformBase</artifactId>
             <version>2.0</version>
         </dependency>
+        <dependency>
+            <groupId>cn.integriti</groupId>
+            <artifactId>center-api</artifactId>
+            <version>${integriti-center.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xw.ipark</groupId>
+            <artifactId>xw-ipark-api</artifactId>
+            <version>${ipark-api.version}</version>
+        </dependency>
+         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-excelant</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jxls/jxls -->
+        <dependency>
+            <groupId>org.jxls</groupId>
+            <artifactId>jxls</artifactId>
+            <version>2.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jxls</groupId>
+            <artifactId>jxls-poi</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
