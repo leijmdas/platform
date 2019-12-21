@@ -20,10 +20,10 @@ public class PfContext implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         appCtxt = applicationContext;
 
-        RedisUtil.Singleton.instanceRedisTemplate((RedisTemplate) appCtxt.getBean("stringRedisTemplate"));
-        // RedisUtil.Singleton.instanceRedisTemplate(stringRedisTemplate);
+        RedisUtil.Singleton.instanceRedisTemplate((RedisTemplate) appCtxt.getBean("redisTemplate"));
+        //RedisUtil.Singleton.instanceRedisTemplate(stringRedisTemplate);
 
-        SessionHolder.config("session:mgr:", 7200);
+        SessionHolder.config("session:pf-dxw:", 7200);
 
     }
 

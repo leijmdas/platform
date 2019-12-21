@@ -98,6 +98,7 @@ public class SysUserController extends BaseController {
 		SysUserDTO su = this.sysUserService.findByUsername(corpId,username);
 		return su;
 	}
+
 	@RequestMapping(value="authorization",method = RequestMethod.POST)
 	public @ResponseBody
     AuthorizationDTO authrozation() {

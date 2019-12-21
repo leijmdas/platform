@@ -20,6 +20,7 @@ public class BaseController {
 		Assert.notNull(su,"User Session不存在或已失效");
 		return su;
 	}
+
 	public Integer getCurrentUserId() {
 		return getCurrentSysUser().getId();
 		

@@ -26,6 +26,7 @@ public class TestSysUser extends ITestImpl {
 	String url_sysuser="http://127.0.0.1:10080/rest/sysuser";
 	String url_base="http://mysql.kunlong.com/rest/sysuser";
 	String url_login ="http://127.0.0.1:10080/auth/login?username=admin&password=111111";
+	String url_auth ="http://127.0.0.1:10080/sys/user/authorization";
 
 	@Inject(filename = "node.xml", value = "httpclient")
 	HttpClientNode httpclient;
@@ -49,8 +50,6 @@ public class TestSysUser extends ITestImpl {
 	public void setUp() {
 		req = login.defaultReq();
 		token = login.login(req);
-		logger.info("aaa--req:{} ******",req.toJSONStringPretty());
-		logger.info("bbb req:{} ******",req.toJSONStringPretty());
 	}
 	
 	@Override
@@ -611,6 +610,21 @@ public class TestSysUser extends ITestImpl {
 
 
 		String ret = httpclient.post(url_login, "{}", "application/json");
+		System.out.println(ret);
+		httpclient.checkStatusCode(200);
+
+
+	}
+
+	@JTest
+	@JTestClass.title("获取用户列表")
+	@JTestClass.pre("")
+	@JTestClass.step("url_context")
+	@JTestClass.exp("ok")
+	public void test_025_authCenter() {
+
+		httpclient.addHeader("access-token","a2801f61f0674d6091e06015cc059917");
+		String ret = httpclient.post(url_auth, "{}", "application/json");
 		System.out.println(ret);
 		httpclient.checkStatusCode(200);
 
