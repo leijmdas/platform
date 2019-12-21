@@ -7,6 +7,7 @@ import cn.integriti.center.api.model.SysResourceGroupDTO;
 import cn.integriti.center.api.service.SysResourceApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,8 @@ import java.util.List;
 @Controller
 public class SysResourceController extends BaseController {
 
-	@Autowired
+	//@Autowired
+	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private SysResourceApiService service;
 
 	@RequestMapping(value = "query", method = RequestMethod.POST)

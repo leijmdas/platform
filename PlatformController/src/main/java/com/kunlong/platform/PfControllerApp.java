@@ -7,17 +7,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 // mvn deploy:deploy-file -DgroupId=app -DartifactId=app-support -Dversion=1.1 -Dpackaging=jar -Dfile=app-support-1.1.jar -Durl=http://localhost:8081/repository/maven-releases/ -DrepositoryId=nexus
 
-
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = {
+        SecurityAutoConfiguration.class
+})
 @Configuration
-@SpringBootApplication(scanBasePackages = {"com.kunlong","cn.integriti.center"})
+//@SpringBootApplication(scanBasePackages = {"com.kunlong","cn.integriti.center"})
+@SpringBootApplication(scanBasePackages = {"com.kunlong"})
 @ImportResource({"classpath:appcontext.xml"})
+//@EnableDubbo
+//@EnableDubboConfig
+@EnableSwagger2
 public class PfControllerApp {
     private static final Logger logger = LoggerFactory.getLogger(PfControllerApp.class);
 

@@ -33,7 +33,7 @@ public class TestPfServiceImpl {
     @Autowired
     DictDataTypeService dictDataTypeService;
 
-    @Reference(lazy = true)
+    @Reference(lazy = true, version = "${dubbo.service.version}")
     DictDataTypeApiService dictDataTypeApiService;
 
 
@@ -62,7 +62,6 @@ public class TestPfServiceImpl {
         System.out.println(ret);
     }
 
-    //dictDataTypeApiService
     @Test
     public void test0003_dictDataTypeApiService() {
 

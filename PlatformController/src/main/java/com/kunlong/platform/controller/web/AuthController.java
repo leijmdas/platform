@@ -7,6 +7,7 @@ import com.kunlong.platform.consts.SessionKeyEnum;
 import com.kunlong.platform.util.SessionHolder;
 import com.kunlong.platform.util.support.service.AuthService;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,8 @@ public class AuthController extends BaseController {
 	@Autowired
 	private AuthService authService;
 
-	@Autowired
+	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private SysUserApiService userService;
-//	@Autowired
-//	private UserApiService userApiService;
 
 	/**
 	 * 登录
@@ -35,7 +34,6 @@ public class AuthController extends BaseController {
 	public @ResponseBody
 	AuthService.AuthToken login(String username, String password) {
 		SysUserDTO su = userService.checkPass(1,username,password);
-		//userApiService.queryUserSession(su.getId(),0);
 		AuthService.AuthToken at  = this.authService.createToken("web:user:"+su.getId());
 		ISessionHolder sessionHolder = SessionHolder.create(at.getToken());
 		sessionHolder.setAttribute(SessionKeyEnum.WEB_USER.getKey(), su);

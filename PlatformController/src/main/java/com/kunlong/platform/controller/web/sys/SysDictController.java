@@ -8,6 +8,7 @@ import cn.integriti.center.api.model.SysDictItemDTO;
 import cn.integriti.center.api.service.SysDictApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class SysDictController extends BaseController {
 
-	@Autowired
+	//@Autowired
+	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private SysDictApiService service;
 
 	@RequestMapping(value = "query", method = RequestMethod.POST)

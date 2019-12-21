@@ -17,7 +17,7 @@ public class ComplexDubboApiServiceProvider implements ComplexDictDataTypeApiSer
     //@Autowired
     //DictDatatypeServiceExample dictDatatypeServiceExample;
 
-    @Reference(lazy = true,version = "${dubbo.service.version}")
+    @Reference(lazy = true, version = "${dubbo.service.version}")
     DictDataTypeApiService dictDataTypeService;
 
     @Override

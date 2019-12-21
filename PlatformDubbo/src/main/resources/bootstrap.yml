@@ -1,0 +1,10 @@
+#公共默认配置
+
+spring:
+  application:
+    name:pf-dubbo
+  profiles:
+    active: dev
+server:
+  port: 11122
+  contextPath: /

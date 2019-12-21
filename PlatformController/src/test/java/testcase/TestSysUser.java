@@ -25,10 +25,11 @@ public class TestSysUser extends ITestImpl {
 
 	String url_sysuser="http://127.0.0.1:10080/rest/sysuser";
 	String url_base="http://mysql.kunlong.com/rest/sysuser";
-	String url_context="http://127.0.0.1:10080/rest/sysuser";
+	String url_login ="http://127.0.0.1:10080/auth/login?username=admin&password=111111";
+
 	@Inject(filename = "node.xml", value = "httpclient")
 	HttpClientNode httpclient;
-
+	//http://localhost:8089/api/auth/login?username=admin&password=111111
 
 	ManagerLogin login = new ManagerLogin();
 	String token = "d98c3b969dc34aaa92942c8a9c646f2a";
@@ -62,7 +63,7 @@ public class TestSysUser extends ITestImpl {
 	@JTestClass.pre("")
 	@JTestClass.step("url_context")
 	@JTestClass.exp("ok")
-	public void test_0001_getLoginSSO() {
+	public void test_001_getLoginSSO() {
 
 		req.reqtime = System.currentTimeMillis();
 		req.seqno = System.currentTimeMillis();
@@ -84,7 +85,7 @@ public class TestSysUser extends ITestImpl {
 	@JTestClass.pre("")
 	@JTestClass.step("post http://mysql.kunlong.com:8080/rest/sysuser")
 	@JTestClass.exp("ok")
-	public void test_0002_addUser() {
+	public void test_002_addUser() {
 
 		req.reqtime = System.currentTimeMillis();
 
@@ -601,10 +602,24 @@ public class TestSysUser extends ITestImpl {
 		TestLog.logJtest(KunlongUtils.toJSONStringPretty(req));
 
 	}
+	@JTest
+	@JTestClass.title("获取用户列表")
+	@JTestClass.pre("")
+	@JTestClass.step("url_context")
+	@JTestClass.exp("ok")
+	public void test_024_loginCenter() {
+
+
+		String ret = httpclient.post(url_login, "{}", "application/json");
+		System.out.println(ret);
+		httpclient.checkStatusCode(200);
+
+
+	}
 
 	public static void main(String[] args) {
 
-		 run(TestSysUser.class,22);
+		 run(TestSysUser.class,24);
 
 	}
 

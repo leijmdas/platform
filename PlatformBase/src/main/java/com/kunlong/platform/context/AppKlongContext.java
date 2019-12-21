@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +15,11 @@ public class AppKlongContext implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         appCtxt = applicationContext;
+        // redis
+        //RedisUtil.Singleton.instanceRedisTemplate((RedisTemplate) appCtxt.getBean("stringRedisTemplate"));
+        //RedisUtil.Singleton.instanceRedisTemplate((RedisTemplate) appCtxt.getBean("redisTemplate"));
+
+        //SessionHolder.config("session:mgr:", 7200);
 
     }
 

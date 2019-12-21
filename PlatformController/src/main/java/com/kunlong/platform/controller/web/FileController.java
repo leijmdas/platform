@@ -4,6 +4,7 @@ package com.kunlong.platform.controller.web;
 import cn.integriti.center.api.dto.FileInfoDTO;
 import cn.integriti.center.api.service.FileApiService;
 import com.kunlong.platform.util.FileHelper;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,8 @@ public class FileController {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
-	@Autowired
+	//@Autowired
+	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private FileApiService fileApiService;
 	// 处理文件上传
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)

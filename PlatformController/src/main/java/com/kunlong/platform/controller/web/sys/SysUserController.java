@@ -25,7 +25,8 @@ import java.util.List;
 public class SysUserController extends BaseController {
 
 	//@Autowired
-	@Reference
+	//@Reference
+	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private SysUserApiService sysUserService;
 
 	@RequestMapping(value = "query", method = RequestMethod.POST)

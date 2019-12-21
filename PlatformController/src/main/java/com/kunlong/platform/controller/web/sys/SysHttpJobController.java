@@ -9,7 +9,7 @@ import cn.integriti.center.api.service.SysHttpJobApiService;
 import cn.integriti.center.api.service.SysJobGroupApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.util.ValueFieldHelper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,10 +29,11 @@ import java.util.Set;
 @Controller
 public class SysHttpJobController  {
 
-	@Autowired
+	//@Autowired
+	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private SysHttpJobApiService sysHttpJobApiService;
-	
-	@Autowired
+
+	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private SysJobGroupApiService sysJobGroupApiService;
 
 	/**
