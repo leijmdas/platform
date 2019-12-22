@@ -76,7 +76,7 @@
             <artifactId>poi-ooxml-schemas</artifactId>
             <version>${poi.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jxls/jxls -->
+
         <dependency>
             <groupId>org.jxls</groupId>
             <artifactId>jxls</artifactId>
@@ -91,7 +91,7 @@
     </dependencies>
 
     <build>
-        <finalName>pf-kl</finalName>
+        <finalName>kl-pf</finalName>
         <plugins>
 
             <plugin>

@@ -585,6 +585,7 @@ public class TestSysUser extends ITestImpl {
 	@JTestClass.exp("ok")
 	public void test_022login() {
 	}
+
 	@JTest
 	@JTestClass.title("获取图形码")
 	@JTestClass.pre("")
