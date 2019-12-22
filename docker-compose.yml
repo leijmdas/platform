@@ -1,0 +1,63 @@
+version: '3.2'
+services:
+    kl-pf-ctrl:
+        image: kl-pf-ctrl
+        hostname: kl-pf-ctrl
+        user: root
+        restart: always
+        ports:
+            - '10080:10080' 
+        #command:
+        environment:
+            APP_OPTS: --spring.profiles.active=dev
+            #DUBBO_IP_TO_REGISTRY: 120.77.172.83
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            #- /etc/hosts:/etc/hosts:ro
+            #- /opt/logs/:/opt/logs/
+            #- /opt/shareISSUE.pfx:/opt/shareISSUE.pfx:ro
+        extra_hosts:
+            - "mysql.kunlong.com:172.17.0.1"
+            - "redis.kunlong.com:172.17.0.1"
+            - "zookeeper.kunlong.com:172.17.0.1"
+    kl-center-service:
+        image: kl-center-service
+        hostname: kl-center-service
+        user: root
+        restart: always
+        ports:
+            - '12340:12340' 
+        #command:
+        environment:
+            APP_OPTS: --spring.profiles.active=dev
+            #DUBBO_IP_TO_REGISTRY: 120.77.172.83
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            #- /etc/hosts:/etc/hosts:ro
+            #- /opt/logs/:/opt/logs/
+            #- /opt/shareISSUE.pfx:/opt/shareISSUE.pfx:ro
+        extra_hosts:
+            - "mysql.kunlong.com:172.17.0.1"
+            - "redis.kunlong.com:172.17.0.1"
+            - "zookeeper.kunlong.com:172.17.0.1"            
+    kl-dongxw-ctrl:
+        image: kl-dongxw-ctrl
+        hostname: kl-dongxw-ctrl
+        user: root
+        restart: always
+        ports:
+            - '10081:10081' 
+        #command:
+        environment:
+            APP_OPTS: --spring.profiles.active=dev
+            #DUBBO_IP_TO_REGISTRY: 120.77.172.83
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            #- /etc/hosts:/etc/hosts:ro
+            #- /opt/logs/:/opt/logs/
+            #- /opt/shareISSUE.pfx:/opt/shareISSUE.pfx:ro
+        extra_hosts:
+            - "mysql.kunlong.com:172.17.0.1"
+            - "redis.kunlong.com:172.17.0.1"
+            - "zookeeper.kunlong.com:172.17.0.1"
+                        
