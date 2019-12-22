@@ -91,7 +91,7 @@
     </dependencies>
 
     <build>
-        <finalName>kl-pf</finalName>
+        <finalName>kl-pf-ctrl</finalName>
         <plugins>
 
             <plugin>

@@ -45,7 +45,7 @@ public class AppMvcConfig implements WebMvcConfigurer {
 
 		registry.addInterceptor(wapRequestHandler).addPathPatterns("/wap/**").excludePathPatterns("/wap/app/**", "/wap/auth/**", "/wap/public/**");
 		registry.addInterceptor(webRequestHandler).addPathPatterns("/**").excludePathPatterns(concat(ignorUrls, new String[] { "/wap/**", "/app/**" })).excludePathPatterns("/swagger-resources/**",
-				"/webjars/**", "/v2/**", "/swagger-ui.html/**","/rest/**");
+				"/dongxw/**","/webjars/**", "/v2/**", "/swagger-ui.html/**","/rest/**");
 	}
 
 	private String[] concat(String[] res, String[] res2) {

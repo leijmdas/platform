@@ -30,7 +30,6 @@ public class PfControllerApp {
 
 
     public static void main(String[] args) {
-        logger.info("appcontext PfControllerApp appcontext appcontext");
         Class[] classes = new Class[]{
                 PfControllerApp.class
         };
