@@ -47,7 +47,7 @@ public class SysUserCtrl implements IRestProcess {
 //        return new MsgHandler().parseRequest(this, data, request, response);
 //    }
 
-    @RequestMapping(value = "sysuser", produces = {"Application/json;charset=UTF-8"})
+    @RequestMapping(value = "/sysuser", produces = {"Application/json;charset=UTF-8"})
     @ResponseBody
     public String sysUserRest(@RequestBody MsgRequest msgRequest, HttpServletRequest request, HttpServletResponse response) {
         return new MsgHandler().parseRequest(this, msgRequest, request, response);
