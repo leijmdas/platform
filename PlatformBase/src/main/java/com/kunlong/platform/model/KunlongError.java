@@ -73,26 +73,27 @@ public class KunlongError extends Error {
     public static int getErrorId(String code) {
 //        Dict_ErrorCode json = YtbContext.getYtb_context().getError_msg(code);
 //        return json.getErrorId();
-        return 0;
+
+        return -1;
     }
 
     public KunlongError(String code) {
 //        Dict_ErrorCode json = YtbContext.getYtb_context().getError_msg(code);
-//        this.retcode = json.getErrorId();
-//        this.msg = json.getRemarkChina();
-//        YtbLog.logError(retcode , msg);
+        this.retcode = -1;//json.getErrorId();
+         this.msg = code;//json.getRemarkChina();
+    //        YtbLog.logError(retcode , msg);
     }
 
     public KunlongError(String code, String errMsg) {
 //        Dict_ErrorCode json = YtbContext.getYtb_context().getError_msg(code);
-//        this.retcode = json.getErrorId();
-//        this.msg = json.getRemarkChina() + ": " + errMsg;
+        this.retcode = -1;//json.getErrorId();
+        this.msg = errMsg;//json.getRemarkChina() + ": " + errMsg;
 //        YtbLog.logError(retcode,  msg);
     }
     public KunlongError(IUserContext userContext, String code, String errMsg) {
 //        Dict_ErrorCode json = YtbContext.getYtb_context().getError_msg(code);
-//        this.retcode = json.getErrorId();
-//        this.msg = json.getRemarkChina() + ": " + errMsg;
+        this.retcode = -1;// json.getErrorId();
+       this.msg = errMsg;//json.getRemarkChina() + ": " + errMsg;
         //YtbLog.logError(userContext,retcode,  msg);
     }
 

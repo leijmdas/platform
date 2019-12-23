@@ -631,10 +631,22 @@ public class TestSysUser extends ITestImpl {
 
 
 	}
+	@JTest
+	@JTestClass.title("获取用户列表")
+	@JTestClass.pre("")
+	@JTestClass.step("url_context")
+	@JTestClass.exp("ok")
+	public void test_026_loginError() {
+
+		login.login(req,"admin","223122");
+
+
+	}
+	//token = ;
 
 	public static void main(String[] args) {
 
-		 run(TestSysUser.class,24);
+		 run(TestSysUser.class,26);
 
 	}
 

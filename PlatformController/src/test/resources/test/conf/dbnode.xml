@@ -2,7 +2,7 @@
 <nodes>
     <node name="system" type='mysql'>
 
-        <item name="url" value="jdbc:mysql://system-db-host:3306/kunlong_system?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=Asia/Shanghai"/>
+        <item name="url" value="jdbc:mysql://mysql.kunlong.com:3306/kunlong_system?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=Asia/Shanghai"/>
         <item name="user" value="ytb"/>
         <item name="pwd" value="leijmdas@163.comL"/>
         <item name="driver" value="com.mysql.cj.jdbc.Driver"/>
