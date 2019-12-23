@@ -10,7 +10,7 @@ import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-//@Service(@com.alibaba.dubbo.config.annotation.Service(version = "${dubbo.service.version}")interfaceClass = DictDataTypeApiService.class)
+//@Service(@com.alibaba.dubbo.platform.annotation.Service(version = "${dubbo.service.version}")interfaceClass = DictDataTypeApiService.class)
 
 @Service(version = "${dubbo.service.version}",interfaceClass = DictDataTypeApiService.class)
 public class DubboApiServiceProvider implements DictDataTypeApiService {

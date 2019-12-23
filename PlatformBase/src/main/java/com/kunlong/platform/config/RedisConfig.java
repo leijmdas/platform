@@ -1,4 +1,4 @@
-//package com.kunlong.platform.config;
+//package com.kunlong.platform.platform;
 //
 //
 //import com.kunlong.platform.model.LoginSso;

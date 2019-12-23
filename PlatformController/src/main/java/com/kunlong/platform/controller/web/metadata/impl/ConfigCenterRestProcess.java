@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ConfigCenterRestProcess {
 
-//    ConfigDAOService configManagerService = new ConfigDAOService();
+//    ErrorCodeService configManagerService = new ErrorCodeService();
 //
 //    public MsgResponse process(MsgRequest req, RestHandler handler) {
 //

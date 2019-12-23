@@ -147,8 +147,8 @@ public class MsgHandler {
         } catch (Exception e) {
                  e.printStackTrace();
 
-            KunlongError ye = new KunlongError(KunlongError.CODE_UNKNOWN_ERROR);
-            failure(ye.getRetcode(), e.toString());
+            //KunlongError ye = new KunlongError(KunlongError.CODE_UNKNOWN_ERROR);
+            failure(-1, e.toString());
         }finally {
             //YtbLog.logDebug("Exit " + req.buildCmdInfo(), this.resp);
         }

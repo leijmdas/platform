@@ -34,18 +34,17 @@ public class SysUserCtrl implements IRestProcess {
 
     @Resource(name = "kunlongSysUser")
     KunlongSysUser sysUser;
+
     @Resource(name = "sysRole")
     SysRole sysRole;
+
     @Resource(name = "sysPower")
     SysPower sysPower;
+
     @Autowired
     LoginContext loginContext;
 
-//    @RequestMapping(value = "sysuser", produces = {"Application/json;charset=UTF-8"})
-//    @ResponseBody
-//    public String sysUserRest(@RequestBody String data, HttpServletRequest request, HttpServletResponse response) {
-//        return new MsgHandler().parseRequest(this, data, request, response);
-//    }
+
 
     @RequestMapping(value = "/sysuser", produces = {"Application/json;charset=UTF-8"})
     @ResponseBody

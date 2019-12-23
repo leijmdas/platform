@@ -11,6 +11,7 @@ import com.jtest.testframe.ITestImpl;
 import com.jtest.utility.testlog.TestLog;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.util.support.service.AuthService;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -611,7 +612,8 @@ public class TestSysUser extends ITestImpl {
 
 
 		String ret = httpclient.post(url_login, "{}", "application/json");
-		System.out.println(ret);
+		AuthService.AuthToken authToken = KunlongUtils.parseObject(ret, AuthService.AuthToken .class);
+		System.out.println(KunlongUtils.toJSONStringPretty(authToken));
 		httpclient.checkStatusCode(200);
 
 
@@ -624,17 +626,33 @@ public class TestSysUser extends ITestImpl {
 	@JTestClass.exp("ok")
 	public void test_025_authCenter() {
 
-		httpclient.addHeader("access-token","a2801f61f0674d6091e06015cc059917");
-		String ret = httpclient.post(url_auth, "{}", "application/json");
+		String ret = httpclient.post(url_login, "{}", "application/json");
+		AuthService.AuthToken authToken = KunlongUtils.parseObject(ret, AuthService.AuthToken .class);
+		System.out.println(KunlongUtils.toJSONStringPretty(authToken));
+		httpclient.checkStatusCode(200);
+		httpclient.addHeader("access-token",authToken.getToken());
+		ret = httpclient.post(url_auth, "{}", "application/json");
 		System.out.println(ret);
 		httpclient.checkStatusCode(200);
 
 
 	}
+	@JTest
+	@JTestClass.title("获取用户列表")
+	@JTestClass.pre("")
+	@JTestClass.step("url_context")
+	@JTestClass.exp("ok")
+	public void test_026_loginError() {
+
+		login.login(req,"admin","223122");
+
+
+	}
+	//token = ;
 
 	public static void main(String[] args) {
 
-		 run(TestSysUser.class,24);
+		 run(TestSysUser.class,24,25);
 
 	}
 

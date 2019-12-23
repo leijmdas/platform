@@ -20,27 +20,31 @@ public class ManagerLogin extends ITestImpl {
     MsgRequest req = new MsgRequest();
 
     String apiKey;
+
     //MsgRequest
     public String login(MsgRequest req) {
-        String token = login();
+        String token = login("admin","123456");
         req.setToken(token);
         req.setApiKey(getApiKey());
         return token;
     }
 
-    public String login() {
-        return login("admin");
+    public String login(MsgRequest req,String user,String pass) {
+        String token = login(user,pass);
+        req.setToken(token);
+        req.setApiKey(getApiKey());
+        return token;
     }
 
     //return token
-    public String login(String userName) {
+    public String login(String userName,String passwd) {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
         req.cmdtype = "user";
         req.cmd = "login";
 
-        req.msgBody.fluentPut("userName", userName).fluentPut("password", "123456");
+        req.msgBody.fluentPut("userName", userName).fluentPut("password", passwd);
 
         String ret = httpclient.post(url_login, req.toString(), "application/json");
         httpclient.checkStatusCode(200);

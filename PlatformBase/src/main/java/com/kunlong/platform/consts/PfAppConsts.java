@@ -10,7 +10,7 @@ package com.kunlong.platform.consts;
 public class PfAppConsts {
 
 	
-	protected static String[] MYBATIS_MAPPER_LOCATIONS = new String[] {"classpath*:/mapper/platform/*.xml"};
+	protected static String[] MYBATIS_MAPPER_LOCATIONS = new String[] {"classpath*:/dbconfig/manager/platform/*.xml"};
 	
 	protected static String MYBATIS_BASE_PACKAGE = "com.kunlong.platform.dao";
 	
