@@ -1,4 +1,4 @@
-//package com.kunlong.platform.config;
+//package com.kunlong.platform.platform;
 //
 //
 //import org.springframework.boot.context.properties.ConfigurationProperties;

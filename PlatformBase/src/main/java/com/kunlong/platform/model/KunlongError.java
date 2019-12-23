@@ -1,7 +1,10 @@
 package com.kunlong.platform.model;
 
 
+import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.dao.IUserContext;
+
+import java.util.List;
 
 public class KunlongError extends Error {
 
@@ -70,37 +73,43 @@ public class KunlongError extends Error {
         this.msg = msg;
     }
 
-    public static int getErrorId(String code) {
-//        Dict_ErrorCode json = YtbContext.getYtb_context().getError_msg(code);
-//        return json.getErrorId();
+    static Dict_ErrorCode getErrorCode(String code) {
+        List<Dict_ErrorCode> dict_errorCodes = AppKlongContext.getErrorCodeService().getDictErrorCode();
+        for(Dict_ErrorCode errorCode:dict_errorCodes){
+            if(errorCode.getErrorCode().equals(code))
+            {
+                return errorCode;
+            }
+        }
+        return new Dict_ErrorCode();
 
-        return -1;
+    }
+    public static int getErrorId(String code) {
+        return getErrorCode(code).getErrorId();
+
     }
 
     public KunlongError(String code) {
-//        Dict_ErrorCode json = YtbContext.getYtb_context().getError_msg(code);
-        this.retcode = -1;//json.getErrorId();
-         this.msg = code;//json.getRemarkChina();
-    //        YtbLog.logError(retcode , msg);
+        Dict_ErrorCode errorCode = getErrorCode(code);
+        this.retcode = errorCode.getErrorId();
+        this.msg = errorCode.getRemarkChina();
     }
 
     public KunlongError(String code, String errMsg) {
-//        Dict_ErrorCode json = YtbContext.getYtb_context().getError_msg(code);
-        this.retcode = -1;//json.getErrorId();
-        this.msg = errMsg;//json.getRemarkChina() + ": " + errMsg;
-//        YtbLog.logError(retcode,  msg);
+        Dict_ErrorCode errorCode = getErrorCode(code);
+        this.retcode = errorCode.getErrorId();
+        this.msg =  errorCode.getRemarkChina() + ": " + errMsg;
     }
     public KunlongError(IUserContext userContext, String code, String errMsg) {
-//        Dict_ErrorCode json = YtbContext.getYtb_context().getError_msg(code);
-        this.retcode = -1;// json.getErrorId();
-       this.msg = errMsg;//json.getRemarkChina() + ": " + errMsg;
+        Dict_ErrorCode errorCode = getErrorCode(code);
+        this.retcode = errorCode.getErrorId();
+        this.msg =  errorCode.getRemarkChina() + ": " + errMsg;
         //YtbLog.logError(userContext,retcode,  msg);
     }
 
     public KunlongError(int retcode, String msg) {
         this.retcode = retcode;
         this.msg = msg;
-        //YtbLog.logError(retcode , msg);
 
     }
 
