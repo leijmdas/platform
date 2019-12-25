@@ -84,6 +84,33 @@ public class WebFileUtil  {
 		JxlsUtil.exportExcel(resovePath(dir+"/"+templateName),  params,this.response.getOutputStream());
 		
 	}
+
+
+	//easyExcel
+	public void export2EasyExcel(String fileName, List<String> titleNames, List<List<String>> records) throws IOException {
+		setExcelHeader(fileName);
+		OutputStream out = response.getOutputStream();
+
+		ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
+
+		// 设置SHEET
+		Sheet sheet = new Sheet(1, 0);
+		sheet.setSheetName("明细单");
+
+		// 设置标题
+		Table table = new Table(1);
+		List<List<String>> titles = new ArrayList<List<String>>();
+		for(String name:titleNames){
+			titles.add(Arrays.asList(name));
+
+		}
+		table.setHead(titles);
+
+		writer.write0(records, sheet, table);
+		writer.finish();
+
+	}
+
 	private static String resovePath(String path) {
 		return StringUtil.resolveUrl(path);
 	}
@@ -159,20 +186,20 @@ public class WebFileUtil  {
 		write2Response(file);
 	}
 
-	public void exportExcelBatchInviteDetailByBatchNo(String fileName, List<String> titleNames, List<List<String>> records) throws IOException {
-		setExcelHeader(fileName);
-		OutputStream out = response.getOutputStream();
-		ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
-		Sheet sheet = new Sheet(1, 0);
-		sheet.setSheetName("批次号邀请码明细");
-		Table table = new Table(1);
-		List<List<String>> titles = new ArrayList<List<String>>();
-		for(String name:titleNames){
-			titles.add(Arrays.asList(name));
-		}
-		table.setHead(titles);
-		writer.write0(records, sheet, table);
-		writer.finish();
-
-	}
+//	public void exportExcelBatchInviteDetailByBatchNo(String fileName, List<String> titleNames, List<List<String>> records) throws IOException {
+//		setExcelHeader(fileName);
+//		OutputStream out = response.getOutputStream();
+//		ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
+//		Sheet sheet = new Sheet(1, 0);
+//		sheet.setSheetName("批次号邀请码明细");
+//		Table table = new Table(1);
+//		List<List<String>> titles = new ArrayList<List<String>>();
+//		for(String name:titleNames){
+//			titles.add(Arrays.asList(name));
+//		}
+//		table.setHead(titles);
+//		writer.write0(records, sheet, table);
+//		writer.finish();
+//
+//	}
 }
