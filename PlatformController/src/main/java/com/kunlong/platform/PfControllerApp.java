@@ -22,8 +22,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //@SpringBootApplication(scanBasePackages = {"com.kunlong","cn.integriti.center"})
 @SpringBootApplication(scanBasePackages = {"com.kunlong"})
 @ImportResource({"classpath:appcontext.xml"})
-//@EnableDubbo
-//@EnableDubboConfig
+@EnableDubbo
+@EnableDubboConfig
 @EnableSwagger2
 public class PfControllerApp {
     private static final Logger logger = LoggerFactory.getLogger(PfControllerApp.class);
