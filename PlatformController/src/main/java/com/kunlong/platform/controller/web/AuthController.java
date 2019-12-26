@@ -5,7 +5,7 @@ import cn.integriti.center.api.model.SysUserDTO;
 import cn.integriti.center.api.service.SysUserApiService;
 import com.kunlong.platform.consts.SessionKeyEnum;
 import com.kunlong.platform.util.SessionHolder;
-import com.kunlong.platform.util.support.service.AuthService;
+import com.kunlong.platform.support.service.AuthService;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;

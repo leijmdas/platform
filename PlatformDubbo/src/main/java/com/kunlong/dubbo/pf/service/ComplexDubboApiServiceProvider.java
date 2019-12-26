@@ -3,12 +3,10 @@ package com.kunlong.dubbo.pf.service;
 import com.kunlong.api.model.DictDatatypeApiModel;
 import com.kunlong.api.service.ComplexDictDataTypeApiService;
 import com.kunlong.api.service.DictDataTypeApiService;
-import com.kunlong.platform.utils.KunlongUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 @Service(interfaceClass = ComplexDictDataTypeApiService.class)
 public class ComplexDubboApiServiceProvider implements ComplexDictDataTypeApiService {

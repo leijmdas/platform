@@ -1,9 +1,9 @@
-package com.kunlong.platform.util.support.service.impl;
+package com.kunlong.platform.util.support.impl;
 
 
 import com.kunlong.platform.util.JsonUtil;
 import com.kunlong.platform.util.RedisUtil;
-import com.kunlong.platform.util.support.service.AuthService;
+import com.kunlong.platform.support.service.AuthService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

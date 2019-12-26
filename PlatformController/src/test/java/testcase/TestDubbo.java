@@ -2,8 +2,6 @@ package testcase;
 
 import cn.integriti.center.api.model.SysUserDTO;
 import cn.integriti.center.api.service.SysUserApiService;
-import com.kunlong.api.model.DictDatatypeApiModel;
-import com.kunlong.api.service.DictDataTypeApiService;
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.service.DictDataTypeService;
 import com.kunlong.platform.PfControllerApp;

@@ -9,7 +9,6 @@ import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.sysuser.model.Sys_RoleModel;
 import com.kunlong.sysuser.service.SysRoleService;
-import com.kunlong.sysuser.service.impl.SysRoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

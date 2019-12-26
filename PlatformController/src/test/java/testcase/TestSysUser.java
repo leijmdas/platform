@@ -11,7 +11,7 @@ import com.jtest.testframe.ITestImpl;
 import com.jtest.utility.testlog.TestLog;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
-import com.kunlong.platform.util.support.service.AuthService;
+import com.kunlong.platform.support.service.AuthService;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -612,7 +612,7 @@ public class TestSysUser extends ITestImpl {
 
 
 		String ret = httpclient.post(url_login, "{}", "application/json");
-		AuthService.AuthToken authToken = KunlongUtils.parseObject(ret, AuthService.AuthToken .class);
+		AuthService.AuthToken authToken = KunlongUtils.parseObject(ret, AuthService.AuthToken.class);
 		System.out.println(KunlongUtils.toJSONStringPretty(authToken));
 		httpclient.checkStatusCode(200);
 
@@ -627,7 +627,7 @@ public class TestSysUser extends ITestImpl {
 	public void test_025_authCenter() {
 
 		String ret = httpclient.post(url_login, "{}", "application/json");
-		AuthService.AuthToken authToken = KunlongUtils.parseObject(ret, AuthService.AuthToken .class);
+		AuthService.AuthToken authToken = KunlongUtils.parseObject(ret, AuthService.AuthToken.class);
 		System.out.println(KunlongUtils.toJSONStringPretty(authToken));
 		httpclient.checkStatusCode(200);
 		httpclient.addHeader("access-token",authToken.getToken());

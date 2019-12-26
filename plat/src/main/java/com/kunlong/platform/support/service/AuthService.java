@@ -1,4 +1,4 @@
-package com.kunlong.platform.util.support.service;
+package com.kunlong.platform.support.service;
 
 public interface AuthService {
 

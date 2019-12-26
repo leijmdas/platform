@@ -26,7 +26,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="DubboApi" />
+    <orderEntry type="module" module-name="plat" />
     <orderEntry type="module" module-name="PlatformBase" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-activemq:2.1.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jms:5.1.9.RELEASE" level="project" />
@@ -50,6 +50,7 @@
     <orderEntry type="library" name="Maven: com.github.penggle:kaptcha:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235-1" level="project" />
+    <orderEntry type="module" module-name="DubboApi" />
     <orderEntry type="library" name="Maven: cn.integriti:center-api:1.0.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: io.swagger:swagger-annotations:1.5.13" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />

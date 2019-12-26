@@ -1,6 +1,7 @@
 package com.kunlong.platform.utils;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
@@ -20,7 +21,6 @@ public final class KunlongUtils {
     public static String getUUID(boolean flag) {
         String s = UUID.randomUUID().toString();
         if (flag) {
-            //return getObjectId();
             return s.replace("-", "");
         }
 
@@ -69,6 +69,10 @@ public final class KunlongUtils {
 
 
         return ip;
+    }
+
+    public static <T> T parseObject(String text, Class<T> clazz) {
+        return JSON.parseObject(text, clazz);
     }
 
     public static String toJSONStringSkipNull(Object o) {

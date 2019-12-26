@@ -2,25 +2,20 @@ package testcase.sys;
 
 
 import cn.integriti.center.api.dto.queryParam.SysUserQueryDTO;
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
 import com.jtest.NodesFactroy.Inject.Inject;
 import com.jtest.NodesFactroy.Node.HttpClientNode;
 import com.jtest.annotation.JTest;
 import com.jtest.annotation.JTestClass;
 import com.jtest.testframe.ITestImpl;
-import com.jtest.utility.testlog.TestLog;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
-import com.kunlong.platform.context.RestMessage.MsgResponse;
-import com.kunlong.platform.util.support.service.AuthService;
+import com.kunlong.platform.support.service.AuthService;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import testcase.pub.ManagerLogin;
 
 import java.io.IOException;
-import java.util.UUID;
 
 @JTestClass.author("leijm")
 public class TestSysUser extends ITestImpl {
@@ -39,10 +34,9 @@ public class TestSysUser extends ITestImpl {
 	String token = "d98c3b969dc34aaa92942c8a9c646f2a";
 	int apiKey = 1111;
 
-	String data;
-	AuthService.AuthToken authToken;
 
 	MsgRequest req = new MsgRequest();
+
 	public void suiteSetUp() {
 	
 	}
@@ -50,12 +44,13 @@ public class TestSysUser extends ITestImpl {
 	public void suiteTearDown() throws IOException {
 	}
 
+	AuthService.AuthToken authToken;
 
 	public AuthService.AuthToken loginsys() {
 
 
 		String ret = httpclient.post(url_login, "{}", "application/json");
-		AuthService.AuthToken authToken = KunlongUtils.parseObject(ret, AuthService.AuthToken .class);
+		authToken = KunlongUtils.parseObject(ret, AuthService.AuthToken .class);
 		System.out.println(KunlongUtils.toJSONStringPretty(authToken));
 		httpclient.checkStatusCode(200);
 		return authToken;
@@ -73,9 +68,7 @@ public class TestSysUser extends ITestImpl {
 	@Override
 	public void setUp() {
 		 authToken=loginsys();
-		 auth();
-		//req = login.defaultReq();
-		//token = login.login(req);
+		 auth();		//req = login.defaultReq();		//token = login.login(req);
 	}
 	
 	@Override
