@@ -39,7 +39,7 @@ public class SysJobGroupController  {
 	
 	/**
 	 * 保存r
-	 * @param entitySysJobGroupController
+	 * @param SysJobGroupDTO
 	 * @return
 	 */
 	@PostMapping(value="save")
