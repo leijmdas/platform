@@ -26,9 +26,10 @@ import java.util.UUID;
 public class TestSysUser extends ITestImpl {
 	private static final Logger logger = LoggerFactory.getLogger(TestSysUser.class);
 
-	String url_sysuser="http://127.0.0.1:10080/sys/sysuser";
-	String url_auth = "http://127.0.0.1:10080/api/sys/user/authorization";
 	String url_login ="http://127.0.0.1:10080/auth/login?username=admin&password=111111";
+	String url_auth = "http://127.0.0.1:10080/sys/user/authorization";
+
+	String url_sysuser="http://127.0.0.1:10080/sys/user";
 
 	@Inject(filename = "node.xml", value = "httpclient")
 	HttpClientNode httpclient;
@@ -60,10 +61,11 @@ public class TestSysUser extends ITestImpl {
 		return authToken;
 
 	}
-	void auth(){
-		//
-		httpclient.addHeader(ApiConstants.AUTH_TOKEN_KEY_WEB,authToken.getToken());
-		httpclient.addHeader( "access-token",authToken.getToken());
+
+	void auth() {
+
+		httpclient.addHeader(ApiConstants.AUTH_TOKEN_KEY_WEB, authToken.getToken());
+		//httpclient.addHeader( "access-token",authToken.getToken());
 		String ret = httpclient.post(url_auth, "{}", "application/json");
 
 	}
@@ -80,18 +82,18 @@ public class TestSysUser extends ITestImpl {
 	public void tearDown() {
 
 	}
-	
+
 	@JTest
-	@JTestClass.title("获取用户列表")
+	@JTestClass.title("test_001_querySysUser")
 	@JTestClass.pre("")
 	@JTestClass.step("url_context")
 	@JTestClass.exp("ok")
 	public void test_001_querySysUser() {
 
-		SysUserQueryDTO sysUserQueryDTO=new SysUserQueryDTO();
+		SysUserQueryDTO sysUserQueryDTO = new SysUserQueryDTO();
 
-		httpclient.addHeader(ApiConstants.AUTH_TOKEN_KEY_WEB,authToken.getToken());
-		String ret = httpclient.post(url_sysuser+"/query", KunlongUtils.toJSONStringPretty(sysUserQueryDTO), "application/json");
+		httpclient.addHeader(ApiConstants.AUTH_TOKEN_KEY_WEB, authToken.getToken());
+		String ret = httpclient.post(url_sysuser + "/query", KunlongUtils.toJSONStringPretty(sysUserQueryDTO), "application/json");
 
 		httpclient.checkStatusCode(200);
 
