@@ -3,6 +3,7 @@ package com.kunlong.web.system.testcase;
 
 import com.kunlong.platform.dao.DictDatatypeDAO;
 import com.kunlong.platform.model.DictDatatypeDemo;
+import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.system.SysApp;
 
 import com.kunlong.system.model.DictDatatype;

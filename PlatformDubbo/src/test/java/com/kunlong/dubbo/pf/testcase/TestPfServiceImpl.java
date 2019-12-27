@@ -7,6 +7,7 @@ import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.service.DictDataTypeService;
 import com.kunlong.platform.model.DictDatatypeDemo;
 import com.kunlong.platform.service.DictDatatypeServiceExample;
+import com.kunlong.platform.utils.KunlongUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Before;
 import org.junit.Test;
