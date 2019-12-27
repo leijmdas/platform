@@ -2,6 +2,8 @@ package testcase;
 
 import cn.integriti.center.api.model.SysUserDTO;
 import cn.integriti.center.api.service.SysUserApiService;
+import com.kunlong.api.model.DictDatatypeApiModel;
+import com.kunlong.api.service.DictDataTypeApiService;
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.service.DictDataTypeService;
 import com.kunlong.platform.PfControllerApp;
@@ -33,12 +35,11 @@ public class TestDubbo {
     @Autowired
     DictDataTypeService dictDataTypeService;
 
-    //@Reference(version = "1.0.0")
-    @Reference(lazy = true, version = "${dubbo.service.version}")
+    @Reference(lazy = true, version = "1.0.0")
     SysUserApiService sysUserApiService;
 
-//    @Reference(lazy = true, version = "${dubbo.service.version}")
-//    DictDataTypeApiService dictDataTypeApiService;
+    @Reference(lazy = true, version = "1.0.0")
+    DictDataTypeApiService dictDataTypeApiService;
 
 
     @Before
@@ -68,12 +69,12 @@ public class TestDubbo {
     //dictDataTypeApiService
     @Test
     public void test0003_dictDataTypeApiService() {
-//        DictDatatypeApiModel dictDatatypeDemo = dictDataTypeApiService.selectByPrimaryKey(3);
-//        String ret = KunlongUtils.toJSONStringPretty(dictDatatypeDemo);
-//        System.out.println(ret);
-        SysUserDTO sysUserDTO = sysUserApiService.findById(3);
-        String ret = KunlongUtils.toJSONStringPretty(sysUserDTO);
+        DictDatatypeApiModel datatypeApiModel = dictDataTypeApiService.selectByPrimaryKey(3);
+        String ret = KunlongUtils.toJSONStringPretty(datatypeApiModel);
         System.out.println(ret);
+//        SysUserDTO sysUserDTO = sysUserApiService.findById(3);
+//        String ret = KunlongUtils.toJSONStringPretty(sysUserDTO);
+//        System.out.println(ret);
     }
 
     @Test

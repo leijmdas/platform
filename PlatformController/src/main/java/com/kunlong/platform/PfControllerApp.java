@@ -25,6 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableDubbo
 @EnableDubboConfig
 @EnableSwagger2
+//http://dubbo.apache.org/
 public class PfControllerApp {
     private static final Logger logger = LoggerFactory.getLogger(PfControllerApp.class);
 
