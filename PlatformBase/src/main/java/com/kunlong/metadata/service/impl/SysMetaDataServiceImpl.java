@@ -308,7 +308,8 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
         }
 
         sql.deleteCharAt(sql.length() - 1);
-        sql.append(")" + "ENGINE=Innodb DEFAULT CHARSET=UTF8 COLLATE UTF8_BIN;");
+        sql.append(")" + " ENGINE=Innodb DEFAULT CHARSET=UTF8 COLLATE UTF8_BIN ");
+        sql.append(" comment '").append(metadataDict.getMetadataAlias()).append("'; ");
 
         KunlongSql.update(sql);
         msgBody = "{'sql': 'make Table OK'}";
