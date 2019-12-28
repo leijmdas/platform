@@ -29,20 +29,20 @@ import java.util.Map;
 @Service
 public class SysMetaDataServiceImpl implements SysMetaDataService {
     @Autowired
-    MetadataDictService metadataDictService ;//= new MetadataDictServiceImpl();
+    MetadataDictService metadataDictService;//= new MetadataDictServiceImpl();
     @Autowired
-    MetadataFieldService metadataFieldService ;//= new MetadataFieldServiceImpl();
+    MetadataFieldService metadataFieldService;//= new MetadataFieldServiceImpl();
 
     @Autowired
-    SysDictDataTypeMapper sysDictDataTypeDao ;
+    SysDictDataTypeMapper sysDictDataTypeDao;
     @Autowired
-    SubsysDictMapper subsysDictMapper ;
+    SubsysDictMapper subsysDictMapper;
     @Autowired
     SysMetaDataDictMapper sysMetaDataDictDao;
     @Autowired
     MetadataDictMapper metadataDictMapper;
     @Autowired
-    MetadataFieldMapper sysMetaDataFieldDao ;
+    MetadataFieldMapper sysMetaDataFieldDao;
     @Autowired
     SysMetaDataFieldMapper sysMetaDataFieldMapper;
 
@@ -111,7 +111,7 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
     @Override
     public void deleteDictById(int metaDataId) {
 
-            sysMetaDataDictDao.deleteDictById(metaDataId);
+        sysMetaDataDictDao.deleteDictById(metaDataId);
 
     }
 
@@ -130,7 +130,7 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
     @Override
     public void deleteFieldById(int fieldId) {
 
-            sysMetaDataFieldMapper.deleteFieldById(fieldId);
+        sysMetaDataFieldMapper.deleteFieldById(fieldId);
 
     }
 
@@ -142,38 +142,38 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
     @Override
     public void addDictDataType(Sys_DictDataTypeModel sysDictDataTypeModel) {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date now = new Date();
-            String createTime = df.format(now);
-            sysDictDataTypeModel.setCreateTime(createTime);
-            sysDictDataTypeDao.addDictDataType(sysDictDataTypeModel);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String createTime = df.format(now);
+        sysDictDataTypeModel.setCreateTime(createTime);
+        sysDictDataTypeDao.addDictDataType(sysDictDataTypeModel);
 
     }
 
     @Override
     public void updateDictDataTypeById(Sys_DictDataTypeModel sysDictDataTypeModel) {
 
-            sysDictDataTypeDao.updateDictDataTypeById(sysDictDataTypeModel);
+        sysDictDataTypeDao.updateDictDataTypeById(sysDictDataTypeModel);
 
     }
 
     @Override
     public void deleteDictDataTypeById(int dataInnerId) {
 
-            sysDictDataTypeDao.deleteDictDataTypeById(dataInnerId);
+        sysDictDataTypeDao.deleteDictDataTypeById(dataInnerId);
 
     }
 
     @Override
     public List<Map<String, Object>> getTree(int typeId) {
-            return  sysDictDataTypeDao.getTree(typeId);
+        return sysDictDataTypeDao.getTree(typeId);
     }
 
 
     @Override
     public int getTotalCount() {
 
-       return sysMetaDataDictDao.getTotalCount();
+        return sysMetaDataDictDao.getTotalCount();
     }
 
     boolean isDate(String dtype) {
@@ -202,10 +202,11 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
     }
 
-    boolean isMoney (String dtype) {
+    boolean isMoney(String dtype) {
         return dtype.equals("MONEY");
 
     }
+
     boolean isBlobText(String dt) {
         return dt.equals("BLOB")
                 || dt.equals("MEDIUMBLOB")
@@ -225,14 +226,14 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
         MetadataDict metadataDict = metadataDictService.selectByPrimaryKey(metadataId);
         if (metadataDict == null) {
-            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR,"字典未定义");
+            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, "字典未定义");
         }
 
-        if(metadataDictService.checkTableExists(metadataDict.getMetadataDb(),metadataDict.getMetadataName())){
-            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR," 表已经存在！");
+        if (metadataDictService.checkTableExists(metadataDict.getMetadataDb(), metadataDict.getMetadataName())) {
+            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, " 表已经存在！");
         }
 
-         MetadataFieldExample metadataFieldExampleKey = new MetadataFieldExample();
+        MetadataFieldExample metadataFieldExampleKey = new MetadataFieldExample();
         MetadataFieldExample.Criteria fieldExampleCriteriaKey = metadataFieldExampleKey.createCriteria();
         fieldExampleCriteriaKey.andFieldPkEqualTo(true);
         fieldExampleCriteriaKey.andMetadataIdEqualTo(metadataId);
@@ -251,15 +252,13 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
         for (int i = 0; i < fieldList.size(); i++) {
             sql.append(fieldList.get(i).getFieldName()).append(" ");
             if (isPCT(fieldList.get(i).getFieldType())
-             || isMoney(fieldList.get(i).getFieldType())) {
+                    || isMoney(fieldList.get(i).getFieldType())) {
                 sql.append(" DECIMAL ");
             }
             if (isTAGIMAGE(fieldList.get(i).getFieldType())
                     || isMoney(fieldList.get(i).getFieldType())) {
                 sql.append(" INT ");
-            }
-
-            else {
+            } else {
                 sql.append(fieldList.get(i).getFieldType());
             }
 
@@ -267,11 +266,9 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
                 sql.append("(").append(fieldList.get(i).getFieldSize()).append(") ");
             } else if (isDecimal(fieldList.get(i).getFieldType())) {
                 sql.append("(").append(fieldList.get(i).getFieldSize()).append(",2) ");
-            }
-            else if (isPCT(fieldList.get(i).getFieldType())) {
+            } else if (isPCT(fieldList.get(i).getFieldType())) {
                 sql.append("(8,4) ");
-            }
-            else if (isMoney(fieldList.get(i).getFieldType())) {
+            } else if (isMoney(fieldList.get(i).getFieldType())) {
                 sql.append("(12,2) ");
             }
 
@@ -298,7 +295,7 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
                         if (fieldList.get(i).getFieldDefault() != null
                                 && fieldList.get(i).getFieldDefault().length() >= 10) {
                             sql.append("'").append(fieldList.get(i).getFieldDefault()).append("'");
-                        }else{
+                        } else {
                             sql.append(fieldList.get(i).getFieldDefault());
 
                         }
@@ -307,7 +304,7 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
                     }
                 }
             }
-            sql.append(" comment '").append(fieldList.get(i).getFieldMemo()).append("' ,");
+            sql.append(" comment '").append(fieldList.get(i).getFieldMemo()).append(" ").append(fieldList.get(i).getFieldRemark()).append("' ,");
         }
 
         sql.deleteCharAt(sql.length() - 1);
@@ -344,15 +341,15 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
     @Override
     public List<Map<String, Object>> selectByTableLimit(SelectSql selectSql) {
 
-            StringBuilder sql=new StringBuilder(256);
-            sql.append(" select * from " ).append( selectSql.getTable() );
-            if( selectSql.getsWhere()!=null ){
-                sql.append(" where ").append(selectSql.getsWhere());
-            }
-            sql.append( "  limit " ).append(selectSql.getLimitFirstIndex() );
-            sql.append( ",").append( selectSql.getLimitpageSize() );
-            List<Map<String, Object>> data = KunlongSql.selectList(sql);
-            return data;
+        StringBuilder sql = new StringBuilder(256);
+        sql.append(" select * from ").append(selectSql.getTable());
+        if (selectSql.getsWhere() != null) {
+            sql.append(" where ").append(selectSql.getsWhere());
+        }
+        sql.append("  limit ").append(selectSql.getLimitFirstIndex());
+        sql.append(",").append(selectSql.getLimitpageSize());
+        List<Map<String, Object>> data = KunlongSql.selectList(sql);
+        return data;
 
 
     }
@@ -360,18 +357,18 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
     @Override
     public List<Map<String, Object>> selectByTableLimitOrderBy(SelectSql selectSql) {
 
-            StringBuilder sql = new StringBuilder();
-            sql.append("select * from ").append(selectSql.getTable());
-            if( selectSql.getsWhere()!=null ){
-                sql.append(" where ").append(selectSql.getsWhere());
-            }
-            if(!selectSql.buildOrderby().isEmpty()) {
-                sql.append(" order by ").append(selectSql.buildOrderby());
-            }
-            sql.append("  limit ").append(selectSql.getLimitFirstIndex());
-            sql.append(",").append(selectSql.getLimitpageSize());
+        StringBuilder sql = new StringBuilder();
+        sql.append("select * from ").append(selectSql.getTable());
+        if (selectSql.getsWhere() != null) {
+            sql.append(" where ").append(selectSql.getsWhere());
+        }
+        if (!selectSql.buildOrderby().isEmpty()) {
+            sql.append(" order by ").append(selectSql.buildOrderby());
+        }
+        sql.append("  limit ").append(selectSql.getLimitFirstIndex());
+        sql.append(",").append(selectSql.getLimitpageSize());
 
-            return KunlongSql.selectList(sql);
+        return KunlongSql.selectList(sql);
 
 
     }
@@ -379,11 +376,10 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
     public List<SubsysDict> getSubSysDictList() {
 
-       return subsysDictMapper.getSubSysDictList();
+        return subsysDictMapper.getSubSysDictList();
 
 
     }
-
 
 
 }
