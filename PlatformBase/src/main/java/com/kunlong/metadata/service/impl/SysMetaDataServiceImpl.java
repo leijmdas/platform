@@ -5,11 +5,14 @@ import com.kunlong.metadata.model.*;
 import com.kunlong.metadata.service.MetadataDictService;
 import com.kunlong.metadata.service.MetadataFieldService;
 import com.kunlong.metadata.service.SysMetaDataService;
+import com.kunlong.metadata.service.server.MetadataDictServer;
 import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.model.KunlongError;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,8 @@ import java.util.Map;
  */
 @Service
 public class SysMetaDataServiceImpl implements SysMetaDataService {
+    private static final Logger logger = LoggerFactory.getLogger(SysMetaDataServiceImpl.class);
+
     @Autowired
     MetadataDictService metadataDictService;//= new MetadataDictServiceImpl();
     @Autowired
@@ -229,9 +234,7 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
             throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, "字典未定义");
         }
 
-        if (metadataDictService.checkTableExists(metadataDict.getMetadataDb(), metadataDict.getMetadataName())) {
-            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, " 表已经存在！");
-        }
+
 
         MetadataFieldExample metadataFieldExampleKey = new MetadataFieldExample();
         MetadataFieldExample.Criteria fieldExampleCriteriaKey = metadataFieldExampleKey.createCriteria();
@@ -311,6 +314,12 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
         sql.append(")" + " ENGINE=Innodb DEFAULT CHARSET=UTF8 COLLATE UTF8_BIN ");
         sql.append(" comment '").append(metadataDict.getMetadataAlias()).append("'; ");
 
+        logger.info("sql ",sql);
+        System.out.println(sql.toString());
+
+        if (metadataDictService.checkTableExists(metadataDict.getMetadataDb(), metadataDict.getMetadataName())) {
+            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, " 表已经存在！");
+        }
         KunlongSql.update(sql);
         msgBody = "{'sql': 'make Table OK'}";
         return handler.buildMsg(retcode, retmsg, msgBody);

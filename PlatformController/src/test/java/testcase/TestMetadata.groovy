@@ -33,7 +33,7 @@ public class TestMetadata extends ITestImpl {
 
     @Override
     public void setUp() {
-        token = login.login();
+        token = login.login(req);
         req.token = token;
 
         req.reqtime = System.currentTimeMillis();
@@ -362,13 +362,9 @@ public class TestMetadata extends ITestImpl {
         req.seqno = System.currentTimeMillis();
         req.cmdtype = "metadata";
         req.cmd = "makeTableByDictId";
-        String body = "{metadataId: 315}"
+        req.msgBody = JSONObject.parseObject("{metadataId: 297}");
 
-        req.msgBody = JSONObject.parseObject(body);
-
-        data = JSONObject.toJSONString(req);
-        String ret = httpclient.post("http://localhost:10080/rest/sysmetadata",
-                data, "application/json");
+        String ret = httpclient.post("http://localhost:10080/rest/sysmetadata", JSONObject.toJSONString(req), "application/json");
         httpclient.checkStatusCode(200);
 
         MsgResponse resp = MsgResponse.parseResponse(ret);
@@ -377,6 +373,6 @@ public class TestMetadata extends ITestImpl {
     }
 
     public static void main(String[] args) {
-        run(TestMetadata.class, 6);
+        run(TestMetadata.class, 14);
     }
 }

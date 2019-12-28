@@ -72,6 +72,8 @@
 	<logger name="org.activiti" level="INFO"></logger>
 	<logger name="com.kunlong"  level="DEBUG"></logger>
 	<logger name="testcase"  level="DEBUG"></logger>
+	<logger name="com.kunlong.metadata.service.impl.SysMetaDataServiceImpl"  level="DEBUG"></logger>
+
 	<!-- async log -->
 	<logger name="AsyncLog" level="INFO" additivity="false">
 		<appender-ref ref="ASYNCOUT" />

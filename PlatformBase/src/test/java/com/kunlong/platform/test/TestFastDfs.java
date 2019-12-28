@@ -18,7 +18,7 @@ public class TestFastDfs extends ITestImpl {
         System.out.println(confUrl);
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //上传文件
-        String filePath = fastDFSClient.uploadFile("c:\\1.png");
+        String filePath = fastDFSClient.uploadFile("l:\\2.png");
         System.out.println("返回路径：" + filePath);
         JTestLog.logJtest("http://120.77.172.83:12088/"+filePath);
     }
@@ -38,9 +38,9 @@ public class TestFastDfs extends ITestImpl {
     }
 
     @JTest
-    @JTestClass.title(".test0001_fastdfs")
+    @JTestClass.title(".test0003_fastdfs")
     @JTestClass.pre("")
-    @JTestClass.step("test0001_fastdfs")
+    @JTestClass.step(" ")
     @JTestClass.exp("ok")
     public void test0003_fastdfs() throws Exception {
         String confUrl = PfApp.class.getResource("/fdfs_client63.properties").getPath();
