@@ -27,6 +27,11 @@ public final class LoginContext {
     @Autowired
     RedisService redisService;
 
+    public Boolean checkTokenExists(String token) {
+        return  redisService.checkTokenExists(token);
+
+    }
+
     public LoginSso getLoginSso(String token) {
         return  redisService.getLoginSso(token);
 

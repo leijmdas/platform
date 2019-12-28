@@ -33,6 +33,7 @@ public class KunlongSysUser {
 
     @Autowired
     SysUserService sysUserService ;
+
     @Autowired
     LoginContext loginContext;
 

@@ -11,6 +11,7 @@ import com.jtest.annotation.JTestClass;
 import com.jtest.testframe.ITestImpl;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
+import com.kunlong.platform.utils.KunlongUtils;
 import testcase.pub.ManagerLogin;
 
 import java.io.IOException;
@@ -18,8 +19,9 @@ import java.util.UUID;
 
 @JTestClass.author("leijm")
 public class TestSysMetadata extends ITestImpl {
-    String url = "http://localhost/rest/sysmetadata";
+    String url = "http://localhost:10080/rest/sysmetadata";
     String url_base = "http://localhost:80/rest";
+
 
     @Inject(filename = "node.xml", value = "httpclient")
     HttpClientNode httpclient;
@@ -37,15 +39,14 @@ public class TestSysMetadata extends ITestImpl {
 
     @Override
     public void setUp() {
+
         token = login.login(req);
-        //req.setApiKey(login.getApiKey());
-        //req.token = token;
-        req.reqtime = System.currentTimeMillis();// DateFormat(new Date())
+        req.reqtime = System.currentTimeMillis();
 
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "projectType";
-        req.cmd = "getProjectTypeList";
-        req.msgBody = JSONObject.parseObject("{\"x\":1}");
+        req.cmdtype = "user";
+        req.cmd = "login";
+        req.msgBody = JSONObject.parseObject("{ }");
 
 
      }
@@ -344,25 +345,23 @@ public class TestSysMetadata extends ITestImpl {
     @JTestClass.pre("")
     @JTestClass.step("post http://mysql.kunlong.com:8080/rest/sysmetadata")
     @JTestClass.exp("ok")
-    public void updateFieldById() {
+    public void fieldByUpdateByKey() {
 
-        req.token = UUID.randomUUID().toString();
-        req.reqtime = System.currentTimeMillis();// DateFormat(new Date())
+        req.token = token;
+        req.reqtime = System.currentTimeMillis();
 
         req.seqno = System.currentTimeMillis();
         req.cmdtype = "metadata";
-        req.cmd = "updateFieldById";
+        req.cmd = "fieldByUpdateByKey";
         req.msgBody = JSONObject.parseObject("{\"fieldId\":5,\"fieldMemo\":\"字gfdgd段\",\"metaDataId\":1,\"fieldName\":\"myuser\"}");
 
-        data = new Gson().toJson(req).toString();
-        System.out.println(data);
-        String ret = httpclient.post("http://localhost:8080/rest/sysmetadata", data, "application/json");
+        String ret = httpclient.post(url, KunlongUtils.toJSONString(req), "application/json");
         httpclient.checkStatusCode(200);
         JSONObject json = JSONObject.parseObject(ret);
         checkEQ(0, json.getInteger("retcode"));
-        System.out.println(data);
-        System.out.println(json.get("msgBody"));
+        System.out.println(KunlongUtils.toJSONString(req));
         System.out.println(json);
+
     }
 
     @JTest
@@ -408,7 +407,7 @@ public class TestSysMetadata extends ITestImpl {
 
         data = new Gson().toJson(req).toString();
         System.out.println(data);
-        String ret = httpclient.post("http://localhost:8080/rest/sysmetadata", data, "application/json");
+        String ret = httpclient.post("http://localhost:10080/rest/sysmetadata", data, "application/json");
         httpclient.checkStatusCode(200);
         JSONObject json = JSONObject.parseObject(ret);
         checkEQ(0, json.getInteger("retcode"));
@@ -693,7 +692,7 @@ public class TestSysMetadata extends ITestImpl {
 
 
     public static void main(String[] args) {
-        run(TestSysMetadata.class, "selectByTableProject_plan_total");
+        run(TestSysMetadata.class, "fieldByUpdateByKey");
 
     }
 }

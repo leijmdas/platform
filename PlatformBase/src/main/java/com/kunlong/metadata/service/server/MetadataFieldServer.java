@@ -6,11 +6,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.kunlong.metadata.model.MetadataField;
 import com.kunlong.metadata.model.MetadataFieldExample;
+import com.kunlong.metadata.service.MetadataFieldService;
+import com.kunlong.metadata.service.SysMetaDataService;
 import com.kunlong.metadata.service.impl.MetadataFieldServiceImpl;
 import com.kunlong.metadata.service.impl.SysMetaDataServiceImpl;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,8 +23,13 @@ public class MetadataFieldServer {
     String retmsg = "成功";
     String msgBody = null;
 
+    @Autowired
+    MetadataFieldService metadataFieldService; // = new MetadataFieldServiceImpl();
+    @Autowired
+    SysMetaDataService sysMetaDataService ;
+
     public MsgResponse getFieldListByDictId(MsgRequest req, RestHandler handler) {
-        MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
+
         Integer metadataId = req.msgBody.getInteger("metadataId");
         MetadataFieldExample metadataFieldExample = new MetadataFieldExample();
         metadataFieldExample.createCriteria().andMetadataIdEqualTo(metadataId);
@@ -32,7 +40,8 @@ public class MetadataFieldServer {
 
 
     public MsgResponse deleteFieldById(MsgRequest req, RestHandler handler) {
-        SysMetaDataServiceImpl sysMetaDataService = new SysMetaDataServiceImpl();
+        //SysMetaDataServiceImpl sysMetaDataService = new SysMetaDataServiceImpl();
+
         int metaDataFieldId = req.msgBody.getInteger("fieldId");
         sysMetaDataService.deleteFieldById(metaDataFieldId);
         return handler.buildMsg(retcode, retmsg, msgBody);
@@ -43,7 +52,7 @@ public class MetadataFieldServer {
     public MsgResponse fieldByUpdateByKey(MsgRequest req, RestHandler handler) {
         MetadataField metadataDict = JSONObject.parseObject(req.msgBody.toString(), MetadataField.class);
         metadataDict.setFieldName(metadataDict.getFieldName().trim());
-        MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
+        //MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
         int sta = metadataFieldService.updateByPrimaryKey(metadataDict);
 
         return handler.buildMsg(retcode, retmsg, msgBody);
@@ -59,7 +68,7 @@ public class MetadataFieldServer {
                 MetadataFieldExample metadataFieldExample = new MetadataFieldExample();
 
                 metadataFieldExample.createCriteria().andMetadataIdEqualTo(metadataId);
-                MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
+                // MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
                 int sta = metadataFieldService.deleteByExample(metadataFieldExample);
                 if (sta != 1) {
                     retcode = 1;
@@ -85,7 +94,7 @@ public class MetadataFieldServer {
             Integer fieldId = Integer.parseInt(req.msgBody.getString("fieldId"));
 
             if (fieldId != null) {
-                MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
+                //MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
                 MetadataField sta = metadataFieldService.selectByPrimaryKey(fieldId);
                 JSONObject array = JSONObject.parseObject(JSON.toJSONString(sta));
                 msgBody = "{\"list\":" + array + "}";
@@ -112,7 +121,7 @@ public class MetadataFieldServer {
             Integer fieldId = Integer.parseInt(req.msgBody.getString("fieldId"));
 
             if (fieldId != null) {
-                MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
+                //MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
                 int sta = metadataFieldService.deleteByPrimaryKey(fieldId);
                 if (sta != 1) {
                     retcode = 1;
@@ -147,7 +156,7 @@ public class MetadataFieldServer {
                         metadataDict.setFieldDefault(null);
                     }
                 }
-                MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
+                //MetadataFieldServiceImpl metadataFieldService = new MetadataFieldServiceImpl();
                 int sta = metadataFieldService.insertSelective(metadataDict);
                 if (sta != 1) {
                     retcode = 1;

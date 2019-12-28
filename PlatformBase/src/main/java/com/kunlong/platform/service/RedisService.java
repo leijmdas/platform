@@ -52,8 +52,12 @@ public class RedisService {
 
     }
 
+    public Boolean checkTokenExists(String koken) {
+        return redisTemplate.opsForValue().get(koken) != null;
+    }
+
     public LoginSso getLoginSso(String key) {
-        return JSON.parseObject(redisTemplate.opsForValue().get(key),LoginSso.class);
+        return JSON.parseObject(redisTemplate.opsForValue().get(key), LoginSso.class);
 
     }
 }

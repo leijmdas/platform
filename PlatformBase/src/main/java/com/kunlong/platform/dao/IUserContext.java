@@ -1,5 +1,7 @@
 package com.kunlong.platform.dao;
 
+import com.kunlong.platform.context.AppKlongContext;
+import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.model.LoginSso;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 
@@ -13,18 +15,27 @@ public interface IUserContext {
     void setLoginSso(LoginSso sso);
 
     default boolean isUserManager() {
-        return true;//getLoginSso().isUserManager();
+        return true;
     }
+
     default boolean isTest() {
-        return false;//getLoginSso().isTest();
+        return false;
     }
 
     default void checkUserRightValid(MsgRequest req) {
+        if(req.isLoginCmd()){
+            return ;
+        }
+        if (AppKlongContext.getLoginContext().checkTokenExists(req.token)) {
+            return;
+        }
+        throw new KunlongError(KunlongError.CODE_INVALID_USER);
+
         //YtbContext.getSafeContext().checkUserRightValid(this, req);
     }
 
     default int insertUserLog(MsgRequest req) {
-        return 0;//u.insertUserLog(this, req);
+        return 0;
     }
 
 }

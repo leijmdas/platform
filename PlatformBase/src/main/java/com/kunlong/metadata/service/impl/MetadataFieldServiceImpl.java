@@ -18,8 +18,9 @@ import java.util.List;
 public class MetadataFieldServiceImpl implements MetadataFieldService {
     @Autowired
     MetadataFieldMapper metadataFieldMapper;
-    @Autowired
-    MetadataFieldMapper sysMetaDataFieldMapper;
+
+    //@Autowired
+    //MetadataFieldMapper sysMetaDataFieldMapper;
 
     @Override
     public long countByExample(MetadataFieldExample example) {
@@ -52,7 +53,7 @@ public class MetadataFieldServiceImpl implements MetadataFieldService {
 
     @Override
     public List<MetadataField> selectByExample(MetadataFieldExample example) {
-        return  sysMetaDataFieldMapper.selectByExample(example);
+        return  metadataFieldMapper.selectByExample(example);
 
 
     }

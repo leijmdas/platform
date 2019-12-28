@@ -95,6 +95,9 @@ public class MsgRequest {
         this.msgBody = msgBody;
     }
 
+    public Boolean isLoginCmd(){
+        return cmd.equalsIgnoreCase("login");
+    }
 
     void parseRequest(String reqBody) {
 
