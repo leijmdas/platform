@@ -5,16 +5,16 @@ import com.kunlong.metadata.model.*;
 import com.kunlong.metadata.service.MetadataDictService;
 import com.kunlong.metadata.service.MetadataFieldService;
 import com.kunlong.metadata.service.SysMetaDataService;
-import com.kunlong.metadata.service.server.MetadataDictServer;
 import com.kunlong.mybatis.KunlongSql;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
+import com.kunlong.platform.dao.SubsysDictMapper;
+import com.kunlong.platform.domain.SubsysDict;
 import com.kunlong.platform.model.KunlongError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
@@ -386,7 +386,7 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
 
     public List<SubsysDict> getSubSysDictList() {
 
-        return subsysDictMapper.getSubSysDictList();
+        return subsysDictMapper.findByQueryParam(new com.kunlong.platform.domain.SubsysDict.QueryParam());
 
 
     }
