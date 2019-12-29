@@ -1,5 +1,7 @@
 package com.kunlong.platform.controller.web.metadata;
 
+import app.support.query.PageResult;
+import cn.integriti.center.api.model.SysOrgDTO;
 import com.kunlong.api.dto.queryParam.MetadataDictModelQueryDTO;
 import com.kunlong.api.dto.queryParam.MetadataFieldModelQueryDTO;
 import com.kunlong.api.model.MetadataDictModelDTO;
@@ -38,15 +40,27 @@ public class MetadataController extends BaseController {
 		}
 		return this.metadataDictApiService.query(qp);
 	}
+
 	@PostMapping("/queryFields")
 	public @ResponseBody
-	List<MetadataFieldModelDTO> queryFields(@RequestBody MetadataFieldModelQueryDTO qp) {
+	PageResult<MetadataFieldModelDTO> queryFields(@RequestBody MetadataFieldModelQueryDTO qp) {
 		if (qp.getParam() == null) {
 			qp.setParam(new MetadataFieldModelDTO());
 
 		}
-		return this.metadataFieldApiService.query(qp);
+		List<MetadataFieldModelDTO> models = this.metadataFieldApiService.query(qp);
+		PageResult<MetadataFieldModelDTO> pageResult = new PageResult<MetadataFieldModelDTO>();
+		pageResult.setData(models);
+		pageResult.setTotal(metadataFieldApiService.countByQueryParam(qp));
+
+		return pageResult;
 	}
 
+	@PostMapping("/queryFieldsByTable")
+	public @ResponseBody
+	List<MetadataFieldModelDTO> queryFieldsByTable(@RequestParam(value = "tableName") String tableName) {
+		System.out.println("tbl:" + tableName);
+		return this.metadataFieldApiService.query(tableName);
+	}
 
 }

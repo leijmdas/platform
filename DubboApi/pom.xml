@@ -11,6 +11,8 @@
 
     <artifactId>DubboApi</artifactId>
     <packaging>jar</packaging>
+
+
     <dependencies>
         <dependency>
             <groupId>app</groupId>

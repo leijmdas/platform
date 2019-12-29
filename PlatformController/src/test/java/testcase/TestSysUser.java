@@ -28,6 +28,7 @@ public class TestSysUser extends ITestImpl {
 	String url_base="http://mysql.kunlong.com/rest/sysuser";
 	String url_login ="http://127.0.0.1:10080/auth/login?username=admin&password=111111";
 	String url_auth ="http://127.0.0.1:10080/sys/user/authorization";
+	String url_metadata ="http://127.0.0.1:10080/sys/metadata";
 
 	@Inject(filename = "node.xml", value = "httpclient")
 	HttpClientNode httpclient;
@@ -648,7 +649,6 @@ public class TestSysUser extends ITestImpl {
 
 
 	}
-	//token = ;
 
 	public static void main(String[] args) {
 

@@ -14,7 +14,9 @@ public interface MetadataFieldApiService {
      * @return
      */
     public List<MetadataFieldModelDTO> query(MetadataFieldModelQueryDTO queryParam);
+    public long countByQueryParam(MetadataFieldModelQueryDTO queryParam);
 
+    public List<MetadataFieldModelDTO> query(String tableName);
 
     public MetadataFieldModelDTO findById(Integer pk);
     /**

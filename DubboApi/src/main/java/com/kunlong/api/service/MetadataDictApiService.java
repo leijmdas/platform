@@ -12,6 +12,7 @@ public interface MetadataDictApiService {
      * @return
      */
     public List<MetadataDictModelDTO> query(MetadataDictModelQueryDTO queryParam);
+    public MetadataDictModelDTO findByName(String name);
 
     public MetadataDictModelDTO findById(Integer pk);
     /**

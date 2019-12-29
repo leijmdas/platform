@@ -3,7 +3,7 @@ package com.kunlong.metadata.service.impl;
 import com.kunlong.metadata.dao.DictDatatypeMapper;
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.model.DictDatatypeExample;
-import com.kunlong.metadata.service.DictDataTypeService;
+import com.kunlong.metadata.service.DictDataTypeService; ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

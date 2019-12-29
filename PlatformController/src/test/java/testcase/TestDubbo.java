@@ -1,26 +1,17 @@
 package testcase;
 
 import cn.integriti.center.api.service.SysUserApiService;
-import com.kunlong.api.dto.queryParam.MetadataDictModelQueryDTO;
 import com.kunlong.api.dto.queryParam.MetadataFieldModelQueryDTO;
-import com.kunlong.api.model.DictDatatypeApiModel;
-import com.kunlong.api.model.KunlongApiModel;
 import com.kunlong.api.model.MetadataDictModelDTO;
 import com.kunlong.api.model.MetadataFieldModelDTO;
-import com.kunlong.api.service.DictDataTypeApiService;
 import com.kunlong.api.service.MetadataDictApiService;
-import com.kunlong.api.service.MetadataFieldApiService;
-import com.kunlong.metadata.model.DictDatatype;
-import com.kunlong.metadata.model.MetadataField;
-import com.kunlong.metadata.service.DictDataTypeService;
+import com.kunlong.api.service.MetadataFieldApiService; ;
 import com.kunlong.platform.PfControllerApp;
-import com.kunlong.platform.domain.MetadataFieldModel;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -81,6 +72,17 @@ public class TestDubbo {
     }
 
 
+    @Test
+    public void test0005() {
+        MetadataDictModelDTO  modelDTO = metadataDictApiService.findByName("dict_area");
+        System.out.println(modelDTO);
 
+    }
+    @Test
+    public void test0006() {
+        List<MetadataFieldModelDTO>  models = metadataFieldApiService.query("dict_area");
+        System.out.println(models);
+
+    }
 }
 

@@ -30,6 +30,8 @@ import java.util.Map;
 public class MetadataDictServer {
 
     private static final Logger logger = LoggerFactory.getLogger(MetadataDictServer.class);
+    @Autowired
+    DictDataTypeService dictDataTypeService;//= new DictDataTypeServiceImpl();
 
     @Autowired
     MetaDataService metaDataService;
@@ -40,8 +42,6 @@ public class MetadataDictServer {
 
     @Autowired
     MetadataFieldService metadataFieldService;//aFieldServiceImpl();
-    @Autowired
-    DictDataTypeService dictDataTypeService;//= new DictDataTypeServiceImpl();
 
     int retcode = 0;
     String retmsg = "成功";
