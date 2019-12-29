@@ -1,8 +1,6 @@
 package com.kunlong.web.system.testcase;
 
 
-import com.kunlong.platform.dao.DictDatatypeDAO;
-import com.kunlong.platform.model.DictDatatypeDemo;
 import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.system.SysApp;
 
@@ -33,8 +31,6 @@ public class TestDictDatatypeService extends TestCase {
 
 	DictDataTypeService dictDataTypeService;
 
-    @Autowired
-	DictDatatypeDAO dictDatatypeServiceExample;
 	@Override
 	protected void setUp() throws Exception {
 
@@ -57,8 +53,6 @@ public class TestDictDatatypeService extends TestCase {
 	@Test
 	public void test0003_selectOne() throws Exception {
 
-		DictDatatypeDemo dictDatatypeDemo=new DictDatatypeDemo();
-		dictDatatypeDemo.setDataInnerId(204);
 		//DictDatatypeDemo result = dictDatatypeServiceExample.selectOne(dictDatatypeDemo);
 		//System.out.println(KunlongUtils.toJSONStringPretty(result));
 		//System.out.println(dictDatatypeServiceExample.getClass().getName());

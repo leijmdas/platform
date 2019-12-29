@@ -16,7 +16,7 @@ import java.io.IOException;
 
 /**
  * 后台元数据字典模块的Rest类
- * Package: ytb.manager.metadata.rest
+ * Package: ytb.manager.sysmetadata.rest
  * Author: cch/leijiming
  * Date: Created in 2018/8/23 16:50
  */

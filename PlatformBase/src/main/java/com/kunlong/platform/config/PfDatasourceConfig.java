@@ -3,6 +3,7 @@ package com.kunlong.platform.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.kunlong.platform.consts.PfAppConsts;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -53,7 +54,7 @@ public class PfDatasourceConfig extends PfAppConsts {
 		
 		SqlSessionFactory sessionFactory = bean.getObject();
 		sessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
-		//HbatisSqlSessionDaoSupport.setHbatisSessionFactory(sessionFactory);
+		HbatisSqlSessionDaoSupport.setHbatisSessionFactory(sessionFactory);
 		return sessionFactory;
 	}
 

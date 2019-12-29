@@ -5,8 +5,6 @@ import com.kunlong.api.service.DictDataTypeApiService;
 import com.kunlong.dubbo.PfDubboApp;
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.service.DictDataTypeService;
-import com.kunlong.platform.model.DictDatatypeDemo;
-import com.kunlong.platform.service.DictDatatypeServiceExample;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Before;
@@ -28,9 +26,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 public class TestPfServiceImpl {
     @Autowired
-    DictDatatypeServiceExample dictDatatypeServiceExample;
-
-    @Autowired
     DictDataTypeService dictDataTypeService;
 
     @Reference(lazy = true, version = "${dubbo.service.version}")
@@ -49,9 +44,6 @@ public class TestPfServiceImpl {
     @Test
     public void test0001_service() {
 
-        DictDatatypeDemo dictDatatypeDemo = dictDatatypeServiceExample.selectByPrimaryKey(3);
-        String ret = KunlongUtils.toJSONStringPretty(dictDatatypeDemo);
-        System.out.println(ret);
     }
 
     @Test

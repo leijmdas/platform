@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kunlong.platform.dao.MetadataDictModelMapper" >
+	<resultMap id="BaseResultMap" type="com.kunlong.platform.domain.MetadataDictModel" >
+	    <id column="metadata_id" property="metadataId" jdbcType="INTEGER" />	
+	  	<result column="subsys_id" property="subsysId" jdbcType="INTEGER" />
+	  	<result column="metadata_order" property="metadataOrder" jdbcType="INTEGER" />
+	  	<result column="metadata_name" property="metadataName" jdbcType="VARCHAR" />
+	  	<result column="metadata_alias" property="metadataAlias" jdbcType="VARCHAR" />
+	  	<result column="metadata_memo" property="metadataMemo" jdbcType="VARCHAR" />
+	  	<result column="metadata_parentid" property="metadataParentid" jdbcType="INTEGER" />
+	  	<result column="metadata_type" property="metadataType" jdbcType="INTEGER" />
+	  	<result column="metadata_cached" property="metadataCached" jdbcType="BIT" />
+	  	<result column="metadata_db" property="metadataDb" jdbcType="VARCHAR" />
+	  	<result column="metadata_autocreate" property="metadataAutocreate" jdbcType="BIT" />
+	  	<result column="metadata_stmt" property="metadataStmt" jdbcType="VARCHAR" />
+	  	<result column="metadata_index" property="metadataIndex" jdbcType="VARCHAR" />
+	  	<result column="metadata_remark" property="metadataRemark" jdbcType="VARCHAR" />
+	  	<result column="metadata_sort_fields" property="metadataSortFields" jdbcType="VARCHAR" />
+	  	<result column="ref_src" property="refSrc" jdbcType="TINYINT" />
+	  	<result column="ref_object" property="refObject" jdbcType="VARCHAR" />
+	  	<result column="ref_param" property="refParam" jdbcType="VARCHAR" />
+	  	<result column="metadata_readonly" property="metadataReadonly" jdbcType="BIT" />
+	  	<result column="metadata_add_del" property="metadataAddDel" jdbcType="BIT" />
+	  	<result column="exp_tagtable_head" property="expTagtableHead" jdbcType="BIT" />
+    </resultMap>
+    <resultMap id="BaseResultMap_MetadataDictModel" type="com.kunlong.platform.domain.MetadataDictModel" >
+	    <id column="md_metadata_id" property="metadataId" jdbcType="INTEGER" />	
+	  	<result column="md_subsys_id" property="subsysId" jdbcType="INTEGER" />
+	  	<result column="md_metadata_order" property="metadataOrder" jdbcType="INTEGER" />
+	  	<result column="md_metadata_name" property="metadataName" jdbcType="VARCHAR" />
+	  	<result column="md_metadata_alias" property="metadataAlias" jdbcType="VARCHAR" />
+	  	<result column="md_metadata_memo" property="metadataMemo" jdbcType="VARCHAR" />
+	  	<result column="md_metadata_parentid" property="metadataParentid" jdbcType="INTEGER" />
+	  	<result column="md_metadata_type" property="metadataType" jdbcType="INTEGER" />
+	  	<result column="md_metadata_cached" property="metadataCached" jdbcType="BIT" />
+	  	<result column="md_metadata_db" property="metadataDb" jdbcType="VARCHAR" />
+	  	<result column="md_metadata_autocreate" property="metadataAutocreate" jdbcType="BIT" />
+	  	<result column="md_metadata_stmt" property="metadataStmt" jdbcType="VARCHAR" />
+	  	<result column="md_metadata_index" property="metadataIndex" jdbcType="VARCHAR" />
+	  	<result column="md_metadata_remark" property="metadataRemark" jdbcType="VARCHAR" />
+	  	<result column="md_metadata_sort_fields" property="metadataSortFields" jdbcType="VARCHAR" />
+	  	<result column="md_ref_src" property="refSrc" jdbcType="TINYINT" />
+	  	<result column="md_ref_object" property="refObject" jdbcType="VARCHAR" />
+	  	<result column="md_ref_param" property="refParam" jdbcType="VARCHAR" />
+	  	<result column="md_metadata_readonly" property="metadataReadonly" jdbcType="BIT" />
+	  	<result column="md_metadata_add_del" property="metadataAddDel" jdbcType="BIT" />
+	  	<result column="md_exp_tagtable_head" property="expTagtableHead" jdbcType="BIT" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+  		metadata_id,subsys_id,metadata_order,metadata_name,metadata_alias,metadata_memo,metadata_parentid,metadata_type,metadata_cached,metadata_db,metadata_autocreate,metadata_stmt,metadata_index,metadata_remark,metadata_sort_fields,ref_src,ref_object,ref_param,metadata_readonly,metadata_add_del,exp_tagtable_head
+	</sql>
+  	<sql id="Base_Column_List_MetadataDictModel" >
+  		md.metadata_id md_metadata_id,md.subsys_id md_subsys_id,md.metadata_order md_metadata_order,md.metadata_name md_metadata_name,md.metadata_alias md_metadata_alias,md.metadata_memo md_metadata_memo,md.metadata_parentid md_metadata_parentid,md.metadata_type md_metadata_type,md.metadata_cached md_metadata_cached,md.metadata_db md_metadata_db,md.metadata_autocreate md_metadata_autocreate,md.metadata_stmt md_metadata_stmt,md.metadata_index md_metadata_index,md.metadata_remark md_metadata_remark,md.metadata_sort_fields md_metadata_sort_fields,md.ref_src md_ref_src,md.ref_object md_ref_object,md.ref_param md_ref_param,md.metadata_readonly md_metadata_readonly,md.metadata_add_del md_metadata_add_del,md.exp_tagtable_head md_exp_tagtable_head
+	</sql>
+	
+	<!-- 系统自定义 -->
+	<!-- 实体参数查询结果[START] -->
+	<resultMap id="ResultMap_FindByQueryParam" type="com.kunlong.platform.domain.MetadataDictModel" extends="BaseResultMap_MetadataDictModel">
+		
+	</resultMap>
+
+	<sql id="Condition_FindByQueryParam">
+		<if test="queryParam.param!=null">
+			<bind name="p" value="queryParam.param"/>
+			<if test="p.metadataId!=null ">
+		    	and md.metadata_id=#{p.metadataId}
+		    </if>
+			<if test="p.subsysId!=null ">
+		    	and md.subsys_id=#{p.subsysId}
+		    </if>
+			<if test="p.metadataOrder!=null ">
+		    	and md.metadata_order=#{p.metadataOrder}
+		    </if>
+			<if test="p.metadataName!=null and p.metadataName!=''">
+		    	and md.metadata_name like #{p.metadataName}
+		    </if>
+			<if test="p.metadataAlias!=null and p.metadataAlias!=''">
+		    	and md.metadata_alias like #{p.metadataAlias}
+		    </if>
+			<if test="p.metadataMemo!=null and p.metadataMemo!=''">
+		    	and md.metadata_memo like #{p.metadataMemo}
+		    </if>
+			<if test="p.metadataParentid!=null ">
+		    	and md.metadata_parentid=#{p.metadataParentid}
+		    </if>
+			<if test="p.metadataType!=null ">
+		    	and md.metadata_type=#{p.metadataType}
+		    </if>
+			<if test="p.metadataCached!=null ">
+		    	and md.metadata_cached=#{p.metadataCached}
+		    </if>
+			<if test="p.metadataDb!=null and p.metadataDb!=''">
+		    	and md.metadata_db like #{p.metadataDb}
+		    </if>
+			<if test="p.metadataAutocreate!=null ">
+		    	and md.metadata_autocreate=#{p.metadataAutocreate}
+		    </if>
+			<if test="p.metadataStmt!=null and p.metadataStmt!=''">
+		    	and md.metadata_stmt like #{p.metadataStmt}
+		    </if>
+			<if test="p.metadataIndex!=null and p.metadataIndex!=''">
+		    	and md.metadata_index like #{p.metadataIndex}
+		    </if>
+			<if test="p.metadataRemark!=null and p.metadataRemark!=''">
+		    	and md.metadata_remark like #{p.metadataRemark}
+		    </if>
+			<if test="p.metadataSortFields!=null and p.metadataSortFields!=''">
+		    	and md.metadata_sort_fields like #{p.metadataSortFields}
+		    </if>
+			<if test="p.refSrc!=null ">
+		    	and md.ref_src=#{p.refSrc}
+		    </if>
+			<if test="p.refObject!=null and p.refObject!=''">
+		    	and md.ref_object like #{p.refObject}
+		    </if>
+			<if test="p.refParam!=null and p.refParam!=''">
+		    	and md.ref_param like #{p.refParam}
+		    </if>
+			<if test="p.metadataReadonly!=null ">
+		    	and md.metadata_readonly=#{p.metadataReadonly}
+		    </if>
+			<if test="p.metadataAddDel!=null ">
+		    	and md.metadata_add_del=#{p.metadataAddDel}
+		    </if>
+			<if test="p.expTagtableHead!=null ">
+		    	and md.exp_tagtable_head=#{p.expTagtableHead}
+		    </if>
+		</if>
+		<!--
+		<bind name="rp" value="queryParam.ruleParam" />
+		<include refid="org.mybatis.hbatis.orm.mapper.HbatisMapper.RuleParam"/>
+		-->
+	</sql>
+	<select id="findByQueryParam" resultMap="ResultMap_FindByQueryParam">
+		select
+		<include refid="Base_Column_List_MetadataDictModel"></include>
+		from metadata_dict md where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+		<if test="queryParam.sortOrders!=null and queryParam.sortOrders.size() gt 0">
+			order by 
+			<foreach collection="queryParam.sortOrders" item="item" separator=",">
+				${item.sortField.sqlColumn} ${item.sortType}
+			</foreach>
+		</if>
+		<if test="queryParam.limit gt 0">
+	  		limit ${queryParam.start},${queryParam.limit}
+	  	</if>
+	</select>
+	<select id="countByQueryParam" resultType="long">
+		select count(1) from metadata_dict md where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+	</select>
+	
+	<!-- 实体参数查询结果[END] -->
+	<!-- 用户自定义 -->
+	
+</mapper>

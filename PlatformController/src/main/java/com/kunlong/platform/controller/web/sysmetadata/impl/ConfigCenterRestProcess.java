@@ -1,13 +1,7 @@
-package com.kunlong.platform.controller.web.metadata.impl;
-
-import com.alibaba.fastjson.JSONObject;
-import com.kunlong.platform.model.KunlongError;
-
-
-import java.util.List;
+package com.kunlong.platform.controller.web.sysmetadata.impl;
 
 /**
- * Package: com.kunlong.metadata.sysuser.impl
+ * Package: com.kunlong.sysmetadata.sysuser.impl
  * Author: XZW
  * Date: Created in 2018/8/23 18:11
  */

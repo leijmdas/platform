@@ -25,7 +25,7 @@ import java.util.Map;
 
 
 /**
- * Package: com.kunlong.metadata.service.impl
+ * Package: com.kunlong.sysmetadata.service.impl
  * Author: XZW
  * Date: Created in 2018/8/23 16:50
  */
@@ -34,9 +34,9 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
     private static final Logger logger = LoggerFactory.getLogger(SysMetaDataServiceImpl.class);
 
     @Autowired
-    MetadataDictService metadataDictService;//= new MetadataDictServiceImpl();
+    MetadataDictService metadataDictService;
     @Autowired
-    MetadataFieldService metadataFieldService;//= new MetadataFieldServiceImpl();
+    MetadataFieldService metadataFieldService;
 
     @Autowired
     SysDictDataTypeMapper sysDictDataTypeDao;

@@ -4,7 +4,7 @@ package com.kunlong.metadata.model;
 
 /**
  * 元数据子表实体类
- * Package: com.kunlong.metadata.model
+ * Package: com.kunlong.sysmetadata.model
  * Author: XZW
  * Date: Created in 2018/8/23 16:00
  */

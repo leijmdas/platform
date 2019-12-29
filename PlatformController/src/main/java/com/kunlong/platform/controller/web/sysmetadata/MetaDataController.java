@@ -1,10 +1,8 @@
-package com.kunlong.platform.controller.web.metadata;
+package com.kunlong.platform.controller.web.sysmetadata;
 
-import com.kunlong.metadata.service.server.MetadataDictServer;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
-import com.kunlong.platform.controller.web.metadata.impl.ConfigCenterRestProcess;
-import com.kunlong.platform.controller.web.metadata.impl.MetaDataProcess;
+import com.kunlong.platform.controller.web.sysmetadata.impl.MetaDataProcess;
 import com.kunlong.platform.model.KunlongError;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +14,7 @@ import javax.annotation.Resource;
 
 /**
  * 后台元数据字典模块的Rest类
- * Package: com.kunlong.metadata.sysuser
+ * Package: com.kunlong.sysmetadata.sysuser
  * Author: XZW
  * Date: Created in 2018/8/23 16:50
  */
@@ -64,7 +62,7 @@ public class MetaDataController extends RestHandler {
 //            //return new ConfigCenterRestProcess().process(req, this);
 //        }
     protected MsgResponse process() {
-        if (req.cmdtype.equals("metadata")) {
+        if (req.cmdtype.equals("sysmetadata")) {
             return metaDataProcess.process(req, this);
         }
 

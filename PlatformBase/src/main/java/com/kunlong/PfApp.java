@@ -1,6 +1,7 @@
 package com.kunlong;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +16,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //@ImportResource({"classpath:appcontext.xml"})
 public class PfApp {
     public static void main(String[] args) {
-        Class[] classes = new Class[]{
-                PfApp.class
-        };
-        SpringApplication.run(classes, args);
+        SpringApplication app = new SpringApplication(PfApp.class);
+        app.setWebApplicationType(WebApplicationType.NONE);
+        app.run(args);
+
     }
 }

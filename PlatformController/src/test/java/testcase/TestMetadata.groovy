@@ -50,7 +50,7 @@ public class TestMetadata extends ITestImpl {
     public void test0001_insertMaster() {
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "dictByInsertSelective";
         String body = '''
         {"metadataName":"work_group_plan_landmark","metadataAlias":"work_group_plan_landmark","metadataMemo":"work_group_plan_landmark","metadataParentid":"","isCached":0,"metadataDb":"ytb_project","metadataAutocreate":1,"metadataStmt":"","metadataIndex":"","metadataOrder":"","metadataRemark":"","subsysId":"3","metadataType":6}'''
@@ -71,13 +71,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0002_getDictDataTypeList")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0002_getDictDataTypeList() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "getDictDataTypeList";
         String data = JSONObject.toJSONString(req);
         System.err.println(data);
@@ -93,13 +93,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0003_addDictDataType")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0003_addDictDataType() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "addDictDataType";
         data = JSONObject.toJSONString(req);
         System.err.println(data);
@@ -114,13 +114,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0004_addDictDataType")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0004_addDictDataType() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "getDictDataTypeById";
         req.msgBody = JSONObject.parseObject("{}");
         req.msgBody.put("dataInnerId",4)
@@ -138,13 +138,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0005_deleteDictDataTypeById")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0005_deleteDictDataTypeById() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "deleteDictDataTypeById";
         req.msgBody = JSONObject.parseObject("{}");
         req.msgBody.put("dataInnerId",39)
@@ -163,13 +163,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0006_getSubSysDictList")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0006_getSubSysDictList() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "getSubSysDictList";
         req.msgBody = JSONObject.parseObject("{}");
 
@@ -184,7 +184,7 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0007_getConfigCenter")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0007_getConfigCenter() {
 
@@ -207,7 +207,7 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0008_getConfigCenter")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0008_getConfigCenter() {
         String url="http://localhost/rest/configCenter";
@@ -230,13 +230,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0009_createTableBymetadat")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0009_createTableBymetadat() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "makeTableByDictId";
         req.msgBody = JSONObject.parseObject("{}");
         req.msgBody.put("metadataId", 270);
@@ -254,13 +254,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0010_selectByTable")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0010_selectByTable() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "selectByTable";
         req.msgBody = JSONObject.parseObject("{}");
         req.msgBody.put("table", "ytb_project.electric_mat");
@@ -279,13 +279,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0011_getDictTableAndField")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0011_getDictTableAndField() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "getDictTableAndField";
         req.msgBody = JSONObject.parseObject("{}");
         req.msgBody.put("metadataName", "electric_mat");
@@ -303,13 +303,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0011_getDictTableAndField")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0012_checkMetadata() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "checkDict";
         req.msgBody = JSONObject.parseObject("{}");
         req.msgBody.put("metadataId", 55);
@@ -331,13 +331,13 @@ public class TestMetadata extends ITestImpl {
     @JTest
     @JTestClass.title(" test0013_getCachedTableList")
     @JTestClass.pre("getDictTableAndField")
-    @JTestClass.step("post http://mysql.kunlong.com/rest/metadata")
+    @JTestClass.step("post http://mysql.kunlong.com/rest/sysmetadata")
     @JTestClass.exp("ok")
     public void test0013_getCachedTableList() {
 
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "getCachedTableList";
         req.msgBody = JSONObject.parseObject("{}");
 
@@ -360,7 +360,7 @@ public class TestMetadata extends ITestImpl {
     public void test0014_makeTableByDictId() {
         req.reqtime = System.currentTimeMillis();
         req.seqno = System.currentTimeMillis();
-        req.cmdtype = "metadata";
+        req.cmdtype = "sysmetadata";
         req.cmd = "makeTableByDictId";
         req.msgBody = JSONObject.parseObject("{metadataId: 297}");
 

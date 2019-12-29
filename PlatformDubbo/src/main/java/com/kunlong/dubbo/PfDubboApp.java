@@ -12,11 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableDubboConfig
 public class PfDubboApp {
     public static void main(String[] args) {
-//        Class[] classes = new Class[]{
-//                PfDubboApp.class
-//        };
-//
-//        SpringApplication.run(classes, args);
+
         SpringApplication app = new SpringApplication(PfDubboApp.class);
         app.setWebApplicationType(WebApplicationType.NONE);
         app.run(args);

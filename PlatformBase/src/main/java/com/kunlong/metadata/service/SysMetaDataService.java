@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Package: com.kunlong.metadata.service
+ * Package: com.kunlong.sysmetadata.service
  * Author: XZW
  * Date: Created in 2018/8/23 16:33
  */

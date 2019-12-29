@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Package: com.kunlong.metadata.dao
+ * Package: com.kunlong.sysmetadata.dao
  * Author: XZW
  */
 public interface SysDictDataTypeMapper {

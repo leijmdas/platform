@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Package: com.kunlong.metadata.sysuser.impl
+ * Package: com.kunlong.sysmetadata.sysuser.impl
  * Author: leijming
  * Date: Created in 2018/10/17 18:11
  */

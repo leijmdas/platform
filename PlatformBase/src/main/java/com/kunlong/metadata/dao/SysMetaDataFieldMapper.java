@@ -5,7 +5,7 @@ import com.kunlong.metadata.model.Sys_MetaDataFieldModel;
 import java.util.List;
 
 /**
- * Package: com.kunlong.metadata.dao
+ * Package: com.kunlong.sysmetadata.dao
  * Author: XZW
  * Date: Created in 2018/8/23 16:29
  */

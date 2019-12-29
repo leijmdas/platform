@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Package: com.kunlong.metadata.service
+ * Package: com.kunlong.sysmetadata.service
  * Author: XZW
  * Date: Created in 2018/8/23 16:33
  */

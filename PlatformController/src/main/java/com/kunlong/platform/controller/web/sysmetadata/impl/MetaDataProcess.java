@@ -1,4 +1,4 @@
-package com.kunlong.platform.controller.web.metadata.impl;
+package com.kunlong.platform.controller.web.sysmetadata.impl;
 
 import com.kunlong.metadata.service.server.DictDataTypeServer;
 import com.kunlong.metadata.service.server.MetadataDictServer;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 
 
 /**
- * Package: com.kunlong.metadata.sysuser.impl
+ * Package: com.kunlong.sysmetadata.sysuser.impl
  * Author: ljm
  * Date: Created in 2019/8/23 18:11
  */

@@ -5,6 +5,7 @@ import com.kunlong.platform.consts.PrimaryAppConsts;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 //import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;
+import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -50,7 +51,7 @@ public class PrimaryDatasourceConfig extends PrimaryAppConsts {
 		
 		SqlSessionFactory sessionFactory = bean.getObject();
 		sessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
-		//HbatisSqlSessionDaoSupport.setHbatisSessionFactory(sessionFactory);
+	    HbatisSqlSessionDaoSupport.setHbatisSessionFactory(sessionFactory);
 		return sessionFactory;
 	}
 

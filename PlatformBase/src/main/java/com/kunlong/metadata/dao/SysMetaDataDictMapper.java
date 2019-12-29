@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Package: com.kunlong.metadata.dao
+ * Package: com.kunlong.sysmetadata.dao
  * Author: XZW
  * Date: Created in 2018/8/23 16:16
  */
