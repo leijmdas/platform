@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kunlong.platform.dao.DictConfigMapper" >
+	<resultMap id="BaseResultMap" type="com.kunlong.platform.domain.DictConfig" >
+	    <id column="config_id" property="configId" jdbcType="INTEGER" />	
+	  	<result column="config_type" property="configType" jdbcType="INTEGER" />
+	  	<result column="config_item" property="configItem" jdbcType="VARCHAR" />
+	  	<result column="config_remark" property="configRemark" jdbcType="VARCHAR" />
+	  	<result column="config_value" property="configValue" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="BaseResultMap_DictConfig" type="com.kunlong.platform.domain.DictConfig" >
+	    <id column="dc_config_id" property="configId" jdbcType="INTEGER" />	
+	  	<result column="dc_config_type" property="configType" jdbcType="INTEGER" />
+	  	<result column="dc_config_item" property="configItem" jdbcType="VARCHAR" />
+	  	<result column="dc_config_remark" property="configRemark" jdbcType="VARCHAR" />
+	  	<result column="dc_config_value" property="configValue" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+  		config_id,config_type,config_item,config_remark,config_value
+	</sql>
+  	<sql id="Base_Column_List_DictConfig" >
+  		dc.config_id dc_config_id,dc.config_type dc_config_type,dc.config_item dc_config_item,dc.config_remark dc_config_remark,dc.config_value dc_config_value
+	</sql>
+	
+	<!-- 系统自定义 -->
+	<!-- 实体参数查询结果[START] -->
+	<resultMap id="ResultMap_FindByQueryParam" type="com.kunlong.platform.domain.DictConfig" extends="BaseResultMap_DictConfig">
+		
+	</resultMap>
+
+	<sql id="Condition_FindByQueryParam">
+		<if test="queryParam.param!=null">
+			<bind name="p" value="queryParam.param"/>
+			<if test="p.configId!=null ">
+		    	and dc.config_id=#{p.configId}
+		    </if>
+			<if test="p.configType!=null ">
+		    	and dc.config_type=#{p.configType}
+		    </if>
+			<if test="p.configItem!=null and p.configItem!=''">
+		    	and dc.config_item like #{p.configItem}
+		    </if>
+			<if test="p.configRemark!=null and p.configRemark!=''">
+		    	and dc.config_remark like #{p.configRemark}
+		    </if>
+			<if test="p.configValue!=null and p.configValue!=''">
+		    	and dc.config_value like #{p.configValue}
+		    </if>
+		</if>
+		<!--
+		<bind name="rp" value="queryParam.ruleParam" />
+		<include refid="org.mybatis.hbatis.orm.mapper.HbatisMapper.RuleParam"/>
+		-->
+	</sql>
+	<select id="findByQueryParam" resultMap="ResultMap_FindByQueryParam">
+		select
+		<include refid="Base_Column_List_DictConfig"></include>
+		from dict_config dc where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+		<if test="queryParam.sortOrders!=null and queryParam.sortOrders.size() gt 0">
+			order by 
+			<foreach collection="queryParam.sortOrders" item="item" separator=",">
+				${item.sortField.sqlColumn} ${item.sortType}
+			</foreach>
+		</if>
+		<if test="queryParam.limit gt 0">
+	  		limit ${queryParam.start},${queryParam.limit}
+	  	</if>
+	</select>
+	<select id="countByQueryParam" resultType="long">
+		select count(1) from dict_config dc where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+	</select>
+	
+	<!-- 实体参数查询结果[END] -->
+	<!-- 用户自定义 -->
+	
+</mapper>
