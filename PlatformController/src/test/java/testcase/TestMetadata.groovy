@@ -372,7 +372,26 @@ public class TestMetadata extends ITestImpl {
         System.out.println(resp);
     }
 
+    @JTest
+    @JTestClass.title(" test0014_makeTableByDictId")
+    @JTestClass.pre("getDictTableAndField")
+    @JTestClass.step("post http://mysql.kunlong.com:8080/rest/sysmetadata")
+    @JTestClass.exp("ok")
+    public void test0015_getSubSysDictList() {
+        req.reqtime = System.currentTimeMillis();
+        req.seqno = System.currentTimeMillis();
+        req.cmdtype = "metadata";
+        req.cmd = "getSubSysDictList";
+        req.msgBody = JSONObject.parseObject("{metadataId: 297}");
+
+        String ret = httpclient.post("http://localhost:10080/rest/sysmetadata", JSONObject.toJSONString(req), "application/json");
+        httpclient.checkStatusCode(200);
+
+        MsgResponse resp = MsgResponse.parseResponse(ret);
+        checkEQ(0, resp.getRetcode());
+        System.out.println(resp);
+    }
     public static void main(String[] args) {
-        run(TestMetadata.class, 14);
+        run(TestMetadata.class, 15);
     }
 }

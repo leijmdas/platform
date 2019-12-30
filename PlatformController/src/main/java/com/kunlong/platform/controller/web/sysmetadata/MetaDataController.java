@@ -62,7 +62,7 @@ public class MetaDataController extends RestHandler {
 //            //return new ConfigCenterRestProcess().process(req, this);
 //        }
     protected MsgResponse process() {
-        if (req.cmdtype.equals("sysmetadata")) {
+        if (req.cmdtype.equals("metadata")) {
             return metaDataProcess.process(req, this);
         }
 
