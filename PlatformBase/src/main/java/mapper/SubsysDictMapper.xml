@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kunlong.platform.dao.SubsysDictMapper" >
+	<resultMap id="BaseResultMap" type="com.kunlong.platform.domain.SubsysDict" >
+	    <id column="subsys_id" property="subsysId" jdbcType="INTEGER" />	
+	  	<result column="subsys_no" property="subsysNo" jdbcType="VARCHAR" />
+	  	<result column="subsys_name" property="subsysName" jdbcType="VARCHAR" />
+	  	<result column="remark" property="remark" jdbcType="VARCHAR" />
+	  	<result column="ip" property="ip" jdbcType="VARCHAR" />
+	  	<result column="port" property="port" jdbcType="SMALLINT" />
+    </resultMap>
+    <resultMap id="BaseResultMap_SubsysDict" type="com.kunlong.platform.domain.SubsysDict" >
+	    <id column="sd_subsys_id" property="subsysId" jdbcType="INTEGER" />	
+	  	<result column="sd_subsys_no" property="subsysNo" jdbcType="VARCHAR" />
+	  	<result column="sd_subsys_name" property="subsysName" jdbcType="VARCHAR" />
+	  	<result column="sd_remark" property="remark" jdbcType="VARCHAR" />
+	  	<result column="sd_ip" property="ip" jdbcType="VARCHAR" />
+	  	<result column="sd_port" property="port" jdbcType="SMALLINT" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+  		subsys_id,subsys_no,subsys_name,remark,ip,port
+	</sql>
+  	<sql id="Base_Column_List_SubsysDict" >
+  		sd.subsys_id sd_subsys_id,sd.subsys_no sd_subsys_no,sd.subsys_name sd_subsys_name,sd.remark sd_remark,sd.ip sd_ip,sd.port sd_port
+	</sql>
+	
+	<!-- 系统自定义 -->
+	<!-- 实体参数查询结果[START] -->
+	<resultMap id="ResultMap_FindByQueryParam" type="com.kunlong.platform.domain.SubsysDict" extends="BaseResultMap_SubsysDict">
+		
+	</resultMap>
+
+	<sql id="Condition_FindByQueryParam">
+		<if test="queryParam.param!=null">
+			<bind name="p" value="queryParam.param"/>
+			<if test="p.subsysId!=null ">
+		    	and sd.subsys_id=#{p.subsysId}
+		    </if>
+			<if test="p.subsysNo!=null and p.subsysNo!=''">
+		    	and sd.subsys_no like #{p.subsysNo}
+		    </if>
+			<if test="p.subsysName!=null and p.subsysName!=''">
+		    	and sd.subsys_name like #{p.subsysName}
+		    </if>
+			<if test="p.remark!=null and p.remark!=''">
+		    	and sd.remark like #{p.remark}
+		    </if>
+			<if test="p.ip!=null and p.ip!=''">
+		    	and sd.ip like #{p.ip}
+		    </if>
+			<if test="p.port!=null ">
+		    	and sd.port=#{p.port}
+		    </if>
+		</if>
+		<!--
+		<bind name="rp" value="queryParam.ruleParam" />
+		<include refid="org.mybatis.hbatis.orm.mapper.HbatisMapper.RuleParam"/>
+		-->
+	</sql>
+	<select id="findByQueryParam" resultMap="ResultMap_FindByQueryParam">
+		select
+		<include refid="Base_Column_List_SubsysDict"></include>
+		from subsys_dict sd where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+		<if test="queryParam.sortOrders!=null and queryParam.sortOrders.size() gt 0">
+			order by 
+			<foreach collection="queryParam.sortOrders" item="item" separator=",">
+				${item.sortField.sqlColumn} ${item.sortType}
+			</foreach>
+		</if>
+		<if test="queryParam.limit gt 0">
+	  		limit ${queryParam.start},${queryParam.limit}
+	  	</if>
+	</select>
+	<select id="countByQueryParam" resultType="long">
+		select count(1) from subsys_dict sd where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+	</select>
+	
+	<!-- 实体参数查询结果[END] -->
+	<!-- 用户自定义 -->
+	
+</mapper>
