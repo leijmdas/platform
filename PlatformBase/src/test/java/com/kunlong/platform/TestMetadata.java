@@ -4,13 +4,17 @@ import com.kunlong.PfApp;
 import com.kunlong.platform.dao.DictConfigMapper;
 import com.kunlong.platform.dao.MetadataFieldModelMapper;
 import com.kunlong.platform.domain.MetadataFieldModel;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,6 +28,9 @@ import java.util.List;
 @SpringBootTest(classes = PfApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 public class TestMetadata {
+
+    @Resource
+    CacheManager cacheManager;
 
     @Autowired
     MetadataFieldModelMapper metadataFieldModelMapper;
@@ -49,7 +56,7 @@ public class TestMetadata {
 
     @Test
     public void test0002_service() {
-        MetadataFieldModel.QueryParam queryParam=new MetadataFieldModel.QueryParam();
+        MetadataFieldModel.QueryParam queryParam = new MetadataFieldModel.QueryParam();
         queryParam.setParam(new MetadataFieldModel());
         queryParam.getParam().setMetadataId(59);
         List<MetadataFieldModel> metadataFields = metadataFieldModelMapper.findByQueryParam(queryParam);
@@ -57,5 +64,15 @@ public class TestMetadata {
         System.out.println(metadataFields);
     }
 
+    @Test
+    public void test0003_cache() {
+
+        Cache cache = cacheManager.getCache("PlatformCache");
+        cache.put("key", "123");
+        String key = cache.get("key", String.class);
+        System.out.println(key);
+
+
+    }
 }
 

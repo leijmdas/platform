@@ -2,6 +2,8 @@ package com.kunlong.platform.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.kunlong.platform.domain.SubsysDict;
 import com.kunlong.platform.dao.SubsysDictMapper;
@@ -23,6 +25,7 @@ public class SubsysDictServiceImpl implements SubsysDictService {
 	 * 保存
 	 * @param entity
 	 */
+	@CachePut("${cache.name}")
 	public void save(SubsysDict entity){
 		this.checkEntity(entity);
 		repo.insert(entity);
@@ -32,6 +35,7 @@ public class SubsysDictServiceImpl implements SubsysDictService {
 	 * 修改
 	 * @param entity
 	 */
+	@CachePut("${cache.name}")
 	public void update(SubsysDict entity){
 		this.checkEntity(entity);
 		repo.update(entity);
@@ -85,6 +89,7 @@ public class SubsysDictServiceImpl implements SubsysDictService {
 	 * @param SubsysDict.QueryParam
 	 * @return
 	 */
+	@Cacheable("${cache.name}")
 	public List<SubsysDict> findByQueryParam(SubsysDict.QueryParam queryParam){
 		return repo.findByQueryParam(queryParam);
 	}

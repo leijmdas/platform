@@ -23,7 +23,7 @@ public class PfContext implements ApplicationContextAware {
         RedisUtil.Singleton.instanceRedisTemplate((RedisTemplate) appCtxt.getBean("redisTemplate"));
         //RedisUtil.Singleton.instanceRedisTemplate(stringRedisTemplate);
 
-        SessionHolder.config("session:mgr:", 7200);
+        SessionHolder.config("session:mgr:", 2*7200);
         //SessionHolder.platform("session:pf-dxw:", 7200);
 
     }
