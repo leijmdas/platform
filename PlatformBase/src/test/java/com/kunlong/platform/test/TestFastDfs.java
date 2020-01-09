@@ -18,7 +18,7 @@ public class TestFastDfs extends ITestImpl {
         System.out.println(confUrl);
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //上传文件
-        String filePath = fastDFSClient.uploadFile("l:\\2.png");
+        String filePath = fastDFSClient.uploadFile("c:\\1.png");
         System.out.println("返回路径：" + filePath);
         JTestLog.logJtest("http://120.77.172.83:12088/"+filePath);
     }
@@ -53,6 +53,6 @@ public class TestFastDfs extends ITestImpl {
     }
     //http://192.168.222.128:12088/group1/M00/00/00/wKjegF2q2tyAU648AAD6gBaK6NM8.4.jpg
     public static void main(String[] args) {
-        run(TestFastDfs.class, 3);
+        run(TestFastDfs.class, 1);
     }
 }

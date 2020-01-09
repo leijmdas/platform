@@ -5,6 +5,7 @@ import com.kunlong.platform.dao.DictConfigMapper;
 import com.kunlong.platform.dao.MetadataFieldModelMapper;
 import com.kunlong.platform.domain.MetadataFieldModel;
 
+import com.kunlong.platform.service.impl.MailServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,8 @@ import java.util.List;
 @SpringBootTest(classes = PfApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 public class TestMetadata {
+    @Resource
+    MailServiceImpl mailService;
 
     @Resource
     CacheManager cacheManager;
@@ -72,6 +75,20 @@ public class TestMetadata {
         String key = cache.get("key", String.class);
         System.out.println(key);
 
+
+    }
+
+    @Test
+    public void  test0004_sendMailServiceImpl()
+    {
+        mailService.sendEmail("leijmdas_s@163.com","test","test");
+
+    }
+
+    @Test
+    public void  test0005_sendMailServiceAtrtach()
+    {
+        mailService.sendEmail("leijmdas_s@163.com","test","test","c:/1.png");
 
     }
 }

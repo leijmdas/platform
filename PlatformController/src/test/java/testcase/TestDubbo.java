@@ -4,6 +4,7 @@ import cn.integriti.center.api.service.SysUserApiService;
 import com.kunlong.api.dto.queryParam.MetadataFieldModelQueryDTO;
 import com.kunlong.api.model.MetadataDictModelDTO;
 import com.kunlong.api.model.MetadataFieldModelDTO;
+import com.kunlong.api.service.MailApiService;
 import com.kunlong.api.service.MetadataDictApiService;
 import com.kunlong.api.service.MetadataFieldApiService; ;
 import com.kunlong.platform.PfControllerApp;
@@ -35,6 +36,9 @@ public class TestDubbo {
     MetadataDictApiService metadataDictApiService;
     @Reference(lazy = true, version = "1.0.0")
     MetadataFieldApiService metadataFieldApiService;
+
+    @Reference(lazy = true, version = "${dubbo.service.version}")
+    MailApiService mailApiService;
 
     @Before
     public void setup() {
@@ -82,6 +86,13 @@ public class TestDubbo {
     public void test0006() {
         List<MetadataFieldModelDTO>  models = metadataFieldApiService.query("dict_area");
         System.out.println(models);
+
+    }
+
+    @Test
+    public void  test0007_sendMailServiceAtrtach()
+    {
+        mailApiService.sendEmail("leijmdas_s@163.com","sub","test","c:/1.png");
 
     }
 }

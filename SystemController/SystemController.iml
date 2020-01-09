@@ -29,6 +29,11 @@
     <orderEntry type="library" name="Maven: app:app-support:1.1" level="project" />
     <orderEntry type="module" module-name="PlatformBase" />
     <orderEntry type="module" module-name="plat" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.8.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-mail:2.1.8.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.6.2" level="project" />
+    <orderEntry type="library" name="Maven: javax.mail:mail:1.4.7" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-cache:2.1.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache:2.10.6" level="project" />
     <orderEntry type="library" name="Maven: in.clouthink.repack:fastdfs-client-java:1.29.4" level="project" />

@@ -20,7 +20,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
         SecurityAutoConfiguration.class
 })
 @Configuration
-//@SpringBootApplication(scanBasePackages = {"com.kunlong","cn.integriti.center"})
 @SpringBootApplication(scanBasePackages = {"com.kunlong"})
 @ImportResource({"classpath:appcontext.xml"})
 @EnableDubbo
