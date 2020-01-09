@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MailServiceImpl     {
-	
+public class MailServiceImpl {
+
 	private static final Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
-	
+
 	@Autowired
 	private MailSender mailSender;
 
@@ -55,7 +55,7 @@ public class MailServiceImpl     {
 		@Value("${mail.recipients}")
 		private String recipients;
 		private void sendEmail (String to, String subject, String content, List<String> attachFiles) {
-			logger.info("发送HTML邮件开始：{},{},{}", to, subject, "");
+
 			try {
 				MimeMessage message = javaMailSender.createMimeMessage();
 				MimeMessageHelper helper;
@@ -63,28 +63,16 @@ public class MailServiceImpl     {
 				helper.setFrom(sender);
 				helper.setTo(to);
 				helper.setSubject(subject);
-				if (attachFiles != null) {
-					for (String fileName : attachFiles) {
-						FileSystemResource file = new FileSystemResource(new File(fileName));
-						helper.addAttachment(file.getFilename(), file);//添加附件，可多次调用该方法添加多个附件
-					}
+				for (String fileName : attachFiles) {
+					FileSystemResource file = new FileSystemResource(new File(fileName));
+					helper.addAttachment(file.getFilename(), file);
+					logger.info("sendEmail filename:{}",file.getFilename());
 				}
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+
 				helper.setText(content, false);//true代表支持html
 				javaMailSender.send(message);
-				try {
-					Thread.sleep(300);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				logger.info("发送HTML邮件成功");
-				File deleteDir;
-				String parentDir;
 
+				logger.info("发送HTML邮件成功");
 			} catch (MessagingException e) {
 				logger.error("发送HTML邮件失败：", e);
 			}
@@ -138,7 +126,7 @@ public class MailServiceImpl     {
 
 		public String[] getRecipientList() {
 			return StringUtil.trimToEmpty(this.recipients).split(";");
-			
+
 		}
 		
 		
