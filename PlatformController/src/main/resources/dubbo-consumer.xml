@@ -14,16 +14,6 @@
     </dubbo:reference>
     <!-- 远程服务代理 -->
    
-    <!-- ================ 系统管理 ========================= -->
     <!--<dubbo:reference id="fileApiService" interface="cn.integriti.center.api.service.FileApiService" version="1.0.0"></dubbo:reference>-->
-    <!--<dubbo:reference id="sysShortlinkApiService" interface="cn.integriti.center.api.service.SysShortlinkApiService" version="1.0.0"></dubbo:reference>-->
-    <!--<dubbo:reference id="sysResourceService" interface="cn.integriti.center.api.service.SysResourceApiService" version="1.0.0"></dubbo:reference>-->
-    <!--<dubbo:reference id="sysUserApiService" interface="cn.integriti.center.api.service.SysUserApiService" version="1.0.0"></dubbo:reference>-->
-    <!--<dubbo:reference id="sysOrgApiService" interface="cn.integriti.center.api.service.SysOrgApiService" version="1.0.0"></dubbo:reference>-->
-    <!--<dubbo:reference id="sysRoleApiService" interface="cn.integriti.center.api.service.SysRoleApiService" version="1.0.0"></dubbo:reference>-->
-	<!--<dubbo:reference id="sysHttpJobApiService" interface="cn.integriti.center.api.service.SysHttpJobApiService" version="1.0.0"></dubbo:reference>-->
-
-	<!--<dubbo:reference id="sysJobGroupApiService" interface="cn.integriti.center.api.service.SysJobGroupApiService" version="1.0.0"></dubbo:reference>-->
-
 
 </beans>

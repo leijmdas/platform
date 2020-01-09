@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -27,22 +28,23 @@ public class MailServiceImpl {
 	@Autowired
 	private MailSender mailSender;
 
-	public void sendEmail (String to, String subject, String content, List<String> attachFiles) {
-		mailSender.sendEmail(to,subject,content,attachFiles);
-	}
-	public void sendEmail (String to, String subject, String content, String attachFile ) {
-		List<String> attachFiles=new ArrayList<>();
-		attachFiles.add(attachFile);
-		mailSender.sendEmail(to,subject,content,attachFiles);
+	public void sendEmail(String to, String subject, String content, List<String> attachFiles) {
+		mailSender.sendEmail(to, subject, content, attachFiles);
 	}
 
-	public void sendEmail (String to, String subject, String content ) {
-		mailSender.sendEmail(to,subject,content,null);
+	public void sendEmail(String to, String subject, String content, String attachFile) {
+		List<String> attachFiles = new ArrayList<>();
+		attachFiles.add(attachFile);
+		mailSender.sendEmail(to, subject, content, attachFiles);
+	}
+
+	public void sendEmail(String to, String subject, String content) {
+		mailSender.sendEmail(to, subject, content, null);
 	}
 
 	@Service
-	public static class MailSender{
-		
+	public static class MailSender {
+
 		@Autowired
 		private JavaMailSender javaMailSender;
 
@@ -54,7 +56,9 @@ public class MailServiceImpl {
 
 		@Value("${mail.recipients}")
 		private String recipients;
-		private void sendEmail (String to, String subject, String content, List<String> attachFiles) {
+
+		@Async("pfThreadPool")
+		public void sendEmail(String to, String subject, String content, List<String> attachFiles) {
 
 			try {
 				MimeMessage message = javaMailSender.createMimeMessage();
@@ -77,20 +81,20 @@ public class MailServiceImpl {
 				logger.error("发送HTML邮件失败：", e);
 			}
 		}
-
-		public void send(String subject,String content) throws MessagingException, UnsupportedEncodingException{
-			if ( this.getRecipientList() == null || this.getRecipientList().length == 0) {
-				return;
-			}
-			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-			helper.setTo(this.getRecipientList());
-			
-			helper.setFrom(new InternetAddress(String.format("%s <%s>", MimeUtility.encodeText(sendernick), sender)));
-			helper.setSubject(subject);
-			helper.setText(content);
-			javaMailSender.send(mimeMessage);
-		}
+//
+//		public void send(String subject,String content) throws MessagingException, UnsupportedEncodingException{
+//			if ( this.getRecipientList() == null || this.getRecipientList().length == 0) {
+//				return;
+//			}
+//			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+//			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+//			helper.setTo(this.getRecipientList());
+//
+//			helper.setFrom(new InternetAddress(String.format("%s <%s>", MimeUtility.encodeText(sendernick), sender)));
+//			helper.setSubject(subject);
+//			helper.setText(content);
+//			javaMailSender.send(mimeMessage);
+//		}
 
 		public JavaMailSender getJavaMailSender() {
 			return javaMailSender;

@@ -7,7 +7,7 @@ import com.kunlong.api.model.MetadataFieldModelDTO;
 import com.kunlong.api.service.MailApiService;
 import com.kunlong.api.service.MetadataDictApiService;
 import com.kunlong.api.service.MetadataFieldApiService; ;
-import com.kunlong.platform.PfControllerApp;
+import com.kunlong.platform.PfCtrlApp;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Before;
@@ -26,7 +26,7 @@ import java.util.List;
  * @description:
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = PfControllerApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = PfCtrlApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 public class TestDubbo {
     @Reference(lazy = true, version = "1.0.0")

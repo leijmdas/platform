@@ -1,6 +1,9 @@
 package com.kunlong.platform;
 
 import com.kunlong.PfApp;
+import com.kunlong.platform.config.threadpool.TaskExecutePool;
+import com.kunlong.platform.config.threadpool.ThreadPoolConfig;
+import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.dao.DictConfigMapper;
 import com.kunlong.platform.dao.MetadataFieldModelMapper;
 import com.kunlong.platform.domain.MetadataFieldModel;
@@ -17,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 /**
  * 
@@ -40,6 +44,12 @@ public class TestMetadata {
 
     @Autowired
     DictConfigMapper dictConfigMapper;
+
+    @Autowired
+    ThreadPoolConfig threadPoolConfig;
+
+    @Autowired
+    TaskExecutePool taskExecutePool;
 
     @Before
     public void setup() {
@@ -79,16 +89,23 @@ public class TestMetadata {
     }
 
     @Test
-    public void  test0004_sendMailServiceImpl()
-    {
-        mailService.sendEmail("leijmdas_s@163.com","test","test");
+    public void test0004_sendMailServiceImpl() {
+        mailService.sendEmail("leijmdas_s@163.com", "test", "test");
 
     }
 
     @Test
-    public void  test0005_sendMailServiceAtrtach()
-    {
-        mailService.sendEmail("leijmdas_s@163.com","test","test","c:/1.png");
+    public void test0005_sendMailServiceAtrtach() {
+        mailService.sendEmail("leijmdas_s@163.com", "test", "test", "c:/1.png");
+
+    }
+
+    @Test
+    public void test0006_threadPoolConfig() {
+        System.out.println(threadPoolConfig);
+        Executor executor = AppKlongContext.getAppCtxt().getBean("pfThreadPool", Executor.class);
+        //executor.execute();
+        System.out.println(executor);
 
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableAsync;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
@@ -27,13 +28,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableDubboConfig
 @EnableSwagger2
 @EnableCaching
-public class PfControllerApp {
-    private static final Logger logger = LoggerFactory.getLogger(PfControllerApp.class);
+@EnableAsync
+public class PfCtrlApp {
+    private static final Logger logger = LoggerFactory.getLogger(PfCtrlApp.class);
 
 
     public static void main(String[] args) {
         Class[] classes = new Class[]{
-                PfControllerApp.class
+                PfCtrlApp.class
         };
         SpringApplication.run(classes, args);
     }
