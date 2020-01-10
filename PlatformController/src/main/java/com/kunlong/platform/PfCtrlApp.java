@@ -34,6 +34,8 @@ public class PfCtrlApp {
 
 
     public static void main(String[] args) {
+        //邮件附件名称不会变
+        System.setProperty("mail.mime.splitlongparameters","false");
         Class[] classes = new Class[]{
                 PfCtrlApp.class
         };

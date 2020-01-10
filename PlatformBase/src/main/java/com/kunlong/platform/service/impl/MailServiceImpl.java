@@ -59,7 +59,7 @@ public class MailServiceImpl {
 
 		@Async("pfThreadPool")
 		public void sendEmail(String to, String subject, String content, List<String> attachFiles) {
-
+			//System.setProperty("mail.mime.splitlongparameters","false");
 			try {
 				MimeMessage message = javaMailSender.createMimeMessage();
 				MimeMessageHelper helper;
