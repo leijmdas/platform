@@ -28,18 +28,25 @@ public class MetadataController extends BaseController {
 
 	@Reference(lazy = true, version = "${dubbo.service.version}")
 	MetadataDictApiService metadataDictApiService;
+
 	@Reference(lazy = true, version = "${dubbo.service.version}")
 	MetadataFieldApiService metadataFieldApiService;
 
-	@PostMapping("/queryDicts")
+	@PostMapping("/queryTables")
 	public @ResponseBody
-	List<MetadataDictModelDTO> queryDicts(@RequestBody MetadataDictModelQueryDTO qp) {
+	PageResult<MetadataDictModelDTO> queryTables(@RequestBody MetadataDictModelQueryDTO qp) {
 		if (qp.getParam() == null) {
 			qp.setParam(new MetadataDictModelDTO());
 
 		}
-		return this.metadataDictApiService.query(qp);
+		List<MetadataDictModelDTO> models = metadataDictApiService.query(qp);
+		PageResult<MetadataDictModelDTO> pageResult = new PageResult<MetadataDictModelDTO>();
+		pageResult.setData(models);
+		pageResult.setTotal(metadataDictApiService.countByQueryParam(qp));
+
+		return pageResult;
 	}
+
 
 	@PostMapping("/queryFields")
 	public @ResponseBody
@@ -49,11 +56,26 @@ public class MetadataController extends BaseController {
 
 		}
 		List<MetadataFieldModelDTO> models = this.metadataFieldApiService.query(qp);
+		for(MetadataFieldModelDTO model : models){
+			model.setMetadataDictModel(metadataDictApiService.findById(model.getMetadataId()));
+		}
+
 		PageResult<MetadataFieldModelDTO> pageResult = new PageResult<MetadataFieldModelDTO>();
 		pageResult.setData(models);
 		pageResult.setTotal(metadataFieldApiService.countByQueryParam(qp));
 
 		return pageResult;
+	}
+
+
+	@PostMapping("/queryDicts")
+	public @ResponseBody
+	List<MetadataDictModelDTO> queryDicts(@RequestBody MetadataDictModelQueryDTO qp) {
+		if (qp.getParam() == null) {
+			qp.setParam(new MetadataDictModelDTO());
+
+		}
+		return this.metadataDictApiService.query(qp);
 	}
 
 	@PostMapping("/queryFieldsByTable")

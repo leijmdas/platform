@@ -5,7 +5,6 @@ import com.kunlong.platform.utils.KunlongUtils;
 
 import java.math.BigDecimal;
 
-//@NewScope("prototype")
 public class KunlongModel {
 
     protected BigDecimal newBigDecimal(float value) {
@@ -26,10 +25,8 @@ public class KunlongModel {
     }
 
     public void log(String title) {
-     //   YtbLog.logDebug(title, this);
     }
 
     public void log() {
-    //   YtbLog.logDebug(this.getClass().getName(), this);
     }
 }

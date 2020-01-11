@@ -11,22 +11,24 @@ public interface MetadataDictApiService {
      * @param
      * @return
      */
-    public List<MetadataDictModelDTO> query(MetadataDictModelQueryDTO queryParam);
-    public MetadataDictModelDTO findByName(String name);
+    List<MetadataDictModelDTO> query(MetadataDictModelQueryDTO queryParam);
+    long countByQueryParam(MetadataDictModelQueryDTO queryParam);
 
-    public MetadataDictModelDTO findById(Integer pk);
+    MetadataDictModelDTO findByName(String name);
+
+    MetadataDictModelDTO findById(Integer pk);
     /**
      * 通过非空属性查询
      * @param
      * @return
      */
-    public List<MetadataDictModelDTO> findByNotNullProps(MetadataDictModelDTO entity);
+    List<MetadataDictModelDTO> findByNotNullProps(MetadataDictModelDTO entity);
     /**
      * 通过主键更新非空属性
      * @param entity
      * @return
      */
-    public void updateNotNullPropsById(MetadataDictModelDTO entity);
+    void updateNotNullPropsById(MetadataDictModelDTO entity);
 
 
 

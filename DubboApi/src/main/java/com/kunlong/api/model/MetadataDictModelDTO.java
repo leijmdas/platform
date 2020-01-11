@@ -269,4 +269,6 @@ public class MetadataDictModelDTO extends KunlongApiModel implements Serializabl
     	this.expTagtableHead = expTagtableHead;
     }
     // ==== 自定义属性 ====
+
+
 }

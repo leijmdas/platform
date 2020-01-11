@@ -353,4 +353,18 @@ public class MetadataFieldModelDTO implements Serializable {
     	this.fieldMax = fieldMax;
     }
     // ==== 自定义属性 ====
+
+	MetadataDictModelDTO metadataDictModel;
+
+
+
+	public MetadataDictModelDTO getMetadataDictModel() {
+		return metadataDictModel;
+	}
+
+	public void setMetadataDictModel(MetadataDictModelDTO metadataDictModel) {
+		this.metadataDictModel = metadataDictModel;
+	}
+
+
 }

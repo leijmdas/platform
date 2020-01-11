@@ -47,6 +47,19 @@ public class MetadataDictApiServiceProvider implements MetadataDictApiService {
     }
 
     @Override
+    public long countByQueryParam(MetadataDictModelQueryDTO qp) {
+        MetadataDictModel.QueryParam queryParam = JSON.parseObject(KunlongUtils.toJSONString(qp), MetadataDictModel.QueryParam.class);
+        if(queryParam.getParam()==null){
+            queryParam.setParam(new MetadataDictModel());
+        }
+        queryParam.setLimit(-1);
+        queryParam.setStart(0);
+        return  metadataDictModelService.countByQueryParam(queryParam);
+
+
+    }
+
+    @Override
     public MetadataDictModelDTO findByName(String tableName) {
         MetadataDictModel.QueryParam queryParam = new MetadataDictModel.QueryParam();
         queryParam.setParam(new MetadataDictModel());
