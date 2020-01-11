@@ -2,10 +2,12 @@ package com.kunlong.mybatis;
 
 import com.kunlong.platform.utils.SqlSessionUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+
 
 public class KunlongSql {
     public static SqlSessionUtil sqlSessionUtil = new SqlSessionUtil();

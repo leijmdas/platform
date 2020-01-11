@@ -1,16 +1,20 @@
 package com.kunlong.platform.utils;
 
 import com.github.abel533.sql.SqlMapper;
+import com.kunlong.api.dto.queryParam.MetadataQueryDTO;
+import com.kunlong.api.model.SelectSqlDTO;
 import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.model.KunlongError;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component
 public class SqlSessionUtil {
 
 
@@ -42,6 +46,17 @@ public class SqlSessionUtil {
         sql.append(")");
         return selectOne(sql, String.class);
 
+    }
+
+    public  List<Map<String, Object>>  selectList(String sql ) {
+
+        SqlSession session = getSession();
+        try {
+            SqlMapper m = new SqlMapper(session);
+            return m.selectList(sql.toString());
+        } finally {
+            if (session != null) session.close();
+        }
     }
 
     public <T> List<T> selectList(String sql, Class<T> resultType) {
@@ -86,6 +101,26 @@ public class SqlSessionUtil {
             SqlMapper m = new SqlMapper(session);
             m.update(sql.toString());
             return selectAutoID(session);
+        }
+    }
+    public long countTable(MetadataQueryDTO qp) {
+        qp.getParam().setStart(qp.getStart());
+        qp.getParam().setLimit(qp.getLimit());
+
+
+        try (SqlSession session = getSession()) {
+            SqlMapper m = new SqlMapper(session);
+            return m.selectOne(qp.getParam().buildCountSql().toString(),Long.class);
+        }
+    }
+
+    public List<Map<String, Object>> selectTable(MetadataQueryDTO qp) {
+        qp.getParam().setStart(qp.getStart());
+        qp.getParam().setLimit(qp.getLimit());
+
+        try (SqlSession session = getSession()) {
+            SqlMapper m = new SqlMapper(session);
+            return m.selectList(qp.getParam().buildSql().toString());
         }
     }
 

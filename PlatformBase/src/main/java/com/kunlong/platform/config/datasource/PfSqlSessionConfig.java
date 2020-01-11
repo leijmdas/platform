@@ -1,4 +1,4 @@
-package com.kunlong.platform.config;
+package com.kunlong.platform.config.datasource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;

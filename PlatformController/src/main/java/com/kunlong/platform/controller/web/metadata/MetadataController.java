@@ -1,7 +1,6 @@
 package com.kunlong.platform.controller.web.metadata;
 
 import app.support.query.PageResult;
-import cn.integriti.center.api.model.SysOrgDTO;
 import com.kunlong.api.dto.queryParam.MetadataDictModelQueryDTO;
 import com.kunlong.api.dto.queryParam.MetadataFieldModelQueryDTO;
 import com.kunlong.api.model.MetadataDictModelDTO;

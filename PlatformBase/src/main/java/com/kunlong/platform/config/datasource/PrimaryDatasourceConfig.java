@@ -1,8 +1,10 @@
-package com.kunlong.platform.config;
+package com.kunlong.platform.config.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.kunlong.platform.consts.PfAppConsts;
+import com.kunlong.platform.consts.PrimaryAppConsts;
+
 import org.apache.ibatis.session.SqlSessionFactory;
+//import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;
 import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -20,26 +22,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;
-// location =“classpath：/ properties / $ {spring.profiles .active：test} /some.properties“/>
+@Configuration
+public class PrimaryDatasourceConfig extends PrimaryAppConsts {
 
-@Configuration( "pfDatasourceConfig" )
-//@PropertySource({"classpath:/datasource/datasource-${spring.profiles.active}.properties"})
-//@PropertySource({"classpath:/datasource/datasource-dev.properties"})
-public class PfDatasourceConfig extends PfAppConsts {
+	@Qualifier("DataSource")
 
-	@Qualifier("pfDataSource")
-	@Bean(name = "pfDataSource")
-	//@Bean(name = "primaryDataSource", destroyMethod = "close", initMethod = "init")
+	@Bean(name = "primaryDataSource", destroyMethod = "close", initMethod = "init")
 	@ConfigurationProperties(prefix = "spring.datasource.pf")
 	public DataSource primaryDataSource() {
-		DruidDataSource druidDataSource = new DruidDataSource();
-		return druidDataSource;
+		DruidDataSource druidDataSprimaryource = new DruidDataSource();
+		return druidDataSprimaryource;
 	}
 
-	@Bean(name = "pfSqlSessionFactory")
+	@Bean(name = "primarySqlSessionFactory")
 	@Primary
-	public SqlSessionFactory primarySqlSessionFactory(@Qualifier("pfDataSource") DataSource dataSource)
+	public SqlSessionFactory primarySqlSessionFactory(@Qualifier("primaryDataSource") DataSource dataSource)
 			throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
@@ -54,24 +51,24 @@ public class PfDatasourceConfig extends PfAppConsts {
 		
 		SqlSessionFactory sessionFactory = bean.getObject();
 		sessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
-		HbatisSqlSessionDaoSupport.setHbatisSessionFactory(sessionFactory);
+	    HbatisSqlSessionDaoSupport.setHbatisSessionFactory(sessionFactory);
 		return sessionFactory;
 	}
 
 
-	@Bean(name = "pfMapperScannerConfigurer")
+	@Bean
 	public MapperScannerConfigurer mapperScannerConfigurer() {
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-		mapperScannerConfigurer.setSqlSessionFactoryBeanName("pfSqlSessionFactory");
+		mapperScannerConfigurer.setSqlSessionFactoryBeanName("primarySqlSessionFactory");
 		mapperScannerConfigurer.setBasePackage(MYBATIS_BASE_PACKAGE);
 
 		return mapperScannerConfigurer;
 	}
 
-	@Bean(name = "pfTransactionManager")
+	@Bean(name = "primaryTransactionManager")
 	@Primary
 	public DataSourceTransactionManager primaryTransactionManager(
-			@Qualifier("pfDataSource") DataSource dataSource) {
+			@Qualifier("primaryDataSource") DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
 }
