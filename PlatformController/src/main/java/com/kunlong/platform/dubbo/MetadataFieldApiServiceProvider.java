@@ -1,6 +1,7 @@
 package com.kunlong.platform.dubbo;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.kunlong.api.dto.queryParam.MetadataFieldModelQueryDTO;
 import com.kunlong.api.model.MetadataDictModelDTO;
 import com.kunlong.api.model.MetadataFieldModelDTO;
@@ -28,6 +29,12 @@ public class MetadataFieldApiServiceProvider implements MetadataFieldApiService 
     @Autowired
     MetadataFieldModelService metadataFieldModelService;
 
+
+    <T> List<T> transfer2Model(String text, Class<T> cls) {
+        return JSON.parseArray(text,cls);
+
+    }
+
     @Override
     public List<MetadataFieldModelDTO> query(MetadataFieldModelQueryDTO qp) {
         MetadataFieldModel.QueryParam queryParam = JSON.parseObject(KunlongUtils.toJSONString(qp), MetadataFieldModel.QueryParam.class);
@@ -37,7 +44,8 @@ public class MetadataFieldApiServiceProvider implements MetadataFieldApiService 
 //        queryParam.setLimit(-1);
 //        queryParam.setStart(0);
         List<MetadataFieldModel> metadataDictModels = metadataFieldModelService.findByQueryParam(queryParam);
-        return JSON.parseObject(KunlongUtils.toJSONString(metadataDictModels), List.class);
+
+        return JSON.parseArray(JSON.toJSONString(metadataDictModels), MetadataFieldModelDTO.class);
 
     }
 
@@ -63,7 +71,8 @@ public class MetadataFieldApiServiceProvider implements MetadataFieldApiService 
         qp.setStart(0);
         qp.getParam().setMetadataId(dictModel.getMetadataId());
         List<MetadataFieldModel> models = metadataFieldModelService.findByQueryParam(qp);
-        return JSON.parseObject(KunlongUtils.toJSONString(models), List.class);
+        //return JSON.parseObject(KunlongUtils.toJSONString(models), List.class);
+        return JSON.parseArray(JSON.toJSONString(models), MetadataFieldModelDTO.class);
 
     }
 

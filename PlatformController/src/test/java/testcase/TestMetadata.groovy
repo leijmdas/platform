@@ -9,6 +9,7 @@ import com.jtest.testframe.ITestImpl
 import com.jtest.utility.testlog.TestLog
 import com.kunlong.platform.context.RestMessage.MsgRequest
 import com.kunlong.platform.context.RestMessage.MsgResponse
+import org.apache.curator.framework.CuratorFrameworkFactory
 import testcase.pub.ManagerLogin
 
 @JTestClass.author("leijm")
@@ -391,7 +392,10 @@ public class TestMetadata extends ITestImpl {
         checkEQ(0, resp.getRetcode());
         System.out.println(resp);
     }
+
+
     public static void main(String[] args) {
+        CuratorFrameworkFactory l;
         run(TestMetadata.class, 15);
     }
 }

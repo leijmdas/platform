@@ -56,10 +56,9 @@ public class MetadataController extends BaseController {
 
 		}
 		List<MetadataFieldModelDTO> models = this.metadataFieldApiService.query(qp);
-		for(MetadataFieldModelDTO model : models){
-			model.setMetadataDictModel(metadataDictApiService.findById(model.getMetadataId()));
+		for(MetadataFieldModelDTO model :models){
+			model.setMetadataDictModel(this.metadataDictApiService.findById(model.getMetadataId()));
 		}
-
 		PageResult<MetadataFieldModelDTO> pageResult = new PageResult<MetadataFieldModelDTO>();
 		pageResult.setData(models);
 		pageResult.setTotal(metadataFieldApiService.countByQueryParam(qp));

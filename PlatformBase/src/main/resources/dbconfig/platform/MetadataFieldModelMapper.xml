@@ -173,11 +173,12 @@
 		from metadata_field mf where 1=1
 		<include refid="Condition_FindByQueryParam"></include>
 		<if test="queryParam.sortOrders!=null and queryParam.sortOrders.size() gt 0">
-			order by 
+			order by
 			<foreach collection="queryParam.sortOrders" item="item" separator=",">
 				${item.sortField.sqlColumn} ${item.sortType}
 			</foreach>
 		</if>
+		order by metadata_id,field_order
 		<if test="queryParam.limit gt 0">
 	  		limit ${queryParam.start},${queryParam.limit}
 	  	</if>

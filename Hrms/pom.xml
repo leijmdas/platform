@@ -34,7 +34,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.1.8.RELEASE</version>
+                <version>${spring-boot.version}</version>
 
                 <configuration>
                     <mainClass>com.kunlong.hrms.HrmsApp</mainClass>
