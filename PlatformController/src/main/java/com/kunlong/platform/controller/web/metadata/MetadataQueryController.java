@@ -26,6 +26,7 @@ import java.util.Map;
 public class MetadataQueryController extends BaseController {
 	@Autowired
 	SqlSessionUtil sqlSessionUtil;
+
 	@Autowired
 	MetadataDictService metadataDictService;
 
