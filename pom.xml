@@ -20,9 +20,6 @@
     <modules>
         <module>System</module>
         <module>SystemController</module>
-        <module>Hrms</module>
-        <module>Tasklog</module>
-        <module>Right</module>
         <module>PlatformBase</module>
         <module>PlatformDubbo</module>
         <module>PlatformController</module>
