@@ -2,7 +2,6 @@ package com.kunlong.platform.utils;
 
 import com.github.abel533.sql.SqlMapper;
 import com.kunlong.api.dto.queryParam.MetadataQueryDTO;
-import com.kunlong.api.model.SelectSqlDTO;
 import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.model.KunlongError;
 import org.apache.ibatis.session.SqlSession;
