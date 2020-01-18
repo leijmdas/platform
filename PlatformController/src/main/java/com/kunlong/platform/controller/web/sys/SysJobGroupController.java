@@ -2,9 +2,9 @@ package com.kunlong.platform.controller.web.sys;
 
 
 import app.support.query.PageResult;
-import cn.integriti.center.api.dto.queryParam.SysJobGroupQueryDTO;
-import cn.integriti.center.api.model.SysJobGroupDTO;
-import cn.integriti.center.api.service.SysJobGroupApiService;
+import cn.kunlong.center.api.dto.queryParam.SysJobGroupQueryDTO;
+import cn.kunlong.center.api.model.SysJobGroupDTO;
+import cn.kunlong.center.api.service.SysJobGroupApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;

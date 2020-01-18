@@ -2,8 +2,9 @@ package com.kunlong.platform.controller.web;
 
 import com.kunlong.platform.controller.web.exceptionHandler.ExceptionInfo;
 import com.kunlong.platform.controller.web.exceptionHandler.ExceptionWraper;
+import com.kunlong.platform.exception.ApiBusinessException;
 import com.kunlong.platform.exception.ClientResponseException;
-import com.xw.ipark.api.exception.ApiBusinessException;
+//import com.xw.ipark.api.exception.ApiBusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;

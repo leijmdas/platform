@@ -2,10 +2,11 @@ package com.kunlong.platform.controller.web.sys;
 
 
 import app.support.query.PageResult;
-import cn.integriti.center.api.dto.queryParam.SysDictQueryDTO;
-import cn.integriti.center.api.model.SysDictDTO;
-import cn.integriti.center.api.model.SysDictItemDTO;
-import cn.integriti.center.api.service.SysDictApiService;
+
+import cn.kunlong.center.api.dto.queryParam.SysDictQueryDTO;
+import cn.kunlong.center.api.model.SysDictDTO;
+import cn.kunlong.center.api.model.SysDictItemDTO;
+import cn.kunlong.center.api.service.SysDictApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
 import org.apache.dubbo.config.annotation.Reference;

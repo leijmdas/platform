@@ -46,6 +46,19 @@ public class RedisService {
 
     }
 
+
+    public void setPicCode(String ip, String code) {
+        redisTemplate.expire(ip,10, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(ip, code);
+
+    }
+
+
+    public String getPicCode(String ip) {
+        return getKey(ip);
+
+    }
+
     public void setLoginSso(String key, LoginSso value) {
         redisTemplate.expire(key,1, TimeUnit.DAYS);
         redisTemplate.opsForValue().set(key, value.toString());

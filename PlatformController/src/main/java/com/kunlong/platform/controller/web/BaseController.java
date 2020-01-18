@@ -1,6 +1,6 @@
 package com.kunlong.platform.controller.web;
 
-import cn.integriti.center.api.model.SysUserDTO;
+import cn.kunlong.center.api.model.SysUserDTO;
 import com.kunlong.platform.consts.SessionKeyEnum;
 import com.kunlong.platform.util.SessionHolder;
 import org.springframework.util.Assert;

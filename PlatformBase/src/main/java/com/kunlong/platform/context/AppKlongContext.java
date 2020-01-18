@@ -35,7 +35,7 @@ public class AppKlongContext implements ApplicationContextAware {
 
     public static RedisService getRedisService() {
         if (redisService == null) {
-            redisService = appCtxt.getBean("restTemplate", RedisService.class);
+            redisService = appCtxt.getBean("redisService", RedisService.class);
 
         }
         return redisService;

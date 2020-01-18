@@ -1,8 +1,11 @@
 package com.kunlong.platform.service;
 
 
+import app.support.context.DefaultRequestContextFactory;
+import app.support.context.RequestContext;
 import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.kunlong.platform.consts.RequestContextConst;
 import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.model.LoginSso;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +57,25 @@ public final class LoginContext {
          
     }
 
+    static void setPicCode(String code) {
+        //AppKlongContext.getRedisService().setPicCode(ip,capText);
+        RequestContext ctx = DefaultRequestContextFactory.getInstance().getRequestContext();
+        if (ctx == null) {
+            ctx = DefaultRequestContextFactory.getInstance().create();
+        }
+        ctx.setAttribute(RequestContextConst.KEY_SESSIONKEY_PIC, code);
+
+    }
+
+    public String getPicCode() {
+        //AppKlongContext.getRedisService().setPicCode(ip,capText);
+        RequestContext ctx = DefaultRequestContextFactory.getInstance().getRequestContext();
+        if (ctx == null) {
+            ctx = DefaultRequestContextFactory.getInstance().create();
+        }
+        return (String)ctx.getAttribute( RequestContextConst.KEY_SESSIONKEY_PIC  );
+
+    }
 
     public static void genPicCode(String ip, HttpServletResponse response) throws IOException {
 
@@ -64,7 +86,8 @@ public final class LoginContext {
         response.setContentType("image/jpeg");
         DefaultKaptcha captchaProducer = AppKlongContext.getAppCtxt().getBean("captchaProducer", DefaultKaptcha.class);
         String capText =  captchaProducer.createText().substring(0,4);
-        //EhcacheContext.getEhcacheContext().getCachePicCode().put(ip,capText);
+
+        setPicCode(capText);
         BufferedImage bi = captchaProducer.createImage(capText);
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(bi, "jpg", out);

@@ -1,8 +1,8 @@
 package com.kunlong.platform.controller.web;
 
 
-import cn.integriti.center.api.dto.FileInfoDTO;
-import cn.integriti.center.api.service.FileApiService;
+import cn.kunlong.center.api.dto.FileInfoDTO;
+import cn.kunlong.center.api.service.FileApiService;
 import com.kunlong.platform.util.FileHelper;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;

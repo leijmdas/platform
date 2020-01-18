@@ -2,9 +2,9 @@ package com.kunlong.platform.controller.web.sys;
 
 import app.support.query.PageResult;
 import app.support.tree.TreeNode;
-import cn.integriti.center.api.dto.queryParam.SysOrgQueryDTO;
-import cn.integriti.center.api.model.SysOrgDTO;
-import cn.integriti.center.api.service.SysOrgApiService;
+import cn.kunlong.center.api.dto.queryParam.SysOrgQueryDTO;
+import cn.kunlong.center.api.model.SysOrgDTO;
+import cn.kunlong.center.api.service.SysOrgApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
 import org.apache.dubbo.config.annotation.Reference;

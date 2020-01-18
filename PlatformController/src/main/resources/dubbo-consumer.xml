@@ -14,6 +14,6 @@
     </dubbo:reference>
     <!-- 远程服务代理 -->
    
-    <!--<dubbo:reference id="fileApiService" interface="cn.integriti.center.api.service.FileApiService" version="1.0.0"></dubbo:reference>-->
+    <!--<dubbo:reference id="fileApiService" interface="cn.kunlong.center.api.service.FileApiService" version="1.0.0"></dubbo:reference>-->
 
 </beans>

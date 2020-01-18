@@ -1,6 +1,6 @@
 package testcase;
 
-import cn.integriti.center.api.service.SysUserApiService;
+import cn.kunlong.center.api.service.SysUserApiService;
 import com.kunlong.api.dto.queryParam.MetadataFieldModelQueryDTO;
 import com.kunlong.api.model.MetadataDictModelDTO;
 import com.kunlong.api.model.MetadataFieldModelDTO;

@@ -1,10 +1,10 @@
 package com.kunlong.platform.controller.web.sys;
 
 import app.support.query.PageResult;
-import cn.integriti.center.api.dto.queryParam.SysUserQueryDTO;
-import cn.integriti.center.api.model.AuthorizationDTO;
-import cn.integriti.center.api.model.SysUserDTO;
-import cn.integriti.center.api.service.SysUserApiService;
+import cn.kunlong.center.api.dto.queryParam.SysUserQueryDTO;
+import cn.kunlong.center.api.model.AuthorizationDTO;
+import cn.kunlong.center.api.model.SysUserDTO;
+import cn.kunlong.center.api.service.SysUserApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
 import org.apache.dubbo.config.annotation.Reference;

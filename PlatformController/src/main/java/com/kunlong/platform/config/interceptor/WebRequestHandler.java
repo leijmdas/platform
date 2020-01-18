@@ -57,11 +57,11 @@ public class WebRequestHandler implements HandlerInterceptor {
 			session.flush();
 		}
 		RequestContext ctx = DefaultRequestContextFactory.getInstance().getRequestContext();
-		
+
 		if (ctx == null) {
 			ctx = DefaultRequestContextFactory.getInstance().create();
 		}
-		
+
 		ctx.setAttribute(RequestContextConst.KEY_SESSIONKEY, token);
 		return true;
 	}

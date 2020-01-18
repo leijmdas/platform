@@ -1,7 +1,5 @@
 package com.kunlong.platform.exception;
 
-import com.xw.ipark.api.exception.ApiBusinessException;
-
 public class ClientResponseException extends ApiBusinessException {
 
 	public ClientResponseException(String msg) {

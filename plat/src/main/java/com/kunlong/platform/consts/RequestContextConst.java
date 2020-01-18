@@ -2,7 +2,8 @@ package com.kunlong.platform.consts;
 
 public class RequestContextConst {
 
-	
+	public static final String KEY_SESSIONKEY_PIC = "sessionKeyPic";
+
 	/**
 	 * sessionkey/id
 	 */

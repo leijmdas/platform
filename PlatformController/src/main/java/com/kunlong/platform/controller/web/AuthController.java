@@ -1,9 +1,10 @@
 package com.kunlong.platform.controller.web;
 
 import app.support.session.ISessionHolder;
-import cn.integriti.center.api.model.SysUserDTO;
-import cn.integriti.center.api.service.SysUserApiService;
+import cn.kunlong.center.api.model.SysUserDTO;
+import cn.kunlong.center.api.service.SysUserApiService;
 import com.kunlong.platform.consts.SessionKeyEnum;
+import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.util.SessionHolder;
 import com.kunlong.platform.support.service.AuthService;
 
@@ -32,7 +33,11 @@ public class AuthController extends BaseController {
 	 */
 	@RequestMapping(value="login",method = RequestMethod.POST)
 	public @ResponseBody
-	AuthService.AuthToken login(String username, String password) {
+	AuthService.AuthToken login(String username, String password, String verifyCode) {
+		String code = AppKlongContext.getLoginContext().getPicCode();
+		if (!verifyCode.equalsIgnoreCase(code)) {
+			//throw new RuntimeException("验证码不正确!");
+		}
 		SysUserDTO su = userService.checkPass(1,username,password);
 		AuthService.AuthToken at  = this.authService.createToken("web:user:"+su.getId());
 		ISessionHolder sessionHolder = SessionHolder.create(at.getToken());

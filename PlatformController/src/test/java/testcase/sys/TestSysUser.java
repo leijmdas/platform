@@ -1,7 +1,7 @@
 package testcase.sys;
 
 
-import cn.integriti.center.api.dto.queryParam.SysUserQueryDTO;
+import cn.kunlong.center.api.dto.queryParam.SysUserQueryDTO;
 import com.alibaba.fastjson.JSON;
 import com.jtest.NodesFactroy.Inject.Inject;
 import com.jtest.NodesFactroy.Node.HttpClientNode;

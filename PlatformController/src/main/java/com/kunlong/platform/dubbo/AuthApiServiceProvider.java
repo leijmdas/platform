@@ -1,18 +1,19 @@
 package com.kunlong.platform.dubbo;
 
-import cn.integriti.center.api.model.SysUserDTO;
+import cn.kunlong.center.api.model.SysUserDTO;
 import com.kunlong.api.service.AuthApiService;
 import com.kunlong.platform.consts.SessionKeyEnum;
 import com.kunlong.platform.util.SessionHolder;
 import org.apache.dubbo.config.annotation.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
+import org.mybatis.logging.LoggerFactory;
+
 
 import java.util.Map;
 
 @Service(version = "${dubbo.service.version}",interfaceClass = AuthApiService.class)
 public class AuthApiServiceProvider implements AuthApiService {
-    private static final Logger logger = LoggerFactory.getLogger(AuthApiServiceProvider.class);
+    //private static final Logger logger = LoggerFactory.getLogger(AuthApiServiceProvider.class);
 
 
 
@@ -28,10 +29,12 @@ public class AuthApiServiceProvider implements AuthApiService {
         return true;
     }
 
-//    @Override
-//    public SysUserDTO getCurrentSysUser(String token) {
-//        return null;
-//    }
+    @Override
+    public SysUserDTO getCurrentSysUser(String token) {
+        Map<Object, Object> vals = this.getSessionValues(token);
+        return (SysUserDTO) vals.get(SessionKeyEnum.WEB_USER.getKey());
+
+    }
 
     public Map<Object,Object> getSessionValues(String key){
         Map<Object, Object> sessionValues = SessionHolder.getInstance(key).getValues();
@@ -41,9 +44,9 @@ public class AuthApiServiceProvider implements AuthApiService {
 
 
     public Integer getCurrentUserId(String token) {
-        Map<Object,Object> vals = this.getSessionValues(token);
-        Integer userId = (Integer)vals.get(SessionKeyEnum.APP_USERID.getKey());
-        return userId;
+        SysUserDTO sysUserDTO = getCurrentSysUser(token);
+
+        return sysUserDTO.getId();
 
     }
 

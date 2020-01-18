@@ -234,8 +234,20 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
             throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, "字典未定义");
         }
 
+        if (metadataDictService.checkTableExists(metadataDict.getMetadataDb(), metadataDict.getMetadataName())) {
+            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, " 表已经存在！");
+//            updateMake(metadataId, metadataDict);
+//
+//            msgBody = "{'sql': 'make Table OK'}";
+//            return handler.buildMsg(retcode, retmsg, msgBody);
+        }
 
+        firstMake(metadataId, metadataDict);
+        msgBody = "{'sql': 'make Table first OK'}";
+        return handler.buildMsg(retcode, retmsg, msgBody);
+    }
 
+    void updateMake(Integer metadataId, MetadataDict metadataDict) {
         MetadataFieldExample metadataFieldExampleKey = new MetadataFieldExample();
         MetadataFieldExample.Criteria fieldExampleCriteriaKey = metadataFieldExampleKey.createCriteria();
         fieldExampleCriteriaKey.andFieldPkEqualTo(true);
@@ -315,14 +327,92 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
         sql.append(" comment '").append(metadataDict.getMetadataAlias()).append("'; ");
 
         logger.info("sql ",sql);
-        System.out.println(sql.toString());
-
-        if (metadataDictService.checkTableExists(metadataDict.getMetadataDb(), metadataDict.getMetadataName())) {
-            throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, " 表已经存在！");
-        }
         KunlongSql.update(sql);
-        msgBody = "{'sql': 'make Table OK'}";
-        return handler.buildMsg(retcode, retmsg, msgBody);
+
+    }
+
+    void firstMake(Integer metadataId,MetadataDict metadataDict){
+        MetadataFieldExample metadataFieldExampleKey = new MetadataFieldExample();
+        MetadataFieldExample.Criteria fieldExampleCriteriaKey = metadataFieldExampleKey.createCriteria();
+        fieldExampleCriteriaKey.andFieldPkEqualTo(true);
+        fieldExampleCriteriaKey.andMetadataIdEqualTo(metadataId);
+        List<MetadataField> fieldListKey = metadataFieldService.selectByExample(metadataFieldExampleKey);
+        MetadataFieldExample metadataFieldExample = new MetadataFieldExample();
+        MetadataFieldExample.Criteria fieldExampleCriteria = metadataFieldExample.createCriteria();
+        fieldExampleCriteria.andMetadataIdEqualTo(metadataId);
+        metadataFieldExample.setOrderByClause("field_pk desc,field_order asc");
+        List<MetadataField> fieldList = metadataFieldService.selectByExample(metadataFieldExample);
+
+        //构造创建表的sql语句
+        StringBuilder sql = new StringBuilder();
+        sql.append("create table if not exists ");
+        sql.append(metadataDict.getMetadataDb()).append(".").append(metadataDict.getMetadataName());
+        sql.append("(");
+        for (int i = 0; i < fieldList.size(); i++) {
+            sql.append(fieldList.get(i).getFieldName()).append(" ");
+            if (isPCT(fieldList.get(i).getFieldType())
+                    || isMoney(fieldList.get(i).getFieldType())) {
+                sql.append(" DECIMAL ");
+            }
+            if (isTAGIMAGE(fieldList.get(i).getFieldType())
+                    || isMoney(fieldList.get(i).getFieldType())) {
+                sql.append(" INT ");
+            } else {
+                sql.append(fieldList.get(i).getFieldType());
+            }
+
+            if (isString(fieldList.get(i).getFieldType())) {
+                sql.append("(").append(fieldList.get(i).getFieldSize()).append(") ");
+            } else if (isDecimal(fieldList.get(i).getFieldType())) {
+                sql.append("(").append(fieldList.get(i).getFieldSize()).append(",2) ");
+            } else if (isPCT(fieldList.get(i).getFieldType())) {
+                sql.append("(8,4) ");
+            } else if (isMoney(fieldList.get(i).getFieldType())) {
+                sql.append("(12,2) ");
+            }
+
+
+            if (fieldList.get(i).getFieldPk() != null && fieldList.get(i).getFieldPk()) {
+                if (fieldList.get(i).getFieldPk() == true) {
+                    sql.append(" primary key NOT NULL ");
+                }
+                if (fieldList.get(i).getFieldAuto() == true) {
+                    sql.append("AUTO_INCREMENT ");
+                }
+            } else {
+                if (fieldList.get(i).getFieldIsnull()) {
+                    sql.append("  NULL ");
+                } else {
+                    sql.append("  NOT NULL ");
+                }
+
+                if (!isBlobText(fieldList.get(i).getFieldType()) && fieldList.get(i).getFieldDefault() != null && !fieldList.get(i).getFieldDefault().isEmpty()) {
+                    sql.append(" DEFAULT   ");
+                    if (isString(fieldList.get(i).getFieldType())) {
+                        sql.append("'").append(fieldList.get(i).getFieldDefault()).append("'");
+                    } else if (isDate(fieldList.get(i).getFieldType())) {
+                        if (fieldList.get(i).getFieldDefault() != null
+                                && fieldList.get(i).getFieldDefault().length() >= 10) {
+                            sql.append("'").append(fieldList.get(i).getFieldDefault()).append("'");
+                        } else {
+                            sql.append(fieldList.get(i).getFieldDefault());
+
+                        }
+                    } else {
+                        sql.append(fieldList.get(i).getFieldDefault());
+                    }
+                }
+            }
+            sql.append(" comment '").append(fieldList.get(i).getFieldMemo()).append(" ").append(fieldList.get(i).getFieldRemark()).append("' ,");
+        }
+
+        sql.deleteCharAt(sql.length() - 1);
+        sql.append(")" + " ENGINE=Innodb DEFAULT CHARSET=UTF8 COLLATE UTF8_BIN ");
+        sql.append(" comment '").append(metadataDict.getMetadataAlias()).append("'; ");
+
+        logger.info("sql ",sql);
+        KunlongSql.update(sql);
+
     }
 
     @Override
