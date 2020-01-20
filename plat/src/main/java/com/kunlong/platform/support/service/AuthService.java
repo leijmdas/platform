@@ -1,5 +1,7 @@
 package com.kunlong.platform.support.service;
 
+import java.io.Serializable;
+
 public interface AuthService {
 
 
@@ -7,7 +9,9 @@ public interface AuthService {
 	AuthToken createToken(String businessKey, long timeoutSeconds);
 	
 	AuthToken getToken(String token);
-	public static class AuthToken {
+	public static class AuthToken implements Serializable {
+		private static final long serialVersionUID = 1L;
+
 		private String token;
 		private long expiresIn;
 		private long createTime;

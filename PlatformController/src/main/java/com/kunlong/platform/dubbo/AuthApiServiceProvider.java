@@ -1,20 +1,22 @@
 package com.kunlong.platform.dubbo;
 
+import app.support.session.ISessionHolder;
 import cn.kunlong.center.api.model.SysUserDTO;
 import com.kunlong.api.service.AuthApiService;
 import com.kunlong.platform.consts.SessionKeyEnum;
+import com.kunlong.platform.support.service.AuthService;
 import com.kunlong.platform.util.SessionHolder;
 import org.apache.dubbo.config.annotation.Service;
-import org.apache.log4j.Logger;
-import org.mybatis.logging.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.util.Map;
 
 @Service(version = "${dubbo.service.version}",interfaceClass = AuthApiService.class)
 public class AuthApiServiceProvider implements AuthApiService {
-    //private static final Logger logger = LoggerFactory.getLogger(AuthApiServiceProvider.class);
 
+    @Autowired
+    private AuthService authService;
 
 
     @Override
@@ -47,6 +49,29 @@ public class AuthApiServiceProvider implements AuthApiService {
         SysUserDTO sysUserDTO = getCurrentSysUser(token);
 
         return sysUserDTO.getId();
+
+    }
+
+    @Override
+    public AuthService.AuthToken createToken(String businessKey, String propName, Object v, long timeoutSeconds) {
+
+        AuthService.AuthToken authToken = authService.createToken(businessKey, timeoutSeconds);
+        ISessionHolder sessionHolder = SessionHolder.create(authToken.getToken());
+        sessionHolder.setAttribute(propName, v);
+        return authToken;
+    }
+
+    @Override
+    public void setAttribute(String token, String propName, Object propValue) {
+        SessionHolder sessionHolder =SessionHolder.create(token);
+        sessionHolder.setAttribute(propName, propValue);
+
+    }
+
+
+    @Override
+    public Object getAttribute(String token, String propName) {
+        return SessionHolder.getInstance(token).getAttribute(propName);
 
     }
 

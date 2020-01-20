@@ -7,10 +7,10 @@
 	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
 	the specific language governing permissions and limitations under the License. -->
     <!--<configuration debug="false">-->
-	<configuration scan="false" scanPeriod="60 seconds" debug="false">
+	<configuration scan="false" scanPeriod="120 seconds" debug="false">
 
 	<!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
-	<property name="LOG_HOME" value="/platform/logs/pf" />
+	<property name="LOG_HOME" value="/opt/logs/pf" />
 	<!-- 控制台输出 -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -70,9 +70,9 @@
 	<logger name="org.quartz.core.QuartzSchedulerThread" level="INFO" />
 
 	<logger name="org.activiti" level="INFO"></logger>
-	<logger name="com.kunlong"  level="DEBUG"></logger>
-	<logger name="testcase"  level="DEBUG"></logger>
-	<logger name="com.kunlong.metadata.service.impl.SysMetaDataServiceImpl"  level="DEBUG"></logger>
+	<logger name="com.kunlong"  level="INFO"></logger>
+	<logger name="testcase"  level="INFO"></logger>
+	<!--<logger name="com.kunlong.metadata.service.impl.SysMetaDataServiceImpl"  level="INFO"></logger>-->
 
 	<!-- async log -->
 	<logger name="AsyncLog" level="INFO" additivity="false">
