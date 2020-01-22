@@ -8,15 +8,18 @@ import java.math.BigDecimal;
 //@NewScope("prototype")
 public class KunlongModel {
 
-    protected BigDecimal newBigDecimal(float value) {
+    public BigDecimal newBigDecimal(float value) {
         return new BigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
-    BigDecimal newBigDecimal(double value) {
+    public BigDecimal newBigDecimal(BigDecimal value) {
+        return  value.setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+    public BigDecimal newBigDecimal(double value) {
         return new BigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
-    BigDecimal newBigDecimal(int value) {
+    public BigDecimal newBigDecimal(int value) {
         return new BigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
@@ -26,10 +29,8 @@ public class KunlongModel {
     }
 
     public void log(String title) {
-     //   YtbLog.logDebug(title, this);
     }
 
     public void log() {
-    //   YtbLog.logDebug(this.getClass().getName(), this);
     }
 }
