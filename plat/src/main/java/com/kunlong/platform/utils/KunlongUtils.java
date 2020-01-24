@@ -8,6 +8,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -154,13 +155,22 @@ public final class KunlongUtils {
     }   */
 
 
-    //String url="http://admin.youtobon.com/rest/sysuser"; sysuser
-    /*
-     * sub_sysNo=ISubSystem.SS_Project
-     * url=sysuser/common
-     * data="{...}"
-     * */
 
 
+    public String transDatetime(Date d) {
+        if(d==null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(d);
+    }
+
+    public String transDate(Date d) {
+        if(d==null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(d);
+    }
 }
 

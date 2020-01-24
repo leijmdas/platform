@@ -11,63 +11,35 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("Json 返回结果")
 public class JsonResult<T> extends KunlongModel implements java.io.Serializable {
 
-	static String CODE_FAILER = "10001";
-	static String CODE_SUCCESS = "0";
-	/**
-	 * 是否成功
-	 */
-	@ApiModelProperty(name = "status", notes = "返回状态")
-	private boolean status;
+	static Integer CODE_FAIL  = 10001;
+	static Integer CODE_SUCCESS = 0;
+
+    @ApiModelProperty(name = "code", notes = "返回代码参数")
+    private Integer code;
 	@ApiModelProperty(name = "msg", notes = "完整信息")
 	private String msg;
-	@ApiModelProperty(name = "code", notes = "返回代码参数")
-	private String code;
-	/**
-	 * 数据
-	 */
-	@ApiModelProperty(name = "data", notes = "返回参数")
-	private T data;
 
-	public boolean isSuccess() {
-		return status;
-	}
-
-
-	public JsonResult<T> setSuccess(boolean success) {
-		this.status = success;
-		return this;
-	}
+    T data;
+    @ApiModelProperty(name = "status", notes = "返回状态")
+    private Integer subCode;
 
 
 	public JsonResult() {
 	}
 
 
-	private JsonResult(String code, boolean status) {
+	private JsonResult(Integer code    ) {
 		this.code = code;
-		this.status = status;
 		if(CODE_SUCCESS.equals(code)){
 			this.msg="成功";
 		}
-	}
+    }
 
 
-	private JsonResult(String code, boolean status, T data) {
-		this.code = code;
-		this.status = status;
-		this.data = data;
-	}
-
-
-	public boolean isStatus() {
-		return status;
-	}
-
-
-	public JsonResult<T> setStatus(boolean status) {
-		this.status = status;
-		return this;
-	}
+    private JsonResult(Integer code, T data) {
+        this.code = code;
+        this.data = data;
+    }
 
 
 	public String getMsg() {
@@ -81,12 +53,12 @@ public class JsonResult<T> extends KunlongModel implements java.io.Serializable 
 	}
 
 
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
 
 
-	public JsonResult<T> setCode(String code) {
+	public JsonResult<T> setCode(Integer code) {
 		this.code = code;
 		return this;
 	}
@@ -103,43 +75,36 @@ public class JsonResult<T> extends KunlongModel implements java.io.Serializable 
 	}
 
 
-	public boolean isCodeSuccess() {
-		return code.equals(CODE_SUCCESS);
-	}
+    public static <T> JsonResult<T> success() {
+        return new JsonResult<T>(CODE_SUCCESS);
+    }
 
 
-	public static <T> JsonResult<T> success() {
-		JsonResult<T> result = new JsonResult<T>( CODE_SUCCESS, true );
+    public static <T> JsonResult<T> failure() {
+        return new JsonResult<T>(10001);
 
-		return result;
-	}
-
-
-	public static <T> JsonResult<T> failure() {
-		JsonResult<T> result = new JsonResult<T>("10001", false);
-		return result;
-	}
+    }
 
 
-	public static <T> JsonResult<T> success(T data) {
-		JsonResult<T> result = new JsonResult<T>(CODE_SUCCESS, true, data);
-		result.setMsg("成功");
-		return result;
-	}
+    public static <T> JsonResult<T> success(T data) {
+        JsonResult<T> result = new JsonResult<T>(CODE_SUCCESS, data);
+        result.setMsg("成功");
+        return result;
+    }
 
 
-	public static <T> JsonResult<T> failure(T data) {
-		JsonResult<T> result = new JsonResult<T>("10001", false, data);
-		result.setMsg("失败");
-		return result;
-	}
+    public static <T> JsonResult<T> failure(T data) {
+        JsonResult<T> result = new JsonResult<T>(CODE_FAIL, data);
+        result.setMsg("失败");
+        return result;
+    }
 
 
-	public static <T> JsonResult<T> failure(T data, String msg) {
-		JsonResult<T> result = new JsonResult<T>("10001", false, data);
-		result.setMsg(msg);
-		return result;
-	}
+    public static <T> JsonResult<T> failure(T data, String msg) {
+        JsonResult<T> result = new JsonResult<T>(CODE_FAIL, data);
+        result.setMsg(msg);
+        return result;
+    }
 
 
 

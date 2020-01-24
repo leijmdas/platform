@@ -8,6 +8,7 @@ import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.util.SessionHolder;
 import com.kunlong.platform.support.service.AuthService;
 
+import com.kunlong.platform.utils.JsonResult;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,16 +34,22 @@ public class AuthController extends BaseController {
 	 */
 	@RequestMapping(value="login",method = RequestMethod.POST)
 	public @ResponseBody
-	AuthService.AuthToken login(String username, String password, String verifyCode) {
+	JsonResult<AuthService.AuthToken> login(String username, String password, String verifyCode) {
 		String code = AppKlongContext.getLoginContext().getPicCode();
 		if (!verifyCode.equalsIgnoreCase(code)) {
 			//throw new RuntimeException("验证码不正确!");
 		}
-		SysUserDTO su = userService.checkPass(1,username,password);
-		AuthService.AuthToken at  = this.authService.createToken("web:user:"+su.getId());
-		ISessionHolder sessionHolder = SessionHolder.create(at.getToken());
-		sessionHolder.setAttribute(SessionKeyEnum.WEB_USER.getKey(), su);
-		return at;
+		try {
+			SysUserDTO su = userService.checkPass(1, username, password);
+			AuthService.AuthToken at  = this.authService.createToken("web:user:"+su.getId());
+			ISessionHolder sessionHolder = SessionHolder.create(at.getToken());
+			sessionHolder.setAttribute(SessionKeyEnum.WEB_USER.getKey(), su);
+			return JsonResult.success(at);
+		}catch(RuntimeException businessException)
+		{
+			return JsonResult.failure(null,businessException.getMessage());
+		}
+
 	}
 	
 }
