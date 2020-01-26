@@ -1,6 +1,7 @@
 package com.kunlong.platform.context;
 
 
+import com.kunlong.platform.support.service.AuthService;
 import com.kunlong.platform.util.RedisUtil;
 import com.kunlong.platform.util.SessionHolder; 
 import org.springframework.beans.BeansException;
@@ -23,7 +24,7 @@ public class PfContext implements ApplicationContextAware {
         RedisUtil.Singleton.instanceRedisTemplate((RedisTemplate) appCtxt.getBean("redisTemplate"));
         //RedisUtil.Singleton.instanceRedisTemplate(stringRedisTemplate);
 
-        SessionHolder.config("session:mgr:", 2*7200);
+        SessionHolder.config("session:mgr:", AuthService.TOKEN_TIMEOUT);
         //SessionHolder.platform("session:pf-dxw:", 7200);
 
     }

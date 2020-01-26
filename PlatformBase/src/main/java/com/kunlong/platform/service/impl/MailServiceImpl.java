@@ -71,6 +71,7 @@ public class MailServiceImpl {
 					FileSystemResource file = new FileSystemResource(new File(fileName));
 					helper.addAttachment(file.getFilename(), file);
 					logger.info("sendEmail filename:{}",file.getFilename());
+
 				}
 
 				helper.setText(content, false);//true代表支持html

@@ -3,6 +3,8 @@ package com.kunlong.platform.support.service;
 import java.io.Serializable;
 
 public interface AuthService {
+	// 单位(S)
+	 static final long TOKEN_TIMEOUT =3600*4;
 
 
 	AuthToken createToken(String businessKey);

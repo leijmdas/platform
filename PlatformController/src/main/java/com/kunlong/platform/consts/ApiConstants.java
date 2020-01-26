@@ -6,6 +6,7 @@ package com.kunlong.platform.consts;
  *
  */
 public class ApiConstants {
+	public static long TIMEOUT = 3600*2;
 
 	private ApiConstants(){}
 

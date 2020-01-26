@@ -1,5 +1,6 @@
 package com.kunlong.platform.util;
 
+import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.consts.RequestContextConst;
 import com.kunlong.platform.util.support.CurrentRequestContext;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,7 +27,6 @@ public class SessionHolder implements app.support.session.ISessionHolder {
 
 	private String sessionID = null;
 	private static RedisUtil redisUtil;
-	public static long TIMEOUT = 7200;
 
 	private SessionHolder(String sessionKey) {
 		sessionID = SESSION_PREFIX + sessionKey;
@@ -41,7 +41,7 @@ public class SessionHolder implements app.support.session.ISessionHolder {
 	}
 
 	public static void config(String sessionPrefix, long timeout) {
-		TIMEOUT = timeout;
+		ApiConstants.TIMEOUT = timeout;
 		SESSION_PREFIX = sessionPrefix;
 		StringRedisSerializer stringSerializer = new StringRedisSerializer();
 		RedisTemplate<String, String> tpl = RedisUtil.getInstance().cloneRedisTemplate();
@@ -54,7 +54,7 @@ public class SessionHolder implements app.support.session.ISessionHolder {
 	}
 
 	public static SessionHolder create(String sessionKey) {
-		return create(sessionKey, TIMEOUT);
+		return create(sessionKey, ApiConstants.TIMEOUT);
 	}
 
 	public static SessionHolder create(String sessionKey, long timeout) {
@@ -119,8 +119,8 @@ public class SessionHolder implements app.support.session.ISessionHolder {
 			@Override
 			public void run() {
 				Long expire = redisUtil.getExpireValue(sessionID);
-				if (expire < TIMEOUT) {
-					redisUtil.expireValue(sessionID, TIMEOUT);
+				if (expire < ApiConstants.TIMEOUT) {
+					redisUtil.expireValue(sessionID, ApiConstants.TIMEOUT);
 				}
 			}
 

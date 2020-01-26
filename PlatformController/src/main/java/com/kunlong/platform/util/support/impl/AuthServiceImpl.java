@@ -13,8 +13,6 @@ import java.util.UUID;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-	// 单位(S)
-	private static final long TOKEN_TIMEOUT = 7200;
 
 	/**
 	 * 返回用户ID
