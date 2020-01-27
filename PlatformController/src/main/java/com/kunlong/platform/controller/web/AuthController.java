@@ -3,6 +3,7 @@ package com.kunlong.platform.controller.web;
 import app.support.session.ISessionHolder;
 import cn.kunlong.center.api.model.SysUserDTO;
 import cn.kunlong.center.api.service.SysUserApiService;
+import cn.kunlong.center.core.exception.BusinessException;
 import com.kunlong.platform.consts.SessionKeyEnum;
 import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.util.SessionHolder;
@@ -39,15 +40,16 @@ public class AuthController extends BaseController {
 		if (!verifyCode.equalsIgnoreCase(code)) {
 			//throw new RuntimeException("验证码不正确!");
 		}
+
 		try {
 			SysUserDTO su = userService.checkPass(1, username, password);
 			AuthService.AuthToken at  = this.authService.createToken("web:user:"+su.getId());
 			ISessionHolder sessionHolder = SessionHolder.create(at.getToken());
 			sessionHolder.setAttribute(SessionKeyEnum.WEB_USER.getKey(), su);
 			return JsonResult.success(at);
-		}catch(RuntimeException businessException)
+		}catch(BusinessException e)
 		{
-			return JsonResult.failure(null,businessException.getMessage());
+			return JsonResult.failure(null,e.getMsg());
 		}
 
 	}

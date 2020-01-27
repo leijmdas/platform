@@ -19,6 +19,16 @@ public class JsonResult<T> extends KunlongModel implements java.io.Serializable 
 	@ApiModelProperty(name = "msg", notes = "完整信息")
 	private String msg;
 
+	public String getsCode() {
+		return sCode;
+	}
+
+	public void setsCode(String sCode) {
+		this.sCode = sCode;
+	}
+
+	private String sCode;
+
     T data;
 
 	public Integer getSubCode() {
@@ -95,11 +105,12 @@ public class JsonResult<T> extends KunlongModel implements java.io.Serializable 
     }
 
 
-    public static <T> JsonResult<T> success(T data) {
-        JsonResult<T> result = new JsonResult<T>(CODE_SUCCESS, data);
-        result.setMsg("成功");
-        return result;
-    }
+	public static <T> JsonResult<T> success(T data) {
+		JsonResult<T> result = new JsonResult<T>(CODE_SUCCESS, data);
+		result.setMsg("成功");
+		return result;
+	}
+
 	public static <T> JsonResult<T> success(T data, String msg) {
 		JsonResult<T> result = new JsonResult<T>(CODE_SUCCESS, data);
 		result.setMsg(msg);
