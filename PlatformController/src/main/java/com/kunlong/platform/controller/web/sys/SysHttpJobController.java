@@ -65,7 +65,7 @@ public class SysHttpJobController  {
 	
 	/**
 	 * 保存r
-	 * @param entitySysHttpJobController
+	 * @param entity
 	 * @return
 	 */
 	@PostMapping(value="save")

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kunlong.platform.dao.TasklogMapper" >
+	<resultMap id="BaseResultMap" type="com.kunlong.platform.domain.Tasklog" >
+	    <id column="id" property="id" jdbcType="INTEGER" />	
+	  	<result column="user" property="user" jdbcType="VARCHAR" />
+	  	<result column="ip" property="ip" jdbcType="VARCHAR" />
+	  	<result column="oprt_type" property="oprtType" jdbcType="TINYINT" />
+	  	<result column="oprt" property="oprt" jdbcType="VARCHAR" />
+	  	<result column="params" property="params" jdbcType="VARCHAR" />
+	  	<result column="code" property="code" jdbcType="INTEGER" />
+	  	<result column="oprt_time" property="oprtTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <resultMap id="BaseResultMap_Tasklog" type="com.kunlong.platform.domain.Tasklog" >
+	    <id column="t_id" property="id" jdbcType="INTEGER" />	
+	  	<result column="t_user" property="user" jdbcType="VARCHAR" />
+	  	<result column="t_ip" property="ip" jdbcType="VARCHAR" />
+	  	<result column="t_oprt_type" property="oprtType" jdbcType="TINYINT" />
+	  	<result column="t_oprt" property="oprt" jdbcType="VARCHAR" />
+	  	<result column="t_params" property="params" jdbcType="VARCHAR" />
+	  	<result column="t_code" property="code" jdbcType="INTEGER" />
+	  	<result column="t_oprt_time" property="oprtTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+  		id,user,ip,oprt_type,oprt,params,code,oprt_time
+	</sql>
+  	<sql id="Base_Column_List_Tasklog" >
+  		t.id t_id,t.user t_user,t.ip t_ip,t.oprt_type t_oprt_type,t.oprt t_oprt,t.params t_params,t.code t_code,t.oprt_time t_oprt_time
+	</sql>
+	
+	<!-- 系统自定义 -->
+	<!-- 实体参数查询结果[START] -->
+	<resultMap id="ResultMap_FindByQueryParam" type="com.kunlong.platform.domain.Tasklog" extends="BaseResultMap_Tasklog">
+		
+	</resultMap>
+
+	<sql id="Condition_FindByQueryParam">
+		<if test="queryParam.param!=null">
+			<bind name="p" value="queryParam.param"/>
+			<if test="p.id!=null ">
+		    	and t.id=#{p.id}
+		    </if>
+			<if test="p.user!=null and p.user!=''">
+		    	and t.user like #{p.user}
+		    </if>
+			<if test="p.ip!=null and p.ip!=''">
+		    	and t.ip like #{p.ip}
+		    </if>
+			<if test="p.oprtType!=null ">
+		    	and t.oprt_type=#{p.oprtType}
+		    </if>
+			<if test="p.oprt!=null and p.oprt!=''">
+		    	and t.oprt like #{p.oprt}
+		    </if>
+			<if test="p.params!=null and p.params!=''">
+		    	and t.params like #{p.params}
+		    </if>
+			<if test="p.code!=null ">
+		    	and t.code=#{p.code}
+		    </if>
+			<if test="p.oprtTime!=null ">
+		    	and t.oprt_time=#{p.oprtTime}
+		    </if>
+		</if>
+		<!--
+		<bind name="rp" value="queryParam.ruleParam" />
+		<include refid="org.mybatis.hbatis.orm.mapper.HbatisMapper.RuleParam"/>
+		-->
+	</sql>
+	<select id="findByQueryParam" resultMap="ResultMap_FindByQueryParam">
+		select
+		<include refid="Base_Column_List_Tasklog"></include>
+		from tasklog t where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+		<if test="queryParam.sortOrders!=null and queryParam.sortOrders.size() gt 0">
+			order by 
+			<foreach collection="queryParam.sortOrders" item="item" separator=",">
+				${item.sortField.sqlColumn} ${item.sortType}
+			</foreach>
+		</if>
+		<if test="queryParam.limit gt 0">
+	  		limit ${queryParam.start},${queryParam.limit}
+	  	</if>
+	</select>
+	<select id="countByQueryParam" resultType="long">
+		select count(1) from tasklog t where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+	</select>
+	
+	<!-- 实体参数查询结果[END] -->
+	<!-- 用户自定义 -->
+	
+</mapper>

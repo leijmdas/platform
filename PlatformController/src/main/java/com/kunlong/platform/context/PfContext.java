@@ -1,6 +1,8 @@
 package com.kunlong.platform.context;
 
 
+import cn.kunlong.center.api.model.SysUserDTO;
+import com.kunlong.platform.consts.SessionKeyEnum;
 import com.kunlong.platform.support.service.AuthService;
 import com.kunlong.platform.util.RedisUtil;
 import com.kunlong.platform.util.SessionHolder; 
@@ -11,6 +13,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
+import java.util.Map;
 
 @Component
 public class PfContext implements ApplicationContextAware {
@@ -36,5 +41,15 @@ public class PfContext implements ApplicationContextAware {
 
     private static ApplicationContext appCtxt;
 
+    private static Map<Object, Object> getSessionValues() {
+        return SessionHolder.getCurrentSessionValues();
+    }
 
+    public static SysUserDTO getCurrentSysUser() {
+        Map<Object, Object> vals = getSessionValues();
+        Assert.notNull(vals, "Session不存在或已效");
+        SysUserDTO su = (SysUserDTO) vals.get(SessionKeyEnum.WEB_USER.getKey());
+        //Assert.notNull(su, "User Session不存在或已失效");
+        return su;
+    }
 }

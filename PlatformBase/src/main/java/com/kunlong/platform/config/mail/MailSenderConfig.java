@@ -12,6 +12,7 @@ public class MailSenderConfig {
 	@Bean
 	@ConfigurationProperties(prefix = "mail")
 	public JavaMailSender mailSender() {
+
 		org.springframework.mail.javamail.JavaMailSenderImpl sender = new JavaMailSenderImpl();
 		return sender;
 	}

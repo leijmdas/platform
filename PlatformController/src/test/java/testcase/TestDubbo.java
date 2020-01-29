@@ -8,14 +8,18 @@ import com.kunlong.api.service.MailApiService;
 import com.kunlong.api.service.MetadataDictApiService;
 import com.kunlong.api.service.MetadataFieldApiService; ;
 import com.kunlong.platform.PfCtrlApp;
+import com.kunlong.platform.dao.TasklogMapper;
+import com.kunlong.platform.domain.Tasklog;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +43,9 @@ public class TestDubbo {
 
     @Reference(lazy = true, version = "${dubbo.service.version}")
     MailApiService mailApiService;
+
+    @Autowired
+    TasklogMapper tasklogMapper;
 
     @Before
     public void setup() {
@@ -94,6 +101,17 @@ public class TestDubbo {
     {
         mailApiService.sendEmail("leijmdas_s@163.com","sub","test","c:/1.png");
 
+    }
+    @Test
+    public void test0008_log(){
+        Tasklog log=new Tasklog();
+        log.setCode(0);
+        log.setIp("127.0.0.1");
+        log.setOprt("login");
+        log.setOprtTime(new Date());
+        log.setUser("ljm");
+        log.setOprtType((byte)0);
+        tasklogMapper.insert(log);
     }
 }
 

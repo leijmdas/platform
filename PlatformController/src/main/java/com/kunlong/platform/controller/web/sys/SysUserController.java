@@ -6,9 +6,13 @@ import cn.kunlong.center.api.model.AuthorizationDTO;
 import cn.kunlong.center.api.model.SysUserDTO;
 import cn.kunlong.center.api.service.SysUserApiService;
 import com.kunlong.platform.consts.ApiConstants;
+import com.kunlong.platform.context.PfContext;
 import com.kunlong.platform.controller.web.BaseController;
+import com.kunlong.platform.tasklog.aspect.SysLoggerAnnotation;
+import com.kunlong.platform.utils.KunlongUtils;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +27,9 @@ import java.util.List;
 @RequestMapping(ApiConstants.PREFIX_SYS+"/user")
 @Controller
 public class SysUserController extends BaseController {
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	//@Autowired
-	//@Reference
 	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private SysUserApiService sysUserService;
 
@@ -101,9 +105,14 @@ public class SysUserController extends BaseController {
 
 	@RequestMapping(value="authorization",method = RequestMethod.POST)
 	public @ResponseBody
+	@SysLoggerAnnotation("authrozation")
     AuthorizationDTO authrozation() {
 		Integer userId = this.getCurrentUserId();
 		AuthorizationDTO az = this.sysUserService.getAuthorization(userId);
+		az.getSysUser().setPasswd("");
+//		logger.info("az:{}",KunlongUtils.toJSONStringPretty(az));
+		logger.info("getCurrentSysUser:{}",KunlongUtils.toJSONStringPretty(PfContext.getCurrentSysUser()));
+
 		return az;
 	}
 	@RequestMapping(value="modifyPassword",method = RequestMethod.POST)

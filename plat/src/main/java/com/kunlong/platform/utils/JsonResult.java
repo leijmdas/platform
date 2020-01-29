@@ -1,5 +1,7 @@
 package com.kunlong.platform.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.kunlong.platform.model.KunlongModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -46,6 +48,10 @@ public class JsonResult<T> extends KunlongModel implements java.io.Serializable 
 	public JsonResult() {
 	}
 
+	public static <T> JsonResult<T> parseJsonResult(String text, Class<T> clazz) {
+		JsonResult<T> result = JSON.parseObject(text, new TypeReference<JsonResult<T>>() { });
+		return result;
+	}
 
 	private JsonResult(Integer code    ) {
 		this.code = code;

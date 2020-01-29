@@ -6,8 +6,10 @@ import com.kunlong.platform.config.threadpool.ThreadPoolConfig;
 import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.dao.DictConfigMapper;
 import com.kunlong.platform.dao.MetadataFieldModelMapper;
+import com.kunlong.platform.dao.TasklogMapper;
 import com.kunlong.platform.domain.MetadataFieldModel;
 
+import com.kunlong.platform.domain.Tasklog;
 import com.kunlong.platform.service.impl.MailServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +21,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -38,6 +41,9 @@ public class TestMetadata {
 
     @Resource
     CacheManager cacheManager;
+
+    @Autowired
+    TasklogMapper tasklogMapper;
 
     @Autowired
     MetadataFieldModelMapper metadataFieldModelMapper;
@@ -108,5 +114,18 @@ public class TestMetadata {
         System.out.println(executor);
 
     }
+
+    @Test
+    public void test0007_log(){
+        Tasklog log=new Tasklog();
+        log.setCode(0);
+        log.setIp("127.0.0.1");
+        log.setOprt("login");
+        log.setOprtTime(new Date());
+        log.setUser("ljm");
+        log.setOprtType((byte)0);
+        tasklogMapper.insert(log);
+    }
+
 }
 

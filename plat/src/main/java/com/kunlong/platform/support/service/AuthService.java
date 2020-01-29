@@ -4,17 +4,19 @@ import java.io.Serializable;
 
 public interface AuthService {
 	// 单位(S)
-	 static final long TOKEN_TIMEOUT =3600*4;
+	static final long TOKEN_TIMEOUT = 3600 * 4;
 
 
-	AuthToken createToken(String businessKey);
-	AuthToken createToken(String businessKey, long timeoutSeconds);
+	AuthToken createToken(String bzKey);
+	AuthToken createToken(String bzKey, long timeoutSeconds);
 	
 	AuthToken getToken(String token);
 	public static class AuthToken implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		private String token;
+		//private String refresh_token;
+		//private String scope;
 		private long expiresIn;
 		private long createTime;
 		public String getToken() {

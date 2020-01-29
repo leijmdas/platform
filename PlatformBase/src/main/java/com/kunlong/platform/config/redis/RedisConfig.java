@@ -1,4 +1,4 @@
-//package com.kunlong.platform.platform;
+//package com.kunlong.platform.config.redis;
 //
 //
 //import com.kunlong.platform.model.LoginSso;
@@ -17,7 +17,7 @@
 //public class RedisConfig {
 //
 //	@Bean
-//	@ConfigurationProperties(prefix="spring.redis")
+//	@ConfigurationProperties(prefix="redis")
 //	public JedisPoolConfig jedisPoolConfig() {
 //		JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
 //		return jedisPoolConfig;

@@ -2,7 +2,9 @@ package testcase.sys;
 
 
 import cn.kunlong.center.api.dto.queryParam.SysUserQueryDTO;
+import cn.kunlong.center.api.model.AuthorizationDTO;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.jtest.NodesFactroy.Inject.Inject;
 import com.jtest.NodesFactroy.Node.HttpClientNode;
 import com.jtest.annotation.JTest;
@@ -14,6 +16,7 @@ import com.kunlong.api.model.MetadataFieldModelDTO;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.support.service.AuthService;
+import com.kunlong.platform.utils.JsonResult;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +29,7 @@ import java.util.List;
 public class TestSysUser extends ITestImpl {
 	private static final Logger logger = LoggerFactory.getLogger(TestSysUser.class);
 
-	String url_login = "http://127.0.0.1:10080/auth/login?username=admin&password=123456";
+	String url_login = "http://127.0.0.1:10080/auth/login?username=admin&password=123456&verifyCode=";
 	String url_auth = "http://127.0.0.1:10080/sys/user/authorization";
 
 	String url_sysuser = "http://127.0.0.1:10080/sys/user";
@@ -51,30 +54,34 @@ public class TestSysUser extends ITestImpl {
 	}
 
 	AuthService.AuthToken authToken;
-
-	public AuthService.AuthToken loginsys() {
-
-
-		String ret = httpclient.post(url_login, "{}", "application/json");
-		authToken = KunlongUtils.parseObject(ret, AuthService.AuthToken .class);
-		System.out.println(KunlongUtils.toJSONStringPretty(authToken));
-		httpclient.checkStatusCode(200);
-		return authToken;
+	public static  JsonResult<AuthService.AuthToken> parseJsonResult(String text ) {
+		return  JSON.parseObject(text, new TypeReference<JsonResult<AuthService.AuthToken>>() { });
 
 	}
 
-	void auth() {
+	public AuthService.AuthToken loginsys(HttpClientNode httpclient) {
+
+
+		String ret = httpclient.post(url_login, "{}", "application/json");
+		JsonResult<AuthService.AuthToken>  jsonResult=parseJsonResult(ret);
+		System.out.println(KunlongUtils.toJSONStringPretty(jsonResult));
+		httpclient.checkStatusCode(200);
+		return jsonResult.getData();
+
+	}
+
+	void auth(HttpClientNode httpclient) {
 
 		httpclient.addHeader(ApiConstants.AUTH_TOKEN_KEY_WEB, authToken.getToken());
-		//httpclient.addHeader( "access-token",authToken.getToken());
 		String ret = httpclient.post(url_auth, "{}", "application/json");
-
+		AuthorizationDTO authorizationDTO = JSON.parseObject(ret, AuthorizationDTO.class);
+		//System.out.println(KunlongUtils.toJSONStringPretty(authorizationDTO));
 	}
 
 	@Override
 	public void setUp() {
-		 authToken=loginsys();
-		 auth();		//req = login.defaultReq();		//token = login.login(req);
+		authToken = loginsys(httpclient);
+		auth(httpclient);
 	}
 	
 	@Override
@@ -153,9 +160,19 @@ public class TestSysUser extends ITestImpl {
 
 
 	}
+	@JTest
+	@JTestClass.title("test_005_login")
+	@JTestClass.pre("")
+	@JTestClass.step("test_005_login")
+	@JTestClass.exp("ok")
+	public void test_005_login() {
+
+
+
+	}
 	public static void main(String[] args) {
 
-		 run(TestSysUser.class, 3);
+		 run(TestSysUser.class, 5);
 
 	}
 
