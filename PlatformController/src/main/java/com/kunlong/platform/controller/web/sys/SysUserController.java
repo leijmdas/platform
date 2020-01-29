@@ -5,6 +5,7 @@ import cn.kunlong.center.api.dto.queryParam.SysUserQueryDTO;
 import cn.kunlong.center.api.model.AuthorizationDTO;
 import cn.kunlong.center.api.model.SysUserDTO;
 import cn.kunlong.center.api.service.SysUserApiService;
+import com.kunlong.platform.config.auth.PreAuthAnnotation;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.context.PfContext;
 import com.kunlong.platform.controller.web.BaseController;
@@ -29,7 +30,6 @@ import java.util.List;
 public class SysUserController extends BaseController {
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	//@Autowired
 	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private SysUserApiService sysUserService;
 
@@ -106,6 +106,7 @@ public class SysUserController extends BaseController {
 	@RequestMapping(value="authorization",method = RequestMethod.POST)
 	public @ResponseBody
 	@SysLoggerAnnotation("authrozation")
+	//@PreAuthAnnotation("admin")
     AuthorizationDTO authrozation() {
 		Integer userId = this.getCurrentUserId();
 		AuthorizationDTO az = this.sysUserService.getAuthorization(userId);
