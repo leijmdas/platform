@@ -3,7 +3,7 @@ package testcase.pub;
 import com.jtest.testframe.ITestImpl;
 import com.jtest.utility.testlog.TestLog;
 import com.kunlong.metadata.service.MetadataDictService;
-import com.kunlong.platform.PfCtrlApp;
+import com.kunlong.platform.PfCtlApp;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ import java.net.URL;
  * @description:
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = PfCtrlApp.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = PfCtlApp.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 public class TestBaseApp extends ITestImpl {
 

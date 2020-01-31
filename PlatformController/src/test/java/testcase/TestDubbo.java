@@ -7,7 +7,8 @@ import com.kunlong.api.model.MetadataFieldModelDTO;
 import com.kunlong.api.service.MailApiService;
 import com.kunlong.api.service.MetadataDictApiService;
 import com.kunlong.api.service.MetadataFieldApiService; ;
-import com.kunlong.platform.PfCtrlApp;
+import com.kunlong.platform.PfCtlApp;
+import com.kunlong.platform.PfCtlApp;
 import com.kunlong.platform.dao.TasklogMapper;
 import com.kunlong.platform.domain.Tasklog;
 import com.kunlong.platform.utils.KunlongUtils;
@@ -30,7 +31,7 @@ import java.util.List;
  * @description:
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = PfCtrlApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = PfCtlApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 public class TestDubbo {
     @Reference(lazy = true, version = "1.0.0")

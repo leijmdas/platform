@@ -25,14 +25,12 @@ public class RedisService {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-//    @Autowired
-//    private RedisTemplate<String, LoginSso> loginRedisTemplate;
 
-    @Resource(name = "redisTemplate")
-    private ListOperations<String, String> listOps;
+//    @Resource(name = "redisTemplate")
+//    private ListOperations<String, String> listOps;
 
     public void addLink(String userId, URL url) {
-        listOps.leftPush(userId, url.toExternalForm());
+        //listOps.leftPush(userId, url.toExternalForm());
         redisTemplate.boundListOps(userId).leftPush(url.toExternalForm());
     }
 
@@ -48,7 +46,7 @@ public class RedisService {
 
 
     public void setPicCode(String ip, String code) {
-        redisTemplate.expire(ip,10, TimeUnit.MINUTES);
+        redisTemplate.expire(ip,2, TimeUnit.MINUTES);
         redisTemplate.opsForValue().set(ip, code);
 
     }

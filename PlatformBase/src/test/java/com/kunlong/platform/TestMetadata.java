@@ -6,10 +6,12 @@ import com.kunlong.platform.config.threadpool.ThreadPoolConfig;
 import com.kunlong.platform.context.AppKlongContext;
 import com.kunlong.platform.dao.DictConfigMapper;
 import com.kunlong.platform.dao.MetadataFieldModelMapper;
+import com.kunlong.platform.dao.RedisDAO;
 import com.kunlong.platform.dao.TasklogMapper;
 import com.kunlong.platform.domain.MetadataFieldModel;
 
 import com.kunlong.platform.domain.Tasklog;
+import com.kunlong.platform.service.RedisService;
 import com.kunlong.platform.service.impl.MailServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -125,6 +127,25 @@ public class TestMetadata {
         log.setUser("ljm");
         log.setOprtType((byte)0);
         tasklogMapper.insert(log);
+    }
+
+    @Autowired
+    RedisDAO redisDAO;
+
+    @Autowired
+    RedisService redisService;
+    @Test
+    public void test0008_redisDao() {
+        redisDAO.setKey("a", "1");
+        System.out.println(redisDAO.getKey("a"));
+
+    }
+
+    @Test
+    public void test0008_redisService() {
+        redisService.setKey("a1", "111");
+        System.out.println(redisService.getKey("a1"));
+
     }
 
 }

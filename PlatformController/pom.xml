@@ -29,7 +29,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -106,15 +106,14 @@
     </dependencies>
 
     <build>
-        <finalName>kl-pf-ctrl</finalName>
+        <finalName>kl-pf-ctl</finalName>
         <plugins>
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.0.0.RELEASE</version>
                 <configuration>
-                    <mainClass>com.kunlong.platform.PfCtrlApp</mainClass>
+                    <mainClass>com.kunlong.platform.PfCtlApp</mainClass>
                 </configuration>
                 <executions>
                     <execution>

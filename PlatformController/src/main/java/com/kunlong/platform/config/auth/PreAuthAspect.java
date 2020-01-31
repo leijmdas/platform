@@ -50,5 +50,6 @@ public class PreAuthAspect {
 
             throw new ApiBusinessException("auth failed, you must be admin!");
         }
+
     }
 }

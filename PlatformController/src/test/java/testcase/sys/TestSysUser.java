@@ -53,13 +53,15 @@ public class TestSysUser extends ITestImpl {
 	public void suiteTearDown() throws IOException {
 	}
 
-	AuthService.AuthToken authToken;
-	public static  JsonResult<AuthService.AuthToken> parseJsonResult(String text ) {
-		return  JSON.parseObject(text, new TypeReference<JsonResult<AuthService.AuthToken>>() { });
+    AuthService.AuthToken authToken;
 
-	}
+    public static JsonResult<AuthService.AuthToken> parseJsonResult(String text) {
+        return JSON.parseObject(text, new TypeReference<JsonResult<AuthService.AuthToken>>() {
+        });
 
-	public AuthService.AuthToken loginsys(HttpClientNode httpclient) {
+    }
+
+    public AuthService.AuthToken loginsys(HttpClientNode httpclient) {
 
 
 		String ret = httpclient.post(url_login, "{}", "application/json");

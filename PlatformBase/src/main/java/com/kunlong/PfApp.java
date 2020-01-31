@@ -4,12 +4,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = {
+        SecurityAutoConfiguration.class
+})
 @Configuration
 @SpringBootApplication(scanBasePackages = {"com.kunlong"})
 //@EnableDubbo
