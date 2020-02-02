@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 /**
  * 分布式SESSION
  * @name SessionHolder
- * @author zz  | www.xwparking.com
+ * @author ljm  | www.kl.com
  * @date 2018年11月13日  
  * @description:
  */

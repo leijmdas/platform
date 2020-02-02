@@ -2,7 +2,15 @@
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/dubbo-consumer.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/appcontext.xml</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/kunlong/platform/PfCtlApp.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/kunlong/platform/tasklog/config/RabbitConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/kunlong/platform/config/AppMvcConfig.java</file>
+        </fileset>
+      </configuration>
     </facet>
     <facet type="web" name="Web">
       <configuration>

@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 企业
  * 
- * @author zz
+ * @author ljm
  *
  */
 @RequestMapping(ApiConstants.PREFIX_SYS+"/user")
@@ -109,19 +109,20 @@ public class SysUserController extends BaseController {
 	//@PreAuthAnnotation("admin")
     AuthorizationDTO authrozation() {
 		Integer userId = this.getCurrentUserId();
-		AuthorizationDTO az = this.sysUserService.getAuthorization(userId);
-		az.getSysUser().setPasswd("");
-//		logger.info("az:{}",KunlongUtils.toJSONStringPretty(az));
+		AuthorizationDTO authorization = this.sysUserService.getAuthorization(userId);
+		authorization.getSysUser().setPasswd("");
 		logger.info("getCurrentSysUser:{}",KunlongUtils.toJSONStringPretty(PfContext.getCurrentSysUser()));
 
-		return az;
+		return authorization;
 	}
+
 	@RequestMapping(value="modifyPassword",method = RequestMethod.POST)
 	public @ResponseBody
     Boolean modifyPassword(@RequestBody ModifyPasswordParamDTO param) {
 		this.sysUserService.modifyPass(this.getCurrentUserId(), param.getOldPass(), param.getNewPass());
 		return true;
 	}
+
 	public static class ModifyPasswordParamDTO {
 		private String newPass;
 		private String oldPass;

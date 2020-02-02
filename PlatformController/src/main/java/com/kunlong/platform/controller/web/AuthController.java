@@ -48,11 +48,11 @@ public class AuthController extends BaseController {
 
 		try {
 			SysUserDTO su = userService.checkPass(1, username, password);
-			AuthService.AuthToken at  = this.authService.createToken("web:user:"+su.getId());
-			ISessionHolder sessionHolder = SessionHolder.create(at.getToken());
+			AuthService.AuthToken authToken  = this.authService.createToken("web:user:"+su.getId());
+			ISessionHolder sessionHolder = SessionHolder.create(authToken.getToken());
 			sessionHolder.setAttribute(SessionKeyEnum.WEB_USER.getKey(), su);
 			System.out.println(PfContext.getCurrentSysUser());
-			return JsonResult.success(at);
+			return JsonResult.success(authToken);
 		}catch(BusinessException e)
 		{
 			return JsonResult.failure(null,e.getMsg());

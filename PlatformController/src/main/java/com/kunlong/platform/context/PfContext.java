@@ -17,15 +17,12 @@ import java.util.Map;
 
 @Component
 public class PfContext implements ApplicationContextAware {
-    //@Autowired
-    //private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         appCtxt = applicationContext;
 
         RedisUtil.Singleton.instanceRedisTemplate((RedisTemplate) appCtxt.getBean("redisTemplate"));
-        //RedisUtil.Singleton.instanceRedisTemplate(stringRedisTemplate);
 
         SessionHolder.config("session:mgr:", AuthService.TOKEN_TIMEOUT);
     }

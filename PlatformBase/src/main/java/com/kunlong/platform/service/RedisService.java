@@ -1,15 +1,10 @@
 package com.kunlong.platform.service;
 
-import com.alibaba.fastjson.JSON;
 import com.kunlong.platform.model.LoginSso;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,16 +18,12 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RedisService {
 
+    private static String TOKEN_LOGIN_SSO_PRE = "session:pf:";
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-//    @Resource(name = "redisTemplate")
-//    private ListOperations<String, String> listOps;
-
-    public void addLink(String userId, URL url) {
-        //listOps.leftPush(userId, url.toExternalForm());
-        redisTemplate.boundListOps(userId).leftPush(url.toExternalForm());
-    }
+    @Autowired
+    private RedisTemplate<String, LoginSso> loginSsoRedisTemplate;
 
     public void setKey(String key, String value) {
         redisTemplate.opsForValue().set(key, value);
@@ -48,9 +39,7 @@ public class RedisService {
     public void setPicCode(String ip, String code) {
         redisTemplate.expire(ip,2, TimeUnit.MINUTES);
         redisTemplate.opsForValue().set(ip, code);
-
     }
-
 
     public String getPicCode(String ip) {
         return getKey(ip);
@@ -58,17 +47,17 @@ public class RedisService {
     }
 
     public void setLoginSso(String key, LoginSso value) {
-        redisTemplate.expire(key,1, TimeUnit.DAYS);
-        redisTemplate.opsForValue().set(key, value.toString());
+        loginSsoRedisTemplate.expire(key, 1, TimeUnit.DAYS);
+        loginSsoRedisTemplate.opsForValue().set(TOKEN_LOGIN_SSO_PRE+key, value);
 
     }
 
-    public Boolean checkTokenExists(String koken) {
-        return redisTemplate.opsForValue().get(koken) != null;
+    public Boolean checkTokenExists(String token) {
+        return loginSsoRedisTemplate.opsForValue().get(TOKEN_LOGIN_SSO_PRE+token) != null;
     }
 
     public LoginSso getLoginSso(String key) {
-        return JSON.parseObject(redisTemplate.opsForValue().get(key), LoginSso.class);
+        return loginSsoRedisTemplate.opsForValue().get(TOKEN_LOGIN_SSO_PRE+key) ;
 
     }
 }

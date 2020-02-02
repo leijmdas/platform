@@ -49,14 +49,14 @@ public class AuthServiceImpl implements AuthService {
 	}
 	public AuthToken createToken(String businessKey,long timeoutSeconds) {
 		
-		AuthToken at = new AuthToken();
-		at.setCreateTime(System.currentTimeMillis());
-		at.setExpiresIn(timeoutSeconds);
+		AuthToken authToken = new AuthToken();
+		authToken.setCreateTime(System.currentTimeMillis());
+		authToken.setExpiresIn(timeoutSeconds);
 
 		String tokenId = UUID.randomUUID().toString().replaceAll("-", "");
-		at.setToken(tokenId);
+		authToken.setToken(tokenId);
 
-		return at;
+		return authToken;
 	}
 	
 }

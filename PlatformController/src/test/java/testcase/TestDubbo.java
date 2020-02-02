@@ -8,9 +8,10 @@ import com.kunlong.api.service.MailApiService;
 import com.kunlong.api.service.MetadataDictApiService;
 import com.kunlong.api.service.MetadataFieldApiService; ;
 import com.kunlong.platform.PfCtlApp;
-import com.kunlong.platform.PfCtlApp;
 import com.kunlong.platform.dao.TasklogMapper;
 import com.kunlong.platform.domain.Tasklog;
+import com.kunlong.platform.model.LoginSso;
+import com.kunlong.platform.service.RedisService;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Before;
@@ -18,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
@@ -47,6 +49,10 @@ public class TestDubbo {
 
     @Autowired
     TasklogMapper tasklogMapper;
+    @Autowired
+    RedisTemplate<String, LoginSso> redisTemplate;
+    @Autowired
+    RedisService redisService;
 
     @Before
     public void setup() {
@@ -113,6 +119,15 @@ public class TestDubbo {
         log.setUser("ljm");
         log.setOprtType((byte)0);
         tasklogMapper.insert(log);
+    }
+
+    @Test
+    public void test0009_loginSso() {
+        LoginSso loginSso = new LoginSso();
+        loginSso.setToken("1111");
+        redisService.setLoginSso("1111", loginSso);
+
+        System.out.println(redisService.getLoginSso("1111"));
     }
 }
 
