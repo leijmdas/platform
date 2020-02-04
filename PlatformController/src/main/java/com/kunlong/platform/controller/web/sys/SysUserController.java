@@ -106,7 +106,7 @@ public class SysUserController extends BaseController {
 	@RequestMapping(value="authorization",method = RequestMethod.POST)
 	public @ResponseBody
 	@SysLoggerAnnotation("authrozation")
-	//@PreAuthAnnotation("admin")
+	@PreAuthAnnotation("admin")
     AuthorizationDTO authrozation() {
 		Integer userId = this.getCurrentUserId();
 		AuthorizationDTO authorization = this.sysUserService.getAuthorization(userId);
