@@ -162,6 +162,7 @@ public class TestSysUser extends ITestImpl {
 
 
 	}
+
 	@JTest
 	@JTestClass.title("test_005_login")
 	@JTestClass.pre("")
@@ -170,11 +171,11 @@ public class TestSysUser extends ITestImpl {
 	public void test_005_login() {
 
 
-
 	}
+
 	public static void main(String[] args) {
 
-		 run(TestSysUser.class, 5);
+		run(TestSysUser.class, 5);
 
 	}
 
