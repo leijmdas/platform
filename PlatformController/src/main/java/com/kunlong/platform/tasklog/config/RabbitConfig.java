@@ -18,11 +18,11 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
 
-  public   final static String queueName = "spring-boot-log";
+  public   final static String QUEUE_NAME = "spring-boot-log";
 
     @Bean
     Queue queue() {
-        return new Queue(queueName, false);
+        return new Queue(QUEUE_NAME, false);
     }
 
     @Bean
@@ -32,7 +32,7 @@ public class RabbitConfig {
 
     @Bean
     Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(queueName);
+        return BindingBuilder.bind(queue).to(exchange).with(QUEUE_NAME);
     }
 
     @Bean
@@ -40,7 +40,7 @@ public class RabbitConfig {
                                              MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(queueName);
+        container.setQueueNames(QUEUE_NAME);
         container.setMessageListener(listenerAdapter);
         return container;
     }

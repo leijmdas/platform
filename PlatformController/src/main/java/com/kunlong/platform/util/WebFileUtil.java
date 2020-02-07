@@ -44,18 +44,18 @@ public class WebFileUtil  {
 	
 	public String getOutputAttachementFilename(String filename) throws UnsupportedEncodingException {
 		String userAgent = this.request.getHeader("User-Agent");
-		String new_filename = URLEncoder.encode(filename, "UTF8");
+		String newFilename = URLEncoder.encode(filename, "UTF8");
 		// 如果没有UA，则默认使用IE的方式进行编码，因为毕竟IE还是占多数的
-		String rtn = "filename=\"" + new_filename + "\"";
+		String rtn = "filename=\"" + newFilename + "\"";
 		if (userAgent != null) {
 			userAgent = userAgent.toLowerCase();
 			// IE浏览器，只能采用URLEncoder编码
 			if (userAgent.indexOf("msie") != -1) {
-				rtn = "filename=\"" + new_filename + "\"";
+				rtn = "filename=\"" + newFilename + "\"";
 			}
 			// Opera浏览器只能采用filename*
 			else if (userAgent.indexOf("opera") != -1) {
-				rtn = "filename*=UTF-8''" + new_filename;
+				rtn = "filename*=UTF-8''" + newFilename;
 			}
 			// Safari浏览器，只能采用ISO编码的中文输出
 			else if (userAgent.indexOf("safari") != -1) {
@@ -64,7 +64,7 @@ public class WebFileUtil  {
 			
 			// FireFox浏览器，可以使用MimeUtility或filename*或ISO编码的中文输出
 			else if (userAgent.indexOf("mozilla") != -1) {
-				rtn = "filename*=UTF-8''" + new_filename;
+				rtn = "filename*=UTF-8''" + newFilename;
 			}
 		}
 		return rtn;

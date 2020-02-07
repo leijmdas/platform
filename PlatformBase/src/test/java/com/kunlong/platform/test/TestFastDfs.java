@@ -5,6 +5,13 @@ import com.jtest.annotation.JTestClass;
 import com.jtest.testframe.ITestImpl;
 import com.jtest.utility.testlog.JTestLog;
 import com.kunlong.PfApp;
+import com.kunlong.metadata.model.MetadataDict;
+import com.kunlong.platform.context.AppKlongContext;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import org.apache.ibatis.session.SqlSession;
+import tk.mybatis.mapper.entity.Example;
 
 public class TestFastDfs extends ITestImpl {
 
@@ -51,8 +58,18 @@ public class TestFastDfs extends ITestImpl {
         System.out.println("返回路径：" + filePath);
         JTestLog.logJtest("http://120.78.136.63:8888/"+filePath);
     }
+
+    static @Data
+    @Builder(toBuilder = true) //@AllArgsConstructor
+    class Demo{
+        private String name;
+        private int age;
+    }
     //http://192.168.222.128:12088/group1/M00/00/00/wKjegF2q2tyAU648AAD6gBaK6NM8.4.jpg
     public static void main(String[] args) {
-        run(TestFastDfs.class, 1);
+        //run(TestFastDfs.class, 1);
+        Demo demo=Demo.builder().age(13).name("leijm").build();
+
+        System.out.println(demo.toString());
     }
 }

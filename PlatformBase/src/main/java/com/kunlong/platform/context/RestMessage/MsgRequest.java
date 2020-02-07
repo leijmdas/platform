@@ -8,7 +8,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 public class MsgRequest {
     public String token;
     public long reqtime;
-    public long seqno = 1l;
+    public long seqno = 1L;
     public String cmdtype;
     public String cmd;
     public String apiKey;
@@ -130,6 +130,7 @@ public class MsgRequest {
         return r;
     }
 
+    @Override
     public String toString() {
         return JSONObject.toJSONString(this, SerializerFeature.SkipTransientField, SerializerFeature.PrettyFormat);
 

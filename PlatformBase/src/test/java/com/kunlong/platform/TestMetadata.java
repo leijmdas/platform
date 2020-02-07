@@ -4,15 +4,14 @@ import com.kunlong.PfApp;
 import com.kunlong.platform.config.threadpool.TaskExecutePool;
 import com.kunlong.platform.config.threadpool.ThreadPoolConfig;
 import com.kunlong.platform.context.AppKlongContext;
-import com.kunlong.platform.dao.DictConfigMapper;
-import com.kunlong.platform.dao.MetadataFieldModelMapper;
-import com.kunlong.platform.dao.RedisDAO;
-import com.kunlong.platform.dao.TasklogMapper;
+import com.kunlong.platform.dao.*;
 import com.kunlong.platform.domain.MetadataFieldModel;
 
 import com.kunlong.platform.domain.Tasklog;
 import com.kunlong.platform.service.RedisService;
 import com.kunlong.platform.service.impl.MailServiceImpl;
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.test.context.junit4.SpringRunner;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -147,6 +147,22 @@ public class TestMetadata {
         System.out.println(redisService.getKey("a1"));
 
     }
+
+    @Autowired
+    TaskMapper taskMapper;
+
+    @Test
+    public void test0009() {
+        Example example = new Example(Tasklog.class);
+
+        int count = taskMapper.selectCountByExample(example);
+
+        RowBounds rowBounds = new RowBounds(0, 3);
+
+        List<Tasklog> list = taskMapper.selectByExampleAndRowBounds(example, rowBounds);
+        System.out.println(list);
+    }
+
 
 }
 

@@ -17,9 +17,9 @@ public class FileHelper {
 	 * @return
 	 */
 	public static String getFileExtByFilename(String filename) {
-		if (StringUtils.trimWhitespace(filename).indexOf(".") < 0)
+		if (StringUtils.trimWhitespace(filename).indexOf(".") < 0) {
 			return "";
-
+		}
 		String fileExt = filename.substring(filename.lastIndexOf("."));
 		return fileExt.toLowerCase();
 	}

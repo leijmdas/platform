@@ -1,0 +1,53 @@
+mysql create user
+复制代码
+ 1 -- 查看系统用户
+ 2 select Host,User,Password from mysql.user;
+ 3 
+ 4 -- 创建一个远程用户 
+ 5 create user test identified by '123456'; 
+ 6 
+ 7 -- 分配权限 
+ 8 grant all privileges on *.* to 'test'@'%'identified by '123456' with grant option; 
+ 9 
+10 -- 刷新mysql用户权限
+11 flush privileges ; 
+12 
+13 -- 修改指定用户密码 
+14 update mysql.user set password=password('新密码') where User="test" and Host="localhost"; 
+15 
+16 -- 删除用户 
+17 delete from user where User='test' and Host='localhost';
+复制代码
+ 
+
+-- 查看mysql支持字符集
+show variables like "% character %";
+ 
+
+-- 建立数据库并指定编码
+create database app_relation character set utf8; 
+
+-- 修改数据库编码
+alter database app_relation character set utf8; 
+ 
+
+ 
+
+CREATE DATABASE db_name DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE DATABASE 的语法：
+CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name
+[create_specification [, create_specification] ...]
+create_specification:
+[DEFAULT] CHARACTER SET charset_name
+| [DEFAULT] COLLATE collation_name
+
+更改数据库的字符编码
+ALTER DATABASE db_name DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
+
+use mysql;
+grant all on *.* to 'Administrator'@'%' identified by '12345';
+ 
+
+ set password for root@'%' = password('12345');
+ FLUSH PRIVILEGES;

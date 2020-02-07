@@ -20,7 +20,7 @@ public interface ISqlSessionBuilder {
     final static  ConcurrentHashMap<String, SqlSessionFactory>
             map_factroy = new ConcurrentHashMap<>();
 
-    SqlSession getSession_common(boolean isAutoCommit);
+    SqlSession getSessionCommon(boolean isAutoCommit);
 
     SqlSession getSession_manager(boolean isAutoCommit);
 

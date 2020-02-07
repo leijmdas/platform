@@ -6,6 +6,7 @@ import com.kunlong.platform.context.RestMessage.MsgHandler;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.IRestProcess;
 import com.kunlong.platform.model.KunlongError;
+import com.kunlong.platform.service.LoginContext;
 import com.kunlong.platform.utils.KunlongUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public final class AuthNoController implements IRestProcess {
         try {
 
             String ip= KunlongUtils.getIpAddr(request);
-            AppKlongContext.getLoginContext().genPicCode(ip, response);
+            LoginContext.genPicCode(ip, response);
             return;
         } catch (KunlongError e) {
             msgHandler.buildMsg( e );

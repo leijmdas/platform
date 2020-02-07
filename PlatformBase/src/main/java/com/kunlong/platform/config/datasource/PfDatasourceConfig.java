@@ -39,7 +39,7 @@ public class PfDatasourceConfig extends PfAppConsts {
 
 	@Bean(name = "pfSqlSessionFactory")
 	@Primary
-	public SqlSessionFactory primarySqlSessionFactory(@Qualifier("pfDataSource") DataSource dataSource)
+	public SqlSessionFactory pfSqlSessionFactory(@Qualifier("pfDataSource") DataSource dataSource)
 			throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);

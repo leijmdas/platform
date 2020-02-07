@@ -190,14 +190,14 @@ public class ImportExcelUtil {
                 		CellStyle style = cell.getCellStyle();
                 		DecimalFormat format = new DecimalFormat();
                 		String temp = style.getDataFormatString();
-                		// 单元格设置成常规
-                		if (temp.equals("General")) {
-                		format.applyPattern("#");
-                		} 
-                		val = format.format(v);
-                	}
+                        // 单元格设置成常规
+                        if ("General".equals(temp)) {
+                            format.applyPattern("#");
+                        }
+                        val = format.format(v);
+                    }
                     break;
-                case STRING:
+                    case STRING:
                 	val = cell.getStringCellValue();
                     break;
                 case FORMULA:

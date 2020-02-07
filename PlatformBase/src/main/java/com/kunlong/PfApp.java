@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import tk.mybatis.spring.annotation.MapperScan;
 
 @EnableAutoConfiguration(exclude = {
         SecurityAutoConfiguration.class
@@ -19,6 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //@EnableDubboConfig
 //@ImportResource({"classpath:appcontext.xml"})
 @EnableCaching
+@MapperScan(basePackages={"com.kunlong.dongxw.data.dao"})
 public class PfApp {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(PfApp.class);

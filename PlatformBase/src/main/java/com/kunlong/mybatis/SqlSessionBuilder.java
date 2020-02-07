@@ -29,7 +29,7 @@ public class SqlSessionBuilder implements ISqlSessionBuilder {
         return getSession(DB_NAME_COMMON, true);
     }
 
-    public SqlSession getSession_common(boolean isAutoCommit) {
+    public SqlSession getSessionCommon(boolean isAutoCommit) {
         return getSession(DB_NAME_COMMON, isAutoCommit);
     }
 

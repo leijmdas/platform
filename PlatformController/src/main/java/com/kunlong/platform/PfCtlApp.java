@@ -25,6 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 //@EnableCaching
 @EnableAsync
+@ImportResource(locations= {"classpath:/dubbo-provider.xml","classpath:/dubbo-consumer.xml"})
 public class PfCtlApp {
 
     public static void main(String[] args) {

@@ -27,7 +27,7 @@ public class AppCorsFilter extends OncePerRequestFilter {
 		response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 		response.setHeader("Access-Control-Allow-Headers", "*, access-token, xw-token, app-version, Content-Type");
 		response.addHeader("Access-Control-Max-Age", "1800");// 30 min
-		if(request.getMethod().toUpperCase().equals("OPTIONS")){
+		if("OPTIONS".equals(request.getMethod().toUpperCase())){
 			
 			return ;
 		}

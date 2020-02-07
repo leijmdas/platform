@@ -52,6 +52,7 @@ public class SysUserCtrl implements IRestProcess {
         return new MsgHandler().parseRequest(this, msgRequest, request, response);
     }
 
+    @Override
     public MsgResponse process(MsgHandler handler, HttpServletRequest request, HttpServletResponse response) {
 
         if (handler.req.cmdtype.equals("user") && handler.req.cmd.equals("login")) {

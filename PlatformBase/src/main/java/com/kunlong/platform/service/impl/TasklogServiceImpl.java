@@ -1,10 +1,11 @@
 package com.kunlong.platform.service.impl;
 
 import java.util.List;
+
+import com.kunlong.platform.dao.TasklogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kunlong.platform.domain.Tasklog;
-import com.kunlong.platform.dao.TasklogMapper;
 import com.kunlong.platform.service.TasklogService;
 import org.mybatis.hbatis.orm.criteria.statement.SelectStatement;
 import org.mybatis.hbatis.orm.criteria.statement.UpdateStatement;

@@ -4,13 +4,13 @@ import java.util.UUID;
 
 public class UUID64 {
 
-  public static String compressUUID32To16() {
+  public static String compressuuid32To16() {
 
-    return compressUUID32To16(UUID.randomUUID());
+    return compressuuid32To16(UUID.randomUUID());
   }
 
 
-  public static String compressUUID32To16(UUID uuid) {
+  public static String compressuuid32To16(UUID uuid) {
     StringBuilder resultBuilder = new StringBuilder();
     String uuidStr = uuid.toString();
     boolean isFirst = false;

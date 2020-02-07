@@ -19,7 +19,9 @@ public class CurrentRequestContext {
 	}
 	public static Object getAttribute(String key) {
 		RequestContext ctx = getContext();
-		if (ctx == null) return null;
+		if (ctx == null) {
+			return null;
+		}
 		Object obj = ctx.getAttribute(key);
 		if (obj == null) {
 			return null;

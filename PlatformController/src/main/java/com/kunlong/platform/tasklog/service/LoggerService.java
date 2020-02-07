@@ -18,6 +18,6 @@ public class LoggerService {
 
     public void log(Tasklog tasklog) {
         //logger.info("tasklog:{}", tasklog);
-        amqpTemplate.convertAndSend(RabbitConfig.queueName, JSON.toJSONString(tasklog));
+        amqpTemplate.convertAndSend(RabbitConfig.QUEUE_NAME, JSON.toJSONString(tasklog));
     }
 }

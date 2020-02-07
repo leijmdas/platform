@@ -110,7 +110,7 @@ public class JxlsUtil{
     
     private Map<String,Integer> countMap = new HashMap<>();
     public Integer getIndex(String var){
-	  if (var == null) return null;
+	  if (var == null){ return null;}
 	  if(countMap.containsKey(var)){
 	    Integer t = countMap.get(var);
 	    t += 1;

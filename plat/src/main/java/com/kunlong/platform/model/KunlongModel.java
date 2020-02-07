@@ -22,7 +22,7 @@ public class KunlongModel {
     public BigDecimal newBigDecimal(int value) {
         return new BigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
-
+    @Override
     public String toString() {
         return KunlongUtils.toJSONStringPretty(this);
 

@@ -2,6 +2,7 @@ package com.kunlong.platform.util;
 
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.consts.RequestContextConst;
+import com.kunlong.platform.context.PfContext;
 import com.kunlong.platform.util.support.CurrentRequestContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
@@ -9,8 +10,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Executor;
 
 /**
  * 分布式SESSION
@@ -23,8 +23,8 @@ public class SessionHolder implements app.support.session.ISessionHolder {
 
 	private static String SESSION_PREFIX = "session:";
 
-	private static ExecutorService EXECUTORS = Executors.newCachedThreadPool();
-
+	//private static ExecutorService EXECUTORS =   Executors.newCachedThreadPool();
+	private static Executor EXECUTORS = PfContext.getAppCtxt().getBean("pfThreadPool",Executor.class) ;
 	private String sessionID = null;
 	private static RedisUtil redisUtil;
 
@@ -114,7 +114,8 @@ public class SessionHolder implements app.support.session.ISessionHolder {
 	@Override
 	public void flush() {
 		final String sessionID = this.getSessionID();
-		EXECUTORS.submit(new Runnable() {
+		//EXECUTORS.submit(new Runnable() {
+		EXECUTORS.execute(new Runnable() {
 
 			@Override
 			public void run() {

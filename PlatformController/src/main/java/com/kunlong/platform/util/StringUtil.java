@@ -14,6 +14,9 @@ import java.util.regex.Pattern;
  *
  */
 public class StringUtil extends StringUtils {
+	static Pattern pMatchHttps = Pattern.compile("(?<!http(s?):)/{2,}");
+	static  Pattern pCity = Pattern.compile(
+			"^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(?:(?![A-Z]{4})[A-Z0-9]){4}[A-Z0-9挂学警港澳]{1,}$");
 
 	/**
 	 * 去除多余/
@@ -22,8 +25,8 @@ public class StringUtil extends StringUtils {
 	 * @return
 	 */
 	public static String resolveUrl(String url) {
-		Pattern p = Pattern.compile("(?<!http(s?):)/{2,}");
-		return p.matcher(StringUtils.trimAllWhitespace(url)).replaceAll("/");
+		//Pattern p = Pattern.compile("(?<!http(s?):)/{2,}");
+		return pMatchHttps.matcher(StringUtils.trimAllWhitespace(url)).replaceAll("/");
 	}
 
 	public static List<Integer> trans2IntegerList(String str) {
@@ -38,9 +41,9 @@ public class StringUtil extends StringUtils {
 
 	// https://blog.csdn.net/qq_30024407/article/details/77099098
 	public static boolean isCarNo(String carNo) {
-		Pattern p = Pattern.compile(
-				"^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(?:(?![A-Z]{4})[A-Z0-9]){4}[A-Z0-9挂学警港澳]{1,}$");
-		Matcher m = p.matcher(carNo);
+//		Pattern p = Pattern.compile(
+//				"^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(?:(?![A-Z]{4})[A-Z0-9]){4}[A-Z0-9挂学警港澳]{1,}$");
+		Matcher m = pCity.matcher(carNo);
 		return m.matches();
 	}
 

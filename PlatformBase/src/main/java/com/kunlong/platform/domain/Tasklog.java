@@ -1,7 +1,10 @@
 package com.kunlong.platform.domain;
 
 import java.io.Serializable;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
+
+import com.kunlong.platform.model.KunlongModel;
 import org.mybatis.hbatis.core.type.JdbcType;
 import org.mybatis.hbatis.core.annotation.*;
 import org.mybatis.hbatis.core.*;
@@ -11,20 +14,23 @@ import java.lang.Byte;
 import java.util.Date;
 import org.mybatis.hbatis.orm.criteria.support.query.AbstractQueryParam;
 import org.mybatis.hbatis.orm.criteria.support.query.SortOrders;
+
 /**
  * Tasklog 
  * @author generator
  * @date 2020年01月30日
  */
 @Table(Tasklog.EntityNode.class)
-public class Tasklog implements Serializable {
+public class Tasklog extends KunlongModel implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	/**
 	  * 用户日志标识
 	  * nullable:true,length:11
 	  */
-	@Column(primaryKey = true,autoIncrement = true,comment = "用户日志标识")	
+
+	@Id
+	@Column(primaryKey = true,autoIncrement = true,comment = "用户日志标识")
 	private Integer id;
 	/**
 	  * 用户标识
