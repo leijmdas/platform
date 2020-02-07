@@ -19,13 +19,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 })
 @Configuration
 @SpringBootApplication(scanBasePackages = {"com.kunlong"})
-@ImportResource({"classpath:appcontext.xml"})
 @EnableDubbo
 @EnableDubboConfig
 @EnableSwagger2
 //@EnableCaching
 @EnableAsync
-@ImportResource(locations= {"classpath:/dubbo-provider.xml","classpath:/dubbo-consumer.xml"})
+@ImportResource(locations= {"classpath:appcontext.xml","classpath:/dubbo-provider.xml","classpath:/dubbo-consumer.xml"})
 public class PfCtlApp {
 
     public static void main(String[] args) {

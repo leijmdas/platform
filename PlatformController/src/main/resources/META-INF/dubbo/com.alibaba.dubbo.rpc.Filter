@@ -1,0 +1,1 @@
+dubboRequestFilter = com.kunlong.platform.dubbo.DubboRequestFilter
