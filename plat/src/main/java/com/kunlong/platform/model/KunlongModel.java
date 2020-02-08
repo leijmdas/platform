@@ -22,6 +22,7 @@ public class KunlongModel {
     public BigDecimal newBigDecimal(int value) {
         return new BigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
+
     @Override
     public String toString() {
         return KunlongUtils.toJSONStringPretty(this);
@@ -33,4 +34,21 @@ public class KunlongModel {
 
     public void log() {
     }
+
+
+    public BigDecimal newBigDecimal(int newScale,float value ) {
+        return new BigDecimal(value).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public BigDecimal newBigDecimal(int newScale,BigDecimal value) {
+        return  value.setScale(newScale, BigDecimal.ROUND_HALF_UP);
+    }
+    public BigDecimal newBigDecimal(int newScale,double value) {
+        return new BigDecimal(value).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public BigDecimal newBigDecimal(int newScale,int value) {
+        return new BigDecimal(value).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+    }
+
 }

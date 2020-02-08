@@ -11,6 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+import static com.kunlong.platform.consts.SqlSessionFactoryConsts.SqlSessionFactory_NAME_PF;
+
 @Component
 public class AppKlongContext implements ApplicationContextAware {
 //    @Autowired
@@ -51,7 +53,7 @@ public class AppKlongContext implements ApplicationContextAware {
 
 
     public static SqlSessionFactory getSqlSessionFactory(){
-        return appCtxt.getBean("primarySqlSessionFactory", SqlSessionFactory.class);
+        return appCtxt.getBean(SqlSessionFactory_NAME_PF, SqlSessionFactory.class);
 
     }
 

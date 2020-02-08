@@ -2,6 +2,7 @@ package com.kunlong.platform.config.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.kunlong.platform.consts.PfAppConsts;
+import com.kunlong.platform.consts.SqlSessionFactoryConsts;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.kunlong.platform.consts.SqlSessionFactoryConsts.*;
+
 //import org.mybatis.hbatis.spring.HbatisSqlSessionDaoSupport;
 // location =“classpath：/ properties / $ {spring.profiles .active：test} /some.properties“/>
 
@@ -37,7 +40,7 @@ public class PfDatasourceConfig extends PfAppConsts {
 		return druidDataSource;
 	}
 
-	@Bean(name = "pfSqlSessionFactory")
+	@Bean(name = SqlSessionFactory_NAME_PF)
 	@Primary
 	public SqlSessionFactory pfSqlSessionFactory(@Qualifier("pfDataSource") DataSource dataSource)
 			throws Exception {
@@ -62,7 +65,7 @@ public class PfDatasourceConfig extends PfAppConsts {
 	@Bean(name = "pfMapperScannerConfigurer")
 	public MapperScannerConfigurer mapperScannerConfigurer() {
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-		mapperScannerConfigurer.setSqlSessionFactoryBeanName("pfSqlSessionFactory");
+		mapperScannerConfigurer.setSqlSessionFactoryBeanName(SqlSessionFactory_NAME_PF);
 		mapperScannerConfigurer.setBasePackage(MYBATIS_BASE_PACKAGE);
 
 		return mapperScannerConfigurer;

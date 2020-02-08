@@ -13,6 +13,7 @@ public interface SysMetaDataDictMapper {
 
     //获取主表中的所有记录
     List<Sys_MetaDataDictModel> getDictList();
+    List<Sys_MetaDataDictModel> getDictByName(String name);
 
     //通过元数据类型查询出所有的记录
     List<Sys_MetaDataDictModel> getDictListByType(int metaDataType);

@@ -8,6 +8,8 @@ import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import java.util.Properties;
 
+import static com.kunlong.platform.consts.SqlSessionFactoryConsts.SqlSessionFactory_NAME_PF;
+
 @Configuration
 public class TkMybatisConfig {
 
@@ -20,7 +22,7 @@ public class TkMybatisConfig {
         properties.setProperty("style", Style.camelhump.name());
 
         MapperScannerConfigurer scan = new MapperScannerConfigurer();
-        scan.setSqlSessionFactoryBeanName("pfSqlSessionFactory"); // 多数据源时，必须配置
+        scan.setSqlSessionFactoryBeanName(SqlSessionFactory_NAME_PF); // 多数据源时，必须配置
         scan.setBasePackage("com.kunlong.platform.dao");//mapper.java文件的路径
         scan.setMarkerInterface(BaseMapper.class); // 直接继承了BaseDao接口的才会被扫描，basePackage可以配置的范围更大。
         scan.setProperties(properties);

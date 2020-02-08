@@ -1,5 +1,6 @@
 package com.kunlong.metadata.service.impl;
 
+import com.kunlong.core.util.StringUtil;
 import com.kunlong.metadata.dao.*;
 import com.kunlong.metadata.model.*;
 import com.kunlong.metadata.service.MetadataDictService;
@@ -12,6 +13,7 @@ import com.kunlong.platform.context.rest.RestHandler;
 import com.kunlong.platform.dao.SubsysDictMapper;
 import com.kunlong.platform.domain.SubsysDict;
 import com.kunlong.platform.model.KunlongError;
+import com.mysql.cj.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -364,9 +366,10 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
             if (isString(fieldList.get(i).getFieldType())) {
                 sql.append("(").append(fieldList.get(i).getFieldSize()).append(") ");
             } else if (isDecimal(fieldList.get(i).getFieldType())) {
-                sql.append("(").append(fieldList.get(i).getFieldSize()).append(",2) ");
+                //String[]  s= StringUtils.split(fieldList.get(i).getFieldSize(),",",true);
+                sql.append("(").append(fieldList.get(i).getFieldSize()).append(",4) ");
             } else if (isPCT(fieldList.get(i).getFieldType())) {
-                sql.append("(8,4) ");
+                sql.append("(12,4) ");
             } else if (isMoney(fieldList.get(i).getFieldType())) {
                 sql.append("(12,2) ");
             }
@@ -377,7 +380,7 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
                     sql.append(" primary key NOT NULL ");
                 }
                 if (fieldList.get(i).getFieldAuto() == true) {
-                    sql.append("AUTO_INCREMENT ");
+                    sql.append(" AUTO_INCREMENT ");
                 }
             } else {
                 if (fieldList.get(i).getFieldIsnull()) {
@@ -387,7 +390,7 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
                 }
 
                 if (!isBlobText(fieldList.get(i).getFieldType()) && fieldList.get(i).getFieldDefault() != null && !fieldList.get(i).getFieldDefault().isEmpty()) {
-                    sql.append(" DEFAULT   ");
+                    sql.append(" DEFAULT ");
                     if (isString(fieldList.get(i).getFieldType())) {
                         sql.append("'").append(fieldList.get(i).getFieldDefault()).append("'");
                     } else if (isDate(fieldList.get(i).getFieldType())) {
