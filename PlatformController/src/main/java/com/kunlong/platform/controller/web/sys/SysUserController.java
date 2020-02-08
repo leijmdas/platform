@@ -1,10 +1,10 @@
 package com.kunlong.platform.controller.web.sys;
 
 import app.support.query.PageResult;
-import cn.kunlong.center.api.dto.queryParam.SysUserQueryDTO;
-import cn.kunlong.center.api.model.AuthorizationDTO;
-import cn.kunlong.center.api.model.SysUserDTO;
-import cn.kunlong.center.api.service.SysUserApiService;
+import com.kunlong.dubbo.sys.dto.queryParam.SysUserQueryDTO;
+import com.kunlong.dubbo.sys.model.AuthorizationDTO;
+import com.kunlong.dubbo.sys.model.SysUserDTO;
+import com.kunlong.dubbo.sys.service.SysUserApiService;
 import com.kunlong.platform.config.auth.PreAuthAnnotation;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.context.PfContext;

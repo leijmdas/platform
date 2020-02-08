@@ -1,12 +1,12 @@
 package com.kunlong.platform.controller.web.metadata;
 
 import app.support.query.PageResult;
-import com.kunlong.api.dto.queryParam.MetadataDictModelQueryDTO;
-import com.kunlong.api.dto.queryParam.MetadataFieldModelQueryDTO;
-import com.kunlong.api.model.MetadataDictModelDTO;
-import com.kunlong.api.model.MetadataFieldModelDTO;
-import com.kunlong.api.service.MetadataDictApiService;
-import com.kunlong.api.service.MetadataFieldApiService;
+import com.kunlong.dubbo.api.dto.queryParam.MetadataDictModelQueryDTO;
+import com.kunlong.dubbo.api.dto.queryParam.MetadataFieldModelQueryDTO;
+import com.kunlong.dubbo.api.model.MetadataDictModelDTO;
+import com.kunlong.dubbo.api.model.MetadataFieldModelDTO;
+import com.kunlong.dubbo.api.service.MetadataDictApiService;
+import com.kunlong.dubbo.api.service.MetadataFieldApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
 import org.apache.dubbo.config.annotation.Reference;

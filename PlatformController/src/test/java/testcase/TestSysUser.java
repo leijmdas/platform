@@ -652,7 +652,7 @@ public class TestSysUser extends ITestImpl {
 
 	public static void main(String[] args) {
 
-		 run(TestSysUser.class,25);
+		 run(TestSysUser.class,1);
 
 	}
 

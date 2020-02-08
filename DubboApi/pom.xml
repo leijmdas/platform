@@ -14,24 +14,24 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>app</groupId>
+            <artifactId>app-support</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>cn.kunlong</groupId>-->
+            <!--<artifactId>center-api</artifactId>-->
+            <!--<version>2.0</version>-->
+
+        <!--</dependency>-->
         <dependency>
             <groupId>kunlong</groupId>
             <artifactId>plat</artifactId>
             <version>2.0</version>
 
         </dependency>
-        <dependency>
-            <groupId>app</groupId>
-            <artifactId>app-support</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.kunlong</groupId>
-            <artifactId>center-api</artifactId>
-            <version>2.0</version>
-
-        </dependency>
-
 
     </dependencies>
 

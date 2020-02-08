@@ -1,9 +1,9 @@
 package com.kunlong.platform.controller.web.sys;
 
 import app.support.query.PageResult;
-import cn.kunlong.center.api.dto.queryParam.SysRoleQueryDTO;
-import cn.kunlong.center.api.model.SysRoleDTO;
-import cn.kunlong.center.api.service.SysRoleApiService;
+import com.kunlong.dubbo.sys.dto.queryParam.SysRoleQueryDTO;
+import com.kunlong.dubbo.sys.model.SysRoleDTO;
+import com.kunlong.dubbo.sys.service.SysRoleApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
 import org.apache.dubbo.config.annotation.Reference;

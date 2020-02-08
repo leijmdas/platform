@@ -1,8 +1,8 @@
 package com.kunlong.platform.dubbo;
 
 import app.support.session.ISessionHolder;
-import cn.kunlong.center.api.model.SysUserDTO;
-import com.kunlong.api.service.AuthApiService;
+import com.kunlong.dubbo.sys.model.SysUserDTO;
+import com.kunlong.dubbo.api.service.AuthApiService;
 import com.kunlong.platform.consts.SessionKeyEnum;
 import com.kunlong.platform.support.service.AuthService;
 import com.kunlong.platform.util.SessionHolder;

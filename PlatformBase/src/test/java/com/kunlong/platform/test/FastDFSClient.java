@@ -1,6 +1,6 @@
 package com.kunlong.platform.test;
 
-import org.csource.common.FastdfsException;
+import org.csource.common.MyException;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
 
@@ -40,10 +40,10 @@ public class FastDFSClient {
     public String uploadFile(String fileName, String extName, NameValuePair[] metas) {
         String result=null;
         try {
-            result = storageClient.uploadFile1("group1",fileName, extName, metas);
+            result = storageClient.upload_file1("group1",fileName, extName, metas);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (FastdfsException e) {
+        }  catch (MyException e) {
             e.printStackTrace();
         }
         return result;
@@ -80,10 +80,10 @@ public class FastDFSClient {
     public String uploadFile(byte[] fileContent, String extName, NameValuePair[] metas) {
         String result=null;
         try {
-            result = storageClient.uploadFile1("group1",fileContent, extName, metas);
+            result = storageClient.upload_file1("group1",fileContent, extName, metas);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (FastdfsException e) {
+        } catch (MyException e) {
             e.printStackTrace();
         }
         return result;
@@ -117,7 +117,7 @@ public class FastDFSClient {
     public int download_file(String path,BufferedOutputStream output) {
         int result=-1;
         try {
-            byte[] b = storageClient.downloadFile1(path);
+            byte[] b = storageClient.download_file1(path);
             try{
                 if(b != null){
                     output.write(b);
@@ -146,10 +146,10 @@ public class FastDFSClient {
     public byte[] download_bytes(String path) {
         byte[] b=null;
         try {
-            b = storageClient.downloadFile1(path);
+            b = storageClient.download_file1(path);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (FastdfsException e) {
+        } catch (MyException e) {
             e.printStackTrace();
         }
         return b;
@@ -164,10 +164,10 @@ public class FastDFSClient {
     public Integer delete_file(String group ,String storagePath){
         int result=-1;
         try {
-            result = storageClient.deleteFile(group, storagePath);
+            result = storageClient.delete_file(group, storagePath);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (FastdfsException e) {
+        } catch (MyException e) {
             e.printStackTrace();
         }
         return  result;
@@ -182,10 +182,10 @@ public class FastDFSClient {
     public Integer delete_file(String storagePath){
         int result=-1;
         try {
-            result = storageClient.deleteFile1(storagePath);
+            result = storageClient.delete_file1(storagePath);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (FastdfsException e) {
+        } catch (MyException e) {
             e.printStackTrace();
         }
         return  result;
@@ -199,7 +199,7 @@ public class FastDFSClient {
      */
     public FileInfo getFile(String groupName, String remoteFileName){
         try {
-            return storageClient.getFileInfo(groupName, remoteFileName);
+            return storageClient.get_file_info(groupName, remoteFileName);
         } catch (Exception e) {
             e.printStackTrace();
         }

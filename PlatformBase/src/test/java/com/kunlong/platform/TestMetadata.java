@@ -1,6 +1,6 @@
 package com.kunlong.platform;
 
-import com.kunlong.PfApp;
+import com.kunlong.PfAppServer;
 import com.kunlong.platform.config.threadpool.TaskExecutePool;
 import com.kunlong.platform.config.threadpool.ThreadPoolConfig;
 import com.kunlong.platform.context.AppKlongContext;
@@ -10,8 +10,7 @@ import com.kunlong.platform.domain.MetadataFieldModel;
 import com.kunlong.platform.domain.Tasklog;
 import com.kunlong.platform.service.RedisService;
 import com.kunlong.platform.service.impl.MailServiceImpl;
-import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
+import com.kunlong.sysuser.dao.SysUserModelMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +19,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.test.context.junit4.SpringRunner;
-import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -35,7 +33,7 @@ import java.util.concurrent.Executor;
  * @description:
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = PfApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = PfAppServer.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 public class TestMetadata {
     @Resource
@@ -148,21 +146,26 @@ public class TestMetadata {
 
     }
 
+//    @Autowired
+//    TaskMapper taskMapper;
+//
+//    @Test
+//    public void test0009() {
+//        Example example = new Example(Tasklog.class);
+//
+//        int count = taskMapper.selectCountByExample(example);
+//
+//        RowBounds rowBounds = new RowBounds(0, 3);
+//
+//        List<Tasklog> list = taskMapper.selectByExampleAndRowBounds(example, rowBounds);
+//        System.out.println(list);
+//    }
+
     @Autowired
-    TaskMapper taskMapper;
-
+    SysUserModelMapper sysUserModelMapper;
     @Test
-    public void test0009() {
-        Example example = new Example(Tasklog.class);
-
-        int count = taskMapper.selectCountByExample(example);
-
-        RowBounds rowBounds = new RowBounds(0, 3);
-
-        List<Tasklog> list = taskMapper.selectByExampleAndRowBounds(example, rowBounds);
-        System.out.println(list);
+    public void test0009_sysuSerRoleModel(){
+        sysUserModelMapper.getUserByUserName("ljm");
     }
-
-
 }
 

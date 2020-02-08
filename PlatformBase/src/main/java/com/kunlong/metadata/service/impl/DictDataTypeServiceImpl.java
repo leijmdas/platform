@@ -33,7 +33,7 @@ public class DictDataTypeServiceImpl implements DictDataTypeService {
     @Override
     public int deleteByPrimaryKey(Integer datainnerid) {
 
-          return dictDatatypeMapper.deleteByPrimaryKey(datainnerid);
+          return  dictDatatypeMapper.deleteByPrimaryKey(datainnerid);
 
     }
 

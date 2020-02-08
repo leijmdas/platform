@@ -9,6 +9,7 @@ import com.kunlong.sysuser.model.Sys_MenuModel;
 import com.kunlong.sysuser.model.Sys_RestListModel;
 import com.kunlong.sysuser.service.SysPowerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.Map;
  * Date: Created in 2018/8/21 20:01
  */
 @Service
+@Primary
 public class SysPowerServiceImpl implements SysPowerService {
     @Autowired
     SysMenuMapper sysMenuDao;//= ss.getMapper(SysMenuMapper.class);

@@ -2,9 +2,9 @@
 
 spring:
   application:
-    name:pf-dubbo
+    name:platform-dubbo
   profiles:
     active: dev
 server:
-  port: 11122
+  port: 10090
   contextPath: /

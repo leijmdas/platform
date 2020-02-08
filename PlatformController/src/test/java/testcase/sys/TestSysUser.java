@@ -1,8 +1,8 @@
 package testcase.sys;
 
 
-import cn.kunlong.center.api.dto.queryParam.SysUserQueryDTO;
-import cn.kunlong.center.api.model.AuthorizationDTO;
+import com.kunlong.dubbo.sys.dto.queryParam.SysUserQueryDTO;
+import com.kunlong.dubbo.sys.model.AuthorizationDTO;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.jtest.NodesFactroy.Inject.Inject;
@@ -10,9 +10,9 @@ import com.jtest.NodesFactroy.Node.HttpClientNode;
 import com.jtest.annotation.JTest;
 import com.jtest.annotation.JTestClass;
 import com.jtest.testframe.ITestImpl;
-import com.kunlong.api.dto.queryParam.MetadataDictModelQueryDTO;
-import com.kunlong.api.model.MetadataDictModelDTO;
-import com.kunlong.api.model.MetadataFieldModelDTO;
+import com.kunlong.dubbo.api.dto.queryParam.MetadataDictModelQueryDTO;
+import com.kunlong.dubbo.api.model.MetadataDictModelDTO;
+import com.kunlong.dubbo.api.model.MetadataFieldModelDTO;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.support.service.AuthService;

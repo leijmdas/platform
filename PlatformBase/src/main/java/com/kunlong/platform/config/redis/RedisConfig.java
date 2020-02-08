@@ -1,7 +1,7 @@
 package com.kunlong.platform.config.redis;
 
 
-import cn.kunlong.center.api.model.SysUserDTO;
+import com.kunlong.dubbo.sys.model.SysUserDTO;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.kunlong.platform.model.LoginSso;
 import org.springframework.context.annotation.Bean;

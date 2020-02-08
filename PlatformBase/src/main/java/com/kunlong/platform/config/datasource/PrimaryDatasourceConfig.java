@@ -25,10 +25,9 @@ import java.util.List;
 @Configuration
 public class PrimaryDatasourceConfig extends PrimaryAppConsts {
 
-	@Qualifier("DataSource")
-
+	@Qualifier("primaryDataSource")
 	@Bean(name = "primaryDataSource", destroyMethod = "close", initMethod = "init")
-	@ConfigurationProperties(prefix = "spring.datasource.pf")
+	@ConfigurationProperties(prefix = "spring.datasource.platform")
 	public DataSource primaryDataSource() {
 		DruidDataSource druidDataSprimaryource = new DruidDataSource();
 		return druidDataSprimaryource;
@@ -55,7 +54,8 @@ public class PrimaryDatasourceConfig extends PrimaryAppConsts {
 	}
 
 
-	@Bean
+
+	@Bean(name = "primaryMapperScannerConfigurer")
 	public MapperScannerConfigurer mapperScannerConfigurer() {
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 		mapperScannerConfigurer.setSqlSessionFactoryBeanName("primarySqlSessionFactory");

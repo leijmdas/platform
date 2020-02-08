@@ -23,7 +23,7 @@ public class ApiConstants {
 	/**
 	 * 用在API注解上 WEB
 	 */
-	public static final String AUTH_API_WEB = "api";
+	public static final String AUTH_API_WEB = "sys";
 	
 	/**
 	 * 认证TOKEN KEY APP

@@ -14,6 +14,51 @@
     <dependencies>
         <dependency>
             <groupId>kunlong</groupId>
+            <artifactId>DubboApi</artifactId>
+            <version>2.0</version>
+
+        </dependency>
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>1.5.4</version>
+
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.30</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.27-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>kunlong</groupId>
             <artifactId>plat</artifactId>
             <version>2.0</version>
         </dependency>
@@ -46,11 +91,11 @@
             <version>2.10.6</version>
         </dependency>
 
-        <dependency>
-            <groupId>in.clouthink.repack</groupId>
-            <artifactId>fastdfs-client-java</artifactId>
-            <version>1.29.4</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>in.clouthink.repack</groupId>-->
+            <!--<artifactId>fastdfs-client-java</artifactId>-->
+            <!--<version>1.29.4</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

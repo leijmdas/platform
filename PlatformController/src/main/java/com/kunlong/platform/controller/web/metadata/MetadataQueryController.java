@@ -1,8 +1,8 @@
 package com.kunlong.platform.controller.web.metadata;
 
 import app.support.query.PageResult;
-import com.kunlong.api.dto.queryParam.MetadataQueryDTO;
-import com.kunlong.api.model.SelectSqlDTO;
+import com.kunlong.dubbo.api.dto.queryParam.MetadataQueryDTO;
+import com.kunlong.dubbo.api.model.SelectSqlDTO;
 import com.kunlong.metadata.model.MetadataDict;
 import com.kunlong.metadata.service.MetadataDictService;
 import com.kunlong.platform.consts.ApiConstants;

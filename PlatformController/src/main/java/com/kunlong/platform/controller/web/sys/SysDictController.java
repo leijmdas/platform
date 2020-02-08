@@ -3,14 +3,13 @@ package com.kunlong.platform.controller.web.sys;
 
 import app.support.query.PageResult;
 
-import cn.kunlong.center.api.dto.queryParam.SysDictQueryDTO;
-import cn.kunlong.center.api.model.SysDictDTO;
-import cn.kunlong.center.api.model.SysDictItemDTO;
-import cn.kunlong.center.api.service.SysDictApiService;
+import com.kunlong.dubbo.sys.dto.queryParam.SysDictQueryDTO;
+import com.kunlong.dubbo.sys.model.SysDictDTO;
+import com.kunlong.dubbo.sys.model.SysDictItemDTO;
+import com.kunlong.dubbo.sys.service.SysDictApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

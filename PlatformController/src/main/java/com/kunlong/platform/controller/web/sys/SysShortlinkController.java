@@ -1,9 +1,9 @@
 package com.kunlong.platform.controller.web.sys;
 
 import app.support.query.PageResult;
-import cn.kunlong.center.api.dto.queryParam.SysShortlinkQueryDTO;
-import cn.kunlong.center.api.model.SysShortlinkDTO;
-import cn.kunlong.center.api.service.SysShortlinkApiService;
+import com.kunlong.dubbo.sys.dto.queryParam.SysShortlinkQueryDTO;
+import com.kunlong.dubbo.sys.model.SysShortlinkDTO;
+import com.kunlong.dubbo.sys.service.SysShortlinkApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
 import org.apache.dubbo.config.annotation.Reference;

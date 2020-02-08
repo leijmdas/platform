@@ -1,8 +1,8 @@
 package com.kunlong.dubbo.pf.testcase;
 
-import com.kunlong.api.model.DictDatatypeApiModel;
-import com.kunlong.api.service.DictDataTypeApiService;
-import com.kunlong.dubbo.PfDubboApp;
+import com.kunlong.dubbo.api.model.DictDatatypeApiModel;
+import com.kunlong.dubbo.api.service.DictDataTypeApiService;
+import com.kunlong.platform.PlatformDubboServer;
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.service.DictDataTypeService;
 import com.kunlong.platform.utils.KunlongUtils;
@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @description:
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = PfDubboApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = PlatformDubboServer.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 public class TestPfServiceImpl {
     @Autowired

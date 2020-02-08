@@ -1,10 +1,11 @@
 package com.kunlong.sysuser.service.impl;
 
-import com.kunlong.sysuser.dao.SysRoleMapper;
-import com.kunlong.sysuser.dao.SysUserRoleMapper;
+import com.kunlong.sysuser.dao.SysRoleModelMapper;
+import com.kunlong.sysuser.dao.SysUserRoleModelMapper;
 import com.kunlong.sysuser.model.Sys_RoleModel;
 import com.kunlong.sysuser.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,11 +19,12 @@ import java.util.Map;
  * Date: Created in 2019/8/21 13:13
  */
 @Service
+@Primary
 public class SysRoleServiceImpl implements SysRoleService {
     @Autowired
-    SysRoleMapper sysRoleMapper;
+    SysRoleModelMapper sysRoleMapper;
     @Autowired
-    SysUserRoleMapper sysUserRoleMapper;
+    SysUserRoleModelMapper sysUserRoleMapper;
 
     @Override
     public List<Sys_RoleModel> getSysRoleList(String roleName) {

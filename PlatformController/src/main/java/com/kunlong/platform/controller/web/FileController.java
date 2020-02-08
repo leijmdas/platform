@@ -1,13 +1,12 @@
 package com.kunlong.platform.controller.web;
 
 
-import cn.kunlong.center.api.dto.FileInfoDTO;
-import cn.kunlong.center.api.service.FileApiService;
+import com.kunlong.dubbo.api.dto.FileInfoDTO;
+import com.kunlong.dubbo.api.service.FileApiService;
 import com.kunlong.platform.util.FileHelper;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

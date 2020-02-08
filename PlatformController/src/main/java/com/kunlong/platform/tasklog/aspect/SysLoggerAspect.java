@@ -1,6 +1,6 @@
 package com.kunlong.platform.tasklog.aspect;
 
-import cn.kunlong.center.api.model.SysUserDTO;
+import com.kunlong.dubbo.sys.model.SysUserDTO;
 import com.kunlong.platform.context.PfContext;
 import com.kunlong.platform.domain.Tasklog;
 import com.kunlong.platform.tasklog.service.LoggerService;

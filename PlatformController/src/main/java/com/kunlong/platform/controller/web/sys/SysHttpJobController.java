@@ -2,11 +2,11 @@ package com.kunlong.platform.controller.web.sys;
 
 
 import app.support.query.PageResult;
-import cn.kunlong.center.api.dto.queryParam.SysHttpJobQueryDTO;
-import cn.kunlong.center.api.model.SysHttpJobDTO;
-import cn.kunlong.center.api.model.SysJobGroupDTO;
-import cn.kunlong.center.api.service.SysHttpJobApiService;
-import cn.kunlong.center.api.service.SysJobGroupApiService;
+import com.kunlong.dubbo.sys.dto.queryParam.SysHttpJobQueryDTO;
+import com.kunlong.dubbo.sys.model.SysHttpJobDTO;
+import com.kunlong.dubbo.sys.model.SysJobGroupDTO;
+import com.kunlong.dubbo.sys.service.SysHttpJobApiService;
+import com.kunlong.dubbo.sys.service.SysJobGroupApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.util.ValueFieldHelper;
 import org.apache.dubbo.config.annotation.Reference;

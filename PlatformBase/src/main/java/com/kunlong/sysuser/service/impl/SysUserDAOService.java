@@ -1,15 +1,15 @@
 package com.kunlong.sysuser.service.impl;
 
-import com.kunlong.sysuser.dao.SysUserMapper;
+import com.kunlong.sysuser.dao.SysUserModelMapper;
 import com.kunlong.sysuser.model.SysUserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Map;
 
-public class SysUserDAOService implements SysUserMapper {
+public class SysUserDAOService implements SysUserModelMapper {
     @Autowired
-    protected SysUserMapper sysUserMapper;
+    protected SysUserModelMapper sysUserMapper;
 
      @Override
     public List<SysUserModel> getSysUserList(Map<String, Object> map) {

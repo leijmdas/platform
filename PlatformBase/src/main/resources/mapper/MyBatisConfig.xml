@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="mapper/jdbc.properties"/>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+
+    <!-- 类型命名  定义别名-->
+    <typeAliases>
+
+        <typeAlias type="com.kunlong.mybatis.DruidDataSourceFactory" alias="DRUID"/>
+    </typeAliases>
+
+    <typeHandlers/>
+
+
+    <environments default="development"><!-- 配置环境 -->
+        <environment id="development">
+            <transactionManager type="JDBC">
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <!-- 数据源 -->
+            <dataSource type="DRUID">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${manager.url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers><!-- 映射器 -->
+
+        <!-- 系统管理后台 -->
+        <mapper resource="mapper/manager/sysusermapper/SysMenuMapper.xml"/>
+        <mapper resource="mapper/manager/sysusermapper/SysRestListMapper.xml"/>
+        <mapper resource="mapper/manager/sysusermapper/SysRoleMapper.xml"/>
+        <mapper resource="mapper/manager/sysusermapper/SysRoleRightMapper.xml"/>
+        <mapper resource="mapper/manager/sysusermapper/SysUserMapper.xml"/>
+        <mapper resource="mapper/manager/sysusermapper/SysUserRoleMapper.xml"/>
+
+        <!-- 元数据字典-->
+        <!--<mapper resource="mapper/manager/sysmetadatamapper/SysDictDataTypeMapper.xml"/>-->
+        <mapper resource="mapper/manager/sysmetadatamapper/SysMetaDataDictMapper.xml"/>
+        <mapper resource="mapper/manager/sysmetadatamapper/SysMetaDataFieldMapper.xml"/>
+        <mapper resource="mapper/manager/sysmetadatamapper/SubsysDictMapper.xml"/>
+
+        <mapper resource="mapper/manager/sysmetadatamapper/MetadataDictMapper.xml"/>
+        <mapper resource="mapper/manager/sysmetadatamapper/MetadataFieldMapper.xml"/>
+        <mapper resource="mapper/manager/sysmetadatamapper/DictDatatypeMapper.xml"/>
+
+
+    </mappers>
+</configuration>

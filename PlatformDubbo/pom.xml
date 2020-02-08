@@ -14,31 +14,31 @@
 
         <dependency>
             <groupId>kunlong</groupId>
-            <artifactId>PlatformBase</artifactId>
-            <version>2.0</version>
-
-        </dependency>
-        <dependency>
-            <groupId>kunlong</groupId>
             <artifactId>DubboApi</artifactId>
             <version>2.0</version>
 
         </dependency>
 
+        <dependency>
+            <groupId>kunlong</groupId>
+            <artifactId>PlatformBase</artifactId>
+            <version>2.0</version>
+
+        </dependency>
     </dependencies>
 
 
 
     <build>
-        <finalName>kl-pf-dubbo</finalName>
+        <finalName>kl-center-service</finalName>
         <plugins>
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
+                <!--<version>${spring-boot.version}</version>-->
                 <configuration>
-                    <mainClass>com.kunlong.dubbo.PfDubboApp</mainClass>
+                    <mainClass>com.kunlong.platform.PlatformDubboServer</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -51,7 +51,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <!--<version>3.6.1</version>-->
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

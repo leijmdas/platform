@@ -14,14 +14,14 @@ public class SqlSessionBuilder implements ISqlSessionBuilder {
     static Map<String, String> map_db_config = new LinkedHashMap<>();
 
     static {
-        map_db_config.put(DB_NAME_COMMON, "dbconfig/common/MyBatisConfig.xml");
-        map_db_config.put(DB_NAME_MANAGER, "dbconfig/manager/MyBatisConfig.xml");
-        map_db_config.put(DB_NAME_USER, "dbconfig/user/MyBatisConfig.xml");
-        map_db_config.put(DB_NAME_PROJECT, "dbconfig/project/MyBatisConfig.xml");
-        map_db_config.put(DB_NAME_BANGBANG, "dbconfig/bangbang/MyBatisConfig.xml");
-        map_db_config.put(DB_NAME_ACCOUNT, "dbconfig/account/MyBatisConfig.xml");
-        map_db_config.put(DB_NAME_TASKLOG, "dbconfig/log/MyBatisConfig.xml");
-        //map_db_config.put(DB_NAME_ACTIVITI, "dbconfig/activiti/MyBatisConfig.xml");
+        map_db_config.put(DB_NAME_COMMON, "mapper/manager/MyBatisConfig.xml");
+        map_db_config.put(DB_NAME_MANAGER, "mapper/manager/MyBatisConfig.xml");
+        map_db_config.put(DB_NAME_USER, "mapper/user/MyBatisConfig.xml");
+        map_db_config.put(DB_NAME_PROJECT, "mapper/project/MyBatisConfig.xml");
+        map_db_config.put(DB_NAME_BANGBANG, "mapper/bangbang/MyBatisConfig.xml");
+        map_db_config.put(DB_NAME_ACCOUNT, "mapper/account/MyBatisConfig.xml");
+        map_db_config.put(DB_NAME_TASKLOG, "mapper/log/MyBatisConfig.xml");
+        //map_db_config.put(DB_NAME_ACTIVITI, "mapper/activiti/MyBatisConfig.xml");
     }
 
     private ReentrantLock lock = new ReentrantLock();

@@ -4,14 +4,9 @@ import com.jtest.annotation.JTest;
 import com.jtest.annotation.JTestClass;
 import com.jtest.testframe.ITestImpl;
 import com.jtest.utility.testlog.JTestLog;
-import com.kunlong.PfApp;
-import com.kunlong.metadata.model.MetadataDict;
-import com.kunlong.platform.context.AppKlongContext;
-import lombok.AllArgsConstructor;
+import com.kunlong.PfAppServer;
 import lombok.Builder;
 import lombok.Data;
-import org.apache.ibatis.session.SqlSession;
-import tk.mybatis.mapper.entity.Example;
 
 public class TestFastDfs extends ITestImpl {
 
@@ -21,7 +16,7 @@ public class TestFastDfs extends ITestImpl {
     @JTestClass.step("test0001_fastdfs")
     @JTestClass.exp("ok")
     public void test0001_fastdfs() throws Exception {
-        String confUrl = PfApp.class.getResource("/fdfs_client.properties").getPath();
+        String confUrl = PfAppServer.class.getResource("/fdfs_client.properties").getPath();
         System.out.println(confUrl);
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //上传文件
@@ -35,7 +30,7 @@ public class TestFastDfs extends ITestImpl {
     @JTestClass.step("test0002_fastdfs128")
     @JTestClass.exp("ok")
     public void test0002_fastdfs128() throws Exception {
-        String confUrl = PfApp.class.getResource("/fdfs_client128.properties").getPath();
+        String confUrl = PfAppServer.class.getResource("/fdfs_client128.properties").getPath();
         System.out.println(confUrl);
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //上传文件
@@ -50,7 +45,7 @@ public class TestFastDfs extends ITestImpl {
     @JTestClass.step(" ")
     @JTestClass.exp("ok")
     public void test0003_fastdfs() throws Exception {
-        String confUrl = PfApp.class.getResource("/fdfs_client63.properties").getPath();
+        String confUrl = PfAppServer.class.getResource("/fdfs_client63.properties").getPath();
         System.out.println(confUrl);
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //上传文件

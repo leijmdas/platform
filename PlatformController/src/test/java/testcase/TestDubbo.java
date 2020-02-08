@@ -1,12 +1,12 @@
 package testcase;
 
-import cn.kunlong.center.api.service.SysUserApiService;
-import com.kunlong.api.dto.queryParam.MetadataFieldModelQueryDTO;
-import com.kunlong.api.model.MetadataDictModelDTO;
-import com.kunlong.api.model.MetadataFieldModelDTO;
-import com.kunlong.api.service.MailApiService;
-import com.kunlong.api.service.MetadataDictApiService;
-import com.kunlong.api.service.MetadataFieldApiService; ;
+import com.kunlong.dubbo.sys.service.SysUserApiService;
+import com.kunlong.dubbo.api.dto.queryParam.MetadataFieldModelQueryDTO;
+import com.kunlong.dubbo.api.model.MetadataDictModelDTO;
+import com.kunlong.dubbo.api.model.MetadataFieldModelDTO;
+import com.kunlong.dubbo.api.service.MailApiService;
+import com.kunlong.dubbo.api.service.MetadataDictApiService;
+import com.kunlong.dubbo.api.service.MetadataFieldApiService; ;
 import com.kunlong.platform.PfCtlApp;
 import com.kunlong.platform.dao.TasklogMapper;
 import com.kunlong.platform.domain.Tasklog;
