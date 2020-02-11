@@ -41,7 +41,6 @@ public class PfDatasourceConfig extends PfAppConsts {
 	}
 
 	@Bean(name = SqlSessionFactory_NAME_PF)
-	@Primary
 	public SqlSessionFactory pfSqlSessionFactory(@Qualifier("pfDataSource") DataSource dataSource)
 			throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
@@ -72,7 +71,6 @@ public class PfDatasourceConfig extends PfAppConsts {
 	}
 
 	@Bean(name = "pfTransactionManager")
-	@Primary
 	public DataSourceTransactionManager primaryTransactionManager(
 			@Qualifier("pfDataSource") DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);

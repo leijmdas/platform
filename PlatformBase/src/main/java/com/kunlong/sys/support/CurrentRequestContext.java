@@ -27,17 +27,17 @@ public class CurrentRequestContext {
 		if (ctx == null) return -1;
 		Object obj = ctx.getAttribute("log.opBy");
 		if (obj == null) {
-			return null;
+			return -1;
 		}
 		return (Integer) obj;
 	}
-	
+
 	public static Integer getCurrentCorpId() {
 		RequestContext ctx = getContext();
 		if (ctx == null) return -1;
 		Object obj = ctx.getAttribute(RequestContextKeyEnum.CORP_ID.getValue());
 		if (obj == null) {
-			return null;
+			return 1;
 		}
 		return Integer.parseInt(obj.toString());
 	}

@@ -61,7 +61,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 	}
 
 	private void checkEntity(SysRole entity) {
-		BeanValidator.propertyCheck(entity);
+		//BeanValidator.propertyCheck(entity);
 		if (ROLE_ROOT.equals(entity.getRoleCode())) {
 			throw new ValidationException("此角色不允许编辑");
 		}

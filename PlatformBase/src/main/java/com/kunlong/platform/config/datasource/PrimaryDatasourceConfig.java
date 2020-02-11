@@ -36,6 +36,7 @@ public class PrimaryDatasourceConfig extends PrimaryAppConsts {
 	}
 
 	@Bean(name = SqlSessionFactoryConsts.SqlSessionFactory_NAME_PRIMARY)
+	@Primary
 	public SqlSessionFactory primarySqlSessionFactory(@Qualifier("primaryDataSource") DataSource dataSource)
 			throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();

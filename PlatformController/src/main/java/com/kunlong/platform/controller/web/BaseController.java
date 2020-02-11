@@ -3,8 +3,19 @@ package com.kunlong.platform.controller.web;
 import com.kunlong.dubbo.sys.model.SysUserDTO;
 import com.kunlong.platform.consts.SessionKeyEnum;
 import com.kunlong.platform.util.SessionHolder;
+import com.kunlong.sys.domain.SysDictItem;
+import com.kunlong.sys.service.SysDevService;
+import com.kunlong.sys.service.SysDictService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class BaseController {
@@ -29,6 +40,7 @@ public class BaseController {
 	public Integer getCurrentCorpId() {
 		return getCurrentSysUser().getCorpId();
 	}
-	
-	
+
+
+
 }
