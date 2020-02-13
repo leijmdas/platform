@@ -39,7 +39,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
 	}
 
 	private void checkEntity(SysUserRole entity) {
-		BeanValidator.propertyCheck(entity);
+		//BeanValidator.propertyCheck(entity);
 		SysUserRole tmp = this.findUnique(entity.getUserId(), entity.getRoleId());
 		if (tmp != null && !tmp.getId().equals(entity.getId())) {
 			throw new ValidationException("角色已被分配");

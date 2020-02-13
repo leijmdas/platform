@@ -8,6 +8,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -157,7 +158,7 @@ public final class KunlongUtils {
 
 
 
-    public String transDatetime(Date d) {
+    public static String transDatetime(Date d) {
         if(d==null){
             return "";
         }
@@ -165,12 +166,46 @@ public final class KunlongUtils {
         return sdf.format(d);
     }
 
-    public String transDate(Date d) {
+    public static String transDate(Date d) {
         if(d==null){
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(d);
     }
+
+
+    public static BigDecimal newBigDecimal(float value) {
+        return new BigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public static BigDecimal newBigDecimal(BigDecimal value) {
+        return  value.setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+    public static BigDecimal newBigDecimal(double value) {
+        return new BigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public static BigDecimal newBigDecimal(int value) {
+        return new BigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+
+
+
+    public static BigDecimal newBigDecimal(int newScale,float value ) {
+        return new BigDecimal(value).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public static BigDecimal newBigDecimal(int newScale,BigDecimal value) {
+        return  value.setScale(newScale, BigDecimal.ROUND_HALF_UP);
+    }
+    public static BigDecimal newBigDecimal(int newScale,double value) {
+        return new BigDecimal(value).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public static BigDecimal newBigDecimal(int newScale,int value) {
+        return new BigDecimal(value).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+    }
+
 }
 
