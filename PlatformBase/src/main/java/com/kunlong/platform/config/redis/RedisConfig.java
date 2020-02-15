@@ -4,15 +4,25 @@ package com.kunlong.platform.config.redis;
 import com.kunlong.dubbo.sys.model.SysUserDTO;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.kunlong.platform.model.LoginSso;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-
 @Configuration
 public class RedisConfig {
+
+    @Bean
+    @ConfigurationProperties(prefix="spring.redis")
+    @Primary
+    public RedisProperties redisProperties() {
+        RedisProperties redisProperties = new RedisProperties();
+        return redisProperties;
+    }
 //
 //	@Bean
 //	@ConfigurationProperties(prefix="spring.redis")

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false">
+    <!-- 设定缓存的默认数据过期策略 -->
+    <defaultCache maxElementsInMemory="100000"
+            eternal="false"
+            overflowToDisk="true"
+            timeToIdleSeconds="100"
+            timeToLiveSeconds="200"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"/>
+
+    !-- 设定全局缓存的默认数据过期策略 -->
+    <cache name="PlatformCache"
+           maxElementsInMemory="100000"
+           eternal="false"
+           overflowToDisk="false"
+           timeToIdleSeconds="100"
+           timeToLiveSeconds="3600"/>
+
+
+</ehcache>

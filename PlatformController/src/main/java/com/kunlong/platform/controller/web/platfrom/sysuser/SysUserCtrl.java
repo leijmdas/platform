@@ -1,12 +1,12 @@
-package com.kunlong.platform.controller.web.sysuser;
+package com.kunlong.platform.controller.web.platfrom.sysuser;
 
 import com.kunlong.platform.context.RestMessage.MsgHandler;
 import com.kunlong.platform.context.RestMessage.MsgRequest;
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.IRestProcess;
-import com.kunlong.platform.controller.web.sysuser.impl.KunlongSysUser;
-import com.kunlong.platform.controller.web.sysuser.impl.SysPower;
-import com.kunlong.platform.controller.web.sysuser.impl.SysRole;
+import com.kunlong.platform.controller.web.platfrom.sysuser.impl.KunlongSysUser;
+import com.kunlong.platform.controller.web.platfrom.sysuser.impl.SysPower;
+import com.kunlong.platform.controller.web.platfrom.sysuser.impl.SysRole;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.service.LoginContext;
 import com.kunlong.platform.utils.KunlongUtils;

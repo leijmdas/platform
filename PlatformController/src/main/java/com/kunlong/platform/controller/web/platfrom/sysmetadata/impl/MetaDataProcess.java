@@ -1,4 +1,4 @@
-package com.kunlong.platform.controller.web.sysmetadata.impl;
+package com.kunlong.platform.controller.web.platfrom.sysmetadata.impl;
 
 import com.kunlong.metadata.service.server.DictDataTypeServer;
 import com.kunlong.metadata.service.server.MetadataDictServer;

@@ -1,4 +1,4 @@
-package com.kunlong.platform.controller.web.sysuser.impl;
+package com.kunlong.platform.controller.web.platfrom.sysuser.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

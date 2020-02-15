@@ -1,4 +1,4 @@
-package com.kunlong.platform.controller.web.sys;
+package com.kunlong.platform.controller.web.platfrom.sys;
 
 
 import app.support.query.PageResult;

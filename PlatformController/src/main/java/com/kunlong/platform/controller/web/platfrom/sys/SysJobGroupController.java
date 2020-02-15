@@ -1,4 +1,4 @@
-package com.kunlong.platform.controller.web.sys;
+package com.kunlong.platform.controller.web.platfrom.sys;
 
 
 import app.support.query.PageResult;
@@ -7,7 +7,6 @@ import com.kunlong.dubbo.sys.model.SysJobGroupDTO;
 import com.kunlong.dubbo.sys.service.SysJobGroupApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

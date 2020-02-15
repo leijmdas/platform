@@ -1,4 +1,4 @@
-package com.kunlong.platform.controller.web.metadata;
+package com.kunlong.platform.controller.web.platfrom.metadata;
 
 import app.support.query.PageResult;
 import com.kunlong.dubbo.api.dto.queryParam.MetadataDictModelQueryDTO;

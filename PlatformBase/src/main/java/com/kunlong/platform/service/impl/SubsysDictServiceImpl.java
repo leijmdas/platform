@@ -25,7 +25,7 @@ public class SubsysDictServiceImpl implements SubsysDictService {
 	 * 保存
 	 * @param entity
 	 */
-	@CachePut("${cache.name}")
+	//@CachePut("${cache.name}")
 	public void save(SubsysDict entity){
 		this.checkEntity(entity);
 		repo.insert(entity);
@@ -35,7 +35,7 @@ public class SubsysDictServiceImpl implements SubsysDictService {
 	 * 修改
 	 * @param entity
 	 */
-	@CachePut("${cache.name}")
+	//@CachePut("${cache.name}")
 	public void update(SubsysDict entity){
 		this.checkEntity(entity);
 		repo.update(entity);
@@ -65,7 +65,7 @@ public class SubsysDictServiceImpl implements SubsysDictService {
 	}
 	/**
 	 * 通过非空属性查询
-	 * @param SubsysDict
+	 * @param entity
 	 * @return
 	 */
 	public List<SubsysDict> findByNotNullProps(SubsysDict entity){
@@ -75,7 +75,7 @@ public class SubsysDictServiceImpl implements SubsysDictService {
 	}
 	/**
 	 * 通过主键更新非空属性
-	 * @param SubsysDict
+	 * @param   entity
 	 * @return
 	 */
 	public void updateNotNullPropsById(SubsysDict entity){
@@ -86,10 +86,10 @@ public class SubsysDictServiceImpl implements SubsysDictService {
 	
 	/**
 	 * 通过实体参数分页查询
-	 * @param SubsysDict.QueryParam
+	 * @param    queryParam
 	 * @return
 	 */
-	@Cacheable("${cache.name}")
+	//@Cacheable("${cache.name}")
 	public List<SubsysDict> findByQueryParam(SubsysDict.QueryParam queryParam){
 		return repo.findByQueryParam(queryParam);
 	}

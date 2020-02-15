@@ -1,8 +1,8 @@
-package com.kunlong.platform.controller.web.sysmetadata;
+package com.kunlong.platform.controller.web.platfrom.sysmetadata;
 
 import com.kunlong.platform.context.RestMessage.MsgResponse;
 import com.kunlong.platform.context.rest.RestHandler;
-import com.kunlong.platform.controller.web.sysmetadata.impl.MetaDataProcess;
+import com.kunlong.platform.controller.web.platfrom.sysmetadata.impl.MetaDataProcess;
 import com.kunlong.platform.model.KunlongError;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.PostMapping;
