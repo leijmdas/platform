@@ -1,9 +1,8 @@
-package com.kunlong.platform.controller.web.platfrom;
+package com.kunlong.platform.controller.web.platfrom.metadata;
 
 import app.support.query.PageResult;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
-import com.kunlong.platform.dao.SubsysDictMapper;
 import com.kunlong.platform.domain.SubsysDict;
 import com.kunlong.platform.service.SubsysDictService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.Map;
 
-
+@Deprecated
 public class KunlongSql {
     public static SqlSessionUtil sqlSessionUtil = new SqlSessionUtil();
 

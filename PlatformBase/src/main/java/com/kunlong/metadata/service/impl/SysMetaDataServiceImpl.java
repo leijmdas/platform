@@ -184,13 +184,11 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
     }
 
     boolean isDate(String dtype) {
-        return dtype.equals("DATE")
-                || dtype.equals("TIMESTAMP") || dtype.equalsIgnoreCase("DATETIME");
+        return dtype.equals("DATE")  || dtype.equals("TIMESTAMP") || dtype.equalsIgnoreCase("DATETIME");
     }
 
     boolean isString(String dtype) {
-        return dtype.equals("CHAR")
-                || dtype.equalsIgnoreCase("VARCHAR");
+        return dtype.equals("CHAR")   || dtype.equalsIgnoreCase("VARCHAR");
     }
 
     boolean isDecimal(String dtype) {
@@ -239,7 +237,6 @@ public class SysMetaDataServiceImpl implements SysMetaDataService {
         if (metadataDictService.checkTableExists(metadataDict.getMetadataDb(), metadataDict.getMetadataName())) {
             throw new KunlongError(KunlongError.CODE_DEFINE_ERROR, " 表已经存在！");
 //            updateMake(metadataId, metadataDict);
-//
 //            msgBody = "{'sql': 'make Table OK'}";
 //            return handler.buildMsg(retcode, retmsg, msgBody);
         }

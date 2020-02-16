@@ -23,6 +23,7 @@ import java.util.List;
  */
 @RequestMapping(ApiConstants.PREFIX_SYS + "/metadata")
 @Controller
+@Deprecated
 public class MetadataController extends BaseController {
 
 	@Reference(lazy = true, version = "${dubbo.service.version}")

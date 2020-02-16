@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ConfigurationClassPostProcessor;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableAsync;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -32,5 +33,6 @@ public class PfCtlApp {
         System.setProperty("mail.mime.splitlongparameters", "false");
         Class[] classes = new Class[]{PfCtlApp.class};
         SpringApplication.run(classes, args);
+
     }
 }

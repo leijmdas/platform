@@ -1,4 +1,4 @@
-package com.kunlong.platform.controller.web.platfrom;
+package com.kunlong.platform.controller.web.platfrom.metadata;
 
 
 import app.support.query.PageResult;
@@ -7,12 +7,14 @@ import com.kunlong.platform.domain.MetadataDictModel;
 import com.kunlong.platform.domain.MetadataFieldModel;
 import com.kunlong.platform.service.MetadataDictModelService;
 import com.kunlong.platform.service.MetadataFieldModelService;
+import com.kunlong.platform.service.MetadataJoinService;
 import com.kunlong.platform.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * supplier
@@ -28,11 +30,12 @@ public final class MetadataFieldController {
     @Autowired
     MetadataDictModelService metadataDictModelService;
 
-
+    @Autowired
+    MetadataJoinService metadataJoinService;
 
     @RequestMapping("/findById/{id}")
     public JsonResult<MetadataFieldModel> findById(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
-     return   JsonResult.success(metadataFieldModelService.findById(id))    ;
+        return JsonResult.success(metadataFieldModelService.findById(id));
     }
 
     @RequestMapping("/save")
@@ -70,7 +73,11 @@ public final class MetadataFieldController {
     }
 
 
+    @PostMapping("/deleteAllByMetadataId/{metadataId}")
+    public JsonResult<Integer> deleteAllByMetadataId(@PathVariable("metadataId") Integer metadataId) throws IOException {
 
+        return metadataJoinService.deleteAllByMetadataId(metadataId);
+    }
 
 }
 

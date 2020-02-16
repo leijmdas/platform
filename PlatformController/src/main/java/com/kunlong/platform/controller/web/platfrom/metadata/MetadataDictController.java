@@ -1,10 +1,11 @@
-package com.kunlong.platform.controller.web.platfrom;
+package com.kunlong.platform.controller.web.platfrom.metadata;
 
 
 import app.support.query.PageResult;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.domain.MetadataDictModel;
 import com.kunlong.platform.service.MetadataDictModelService;
+import com.kunlong.platform.service.MetadataJoinService;
 import com.kunlong.platform.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,8 @@ public final class MetadataDictController {
     @Autowired
     MetadataDictModelService metadataDictModelService;
 
+    @Autowired
+    MetadataJoinService metadataJoinService;
 
     @RequestMapping("/findById/{id}")
     public JsonResult<MetadataDictModel> findById(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
@@ -48,14 +51,18 @@ public final class MetadataDictController {
         PageResult<MetadataDictModel> pageResult = new PageResult<MetadataDictModel>();
         queryParam.setSortBys(queryParam.getOrderBys());
 
-       pageResult.setTotal(metadataDictModelService.countByQueryParam(queryParam));
+        pageResult.setTotal(metadataDictModelService.countByQueryParam(queryParam));
         pageResult.setData(metadataDictModelService.findByQueryParam(queryParam));
         return pageResult;
     }
 
     @PostMapping("/deleteById/{id}")
     public JsonResult<Integer> deleteById(@PathVariable("id") Integer id) throws IOException {
-        metadataDictModelService.deleteById(id) ;
+        if(metadataJoinService.checkExistsFieldByMetadataId(id)){
+            return JsonResult.failure(-1,"存在字段信息，不能删除！");
+        }
+
+        metadataDictModelService.deleteById(id);
 
         return JsonResult.success();
     }

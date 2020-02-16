@@ -17,15 +17,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-@ControllerAdvice(basePackages= {"com.xw.ipark.manager"})
 
 /**
  * 分页请求参数处理
  * @name PageQueryParamRequestBodyAdvice
- * @author zz  | www.xwparking.com
+ * @author zz  | www.xx.com
  * @date 2018年12月19日  
  * @description:
  */
+@ControllerAdvice(basePackages= {"com.xxx"})
 public class PageQueryParamRequestBodyAdvice implements RequestBodyAdvice {
 
 	@SuppressWarnings("rawtypes")
