@@ -3,27 +3,27 @@ package com.kunlong.platform.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.kunlong.platform.domain.MetadataFieldModel;
-import com.kunlong.platform.dao.MetadataFieldModelMapper;
-import com.kunlong.platform.service.MetadataFieldModelService;
+import com.kunlong.platform.domain.DictDataModel;
+import com.kunlong.platform.dao.DictDataModelMapper;
+import com.kunlong.platform.service.DictDataModelService;
 import org.mybatis.hbatis.orm.criteria.statement.SelectStatement;
 import org.mybatis.hbatis.orm.criteria.statement.UpdateStatement;
 import org.mybatis.hbatis.orm.criteria.support.StatementBuilder;
 /**
- * MetadataFieldModelServiceImpl
+ * DictDataModelServiceImpl
  * @author generator
- * @date 2020年02月17日
+ * @date 2020年02月16日
  */
 @Service
-public class MetadataFieldModelServiceImpl implements MetadataFieldModelService {
+public class DictDataModelServiceImpl implements DictDataModelService {
 	
 	@Autowired
-	private MetadataFieldModelMapper repo;
+	private DictDataModelMapper repo;
 	/**
 	 * 保存
 	 * @param entity
 	 */
-	public void save(MetadataFieldModel entity){
+	public void save(DictDataModel entity){
 		this.checkEntity(entity);
 		repo.insert(entity);
 	}
@@ -32,7 +32,7 @@ public class MetadataFieldModelServiceImpl implements MetadataFieldModelService 
 	 * 修改
 	 * @param entity
 	 */
-	public void update(MetadataFieldModel entity){
+	public void update(DictDataModel entity){
 		this.checkEntity(entity);
 		repo.update(entity);
 	}
@@ -40,7 +40,7 @@ public class MetadataFieldModelServiceImpl implements MetadataFieldModelService 
 	 * 较验实体
 	 * @param entity
 	 */
-	public void checkEntity(MetadataFieldModel entity){
+	public void checkEntity(DictDataModel entity){
 	
 	}
 	/**
@@ -56,44 +56,44 @@ public class MetadataFieldModelServiceImpl implements MetadataFieldModelService 
 	 * @param id
 	 * @return
 	 */
-	public MetadataFieldModel findById(Integer pk){
+	public DictDataModel findById(Integer pk){
 		return repo.selectByPK(pk);
 	}
 	/**
 	 * 通过非空属性查询
-	 * @param MetadataFieldModel
+	 * @param DictDataModel
 	 * @return
 	 */
-	public List<MetadataFieldModel> findByNotNullProps(MetadataFieldModel entity){
+	public List<DictDataModel> findByNotNullProps(DictDataModel entity){
 		
-		SelectStatement<MetadataFieldModel> st = StatementBuilder.buildSelectSelective(entity);
+		SelectStatement<DictDataModel> st = StatementBuilder.buildSelectSelective(entity);
 		return repo.selectByStatement(st);
 	}
 	/**
 	 * 通过主键更新非空属性
-	 * @param MetadataFieldModel
+	 * @param DictDataModel
 	 * @return
 	 */
-	public void updateNotNullPropsById(MetadataFieldModel entity){
+	public void updateNotNullPropsById(DictDataModel entity){
 		
-		UpdateStatement<MetadataFieldModel> st = StatementBuilder.buildUpdateSelective(entity);
+		UpdateStatement<DictDataModel> st = StatementBuilder.buildUpdateSelective(entity);
 		repo.updateByStatement(st);
 	}
 	
 	/**
 	 * 通过实体参数分页查询
-	 * @param MetadataFieldModel.QueryParam
+	 * @param DictDataModel.QueryParam
 	 * @return
 	 */
-	public List<MetadataFieldModel> findByQueryParam(MetadataFieldModel.QueryParam queryParam){
+	public List<DictDataModel> findByQueryParam(DictDataModel.QueryParam queryParam){
 		return repo.findByQueryParam(queryParam);
 	}
 	/**
 	 * 通过实体参数统计
-	 * @param MetadataFieldModel.QueryParam
+	 * @param DictDataModel.QueryParam
 	 * @return
 	 */
-	public long countByQueryParam(MetadataFieldModel.QueryParam queryParam) {
+	public long countByQueryParam(DictDataModel.QueryParam queryParam) {
 		return repo.countByQueryParam(queryParam);
 	}
 	/**
@@ -101,13 +101,13 @@ public class MetadataFieldModelServiceImpl implements MetadataFieldModelService 
 	 * @param List<Integer> pks
 	 * @return
 	 */
-	public List<MetadataFieldModel> findByIds(List<Integer> pks) {
+	public List<DictDataModel> findByIds(List<Integer> pks) {
 		return repo.selectByPKS(pks);
 	}
 	/**
 	 * 值填充
 	 */
-	public void fillValues(List<MetadataFieldModel> items, MetadataFieldModel.ValueField... field) {
+	public void fillValues(List<DictDataModel> items, DictDataModel.ValueField... field) {
 		if (items == null || items.isEmpty() || field.length < 1) {
 			return;
 		}

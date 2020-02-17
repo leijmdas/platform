@@ -7,7 +7,7 @@ import com.kunlong.platform.domain.MetadataFieldModel;
 /**
  * MetadataFieldModelMapper
  * @author generator
- * @date 2019年12月29日
+ * @date 2020年02月17日
  */
 public interface MetadataFieldModelMapper extends HbatisMapper<MetadataFieldModel, Integer> {
 	

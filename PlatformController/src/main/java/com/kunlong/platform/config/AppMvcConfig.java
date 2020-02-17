@@ -1,14 +1,22 @@
 package com.kunlong.platform.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kunlong.platform.config.interceptor.AppRequestHandler;
 import com.kunlong.platform.config.interceptor.WapRequestHandler;
 import com.kunlong.platform.config.interceptor.WebRequestHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +51,7 @@ public class AppMvcConfig implements WebMvcConfigurer {
 
 		registry.addInterceptor(wapRequestHandler).addPathPatterns("/wap/**").excludePathPatterns("/wap/app/**", "/wap/auth/**", "/wap/public/**");
 		registry.addInterceptor(webRequestHandler).addPathPatterns("/**").excludePathPatterns(concat(IGNOR_URLS, new String[] { "/wap/**", "/app/**" })).excludePathPatterns("/swagger-resources/**",
-				"/dongxw/**","/webjars/**", "/v2/**", "/swagger-ui.html/**","/rest/**");
+				"/nosys/**","/webjars/**", "/v2/**", "/swagger-ui.html/**","/rest/**");
 	}
 
 	private String[] concat(String[] res, String[] res2) {
@@ -58,15 +66,15 @@ public class AppMvcConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-//		super.addResourceHandlers(registry);
+ 		//super.addResourceHandlers(registry);
 	}
-
+//
 //	@Override
 //	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 //    	converters.forEach(c ->{
 //    		if(c instanceof MappingJackson2HttpMessageConverter) {
 //    			MappingJackson2HttpMessageConverter jsonC = (MappingJackson2HttpMessageConverter)c;
-//    			
+//
 //    			//设置日期格式
 //    	        ObjectMapper objectMapper = new ObjectMapper();
 //    	        SimpleDateFormat smt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -78,12 +86,12 @@ public class AppMvcConfig implements WebMvcConfigurer {
 //	}
 
 
-//	@Override
-//	public void addCorsMappings(CorsRegistry registry) {
-//		//super.addCorsMappings(registry);
-//		registry.addMapping("/cors/**")
-//				.allowedHeaders("*")
-//				.allowedMethods("POST", "GET")
-//				.allowedOrigins("*");
-//	}
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		//super.addCorsMappings(registry);
+		registry.addMapping("/cors/**")
+				.allowedHeaders("*")
+				.allowedMethods("POST", "GET")
+				.allowedOrigins("*");
+	}
 }

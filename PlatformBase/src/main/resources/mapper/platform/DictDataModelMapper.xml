@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kunlong.platform.dao.DictDataModelMapper" >
+	<resultMap id="BaseResultMap" type="com.kunlong.platform.domain.DictDataModel" >
+	    <id column="id" property="id" jdbcType="INTEGER" />	
+	  	<result column="type_code" property="typeCode" jdbcType="INTEGER" />
+	  	<result column="type_name" property="typeName" jdbcType="VARCHAR" />
+	  	<result column="code" property="code" jdbcType="INTEGER" />
+	  	<result column="name" property="name" jdbcType="VARCHAR" />
+	  	<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	  	<result column="create_by" property="createBy" jdbcType="INTEGER" />
+	  	<result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="BaseResultMap_DictDataModel" type="com.kunlong.platform.domain.DictDataModel" >
+	    <id column="dd_id" property="id" jdbcType="INTEGER" />	
+	  	<result column="dd_type_code" property="typeCode" jdbcType="INTEGER" />
+	  	<result column="dd_type_name" property="typeName" jdbcType="VARCHAR" />
+	  	<result column="dd_code" property="code" jdbcType="INTEGER" />
+	  	<result column="dd_name" property="name" jdbcType="VARCHAR" />
+	  	<result column="dd_create_time" property="createTime" jdbcType="TIMESTAMP" />
+	  	<result column="dd_create_by" property="createBy" jdbcType="INTEGER" />
+	  	<result column="dd_remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+  		id,type_code,type_name,code,name,create_time,create_by,remark
+	</sql>
+  	<sql id="Base_Column_List_DictDataModel" >
+  		dd.id dd_id,dd.type_code dd_type_code,dd.type_name dd_type_name,dd.code dd_code,dd.name dd_name,dd.create_time dd_create_time,dd.create_by dd_create_by,dd.remark dd_remark
+	</sql>
+	
+	<!-- 系统自定义 -->
+	<!-- 实体参数查询结果[START] -->
+	<resultMap id="ResultMap_FindByQueryParam" type="com.kunlong.platform.domain.DictDataModel" extends="BaseResultMap_DictDataModel">
+		
+	</resultMap>
+
+	<sql id="Condition_FindByQueryParam">
+		<if test="queryParam.param!=null">
+			<bind name="p" value="queryParam.param"/>
+			<if test="p.id!=null ">
+		    	and dd.id=#{p.id}
+		    </if>
+			<if test="p.typeCode!=null ">
+		    	and dd.type_code=#{p.typeCode}
+		    </if>
+			<if test="p.typeName!=null and p.typeName!=''">
+		    	and dd.type_name like #{p.typeName}
+		    </if>
+			<if test="p.code!=null ">
+		    	and dd.code=#{p.code}
+		    </if>
+			<if test="p.name!=null and p.name!=''">
+		    	and dd.name like #{p.name}
+		    </if>
+			<if test="p.createTime!=null ">
+		    	and dd.create_time=#{p.createTime}
+		    </if>
+			<if test="p.createBy!=null ">
+		    	and dd.create_by=#{p.createBy}
+		    </if>
+			<if test="p.remark!=null and p.remark!=''">
+		    	and dd.remark like #{p.remark}
+		    </if>
+		</if>
+		<!--
+		<bind name="rp" value="queryParam.ruleParam" />
+		<include refid="org.mybatis.hbatis.orm.mapper.HbatisMapper.RuleParam"/>
+		-->
+	</sql>
+	<select id="findByQueryParam" resultMap="ResultMap_FindByQueryParam">
+		select
+		<include refid="Base_Column_List_DictDataModel"></include>
+		from dict_data dd where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+		<if test="queryParam.sortOrders!=null and queryParam.sortOrders.size() gt 0">
+			order by 
+			<foreach collection="queryParam.sortOrders" item="item" separator=",">
+				${item.sortField.sqlColumn} ${item.sortType}
+			</foreach>
+		</if>
+		<if test="queryParam.limit gt 0">
+	  		limit ${queryParam.start},${queryParam.limit}
+	  	</if>
+	</select>
+	<select id="countByQueryParam" resultType="long">
+		select count(1) from dict_data dd where 1=1
+		<include refid="Condition_FindByQueryParam"></include>
+	</select>
+	
+	<!-- 实体参数查询结果[END] -->
+	<!-- 用户自定义 -->
+	
+</mapper>

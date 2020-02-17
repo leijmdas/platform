@@ -1,0 +1,130 @@
+<el-form>
+    <el-row :span='24'>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='排序' prop='metadata_order'>
+                <el-input>placeholder='排序' v-model='entity.metadata_order'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='元数据名称' prop='metadata_name'>
+                <el-input>placeholder='元数据名称' v-model='entity.metadata_name'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='中文名称' prop='metadata_alias'>
+                <el-input>placeholder='中文名称' v-model='entity.metadata_alias'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='元数据类型' prop='metadata_type'>
+                <el-input>placeholder='元数据类型' v-model='entity.metadata_type'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='数据库' prop='metadata_db'>
+                <el-input>placeholder='数据库' v-model='entity.metadata_db'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='是否缓存' prop='metadata_cached'>
+                <el-input>placeholder='是否缓存' v-model='entity.metadata_cached'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='排序字段' prop='metadata_sort_fields'>
+                <el-input>placeholder='排序字段' v-model='entity.metadata_sort_fields'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='表格唯一索引字段' prop='metadata_index'>
+                <el-input>placeholder='表格唯一索引字段' v-model='entity.metadata_index'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='子系统' prop='subsys_id'>
+                <el-input>placeholder='子系统' v-model='entity.subsys_id'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='关联元数据' prop='metadata_parentid'>
+                <el-input>placeholder='关联元数据' v-model='entity.metadata_parentid'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='允许创建' prop='metadata_autocreate'>
+                <el-input>placeholder='允许创建' v-model='entity.metadata_autocreate'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='只读表' prop='metadata_readonly'>
+                <el-input>placeholder='只读表' v-model='entity.metadata_readonly'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='增删行' prop='metadata_add_del'>
+                <el-input>placeholder='增删行' v-model='entity.metadata_add_del'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='描述' prop='metadata_memo'>
+                <el-input>placeholder='描述' v-model='entity.metadata_memo'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='说明' prop='metadata_remark'>
+                <el-input>placeholder='说明' v-model='entity.metadata_remark'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='数据来源' prop='ref_src'>
+                <el-input>placeholder='数据来源' v-model='entity.ref_src'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='关联对象' prop='ref_object'>
+                <el-input>placeholder='关联对象' v-model='entity.ref_object'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='关联参数' prop='ref_param'>
+                <el-input>placeholder='关联参数' v-model='entity.ref_param'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='导出标签表头' prop='exp_tagtable_head'>
+                <el-input>placeholder='导出标签表头' v-model='entity.exp_tagtable_head'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='元数据标识' prop='metadata_id'>
+                <el-input>disabled placeholder='元数据标识' v-model='entity.metadata_id'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+        <el-col :span='12'>
+            <el-form-item style='width:100%' label='脚本' prop='metadata_stmt'>
+                <el-input>placeholder='脚本' v-model='entity.metadata_stmt'>
+                </el-input>
+            </el-form-item>
+        </el-col>
+    </el-row>
+</el-form>

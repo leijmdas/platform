@@ -39,20 +39,27 @@ public class SqlSessionUtil {
 
     public String fnDb(String fnName, Object... p) {
         StringBuilder sql = new StringBuilder(128);
-        sql.append("select ").append(fnName);
-        sql.append("(");
+        sql.append("select ").append(fnName).append("(");
         sql.append(Arrays.stream(p).map(x -> x.toString()).collect(Collectors.joining(",")));
         sql.append(")");
         return selectOne(sql, String.class);
 
     }
 
-    public  List<Map<String, Object>>  selectList(String sql ) {
+    public List<Map<String, Object>> selectList(StringBuilder sql) {
+        return selectList(sql.toString());
+    }
+
+    public <T> List<T> selectList(StringBuilder sql, Class<T> resultType) {
+        return selectList(sql.toString(), resultType);
+    }
+
+    public List<Map<String, Object>> selectList(String sql) {
 
         SqlSession session = getSession();
         try {
             SqlMapper m = new SqlMapper(session);
-            return m.selectList(sql.toString());
+            return m.selectList(sql);
         } finally {
             if (session != null) session.close();
         }
@@ -63,7 +70,7 @@ public class SqlSessionUtil {
         SqlSession session = getSession();
         try {
             SqlMapper m = new SqlMapper(session);
-            return m.selectList(sql.toString(), resultType);
+            return m.selectList(sql, resultType);
         } finally {
             if (session != null) session.close();
         }
@@ -180,7 +187,7 @@ public class SqlSessionUtil {
         try (SqlSession session = getSession()) {
 
             SqlMapper m = new SqlMapper(session);
-            return m.selectOne(sql.toString(), value, cls);
+            return m.selectOne(sql, value, cls);
         }
     }
 

@@ -1,6 +1,6 @@
 package testcase.sys;
 
-
+import com.alibaba.fastjson.JSONObject;
 import com.kunlong.dubbo.sys.dto.queryParam.SysUserQueryDTO;
 import com.kunlong.dubbo.sys.model.AuthorizationDTO;
 import com.alibaba.fastjson.JSON;
@@ -23,8 +23,11 @@ import org.slf4j.LoggerFactory;
 import testcase.pub.ManagerLogin;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+//http://localhost:8089/api/auth/login?username=admin&password=111111
 @JTestClass.author("leijm")
 public class TestSysUser extends ITestImpl {
 	private static final Logger logger = LoggerFactory.getLogger(TestSysUser.class);
@@ -37,7 +40,6 @@ public class TestSysUser extends ITestImpl {
 
 	@Inject(filename = "node.xml", value = "httpclient")
 	HttpClientNode httpclient;
-	//http://localhost:8089/api/auth/login?username=admin&password=111111
 
 	ManagerLogin login = new ManagerLogin();
 	String token = "d98c3b969dc34aaa92942c8a9c646f2a";
@@ -172,10 +174,18 @@ public class TestSysUser extends ITestImpl {
 
 
 	}
+	//System.out.println(StringUtil.camelToUnderline("aaBbCc"));
+	//System.out.println(StringUtil.underlineToCamel("aa_bb_cc"));
 
 	public static void main(String[] args) {
 
-		run(TestSysUser.class, 5);
+		//run(TestSysUser.class, 5);
+//		Map<String, String> map = new LinkedHashMap<>();
+//		map.put("1", "222");
+//		map.put("21", "222");
+//		map.put("133", "222");
+//		JSONObject json = JSON.parseObject(KunlongUtils.toJSONString(map), JSONObject.class);
+//		System.out.print(KunlongUtils.toJSONString(json));
 
 	}
 

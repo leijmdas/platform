@@ -3,22 +3,31 @@ package com.kunlong.platform.service.impl;
 import app.support.query.PageResult;
 import com.kunlong.dubbo.api.dto.queryParam.MetadataQueryDTO;
 import com.kunlong.dubbo.api.model.SelectSqlDTO;
+import com.kunlong.platform.domain.CheckDictResult;
 import com.kunlong.platform.domain.MetadataDictModel;
 import com.kunlong.platform.domain.MetadataFieldModel;
 import com.kunlong.platform.service.MetadataDictModelService;
 import com.kunlong.platform.service.MetadataFieldModelService;
 import com.kunlong.platform.service.MetadataJoinService;
+import com.kunlong.platform.service.autowebpage.WebPageUtil;
 import com.kunlong.platform.utils.JsonResult;
 import com.kunlong.platform.utils.SqlSessionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class MetadataJoinServiceImpl implements MetadataJoinService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    WebPageUtil webPageUtil;
+
     @Autowired
     SqlSessionUtil sqlSessionUtil;
 
@@ -28,35 +37,36 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
     @Autowired
     MetadataFieldModelService metadataFieldModelService;
 
-    List<MetadataFieldModel> findAllByMetadataId(Integer metadataId,Integer limit) {
+    public List<MetadataFieldModel> findAllByMetadataId(Integer metadataId, Integer limit) {
         MetadataFieldModel.QueryParam queryParam = new MetadataFieldModel.QueryParam();
         queryParam.setParam(new MetadataFieldModel());
         queryParam.getParam().setMetadataId(metadataId);
+        queryParam.setSortBys("fieldOrder|asc");
         queryParam.setLimit(limit);
         return metadataFieldModelService.findByQueryParam(queryParam);
 
     }
 
     @Transactional
-    void deleteAllByMetadataId(List<MetadataFieldModel> models)     {
+    public void deleteAllByMetadataId(List<MetadataFieldModel> models) {
 
-        if (models != null) {
-            for (MetadataFieldModel model : models) {
-                metadataFieldModelService.deleteById(model.getFieldId());
-            }
+        for (MetadataFieldModel model : models) {
+            metadataFieldModelService.deleteById(model.getFieldId());
         }
+
     }
 
-    public JsonResult<Integer> deleteAllByMetadataId(Integer metadataId)     {
+    public JsonResult<Integer> deleteAllByMetadataId(Integer metadataId) {
 
-        List<MetadataFieldModel> models = findAllByMetadataId(metadataId,-1);
+        List<MetadataFieldModel> models = findAllByMetadataId(metadataId, -1);
         deleteAllByMetadataId(models);
 
-        return JsonResult.success();
+        return JsonResult.success(0);
     }
-    public Boolean checkExistsFieldByMetadataId(Integer metadataId){
-        List<MetadataFieldModel> models = findAllByMetadataId(metadataId,1);
-        return models!=null&&models.size()>0;
+
+    public Boolean checkExistsFieldByMetadataId(Integer metadataId) {
+        List<MetadataFieldModel> models = findAllByMetadataId(metadataId, 1);
+        return models != null && models.size() > 0;
     }
 
     public Integer copyMaster(Integer metadataId) {
@@ -71,7 +81,7 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         metadataDict.setMetadataAutocreate(true);
         metadataDictModelService.save(metadataDict);
 
-        List<MetadataFieldModel> models = findAllByMetadataId(metadataId,-1);
+        List<MetadataFieldModel> models = findAllByMetadataId(metadataId, -1);
 
         for (MetadataFieldModel metadataField : models) {
             metadataField.setMetadataId(metadataDict.getMetadataId());
@@ -80,17 +90,31 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         }
         return metadataDict.getMetadataId();
     }
+    //    MetadataDictModel metadataDict = metadataDictModelService.findById(metadataId);
+    //        if (metadataDict == null) {
+    //            return new StringBuilder("表不存在！");
+    //        }
+    //
 
-    public PageResult<Map<String, Object>> checkDict(MetadataQueryDTO metadataQuery) {
 
+    public PageResult<CheckDictResult> checkDict(Integer id) {
         StringBuilder sql = new StringBuilder();
-        sql.append("call spCheckMetadata");
-        sql.append("(").append(metadataQuery.getParam().getMetadataId()).append(")");
-        List<Map<String, Object>> rs = sqlSessionUtil.selectList(sql.toString());
-        PageResult<Map<String, Object>> pageResult = new PageResult<Map<String, Object>>();
+        sql.append("call spCheckMetadata").append("(").append(id).append(")");
+        List<CheckDictResult> rs = sqlSessionUtil.selectList(sql, CheckDictResult.class);
+
+        PageResult<CheckDictResult> pageResult = new PageResult<>();
         pageResult.setData(rs);
         pageResult.setTotal(rs.size());
         return pageResult;
+    }
+
+    public Boolean checkTableExists(Integer id) {
+        MetadataDictModel metadataDict = metadataDictModelService.findById(id);
+        if (metadataDict == null) {
+            return false;
+        }
+        return checkTableExists(metadataDict);
+
     }
 
     public PageResult<Map<String, Object>> selectTable(MetadataQueryDTO metadataQuery) {
@@ -99,14 +123,16 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
 
         }
 
-        if (metadataQuery.getParam().getMetadataId() != null) {
-            MetadataDictModel metadataDict = metadataDictModelService.findById(metadataQuery.getParam().getMetadataId());
-            if (metadataDict == null) {
-                throw new RuntimeException("表不存在！");
-            }
-            metadataQuery.getParam().setDb(metadataDict.getMetadataDb());
-            metadataQuery.getParam().setTable(metadataDict.getMetadataName());
+        if (metadataQuery.getParam().getMetadataId() == null) {
+            return null;
         }
+        MetadataDictModel metadataDict = metadataDictModelService.findById(metadataQuery.getParam().getMetadataId());
+        if (metadataDict == null) {
+            throw new RuntimeException("表不存在！");
+        }
+        metadataQuery.getParam().setDb(metadataDict.getMetadataDb());
+        metadataQuery.getParam().setTable(metadataDict.getMetadataName());
+
 
         List<Map<String, Object>> rs = sqlSessionUtil.selectTable(metadataQuery);
         PageResult<Map<String, Object>> pageResult = new PageResult<Map<String, Object>>();
@@ -132,10 +158,10 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         sql.append(" select 1 from ");
         sql.append(metadataDict.getMetadataDb()).append(".").append(metadataDict.getMetadataName());
         sql.append(" limit 1");
-        List<Map<String, Object>> list = sqlSessionUtil.selectList(sql.toString());
+        List<Map<String, Object>> list = sqlSessionUtil.selectList(sql);
         //有记录不能删除的
         if (list.size() > 0) {
-            return JsonResult.failure(-121, "有记录不能删除的!");
+            return JsonResult.failure(-12, "有记录不能删除的!");
 
         }
         sql.delete(0, sql.length());
@@ -147,13 +173,13 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
     }
 
     //SELECT  *  FROM information_schema.TABLES WHERE  TABLE_SCHEMA='ytb_manager'
-    Boolean checkTableExists( MetadataDictModel model ) {
+    Boolean checkTableExists(MetadataDictModel model) {
         StringBuilder sql = new StringBuilder(128);
         sql.append("select 1 from information_schema.TABLES");
         sql.append(" where  TABLE_SCHEMA='").append(model.getMetadataDb()).append("'");
         sql.append(" and table_name='").append(model.getMetadataName()).append("'");
-        List list = sqlSessionUtil.selectList(sql.toString());
-        return list != null && list.size() > 0;
+        List list = sqlSessionUtil.selectList(sql);
+        return list.size() > 0;
 
     }
 
@@ -180,8 +206,8 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
     }
 
 
-    JsonResult<Integer> firstMake(Integer metadataId, MetadataDictModel metadataDict){
-        MetadataFieldModel.QueryParam queryParam=new MetadataFieldModel.QueryParam();
+    JsonResult<Integer> firstMake(Integer metadataId, MetadataDictModel metadataDict) {
+        MetadataFieldModel.QueryParam queryParam = new MetadataFieldModel.QueryParam();
         queryParam.setParam(new MetadataFieldModel());
         queryParam.getParam().setMetadataId(metadataId);
         queryParam.setSortBys("field_pk|desc,field_order|asc");
@@ -193,63 +219,58 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         sql.append("create table if not exists ");
         sql.append(metadataDict.getMetadataDb()).append(".").append(metadataDict.getMetadataName());
         sql.append("(");
-        for (int i = 0; i < fieldList.size(); i++) {
-            sql.append(fieldList.get(i).getFieldName()).append(" ");
-            if (isPCT(fieldList.get(i).getFieldType())
-                    || isMoney(fieldList.get(i).getFieldType())) {
+        for (MetadataFieldModel fieldModel : fieldList) {
+            sql.append(fieldModel.getFieldName()).append(" ");
+            if (fieldModel.isPCT() || fieldModel.isMoney()) {
                 sql.append(" DECIMAL ");
             }
-            if (isTAGIMAGE(fieldList.get(i).getFieldType())
-                    || isMoney(fieldList.get(i).getFieldType())) {
+            if (fieldModel.isTAGIMAGE() || fieldModel.isMoney()) {
                 sql.append(" INT ");
             } else {
-                sql.append(fieldList.get(i).getFieldType());
+                sql.append(fieldModel.getFieldType());
             }
 
-            if (isString(fieldList.get(i).getFieldType())) {
-                sql.append("(").append(fieldList.get(i).getFieldSize()).append(") ");
-            } else if (isDecimal(fieldList.get(i).getFieldType())) {
+            if (fieldModel.isString()) {
+                sql.append("(").append(fieldModel.getFieldSize()).append(") ");
+            } else if (fieldModel.isDecimal()) {
+
                 //String[]  s= StringUtils.split(fieldList.get(i).getFieldSize(),",",true);
-                sql.append("(").append(fieldList.get(i).getFieldSize()).append(",4) ");
-            } else if (isPCT(fieldList.get(i).getFieldType())) {
+                sql.append("(").append(fieldModel.getFieldSize()).append(",4) ");
+
+            } else if (fieldModel.isPCT()) {
                 sql.append("(12,4) ");
-            } else if (isMoney(fieldList.get(i).getFieldType())) {
+            } else if (fieldModel.isMoney()) {
                 sql.append("(12,2) ");
             }
 
 
-            if (fieldList.get(i).getFieldPk() != null && fieldList.get(i).getFieldPk()) {
-                if (fieldList.get(i).getFieldPk() == true) {
-                    sql.append(" primary key NOT NULL ");
-                }
-                if (fieldList.get(i).getFieldAuto() == true) {
+            if (fieldModel.getFieldPk() != null && fieldModel.getFieldPk()) {
+                sql.append(" primary key NOT NULL ");
+                if (fieldModel.getFieldAuto()) {
                     sql.append(" AUTO_INCREMENT ");
                 }
             } else {
-                if (fieldList.get(i).getFieldIsNull()) {
-                    sql.append("  NULL ");
-                } else {
-                    sql.append("  NOT NULL ");
-                }
+                sql.append(fieldModel.getFieldIsNull() ? "  NULL " : "  NOT NULL ");
 
-                if (!isBlobText(fieldList.get(i).getFieldType()) && fieldList.get(i).getFieldDefault() != null && !fieldList.get(i).getFieldDefault().isEmpty()) {
+                if (!fieldModel.isBlobText()
+                        && fieldModel.getFieldDefault() != null
+                        && !fieldModel.getFieldDefault().isEmpty()) {
                     sql.append(" DEFAULT ");
-                    if (isString(fieldList.get(i).getFieldType())) {
-                        sql.append("'").append(fieldList.get(i).getFieldDefault()).append("'");
-                    } else if (isDate(fieldList.get(i).getFieldType())) {
-                        if (fieldList.get(i).getFieldDefault() != null
-                                && fieldList.get(i).getFieldDefault().length() >= 10) {
-                            sql.append("'").append(fieldList.get(i).getFieldDefault()).append("'");
+                    if (fieldModel.isString()) {
+                        sql.append("'").append(fieldModel.getFieldDefault()).append("'");
+                    } else if (fieldModel.isDate()) {
+                        if (fieldModel.getFieldDefault() != null && fieldModel.getFieldDefault().length() >= 10) {
+                            sql.append("'").append(fieldModel.getFieldDefault()).append("'");
                         } else {
-                            sql.append(fieldList.get(i).getFieldDefault());
-
+                            sql.append(fieldModel.getFieldDefault());
                         }
                     } else {
-                        sql.append(fieldList.get(i).getFieldDefault());
+                        sql.append(fieldModel.getFieldDefault());
                     }
                 }
             }
-            sql.append(" comment '").append(fieldList.get(i).getFieldMemo()).append(" ").append(fieldList.get(i).getFieldRemark()).append("' ,");
+            sql.append(" comment '").append(fieldModel.getFieldMemo()).append(" ");
+            sql.append(fieldModel.getFieldRemark()).append("' ,");
         }
 
         sql.deleteCharAt(sql.length() - 1);
@@ -260,39 +281,10 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         return JsonResult.success(0);
     }
 
-    boolean isDate(String dtype) {
-        return dtype.equals("DATE")  || dtype.equals("TIMESTAMP") || dtype.equalsIgnoreCase("DATETIME");
+
+    public StringBuilder makeWebPage(Integer metadataId) throws IOException {
+
+        return webPageUtil.makeWebPage(this,metadataId);
     }
 
-    boolean isString(String dtype) {
-        return dtype.equals("CHAR")   || dtype.equalsIgnoreCase("VARCHAR");
-    }
-
-    boolean isDecimal(String dtype) {
-        return dtype.equals("DECIMAL");
-
-    }
-
-    boolean isTAGIMAGE(String dtype) {
-        return dtype.equals("TAGIMAGE");
-
-    }
-
-
-    boolean isPCT(String dtype) {
-        return dtype.equals("PCT");
-
-    }
-
-    boolean isMoney(String dtype) {
-        return dtype.equals("MONEY");
-
-    }
-
-    boolean isBlobText(String dt) {
-        return dt.equals("BLOB")
-                || dt.equals("MEDIUMBLOB")
-                || dt.equals("TEXT");
-
-    }
 }

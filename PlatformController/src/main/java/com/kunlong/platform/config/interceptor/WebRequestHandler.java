@@ -39,9 +39,10 @@ public class WebRequestHandler implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse rsp, Object arg2) throws Exception {
 		logger.info("接收请求[path:"+req.getRequestURI()+"]");
+
 		String token = req.getHeader(ApiConstants.AUTH_TOKEN_KEY_WEB);
 		if(StringUtils.isEmpty(token)) {
-			Object reqToken = req.getParameter(ApiConstants.AUTH_TOKEN_KEY_WEB.toLowerCase());
+			Object reqToken = req.getHeader(ApiConstants.AUTH_TOKEN_KEY_WEB.toLowerCase());
 			token = (reqToken==null?null:reqToken.toString());
 		}
 		

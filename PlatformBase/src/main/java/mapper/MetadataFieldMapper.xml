@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.kunlong.platform.dao.MetadataFieldModelMapper" >
-	<resultMap id="BaseResultMap" type="com.kunlong.platform.domain.MetadataFieldModel" >
+<mapper namespace="com.kunlong.platform.dao.MetadataFieldMapper" >
+	<resultMap id="BaseResultMap" type="com.kunlong.platform.domain.MetadataField" >
 	    <id column="field_id" property="fieldId" jdbcType="INTEGER" />	
 	  	<result column="metadata_id" property="metadataId" jdbcType="INTEGER" />
 	  	<result column="field_order" property="fieldOrder" jdbcType="SMALLINT" />
@@ -33,7 +33,7 @@
 	  	<result column="field_decimal" property="fieldDecimal" jdbcType="INTEGER" />
 	  	<result column="display_color" property="displayColor" jdbcType="VARCHAR" />
     </resultMap>
-    <resultMap id="BaseResultMap_MetadataFieldModel" type="com.kunlong.platform.domain.MetadataFieldModel" >
+    <resultMap id="BaseResultMap_MetadataField" type="com.kunlong.platform.domain.MetadataField" >
 	    <id column="mf_field_id" property="fieldId" jdbcType="INTEGER" />	
 	  	<result column="mf_metadata_id" property="metadataId" jdbcType="INTEGER" />
 	  	<result column="mf_field_order" property="fieldOrder" jdbcType="SMALLINT" />
@@ -68,13 +68,13 @@
     <sql id="Base_Column_List" >
   		field_id,metadata_id,field_order,field_name,field_memo,field_type,field_pk,field_auto,field_visible,field_size,field_displaysize,field_readonly,field_default,field_src,ref_object,ref_parameter,ref_field,ref_displayID,ref_filter,field_iscal,field_remark,field_isNull,ref_table,field_format,field_component,ref_pool,field_min,field_max,field_decimal,display_color
 	</sql>
-  	<sql id="Base_Column_List_MetadataFieldModel" >
+  	<sql id="Base_Column_List_MetadataField" >
   		mf.field_id mf_field_id,mf.metadata_id mf_metadata_id,mf.field_order mf_field_order,mf.field_name mf_field_name,mf.field_memo mf_field_memo,mf.field_type mf_field_type,mf.field_pk mf_field_pk,mf.field_auto mf_field_auto,mf.field_visible mf_field_visible,mf.field_size mf_field_size,mf.field_displaysize mf_field_displaysize,mf.field_readonly mf_field_readonly,mf.field_default mf_field_default,mf.field_src mf_field_src,mf.ref_object mf_ref_object,mf.ref_parameter mf_ref_parameter,mf.ref_field mf_ref_field,mf.ref_displayID mf_ref_displayID,mf.ref_filter mf_ref_filter,mf.field_iscal mf_field_iscal,mf.field_remark mf_field_remark,mf.field_isNull mf_field_isNull,mf.ref_table mf_ref_table,mf.field_format mf_field_format,mf.field_component mf_field_component,mf.ref_pool mf_ref_pool,mf.field_min mf_field_min,mf.field_max mf_field_max,mf.field_decimal mf_field_decimal,mf.display_color mf_display_color
 	</sql>
 	
 	<!-- 系统自定义 -->
 	<!-- 实体参数查询结果[START] -->
-	<resultMap id="ResultMap_FindByQueryParam" type="com.kunlong.platform.domain.MetadataFieldModel" extends="BaseResultMap_MetadataFieldModel">
+	<resultMap id="ResultMap_FindByQueryParam" type="com.kunlong.platform.domain.MetadataField" extends="BaseResultMap_MetadataField">
 		
 	</resultMap>
 
@@ -179,7 +179,7 @@
 	</sql>
 	<select id="findByQueryParam" resultMap="ResultMap_FindByQueryParam">
 		select
-		<include refid="Base_Column_List_MetadataFieldModel"></include>
+		<include refid="Base_Column_List_MetadataField"></include>
 		from metadata_field mf where 1=1
 		<include refid="Condition_FindByQueryParam"></include>
 		<if test="queryParam.sortOrders!=null and queryParam.sortOrders.size() gt 0">

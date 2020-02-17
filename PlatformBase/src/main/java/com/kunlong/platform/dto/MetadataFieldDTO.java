@@ -1,228 +1,200 @@
-package com.kunlong.platform.domain;
+package com.kunlong.platform.dto;
 
 import java.io.Serializable;
-import javax.validation.constraints.*;
-import org.mybatis.hbatis.core.type.JdbcType;
-import org.mybatis.hbatis.core.annotation.*;
-import org.mybatis.hbatis.core.*;
 import java.lang.Integer;
 import java.lang.Short;
 import java.lang.String;
 import java.lang.Boolean;
-import org.mybatis.hbatis.orm.criteria.support.query.AbstractQueryParam;
-import org.mybatis.hbatis.orm.criteria.support.query.SortOrders;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 /**
- * MetadataFieldModel 
+ * MetadataField
  * @author generator
  * @date 2020年02月17日
  */
-@Table(MetadataFieldModel.EntityNode.class)
-public class MetadataFieldModel extends MetadataFieldBase implements Serializable {
+@ApiModel(value="MetadataFieldDTO",description="")
+public class MetadataFieldDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	/**
 	  * 字段标识号
 	  * nullable:true,length:11
 	  */
-	@Column(primaryKey = true,autoIncrement = true,comment = "字段标识号")	
+	@ApiModelProperty(value = "字段标识号",required = false,notes = "字段标识号 [自增]")
 	private Integer fieldId;
 	/**
 	  * 元数据主表ID
 	  * nullable:false,length:11
 	  */
-	@Column(comment = "元数据主表ID")	
-	@NotNull
+	@ApiModelProperty(value = "元数据主表ID",required = true,notes = "元数据主表ID ")
 	private Integer metadataId;
 	/**
 	  * 显示顺序
 	  * nullable:false,length:6
 	  */
-	@Column(comment = "显示顺序")	
-	@NotNull
+	@ApiModelProperty(value = "显示顺序",required = true,notes = "显示顺序 ")
 	private Short fieldOrder;
 	/**
 	  * 字段名称
 	  * nullable:false,length:64
 	  */
-	@Column(comment = "字段名称")	
-	@NotNull
+	@ApiModelProperty(value = "字段名称",required = true,notes = "字段名称 ")
 	private String fieldName;
 	/**
 	  * 字段描述
 	  * nullable:true,length:128
 	  */
-	@Column(comment = "字段描述")	
+	@ApiModelProperty(value = "字段描述",required = false,notes = "字段描述 ")
 	private String fieldMemo;
 	/**
 	  * 字段类型
 	  * nullable:false,length:11
 	  */
-	@Column(comment = "字段类型")	
-	@NotNull
+	@ApiModelProperty(value = "字段类型",required = true,notes = "字段类型 ")
 	private String fieldType;
 	/**
 	  * 是否主键
 	  * nullable:false,length:1
 	  */
-	@Column(comment = "是否主键")	
-	@NotNull
+	@ApiModelProperty(value = "是否主键",required = true,notes = "是否主键 ")
 	private Boolean fieldPk;
 	/**
 	  * 自动生成
 	  * nullable:false,length:1
 	  */
-	@Column(comment = "自动生成")	
-	@NotNull
+	@ApiModelProperty(value = "自动生成",required = true,notes = "自动生成 ")
 	private Boolean fieldAuto;
 	/**
 	  * 是否显示
 	  * nullable:false,length:1
 	  */
-	@Column(comment = "是否显示")	
-	@NotNull
+	@ApiModelProperty(value = "是否显示",required = true,notes = "是否显示 ")
 	private Boolean fieldVisible;
 	/**
 	  * 字段大小长度
 	  * nullable:false,length:11
 	  */
-	@Column(comment = "字段大小长度")	
-	@NotNull
+	@ApiModelProperty(value = "字段大小长度",required = true,notes = "字段大小长度 ")
 	private Integer fieldSize;
 	/**
 	  * 显示大小
 	  * nullable:false,length:11
 	  */
-	@Column(comment = "显示大小")	
-	@NotNull
+	@ApiModelProperty(value = "显示大小",required = true,notes = "显示大小 ")
 	private Integer fieldDisplaysize;
 	/**
 	  * 是否只读
 	  * nullable:false,length:1
 	  */
-	@Column(comment = "是否只读")	
-	@NotNull
+	@ApiModelProperty(value = "是否只读",required = true,notes = "是否只读 ")
 	private Boolean fieldReadonly;
 	/**
 	  * 默认值
 	  * nullable:false,length:64
 	  */
-	@Column(comment = "默认值")	
-	@NotNull
+	@ApiModelProperty(value = "默认值",required = true,notes = "默认值 ")
 	private String fieldDefault;
 	/**
 	  * 数据来源
 	  * nullable:false,length:11
 	  */
-	@Column(comment = "数据来源")	
-	@NotNull
+	@ApiModelProperty(value = "数据来源",required = true,notes = "数据来源 ")
 	private Integer fieldSrc;
 	/**
 	  * 
 	  * nullable:false,length:255
 	  */
-	@Column(comment = "")	
-	@NotNull
+	@ApiModelProperty(value = "",required = true,notes = " ")
 	private String refObject;
 	/**
 	  * 
 	  * nullable:false,length:1,000
 	  */
-	@Column(comment = "")	
-	@NotNull
+	@ApiModelProperty(value = "",required = true,notes = " ")
 	private String refParameter;
 	/**
 	  * 关联外表字段
 	  * nullable:true,length:64
 	  */
-	@Column(comment = "关联外表字段")	
+	@ApiModelProperty(value = "关联外表字段",required = false,notes = "关联外表字段 ")
 	private String refField;
 	/**
 	  * 关联外表显示字段
 	  * nullable:true,length:64
 	  */
-	@Column(comment = "关联外表显示字段")	
+	@ApiModelProperty(value = "关联外表显示字段",required = false,notes = "关联外表显示字段 ")
 	private String refDisplayID;
 	/**
 	  * 关联外表条件
 	  * nullable:true,length:255
 	  */
-	@Column(comment = "关联外表条件")	
+	@ApiModelProperty(value = "关联外表条件",required = false,notes = "关联外表条件 ")
 	private String refFilter;
 	/**
 	  * 是否计算字段
 	  * nullable:false,length:1
 	  */
-	@Column(comment = "是否计算字段")	
-	@NotNull
+	@ApiModelProperty(value = "是否计算字段",required = true,notes = "是否计算字段 ")
 	private Boolean fieldIscal;
 	/**
 	  * 必须填
 	  * nullable:false,length:254
 	  */
-	@Column(comment = "必须填")	
-	@NotNull
+	@ApiModelProperty(value = "必须填",required = true,notes = "必须填 ")
 	private String fieldRemark;
 	/**
 	  * 是否为null
 	  * nullable:false,length:1
 	  */
-	@Column(comment = "是否为null")	
-	@NotNull
+	@ApiModelProperty(value = "是否为null",required = true,notes = "是否为null ")
 	private Boolean fieldIsNull;
 	/**
 	  * 
 	  * nullable:false,length:32
 	  */
-	@Column(comment = "")	
-	@NotNull
+	@ApiModelProperty(value = "",required = true,notes = " ")
 	private String refTable;
 	/**
 	  * 
 	  * nullable:false,length:8
 	  */
-	@Column(comment = "")	
-	@NotNull
+	@ApiModelProperty(value = "",required = true,notes = " ")
 	private String fieldFormat;
 	/**
 	  * 
 	  * nullable:true,length:11
 	  */
-	@Column(comment = "")	
+	@ApiModelProperty(value = "",required = false,notes = " ")
 	private Integer fieldComponent;
 	/**
 	  * 
 	  * nullable:false,length:128
 	  */
-	@Column(comment = "")	
-	@NotNull
+	@ApiModelProperty(value = "",required = true,notes = " ")
 	private String refPool;
 	/**
 	  * 
 	  * nullable:false,length:64
 	  */
-	@Column(comment = "")	
-	@NotNull
+	@ApiModelProperty(value = "",required = true,notes = " ")
 	private String fieldMin;
 	/**
 	  * 
 	  * nullable:false,length:64
 	  */
-	@Column(comment = "")	
-	@NotNull
+	@ApiModelProperty(value = "",required = true,notes = " ")
 	private String fieldMax;
 	/**
 	  * 小数位数
 	  * nullable:false,length:4
 	  */
-	@Column(comment = "小数位数")	
-	@NotNull
+	@ApiModelProperty(value = "小数位数",required = true,notes = "小数位数 ")
 	private Integer fieldDecimal;
 	/**
 	  * 显示颜色
 	  * nullable:false,length:32
 	  */
-	@Column(comment = "显示颜色")	
-	@NotNull
+	@ApiModelProperty(value = "显示颜色",required = true,notes = "显示颜色 ")
 	private String displayColor;
     public Integer getFieldId(){
     	return this.fieldId;
@@ -404,86 +376,5 @@ public class MetadataFieldModel extends MetadataFieldBase implements Serializabl
     public void setDisplayColor(String displayColor){
     	this.displayColor = displayColor;
     }
-
-    public static class EntityNode extends AbstractEntityNode<MetadataFieldModel> {
-        public static final EntityNode INSTANCE = new EntityNode("mf");;
-    	/** 字段标识号 */
-        public FieldNode<MetadataFieldModel, Integer> fieldId =  createFieldNode("fieldId","field_id",Integer.class,JdbcType.INTEGER);
-    	/** 元数据主表ID */
-        public FieldNode<MetadataFieldModel, Integer> metadataId =  createFieldNode("metadataId","metadata_id",Integer.class,JdbcType.INTEGER);
-    	/** 显示顺序 */
-        public FieldNode<MetadataFieldModel, Short> fieldOrder =  createFieldNode("fieldOrder","field_order",Short.class,JdbcType.SMALLINT);
-    	/** 字段名称 */
-        public FieldNode<MetadataFieldModel, String> fieldName =  createFieldNode("fieldName","field_name",String.class,JdbcType.VARCHAR);
-    	/** 字段描述 */
-        public FieldNode<MetadataFieldModel, String> fieldMemo =  createFieldNode("fieldMemo","field_memo",String.class,JdbcType.VARCHAR);
-    	/** 字段类型 */
-        public FieldNode<MetadataFieldModel, String> fieldType =  createFieldNode("fieldType","field_type",String.class,JdbcType.VARCHAR);
-    	/** 是否主键 */
-        public FieldNode<MetadataFieldModel, Boolean> fieldPk =  createFieldNode("fieldPk","field_pk",Boolean.class,JdbcType.BIT);
-    	/** 自动生成 */
-        public FieldNode<MetadataFieldModel, Boolean> fieldAuto =  createFieldNode("fieldAuto","field_auto",Boolean.class,JdbcType.BIT);
-    	/** 是否显示 */
-        public FieldNode<MetadataFieldModel, Boolean> fieldVisible =  createFieldNode("fieldVisible","field_visible",Boolean.class,JdbcType.BIT);
-    	/** 字段大小长度 */
-        public FieldNode<MetadataFieldModel, Integer> fieldSize =  createFieldNode("fieldSize","field_size",Integer.class,JdbcType.INTEGER);
-    	/** 显示大小 */
-        public FieldNode<MetadataFieldModel, Integer> fieldDisplaysize =  createFieldNode("fieldDisplaysize","field_displaysize",Integer.class,JdbcType.INTEGER);
-    	/** 是否只读 */
-        public FieldNode<MetadataFieldModel, Boolean> fieldReadonly =  createFieldNode("fieldReadonly","field_readonly",Boolean.class,JdbcType.BIT);
-    	/** 默认值 */
-        public FieldNode<MetadataFieldModel, String> fieldDefault =  createFieldNode("fieldDefault","field_default",String.class,JdbcType.VARCHAR);
-    	/** 数据来源 */
-        public FieldNode<MetadataFieldModel, Integer> fieldSrc =  createFieldNode("fieldSrc","field_src",Integer.class,JdbcType.INTEGER);
-    	/**  */
-        public FieldNode<MetadataFieldModel, String> refObject =  createFieldNode("refObject","ref_object",String.class,JdbcType.VARCHAR);
-    	/**  */
-        public FieldNode<MetadataFieldModel, String> refParameter =  createFieldNode("refParameter","ref_parameter",String.class,JdbcType.VARCHAR);
-    	/** 关联外表字段 */
-        public FieldNode<MetadataFieldModel, String> refField =  createFieldNode("refField","ref_field",String.class,JdbcType.VARCHAR);
-    	/** 关联外表显示字段 */
-        public FieldNode<MetadataFieldModel, String> refDisplayID =  createFieldNode("refDisplayID","ref_displayID",String.class,JdbcType.VARCHAR);
-    	/** 关联外表条件 */
-        public FieldNode<MetadataFieldModel, String> refFilter =  createFieldNode("refFilter","ref_filter",String.class,JdbcType.VARCHAR);
-    	/** 是否计算字段 */
-        public FieldNode<MetadataFieldModel, Boolean> fieldIscal =  createFieldNode("fieldIscal","field_iscal",Boolean.class,JdbcType.BIT);
-    	/** 必须填 */
-        public FieldNode<MetadataFieldModel, String> fieldRemark =  createFieldNode("fieldRemark","field_remark",String.class,JdbcType.VARCHAR);
-    	/** 是否为null */
-        public FieldNode<MetadataFieldModel, Boolean> fieldIsNull =  createFieldNode("fieldIsNull","field_isNull",Boolean.class,JdbcType.BIT);
-    	/**  */
-        public FieldNode<MetadataFieldModel, String> refTable =  createFieldNode("refTable","ref_table",String.class,JdbcType.VARCHAR);
-    	/**  */
-        public FieldNode<MetadataFieldModel, String> fieldFormat =  createFieldNode("fieldFormat","field_format",String.class,JdbcType.VARCHAR);
-    	/**  */
-        public FieldNode<MetadataFieldModel, Integer> fieldComponent =  createFieldNode("fieldComponent","field_component",Integer.class,JdbcType.INTEGER);
-    	/**  */
-        public FieldNode<MetadataFieldModel, String> refPool =  createFieldNode("refPool","ref_pool",String.class,JdbcType.VARCHAR);
-    	/**  */
-        public FieldNode<MetadataFieldModel, String> fieldMin =  createFieldNode("fieldMin","field_min",String.class,JdbcType.VARCHAR);
-    	/**  */
-        public FieldNode<MetadataFieldModel, String> fieldMax =  createFieldNode("fieldMax","field_max",String.class,JdbcType.VARCHAR);
-    	/** 小数位数 */
-        public FieldNode<MetadataFieldModel, Integer> fieldDecimal =  createFieldNode("fieldDecimal","field_decimal",Integer.class,JdbcType.INTEGER);
-    	/** 显示颜色 */
-        public FieldNode<MetadataFieldModel, String> displayColor =  createFieldNode("displayColor","display_color",String.class,JdbcType.VARCHAR);
-	
-        /**
-         * @param alias 别名
-         */
-        public EntityNode(String alias) {
-            super(MetadataFieldModel.class,"metadata_field",alias);
-        }
-    }
-    
-    //-- 实体参数(允许新增属性) 
-	public static class QueryParam extends AbstractQueryParam<MetadataFieldModel> {
-		public QueryParam() {
-			this.setSortOrders(new SortOrders<MetadataFieldModel>(EntityNode.INSTANCE));
-		}
-	}
-	
-	public static enum ValueField {
-	}
     // ==== 自定义属性 ====
 }
