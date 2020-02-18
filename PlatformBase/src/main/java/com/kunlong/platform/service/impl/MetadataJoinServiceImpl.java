@@ -25,6 +25,7 @@ import java.util.Map;
 @Service
 public class MetadataJoinServiceImpl implements MetadataJoinService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     WebPageUtil webPageUtil;
 
@@ -90,14 +91,32 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         }
         return metadataDict.getMetadataId();
     }
-    //    MetadataDictModel metadataDict = metadataDictModelService.findById(metadataId);
-    //        if (metadataDict == null) {
-    //            return new StringBuilder("表不存在！");
-    //        }
-    //
 
+    public void doSortMetadataDict(Integer subsysId, String ids) {
+        String[] idss = ids.trim().split(",");
+        MetadataDictModel model = new MetadataDictModel();
+        Integer i = 0;
+        for (String id : idss) {
+            model.setMetadataId(Integer.valueOf(id));
+            model.setMetadataOrder(subsysId * 1000 + ++i * 10);
+            metadataDictModelService.updateNotNullPropsById(model);
+        }
 
-    public PageResult<CheckDictResult> checkDict(Integer id) {
+    }
+
+    public void doSortMetadataField(Integer subsysId, String ids) {
+        String[] idss = ids.trim().split(",");
+        MetadataFieldModel metadataFieldModel = new MetadataFieldModel();
+        short i = 0;
+        for (String id : idss) {
+            metadataFieldModel.setFieldId(Integer.valueOf(id));
+            metadataFieldModel.setFieldOrder((short) (subsysId * 100 + ++i * 10));
+            metadataFieldModelService.updateNotNullPropsById(metadataFieldModel);
+        }
+
+    }
+
+        public PageResult<CheckDictResult> checkDict(Integer id) {
         StringBuilder sql = new StringBuilder();
         sql.append("call spCheckMetadata").append("(").append(id).append(")");
         List<CheckDictResult> rs = sqlSessionUtil.selectList(sql, CheckDictResult.class);
@@ -282,7 +301,7 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
     }
 
 
-    public StringBuilder makeWebPage(Integer metadataId) throws IOException {
+    public  List<String> makeWebPage(Integer metadataId) throws IOException {
 
         return webPageUtil.makeWebPage(this,metadataId);
     }

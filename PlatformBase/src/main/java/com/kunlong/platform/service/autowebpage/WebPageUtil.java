@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,16 +31,21 @@ public class WebPageUtil {
     MetadataJoinService metadataJoinService;
 
 
-    public StringBuilder makeWebPage(MetadataJoinService  metadataJoinService,Integer metadataId) throws IOException {
+    public List<String> makeWebPage(MetadataJoinService  metadataJoinService,Integer metadataId) throws IOException {
         this.metadataJoinService=metadataJoinService;
-        makeWebPageEdit(metadataId);
+        String filename=makeWebPageTable(metadataId);
+        List<String> list=new ArrayList<>();
+        list.add(filename);
+        filename=makeWebPageEdit(metadataId);
+        list.add(filename);
 
-        makeWebPageTable(metadataId);
-        return makeWebPageDefaultValue(metadataId);
+        filename= makeWebPageDefaultValue(metadataId);
+        list.add(filename);
+        return list;
     }
 
     //Table主页
-    public StringBuilder makeWebPageTable(Integer metadataId) throws IOException {
+    public String  makeWebPageTable(Integer metadataId) throws IOException {
 
         StringBuilder webPageTable = new StringBuilder(1024);
 
@@ -108,19 +114,19 @@ public class WebPageUtil {
         webPageTable.append("\n\t</el-table-column>");
         webPageTable.append("\n</v-table>");
 
-        write2File(metadataId, webPageTable, WebPageConsts.WEBPAGE_TABLE);
+        String filename = write2File(metadataId, webPageTable, WebPageConsts.WEBPAGE_TABLE);
 
         //write  Dict
-        write2File(metadataId,
-                "\nDICT: "+KunlongUtils.toJSONStringPretty(mapDict),
+        String filenameDict = write2File(metadataId,
+                "\nDICT: " + KunlongUtils.toJSONStringPretty(mapDict),
                 WebPageConsts.WEBPAGE_TABLE_DICT);
 
-        return webPageTable;
+        return filename + "," + filenameDict;
 
     }
 
     //新增时默认值
-    StringBuilder makeWebPageDefaultValue(Integer metadataId) throws IOException {
+    String  makeWebPageDefaultValue(Integer metadataId) throws IOException {
         StringBuilder defaultVal = new StringBuilder(512);
         List<MetadataFieldModel> models = metadataJoinService.findAllByMetadataId(metadataId, -1);
 
@@ -165,16 +171,16 @@ public class WebPageUtil {
         ;
         defaultVal.append("\n\t};");
 
-        write2File(metadataId, defaultVal, WebPageConsts.WEBPAGE_EDIT_DEFAULT);
+        return write2File(metadataId, defaultVal, WebPageConsts.WEBPAGE_EDIT_DEFAULT);
 
-        return defaultVal;
+
     }
 
-    void write2File(Integer metadataId, StringBuilder s, String fSub) throws IOException {
-        write2File(metadataId,s.toString(),fSub);
+    String write2File(Integer metadataId, StringBuilder s, String fSub) throws IOException {
+       return  write2File(metadataId,s.toString(),fSub);
     }
 
-    void write2File(Integer metadataId, String s, String fnSub) throws IOException {
+    String write2File(Integer metadataId, String s, String fnSub) throws IOException {
         MetadataDictModel metadataDict = metadataDictModelService.findById(metadataId);
 
         if (metadataDict != null) {
@@ -186,15 +192,14 @@ public class WebPageUtil {
                 f.write(s.getBytes("UTF-8"));
                 logger.info("end write file: {}",filename);
             }
-
-        }else{
-            logger.info(metadataId + " 不存在！");
+            return filename;
         }
 
+        return metadataId + " 不存在！";
     }
 
     //编辑页面
-    StringBuilder makeWebPageEdit(Integer metadataId) throws IOException {
+    String  makeWebPageEdit(Integer metadataId) throws IOException {
 
         StringBuilder page = new StringBuilder(1024);
         List<MetadataFieldModel> models = this.metadataJoinService.findAllByMetadataId(metadataId, -1);
@@ -267,9 +272,10 @@ public class WebPageUtil {
         page.append("\n</el-form> ");
         logger.info("page: {}", page);
 
-        write2File(metadataId, page, WebPageConsts.WEBPAGE_EDIT);
-        return page;
+        return write2File(metadataId, page, WebPageConsts.WEBPAGE_EDIT);
+
     }
+
     public Map<String, String> parseRefObject(MetadataFieldModel model) {
         String ref = model.getRefObject().trim();
         String[] refTypes = ref.split(",");

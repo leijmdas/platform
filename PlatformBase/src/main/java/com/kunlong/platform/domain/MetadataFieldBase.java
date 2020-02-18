@@ -8,7 +8,17 @@ public class MetadataFieldBase extends KunlongModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String ids ;
+
     MetadataDictModel metadataDictModel;
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIds(String ids) {
+        this.ids = ids;
+    }
+
     public MetadataDictModel getMetadataDictModel() {
         return metadataDictModel;
     }
