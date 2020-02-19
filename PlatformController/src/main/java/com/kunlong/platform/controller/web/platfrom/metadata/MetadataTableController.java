@@ -93,7 +93,7 @@ public class MetadataTableController extends BaseController {
     public @ResponseBody
     JsonResult<Integer> doSortMetadataDict(@RequestBody MetadataQueryDTO queryDTO) {
         logger.info("queryDTO: {}",KunlongUtils.toJSONStringPretty(queryDTO));
-        metadataJoinService.doSortMetadataDict(queryDTO.getSubsysId(), queryDTO.getIds());
+        metadataJoinService.doSortMetadataDict(queryDTO.getSubsysId(),queryDTO.getIds());
         return JsonResult.success();
     }
 
@@ -101,7 +101,7 @@ public class MetadataTableController extends BaseController {
     public @ResponseBody
     JsonResult<Integer> doSortMetadataField(@RequestBody MetadataQueryDTO queryDTO) {
         logger.info("queryDTO: {}",KunlongUtils.toJSONStringPretty(queryDTO));
-        metadataJoinService.doSortMetadataField(queryDTO.getSubsysId(), queryDTO.getIds());
+        metadataJoinService.doSortMetadataField(queryDTO.getIds());
 
         return JsonResult.success();
     }

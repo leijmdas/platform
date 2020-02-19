@@ -12,6 +12,7 @@ import com.kunlong.platform.service.MetadataJoinService;
 import com.kunlong.platform.service.autowebpage.WebPageUtil;
 import com.kunlong.platform.utils.JsonResult;
 import com.kunlong.platform.utils.SqlSessionUtil;
+import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,46 +73,55 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
 
     public Integer copyMaster(Integer metadataId) {
 
-        MetadataDictModel metadataDict = metadataDictModelService.findById(metadataId);
-        if (metadataDict == null) {
+        MetadataDictModel dictModel = metadataDictModelService.findById(metadataId);
+        if (dictModel == null) {
             return -1;
         }
-        metadataDict.setMetadataAlias(metadataDict.getMetadataAlias() + System.currentTimeMillis());
-        metadataDict.setMetadataName(metadataDict.getMetadataName() + System.currentTimeMillis());
-        metadataDict.setMetadataId(null);
-        metadataDict.setMetadataAutocreate(true);
-        metadataDictModelService.save(metadataDict);
+        dictModel.setMetadataAlias(dictModel.getMetadataAlias() + System.currentTimeMillis());
+        dictModel.setMetadataName(dictModel.getMetadataName() + System.currentTimeMillis());
+        dictModel.setMetadataId(null);
+        dictModel.setMetadataAutocreate(true);
+        metadataDictModelService.save(dictModel);
 
         List<MetadataFieldModel> models = findAllByMetadataId(metadataId, -1);
 
         for (MetadataFieldModel metadataField : models) {
-            metadataField.setMetadataId(metadataDict.getMetadataId());
+            metadataField.setMetadataId(dictModel.getMetadataId());
             metadataField.setFieldId(null);
             metadataFieldModelService.save(metadataField);
         }
-        return metadataDict.getMetadataId();
+        return dictModel.getMetadataId();
     }
 
     public void doSortMetadataDict(Integer subsysId, String ids) {
         String[] idss = ids.trim().split(",");
-        MetadataDictModel model = new MetadataDictModel();
+        MetadataDictModel dictModel = new MetadataDictModel();
         Integer i = 0;
         for (String id : idss) {
-            model.setMetadataId(Integer.valueOf(id));
-            model.setMetadataOrder(subsysId * 1000 + ++i * 10);
-            metadataDictModelService.updateNotNullPropsById(model);
+            dictModel.setMetadataId(Integer.valueOf(id));
+            dictModel.setMetadataOrder(subsysId * 100 + ++i * 10);
+            metadataDictModelService.updateNotNullPropsById(dictModel);
         }
 
     }
 
-    public void doSortMetadataField(Integer subsysId, String ids) {
+    public void doSortMetadataField(String ids) {
         String[] idss = ids.trim().split(",");
-        MetadataFieldModel metadataFieldModel = new MetadataFieldModel();
+        if (idss.length == 0) {
+            return;
+        }
+        MetadataFieldModel fieldModel = metadataFieldModelService.findById(Integer.parseInt(idss[0]));
+        MetadataDictModel dictModel = metadataDictModelService.findById(fieldModel.getMetadataId());
+        Integer subsysId = 0;
+        if (dictModel != null) {
+            subsysId = dictModel.getSubsysId();
+        }
         short i = 0;
         for (String id : idss) {
-            metadataFieldModel.setFieldId(Integer.valueOf(id));
-            metadataFieldModel.setFieldOrder((short) (subsysId * 100 + ++i * 10));
-            metadataFieldModelService.updateNotNullPropsById(metadataFieldModel);
+            fieldModel = new MetadataFieldModel();
+            fieldModel.setFieldId(Integer.valueOf(id));
+            fieldModel.setFieldOrder((short) (subsysId * 100 + ++i * 10));
+            metadataFieldModelService.updateNotNullPropsById(fieldModel);
         }
 
     }

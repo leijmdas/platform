@@ -34,7 +34,8 @@ public interface MetadataJoinService {
     //WEB自动化工厂
     List<String> makeWebPage(Integer metadataId) throws IOException;
 
-    void doSortMetadataDict(Integer subsysId,String ids);
-    void doSortMetadataField(Integer subsysId,String ids);
+    void doSortMetadataDict(Integer subsysId, String ids);
+
+    void doSortMetadataField(String ids);
 
 }
