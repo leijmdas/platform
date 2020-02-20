@@ -8,6 +8,8 @@ import com.kunlong.PfAppServer;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Arrays;
+
 public class TestFastDfs extends ITestImpl {
 
     @JTest
@@ -63,8 +65,13 @@ public class TestFastDfs extends ITestImpl {
     //http://192.168.222.128:12088/group1/M00/00/00/wKjegF2q2tyAU648AAD6gBaK6NM8.4.jpg
     public static void main(String[] args) {
         //run(TestFastDfs.class, 1);
-        Demo demo=Demo.builder().age(13).name("leijm").build();
+       // Demo demo=Demo.builder().age(13).name("leijm").build();
 
-        System.out.println(demo.toString());
+        //System.out.println(demo.toString());
+        String[] a="var(11,2)".split("\\)|\\(");
+        for(String aa: Arrays.asList(a)){
+            System.out.println(aa);
+        }
+        System.out.println(a[1].split(",")[0]);
     }
 }

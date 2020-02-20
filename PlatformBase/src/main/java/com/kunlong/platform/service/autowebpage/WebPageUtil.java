@@ -68,7 +68,7 @@ public class WebPageUtil {
 
             if (model.getFieldVisible() || hasSrcDisplay) {
                 webPageTable.append("\n\t");
-                webPageTable.append(String.format("<el-table-column prop='%s' label='%s' width='%d'>",
+                webPageTable.append(String.format("<el-table-column prop='%s' :sortable='true' label='%s' width='%d'>",
                         model.getFieldName(), model.getFieldMemo().trim(), model.getFieldDisplaysize()));
                 webPageTable.append("\n\t\t<template slot-scope='{row}'>");
                 if (hasSrcPool) {

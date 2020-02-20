@@ -42,7 +42,8 @@ public class WebRequestHandler implements HandlerInterceptor {
 
 		String token = req.getHeader(ApiConstants.AUTH_TOKEN_KEY_WEB);
 		if(StringUtils.isEmpty(token)) {
-			Object reqToken = req.getHeader(ApiConstants.AUTH_TOKEN_KEY_WEB.toLowerCase());
+			//upload使用
+			Object reqToken = req.getParameter(ApiConstants.AUTH_TOKEN_KEY_WEB.toLowerCase());
 			token = (reqToken==null?null:reqToken.toString());
 		}
 		

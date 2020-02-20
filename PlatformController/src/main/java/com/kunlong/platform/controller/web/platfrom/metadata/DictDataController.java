@@ -33,7 +33,7 @@ public class DictDataController extends BaseController {
 	public @ResponseBody
 	PageResult<DictDataModel> query(@RequestBody DictDataModel.QueryParam queryParam) throws IOException {
 		queryParam.setSortBys(queryParam.getOrderBys());
-		queryParam.setLimit(100);
+		queryParam.setLimit(200);
 
 		List<DictDataModel> dictDataModels = this.dictDataModelService.findByQueryParam(queryParam);
 		PageResult<DictDataModel> pageResult = new PageResult<DictDataModel>();

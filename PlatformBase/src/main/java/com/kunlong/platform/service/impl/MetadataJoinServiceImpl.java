@@ -11,6 +11,7 @@ import com.kunlong.platform.service.MetadataFieldModelService;
 import com.kunlong.platform.service.MetadataJoinService;
 import com.kunlong.platform.service.autowebpage.WebPageUtil;
 import com.kunlong.platform.utils.JsonResult;
+import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.platform.utils.SqlSessionUtil;
 import io.swagger.models.auth.In;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -103,6 +105,85 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
             metadataDictModelService.updateNotNullPropsById(dictModel);
         }
 
+    }
+    public Boolean checkExistFieldByMIdAndName(Integer metadataId, String fieldName) {
+        MetadataFieldModel.QueryParam queryParam = new MetadataFieldModel.QueryParam();
+        queryParam.setParam(new MetadataFieldModel());
+        queryParam.getParam().setMetadataId(metadataId);
+        queryParam.getParam().setFieldName(fieldName);
+        queryParam.setLimit(1);
+        List<MetadataFieldModel>  models= metadataFieldModelService.findByQueryParam(queryParam);
+        return models.size()>0;
+
+    }
+    // select * from v_col where db_name="dongxw" and table_name='bom'
+    public int dbImportTableFields(Integer metadataId) {
+        MetadataDictModel dictModel = metadataDictModelService.findById(metadataId);
+        if (dictModel == null) {
+            return -1;
+        }
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" select * from v_col ");
+        sql.append(" where db_name='").append(dictModel.getMetadataDb()).append("'");
+        sql.append(" and table_name='").append(dictModel.getMetadataName()).append("'");
+        sql.append(" order by field_order ");
+
+        List<MetadataFieldModel> fieldModels = sqlSessionUtil.selectList(sql, MetadataFieldModel.class);
+        if(fieldModels.size()==0){
+            logger.info("dbImportTableFields sql :{}",sql);
+            return -1;
+        }
+        logger.info("dbImportTableFields fieldModels:{}", fieldModels);
+        for (MetadataFieldModel model : fieldModels) {
+            if (model.getFieldDefault() == null) {
+                model.setFieldDefault("");
+            }
+            model.setMetadataId(dictModel.getMetadataId());
+            model.setFieldVisible(true);
+            model.setFieldDisplaysize(100);
+            model.setFieldSize(11);
+            model.setFieldName(model.getFieldName().trim());
+            model.setFieldMemo(model.getFieldMemo().trim());
+            model.setFieldType(model.getFieldType().toUpperCase().trim());
+            //field_default
+            model.setRefObject(" ");
+            model.setRefParameter(" ");
+            model.setRefField(" ");
+            model.setFieldReadonly(false);
+            model.setRefDisplayID(" ");
+            model.setRefFilter(" ");
+            model.setFieldIscal(false);
+            //field_remark field_isNull
+            model.setRefTable(" ");
+            model.setFieldFormat(" ");
+            model.setDisplayColor(" ");
+            model.setFieldComponent(0);
+            model.setRefPool(" ");
+            model.setFieldDecimal(0);
+            model.setFieldMin(" ");
+            model.setFieldMax(" ");
+            model.setFieldSrc(0);
+
+            String[] w = model.getFieldRemark().trim().split("\\(|\\)");
+
+            if (w.length > 1) {
+                String[] fieldSize = w[1].split(",");
+                model.setFieldSize(Integer.parseInt(fieldSize[0]));
+                if (fieldSize.length > 1) {
+                     model.setFieldDecimal(Integer.parseInt(fieldSize[1]));
+                }
+            } else {
+                model.setFieldSize(0);
+            }
+            logger.info("dbImportTableFields model :{}", model);
+            if(checkExistFieldByMIdAndName(metadataId,model.getFieldName()))
+            {
+                logger.warn("dbImportTableFields checkExistFieldByMIdAndName metadataId:{}, getFieldName:{}",metadataId,model.getFieldName());
+            }else {
+                metadataFieldModelService.save(model);
+            }
+        }
+        return 0;
     }
 
     public void doSortMetadataField(String ids) {
@@ -239,7 +320,7 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         MetadataFieldModel.QueryParam queryParam = new MetadataFieldModel.QueryParam();
         queryParam.setParam(new MetadataFieldModel());
         queryParam.getParam().setMetadataId(metadataId);
-        queryParam.setSortBys("field_pk|desc,field_order|asc");
+        queryParam.setSortBys("fieldPk|desc,fieldOrder|asc");
         queryParam.setLimit(-1);
         List<MetadataFieldModel> fieldList = metadataFieldModelService.findByQueryParam(queryParam);
 
@@ -262,9 +343,8 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
             if (fieldModel.isString()) {
                 sql.append("(").append(fieldModel.getFieldSize()).append(") ");
             } else if (fieldModel.isDecimal()) {
-
-                //String[]  s= StringUtils.split(fieldList.get(i).getFieldSize(),",",true);
-                sql.append("(").append(fieldModel.getFieldSize()).append(",4) ");
+                sql.append("(").append(fieldModel.getFieldSize());
+                sql.append(",").append(fieldModel.getFieldDecimal()).append(") ");
 
             } else if (fieldModel.isPCT()) {
                 sql.append("(12,4) ");
@@ -288,7 +368,9 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
                     if (fieldModel.isString()) {
                         sql.append("'").append(fieldModel.getFieldDefault()).append("'");
                     } else if (fieldModel.isDate()) {
-                        if (fieldModel.getFieldDefault() != null && fieldModel.getFieldDefault().length() >= 10) {
+                        if (fieldModel.getFieldDefault() != null
+                                && fieldModel.getFieldDefault().length() >= 10
+                                && !"CURRENT_TIMESTAMP".equals(fieldModel.getFieldDefault().trim())) {
                             sql.append("'").append(fieldModel.getFieldDefault()).append("'");
                         } else {
                             sql.append(fieldModel.getFieldDefault());

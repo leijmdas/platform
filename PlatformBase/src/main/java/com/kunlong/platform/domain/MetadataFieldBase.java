@@ -7,7 +7,48 @@ import java.io.Serializable;
 public class MetadataFieldBase extends KunlongModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+            //"blobText":false,
+//        "boolean":false,
+//        "date":false,
+//        "decimal":false,
+//        "displayColor":" ",
+//
+//        "fieldAuto":true,
+//        "fieldComponent":0,
+//        "fieldDecimal":0,
+//        "fieldDefault":null,
+//        "fieldDisplaysize":100,
+//        "fieldFormat":" ",
+//        "fieldId":null,
+//        "fieldIsNull":false,
+//        "fieldIscal":false,
+//        "fieldMax":" ",
+//        "fieldMemo":"用户日志标识",
+//        "fieldMin":" ",
+//        "fieldName":"id",
+//        "fieldOrder":1,
+//        "fieldPk":true,
+//        "fieldReadonly":false,
+//        "fieldRemark":"int(11)",
+//        "fieldSize":11,
+//
+//
+//        "fieldType":"int",
+//        "fieldVisible":true,
+//        "ids":null,
+//        "metadataDictModel":null,
+//        "metadataId":404,
+//        "money":false,
+//        "pCT":false,
+//        "refDisplayID":" ",
+//        "refField":" ",
+//        "refFilter":" ",
+//        "refObject":" ",
+//        "refParameter":" ",
+//        "refPool":" ",
+//        "refTable":" ",
+//        "string":false,
+//        "tAGIMAGE":false
     private String ids ;
 
     MetadataDictModel metadataDictModel;
@@ -63,13 +104,10 @@ public class MetadataFieldBase extends KunlongModel implements Serializable {
 
     }
 
-    public    boolean isBlobText() {
+    public boolean isBlobText() {
         String dt = getFieldType();
-        return dt.equals("BLOB")
-                || dt.equals("MEDIUMBLOB")
-                || dt.equals("TEXT");
+        return dt.equals("BLOB") || dt.equals("MEDIUMBLOB") || dt.equals("TEXT");
 
     }
-
 
 }
