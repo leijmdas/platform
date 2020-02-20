@@ -3,17 +3,12 @@ package com.kunlong.platform.service.impl;
 import app.support.query.PageResult;
 import com.kunlong.dubbo.api.dto.queryParam.MetadataQueryDTO;
 import com.kunlong.dubbo.api.model.SelectSqlDTO;
-import com.kunlong.platform.domain.CheckDictResult;
-import com.kunlong.platform.domain.MetadataDictModel;
-import com.kunlong.platform.domain.MetadataFieldModel;
-import com.kunlong.platform.service.MetadataDictModelService;
-import com.kunlong.platform.service.MetadataFieldModelService;
-import com.kunlong.platform.service.MetadataJoinService;
+import com.kunlong.platform.config.datasource.PfTransactional;
+import com.kunlong.platform.domain.*;
+import com.kunlong.platform.service.*;
 import com.kunlong.platform.service.autowebpage.WebPageUtil;
 import com.kunlong.platform.utils.JsonResult;
-import com.kunlong.platform.utils.KunlongUtils;
 import com.kunlong.platform.utils.SqlSessionUtil;
-import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +16,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class MetadataJoinServiceImpl implements MetadataJoinService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    SubsysDictService subsysDictService;
 
     @Autowired
     WebPageUtil webPageUtil;
@@ -116,7 +113,55 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         return models.size()>0;
 
     }
+
+    // @Transactional(rollbackFor=Exception.class) select * from v_table  where metadata_db='dmp' limit 1 transactionManager="pfTransactionManager"
+    //@Transactional(rollbackFor=Exception.class)
+    @PfTransactional()
+    public List<Integer> dbImportTables(Integer subsysId) {
+        List<Integer> result = new ArrayList<>();
+        SubsysDict subsysDict = subsysDictService.findById(subsysId);
+        if (subsysDict == null) {
+            logger.warn("dbImportTables dataModel is null! subsysId:{}",subsysId);
+            return  result;
+        }
+
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" select * from v_table  where metadata_db='");
+        sql.append( subsysDict.getRemark().trim() ).append("'");
+        sql.append(" order by metadata_name ");
+
+        List<MetadataDictModel> dictModels = sqlSessionUtil.selectList(sql, MetadataDictModel.class);
+        if (dictModels.size() == 0) {
+            logger.info("dbImportTables dictModels is empty! sql :{}", sql);
+            return result;
+        }
+        int i = 10;
+
+        for (MetadataDictModel dictModel : dictModels) {
+            dictModel.setSubsysId(subsysId);
+            dictModel.setMetadataType(1);
+            dictModel.setMetadataAutocreate(true);
+            dictModel.setMetadataSortFields(" ");
+            dictModel.setExpTagtableHead(false);
+            dictModel.setMetadataOrder(i++);
+            dictModel.setMetadataAddDel(false);
+            dictModel.setMetadataReadonly(false);
+            dictModel.setRefSrc((byte)0);
+            dictModel.setRefObject(" ");
+            dictModel.setRefParam(" ");
+            if(dictModel.getMetadataAlias().trim().isEmpty()){
+                dictModel.setMetadataAlias(dictModel.getMetadataName());
+            }
+            metadataDictModelService.save(dictModel);
+            result.add(dictModel.getMetadataId());
+            dbImportTableFields(dictModel.getMetadataId());
+        }
+        return result;
+    }
+
     // select * from v_col where db_name="dongxw" and table_name='bom'
+    //@Transactional(transactionManager="pfTransactionManager",rollbackFor=Exception.class)
+    @PfTransactional()
     public int dbImportTableFields(Integer metadataId) {
         MetadataDictModel dictModel = metadataDictModelService.findById(metadataId);
         if (dictModel == null) {
@@ -145,6 +190,9 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
             model.setFieldName(model.getFieldName().trim());
             model.setFieldMemo(model.getFieldMemo().trim());
             model.setFieldType(model.getFieldType().toUpperCase().trim());
+            if(model.getFieldMemo().trim().isEmpty()){
+                model.setFieldMemo(model.getFieldName());
+            }
             //field_default
             model.setRefObject(" ");
             model.setRefParameter(" ");

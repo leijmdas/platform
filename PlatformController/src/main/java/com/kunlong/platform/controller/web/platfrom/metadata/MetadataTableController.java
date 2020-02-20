@@ -115,6 +115,18 @@ public class MetadataTableController extends BaseController {
         }
         return JsonResult.success(ret);
     }
+    @PostMapping("/dbImportTables/{subsysId}")
+    public @ResponseBody
+    JsonResult<List<Integer>> dbImportTables(@PathVariable("subsysId") Integer subsysId) {
+        if (subsysId == null) {
+            return JsonResult.failure(null, "subsysId is null!");
+        }
+        List<Integer> result = metadataJoinService.dbImportTables(subsysId);
+        if (result.size() == 0) {
+            return JsonResult.failure(result, "数据库中无表！");
+        }
+        return JsonResult.success(result);
+    }
 
 
 }

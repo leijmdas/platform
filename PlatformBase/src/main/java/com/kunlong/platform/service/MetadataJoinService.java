@@ -39,4 +39,6 @@ public interface MetadataJoinService {
     void doSortMetadataField(String ids);
 
     int dbImportTableFields(Integer metadataId);
+    List<Integer> dbImportTables(Integer subsysId);
+
 }
