@@ -130,12 +130,13 @@ public class MetadataTableController extends BaseController {
     @PostMapping("/dbImportTableFields/{metadataId}")
     public @ResponseBody
     JsonResult<Integer> dbImportTableFields(@PathVariable("metadataId") Integer metadataId) {
-        int ret=metadataJoinService.dbImportTableFields(metadataId);
-        if(ret<0){
-            return JsonResult.failure(-1,"表在数据库中不存在！");
+        int ret = metadataJoinService.dbImportTableFields(metadataId);
+        if (ret < 0) {
+            return JsonResult.failure(-1, "表在数据库中不存在！");
         }
         return JsonResult.success(ret);
     }
+
     @PostMapping("/dbImportTables/{subsysId}")
     public @ResponseBody
     JsonResult<List<Integer>> dbImportTables(@PathVariable("subsysId") Integer subsysId) {
