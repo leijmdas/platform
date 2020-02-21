@@ -1,12 +1,15 @@
 package com.kunlong.platform.service.impl;
 
 import app.support.query.PageResult;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.kunlong.dubbo.api.dto.queryParam.MetadataQueryDTO;
 import com.kunlong.dubbo.api.model.SelectSqlDTO;
 import com.kunlong.platform.config.datasource.PfTransactional;
 import com.kunlong.platform.domain.*;
 import com.kunlong.platform.service.*;
 import com.kunlong.platform.service.autowebpage.WebPageUtil;
+import com.kunlong.platform.support.service.AuthService;
 import com.kunlong.platform.utils.JsonResult;
 import com.kunlong.platform.utils.SqlSessionUtil;
 import org.slf4j.Logger;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +41,66 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
 
     @Autowired
     MetadataFieldModelService metadataFieldModelService;
+
+    public List<MetadataDictModel> exportDictTables(String metadatIds) {
+        List<MetadataDictModel> dictModels = new ArrayList<>();
+        String[] ids = metadatIds.split(",");
+        for (String id : ids) {
+            MetadataDictModel dictModel = exportDictTable(Integer.parseInt(id));
+            dictModels.add(dictModel);
+        }
+        return dictModels;
+    }
+
+    @PfTransactional
+    public MetadataDictModel importDictTables(byte[] bytes) throws UnsupportedEncodingException {
+
+        List<MetadataDictModel> models = JSON.parseObject(new String(bytes, "UTF-8"),
+                new TypeReference<List<MetadataDictModel>>() {
+                });
+        for (MetadataDictModel model : models) {
+            importDictTable(model);
+        }
+        return models.get(0);
+    }
+
+    @PfTransactional
+    public MetadataDictModel importDictTable(MetadataDictModel model) throws UnsupportedEncodingException {
+        if (model == null) {
+            return model;
+        }
+        model.setMetadataId(null);
+        metadataDictModelService.save(model);
+        for (MetadataFieldModel fieldModel : model.getMetadataFieldModels()) {
+            fieldModel.setFieldId(null);
+            fieldModel.setMetadataId(model.getMetadataId());
+            metadataFieldModelService.save(fieldModel);
+        }
+        return model;
+    }
+
+    public MetadataDictModel importDictTable(byte[] bytes) throws UnsupportedEncodingException {
+        String s = new String(bytes, "UTF-8").trim();
+        if(s.substring(0,1).equals("{")){
+            MetadataDictModel model = JSON.parseObject(s, MetadataDictModel.class);
+            importDictTable(model);
+            return model;
+        }
+
+        return null;
+    }
+
+
+    public MetadataDictModel exportDictTable(Integer metadataId) {
+        MetadataDictModel dictModel = metadataDictModelService.findById(metadataId);
+        if (dictModel == null) {
+           return dictModel;
+        }
+
+        List<MetadataFieldModel> fieldModels = findAllByMetadataId(dictModel.getMetadataId(), -1);
+        dictModel.setMetadataFieldModels(fieldModels);
+        return dictModel;
+    }
 
     public List<MetadataFieldModel> findAllByMetadataId(Integer metadataId, Integer limit) {
         MetadataFieldModel.QueryParam queryParam = new MetadataFieldModel.QueryParam();

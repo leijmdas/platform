@@ -149,45 +149,7 @@ public class MetadataTableController extends BaseController {
         return JsonResult.success(result);
     }
 
-    @RequestMapping(value = "/exportDictTable/{metadataId}", method = RequestMethod.POST)
-    @ApiOperation(value = "exportDictTable", notes = "exportDictTable", authorizations = {@Authorization(value = ApiConstants.AUTH_API_WEB)})
-    public void exportDictTable(@PathVariable("metadataId") Integer metadatId, HttpServletRequest req, HttpServletResponse rsp) throws FileNotFoundException, IOException {
-        MetadataDictModel.QueryParam queryParam = new MetadataDictModel.QueryParam();
 
-        if (queryParam.getParam() == null) {
-            queryParam.setParam(new MetadataDictModel());
-        }
-        queryParam.getParam().setMetadataId(metadatId);
-        queryParam.setLimit(-1);
-        queryParam.setStart(0);
-        queryParam.setSortBys("metadataOrder|asc");
-        List<MetadataDictModel> dictModels = dictModelService.findByQueryParam(queryParam);
-        MetadataDictModel dictModel = dictModels.get(0);
-        if (dictModel == null) {
-            rsp.getWriter().write("exportDictTable  found no dict!");
-        }
-
-        List<MetadataFieldModel> fieldModels = metadataJoinService.findAllByMetadataId(dictModel.getMetadataId(), -1);
-        dictModel.setMetadataFieldModels(fieldModels);
-        WebFileUtil web = new WebFileUtil(req, rsp);
-        //String baseStr =  Base64.encode(KunlongUtils.toJSONString(dictModel).getBytes());
-
-        web.export2JsonFile(dictModel.getMetadataName() + ".json.txt", KunlongUtils.toJSONString(dictModel), rsp);
-
-    }
-
-    @PfTransactional
-    public void importDbDictTable(byte[] bytes) throws UnsupportedEncodingException {
-        MetadataDictModel model= JSON.parseObject(new String(bytes,"UTF-8"),MetadataDictModel.class);
-        model.setMetadataId(null);
-        dictModelService.save(model);
-        for(MetadataFieldModel fieldModel:model.getMetadataFieldModels()){
-            fieldModel.setFieldId(null);
-            fieldModel.setMetadataId(model.getMetadataId());
-            fieldModelService.save(fieldModel);
-        }
-
-    }
     // 处理文件上传
     @RequestMapping(value = "/uploadDict", method = RequestMethod.POST)
     public @ResponseBody
@@ -206,12 +168,43 @@ public class MetadataTableController extends BaseController {
             throw new RuntimeException("文件过大。最大允许(" + maxSize + " KB)");
         }
         String extName = FileHelper.getFileExtByFilename(filename);
-
         byte[] bytes = FileHelper.stream2byte(uploadFile.getInputStream());
-        logger.info("uploadDict filename:{},\n content:\n{}",filename,new String(bytes,"UTF-8"));
-        importDbDictTable(bytes);
+        logger.info("uploadDict filename:{},\n content:\n{}", filename, new String(bytes, "UTF-8"));
+        if(filename.contains("jsonarray")){
+            metadataJoinService.importDictTables(bytes);
+
+        }else {
+            MetadataDictModel model = metadataJoinService.importDictTable(bytes);
+            if (model == null) {
+                metadataJoinService.importDictTables(bytes);
+            }
+        }
+
         return JsonResult.success();
     }
 
+    @RequestMapping(value = "/exportDictTable/{metadataId}", method = RequestMethod.POST)
+    @ApiOperation(value = "exportDictTable", notes = "exportDictTable", authorizations = {@Authorization(value = ApiConstants.AUTH_API_WEB)})
+    public void exportDictTable(@PathVariable("metadataId") Integer metadataId, HttpServletRequest req, HttpServletResponse rsp) throws FileNotFoundException, IOException {
+
+        MetadataDictModel dictModel  = metadataJoinService.exportDictTable( metadataId);
+
+        WebFileUtil web = new WebFileUtil(req, rsp);
+        //String baseStr =  Base64.encode(KunlongUtils.toJSONString(dictModel).getBytes());
+
+        web.export2JsonFile(dictModel.getMetadataName() + ".json.txt", KunlongUtils.toJSONString(dictModel), rsp);
+
+    }
+
+    @RequestMapping(value = "/exportDictTables/{metadataIds}", method = RequestMethod.POST)
+    @ApiOperation(value = "exportDictTables", notes = "exportDictTables", authorizations = {@Authorization(value = ApiConstants.AUTH_API_WEB)})
+    public void exportDictTables(@PathVariable("metadataIds") String metadatIds, HttpServletRequest req, HttpServletResponse rsp) throws FileNotFoundException, IOException {
+
+        List<MetadataDictModel> dictModels  = metadataJoinService.exportDictTables( metadatIds );
+        WebFileUtil web = new WebFileUtil(req, rsp);
+        //String baseStr =  Base64.encode(KunlongUtils.toJSONString(dictModels).getBytes());
+        web.export2JsonFile( dictModels.get(0).getMetadataName()+"_models.jsonarray.txt", KunlongUtils.toJSONString(dictModels), rsp);
+
+    }
 
 }
