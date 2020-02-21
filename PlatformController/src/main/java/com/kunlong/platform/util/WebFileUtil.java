@@ -84,7 +84,18 @@ public class WebFileUtil  {
 		JxlsUtil.exportExcel(resovePath(dir+"/"+templateName),  params,this.response.getOutputStream());
 		
 	}
+	public void export2JsonFile(String fileName,String content,HttpServletResponse rsp) throws IOException {
+		setJsonHeader(fileName);
+		OutputStream out = rsp.getOutputStream();
+		out.write(content.getBytes("UTF-8"));
 
+	}
+
+	private void setJsonHeader(String fileName) throws UnsupportedEncodingException {
+		response.setHeader("content-disposition", "attachment;  filename=" + new String(fileName.getBytes("utf-8"), "ISO8859-1"));
+		response.setHeader("attachment-name", URLEncoder.encode(fileName,"utf-8"));
+		response.setContentType("text/plain;charset=UTF-8");
+	}
 
 	//easyExcel
 	public void export2EasyExcel(String fileName, List<String> titleNames, List<List<String>> records) throws IOException {
@@ -114,11 +125,13 @@ public class WebFileUtil  {
 	private static String resovePath(String path) {
 		return StringUtil.resolveUrl(path);
 	}
+
 	private void setExcelHeader(String fileName) throws UnsupportedEncodingException {
 		response.setHeader("content-disposition", "attachment;  filename=" + new String(fileName.getBytes("utf-8"), "ISO8859-1"));
 		response.setHeader("attachment-name", URLEncoder.encode(fileName,"utf-8"));
-		response.setContentType("application/msexcel");
+		response.setContentType("application/msexcel;charset=UTF-8");
 	}
+
 	public void saveWorkbook(org.apache.poi.ss.usermodel.Workbook resultWorkbook, String fileName) throws IOException {
 		OutputStream os = response.getOutputStream();
 		try {

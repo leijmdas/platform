@@ -31,7 +31,6 @@ public class FileController {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
-	//@Autowired
 	@Reference(lazy = true, version = "${dubbo.service.version}")
 	private FileApiService fileApiService;
 	// 处理文件上传

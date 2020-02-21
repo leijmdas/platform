@@ -19,7 +19,7 @@ import org.mybatis.hbatis.orm.criteria.support.query.SortOrders;
  * @date 2019年12月29日
  */
 @Table(MetadataDictModel.EntityNode.class)
-public class MetadataDictModel extends KunlongModel implements Serializable {
+public class MetadataDictModel extends MetadataDictModelBase implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	/**

@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * DictDataModel
  * @author generator
- * @date 2020年02月16日
+ * @date 2020年02月20日
  */
 @ApiModel(value="DictDataModelDTO",description="数据字典")
 public class DictDataModelDTO implements Serializable {
@@ -63,6 +63,12 @@ public class DictDataModelDTO implements Serializable {
 	  */
 	@ApiModelProperty(value = "备注",required = false,notes = "备注 ")
 	private String remark;
+	/**
+	  * 
+	  * nullable:false,length:11
+	  */
+	@ApiModelProperty(value = "",required = true,notes = " ")
+	private Integer subsysId;
     public Integer getId(){
     	return this.id;
     }
@@ -110,6 +116,12 @@ public class DictDataModelDTO implements Serializable {
     }
     public void setRemark(String remark){
     	this.remark = remark;
+    }
+    public Integer getSubsysId(){
+    	return this.subsysId;
+    }
+    public void setSubsysId(Integer subsysId){
+    	this.subsysId = subsysId;
     }
     // ==== 自定义属性 ====
 }

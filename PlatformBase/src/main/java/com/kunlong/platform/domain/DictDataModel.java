@@ -13,10 +13,10 @@ import org.mybatis.hbatis.orm.criteria.support.query.SortOrders;
 /**
  * DictDataModel 数据字典
  * @author generator
- * @date 2020年02月16日
+ * @date 2020年02月20日
  */
 @Table(DictDataModel.EntityNode.class)
-public class DictDataModel implements Serializable {
+public class DictDataModel extends DictDataModelBase implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	/**
@@ -68,6 +68,13 @@ public class DictDataModel implements Serializable {
 	  */
 	@Column(comment = "备注")	
 	private String remark;
+	/**
+	  * 
+	  * nullable:false,length:11
+	  */
+	@Column(comment = "")	
+	@NotNull
+	private Integer subsysId;
     public Integer getId(){
     	return this.id;
     }
@@ -116,6 +123,12 @@ public class DictDataModel implements Serializable {
     public void setRemark(String remark){
     	this.remark = remark;
     }
+    public Integer getSubsysId(){
+    	return this.subsysId;
+    }
+    public void setSubsysId(Integer subsysId){
+    	this.subsysId = subsysId;
+    }
 
     public static class EntityNode extends AbstractEntityNode<DictDataModel> {
         public static final EntityNode INSTANCE = new EntityNode("dd");;
@@ -135,6 +148,8 @@ public class DictDataModel implements Serializable {
         public FieldNode<DictDataModel, Integer> createBy =  createFieldNode("createBy","create_by",Integer.class,JdbcType.INTEGER);
     	/** 备注 */
         public FieldNode<DictDataModel, String> remark =  createFieldNode("remark","remark",String.class,JdbcType.VARCHAR);
+    	/**  */
+        public FieldNode<DictDataModel, Integer> subsysId =  createFieldNode("subsysId","subsys_id",Integer.class,JdbcType.INTEGER);
 	
         /**
          * @param alias 别名

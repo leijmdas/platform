@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * DictDataModelService
  * @author generator
- * @date 2020年02月16日
+ * @date 2020年02月20日
  */
 public interface DictDataModelService {
 	

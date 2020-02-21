@@ -1,12 +1,22 @@
 package com.kunlong.platform.controller.web.platfrom.metadata;
 
 import app.support.query.PageResult;
+import com.alibaba.fastjson.JSON;
+import com.kunlong.core.util.Base64;
+import com.kunlong.dubbo.api.dto.FileInfoDTO;
 import com.kunlong.dubbo.api.dto.queryParam.MetadataQueryDTO;
+import com.kunlong.platform.config.datasource.PfTransactional;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
+import com.kunlong.platform.controller.web.annotation.DateRewritable;
 import com.kunlong.platform.domain.CheckDictResult;
 import com.kunlong.platform.domain.MetadataDictModel;
+import com.kunlong.platform.domain.MetadataFieldModel;
+import com.kunlong.platform.service.MetadataDictModelService;
+import com.kunlong.platform.service.MetadataFieldModelService;
 import com.kunlong.platform.service.MetadataJoinService;
+import com.kunlong.platform.util.FileHelper;
+import com.kunlong.platform.util.WebFileUtil;
 import com.kunlong.platform.utils.JsonResult;
 import com.kunlong.platform.utils.KunlongUtils;
 import io.swagger.annotations.Api;
@@ -17,8 +27,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +54,10 @@ public class MetadataTableController extends BaseController {
 
     @Autowired
     MetadataJoinService metadataJoinService;
+    @Autowired
+    MetadataDictModelService dictModelService;
+    @Autowired
+    MetadataFieldModelService fieldModelService;
 
     @PostMapping("/selectTable")
     public @ResponseBody
@@ -126,6 +147,70 @@ public class MetadataTableController extends BaseController {
             return JsonResult.failure(result, "数据库中无表！");
         }
         return JsonResult.success(result);
+    }
+
+    @RequestMapping(value = "/exportDictTable/{metadataId}", method = RequestMethod.POST)
+    @ApiOperation(value = "exportDictTable", notes = "exportDictTable", authorizations = {@Authorization(value = ApiConstants.AUTH_API_WEB)})
+    public void exportDictTable(@PathVariable("metadataId") Integer metadatId, HttpServletRequest req, HttpServletResponse rsp) throws FileNotFoundException, IOException {
+        MetadataDictModel.QueryParam queryParam = new MetadataDictModel.QueryParam();
+
+        if (queryParam.getParam() == null) {
+            queryParam.setParam(new MetadataDictModel());
+        }
+        queryParam.getParam().setMetadataId(metadatId);
+        queryParam.setLimit(-1);
+        queryParam.setStart(0);
+        queryParam.setSortBys("metadataOrder|asc");
+        List<MetadataDictModel> dictModels = dictModelService.findByQueryParam(queryParam);
+        MetadataDictModel dictModel = dictModels.get(0);
+        if (dictModel == null) {
+            rsp.getWriter().write("exportDictTable  found no dict!");
+        }
+
+        List<MetadataFieldModel> fieldModels = metadataJoinService.findAllByMetadataId(dictModel.getMetadataId(), -1);
+        dictModel.setMetadataFieldModels(fieldModels);
+        WebFileUtil web = new WebFileUtil(req, rsp);
+        //String baseStr =  Base64.encode(KunlongUtils.toJSONString(dictModel).getBytes());
+
+        web.export2JsonFile(dictModel.getMetadataName() + ".json.txt", KunlongUtils.toJSONString(dictModel), rsp);
+
+    }
+
+    @PfTransactional
+    public void importDbDictTable(byte[] bytes) throws UnsupportedEncodingException {
+        MetadataDictModel model= JSON.parseObject(new String(bytes,"UTF-8"),MetadataDictModel.class);
+        model.setMetadataId(null);
+        dictModelService.save(model);
+        for(MetadataFieldModel fieldModel:model.getMetadataFieldModels()){
+            fieldModel.setFieldId(null);
+            fieldModel.setMetadataId(model.getMetadataId());
+            fieldModelService.save(fieldModel);
+        }
+
+    }
+    // 处理文件上传
+    @RequestMapping(value = "/uploadDict", method = RequestMethod.POST)
+    public @ResponseBody
+    JsonResult uploadDict(@RequestParam("file") MultipartFile uploadFile,
+                       @RequestParam(value = "maxSize", defaultValue = "20480") Integer maxSize,
+                          HttpServletRequest request)
+            throws Exception {
+
+        String filename = uploadFile.getOriginalFilename();
+        filename = URLDecoder.decode(filename,"UTF-8");
+
+        String contentType = uploadFile.getContentType();
+        logger.info("接收文件[contentType:" + contentType + ",name:" + filename + "]");
+        long fileSize = uploadFile.getSize();
+        if (fileSize > maxSize*1024) {
+            throw new RuntimeException("文件过大。最大允许(" + maxSize + " KB)");
+        }
+        String extName = FileHelper.getFileExtByFilename(filename);
+
+        byte[] bytes = FileHelper.stream2byte(uploadFile.getInputStream());
+        logger.info("uploadDict filename:{},\n content:\n{}",filename,new String(bytes,"UTF-8"));
+        importDbDictTable(bytes);
+        return JsonResult.success();
     }
 
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-
 /**
  * 后台元数据字典模块的Rest类
  * Package: com.kunlong.sysmetadata.sysuser
@@ -21,6 +20,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/rest")
 @Scope("prototype")
+@Deprecated
 public class MetaDataController extends RestHandler {
     @Resource(name="metaDataProcess")
     MetaDataProcess metaDataProcess ;

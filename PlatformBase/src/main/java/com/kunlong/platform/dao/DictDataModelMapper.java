@@ -7,7 +7,7 @@ import com.kunlong.platform.domain.DictDataModel;
 /**
  * DictDataModelMapper
  * @author generator
- * @date 2020年02月16日
+ * @date 2020年02月20日
  */
 public interface DictDataModelMapper extends HbatisMapper<DictDataModel, Integer> {
 	

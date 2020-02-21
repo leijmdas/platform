@@ -1,6 +1,5 @@
 package com.kunlong.platform.config.datasource;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.annotation.AliasFor;
 
 import org.springframework.transaction.annotation.Isolation;

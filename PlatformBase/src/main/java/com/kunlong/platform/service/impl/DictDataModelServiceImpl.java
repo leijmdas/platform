@@ -12,7 +12,7 @@ import org.mybatis.hbatis.orm.criteria.support.StatementBuilder;
 /**
  * DictDataModelServiceImpl
  * @author generator
- * @date 2020年02月16日
+ * @date 2020年02月20日
  */
 @Service
 public class DictDataModelServiceImpl implements DictDataModelService {

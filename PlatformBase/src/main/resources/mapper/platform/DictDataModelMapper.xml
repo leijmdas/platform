@@ -10,6 +10,7 @@
 	  	<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 	  	<result column="create_by" property="createBy" jdbcType="INTEGER" />
 	  	<result column="remark" property="remark" jdbcType="VARCHAR" />
+	  	<result column="subsys_id" property="subsysId" jdbcType="INTEGER" />
     </resultMap>
     <resultMap id="BaseResultMap_DictDataModel" type="com.kunlong.platform.domain.DictDataModel" >
 	    <id column="dd_id" property="id" jdbcType="INTEGER" />	
@@ -20,12 +21,13 @@
 	  	<result column="dd_create_time" property="createTime" jdbcType="TIMESTAMP" />
 	  	<result column="dd_create_by" property="createBy" jdbcType="INTEGER" />
 	  	<result column="dd_remark" property="remark" jdbcType="VARCHAR" />
+	  	<result column="dd_subsys_id" property="subsysId" jdbcType="INTEGER" />
     </resultMap>
     <sql id="Base_Column_List" >
-  		id,type_code,type_name,code,name,create_time,create_by,remark
+  		id,type_code,type_name,code,name,create_time,create_by,remark,subsys_id
 	</sql>
   	<sql id="Base_Column_List_DictDataModel" >
-  		dd.id dd_id,dd.type_code dd_type_code,dd.type_name dd_type_name,dd.code dd_code,dd.name dd_name,dd.create_time dd_create_time,dd.create_by dd_create_by,dd.remark dd_remark
+  		dd.id dd_id,dd.type_code dd_type_code,dd.type_name dd_type_name,dd.code dd_code,dd.name dd_name,dd.create_time dd_create_time,dd.create_by dd_create_by,dd.remark dd_remark,dd.subsys_id dd_subsys_id
 	</sql>
 	
 	<!-- 系统自定义 -->
@@ -60,6 +62,9 @@
 		    </if>
 			<if test="p.remark!=null and p.remark!=''">
 		    	and dd.remark like #{p.remark}
+		    </if>
+			<if test="p.subsysId!=null ">
+		    	and dd.subsys_id=#{p.subsysId}
 		    </if>
 		</if>
 		<!--
