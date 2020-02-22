@@ -1,13 +1,11 @@
 package com.kunlong.platform.model;
 
- 
 import com.alibaba.excel.metadata.BaseRowModel;
 import com.kunlong.platform.utils.KunlongUtils;
 
 import java.math.BigDecimal;
 
-//@NewScope("prototype")
-public class KunlongModel {
+public class BaseRowKlModel extends BaseRowModel{
 
     @Override
     public String toString() {
@@ -46,5 +44,4 @@ public class KunlongModel {
     public static BigDecimal newBigDecimal(int newScale,int value) {
         return new BigDecimal(value).setScale(newScale, BigDecimal.ROUND_HALF_UP);
     }
-
 }
