@@ -2,15 +2,15 @@ package com.kunlong.platform.dto;
 
 import java.io.Serializable;
 import java.lang.Integer;
-import java.lang.Short;
 import java.lang.String;
 import java.lang.Boolean;
+import java.util.Date;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 /**
  * MetadataFieldModel
  * @author generator
- * @date 2020年02月17日
+ * @date 2020年03月07日
  */
 @ApiModel(value="MetadataFieldModelDTO",description="")
 public class MetadataFieldModelDTO implements Serializable {
@@ -30,10 +30,10 @@ public class MetadataFieldModelDTO implements Serializable {
 	private Integer metadataId;
 	/**
 	  * 显示顺序
-	  * nullable:false,length:6
+	  * nullable:false,length:11
 	  */
 	@ApiModelProperty(value = "显示顺序",required = true,notes = "显示顺序 ")
-	private Short fieldOrder;
+	private Integer fieldOrder;
 	/**
 	  * 字段名称
 	  * nullable:false,length:64
@@ -42,7 +42,7 @@ public class MetadataFieldModelDTO implements Serializable {
 	private String fieldName;
 	/**
 	  * 字段描述
-	  * nullable:true,length:128
+	  * nullable:true,length:256
 	  */
 	@ApiModelProperty(value = "字段描述",required = false,notes = "字段描述 ")
 	private String fieldMemo;
@@ -196,6 +196,12 @@ public class MetadataFieldModelDTO implements Serializable {
 	  */
 	@ApiModelProperty(value = "显示颜色",required = true,notes = "显示颜色 ")
 	private String displayColor;
+	/**
+	  * 
+	  * nullable:false,length:19
+	  */
+	@ApiModelProperty(value = "",required = true,notes = " ")
+	private Date createTime;
     public Integer getFieldId(){
     	return this.fieldId;
     }
@@ -208,10 +214,10 @@ public class MetadataFieldModelDTO implements Serializable {
     public void setMetadataId(Integer metadataId){
     	this.metadataId = metadataId;
     }
-    public Short getFieldOrder(){
+    public Integer getFieldOrder(){
     	return this.fieldOrder;
     }
-    public void setFieldOrder(Short fieldOrder){
+    public void setFieldOrder(Integer fieldOrder){
     	this.fieldOrder = fieldOrder;
     }
     public String getFieldName(){
@@ -375,6 +381,12 @@ public class MetadataFieldModelDTO implements Serializable {
     }
     public void setDisplayColor(String displayColor){
     	this.displayColor = displayColor;
+    }
+    public Date getCreateTime(){
+    	return this.createTime;
+    }
+    public void setCreateTime(Date createTime){
+    	this.createTime = createTime;
     }
     // ==== 自定义属性 ====
 }

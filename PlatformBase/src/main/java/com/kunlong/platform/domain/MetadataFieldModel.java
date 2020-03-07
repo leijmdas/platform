@@ -6,18 +6,18 @@ import org.mybatis.hbatis.core.type.JdbcType;
 import org.mybatis.hbatis.core.annotation.*;
 import org.mybatis.hbatis.core.*;
 import java.lang.Integer;
-import java.lang.Short;
 import java.lang.String;
 import java.lang.Boolean;
+import java.util.Date;
 import org.mybatis.hbatis.orm.criteria.support.query.AbstractQueryParam;
 import org.mybatis.hbatis.orm.criteria.support.query.SortOrders;
 /**
  * MetadataFieldModel 
  * @author generator
- * @date 2020年02月17日
+ * @date 2020年03月07日
  */
 @Table(MetadataFieldModel.EntityNode.class)
-public class MetadataFieldModel extends MetadataFieldBase implements Serializable {
+public class MetadataFieldModel extends  MetadataFieldBase implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	/**
@@ -35,11 +35,11 @@ public class MetadataFieldModel extends MetadataFieldBase implements Serializabl
 	private Integer metadataId;
 	/**
 	  * 显示顺序
-	  * nullable:false,length:6
+	  * nullable:false,length:11
 	  */
 	@Column(comment = "显示顺序")	
 	@NotNull
-	private Short fieldOrder;
+	private Integer fieldOrder;
 	/**
 	  * 字段名称
 	  * nullable:false,length:64
@@ -49,7 +49,7 @@ public class MetadataFieldModel extends MetadataFieldBase implements Serializabl
 	private String fieldName;
 	/**
 	  * 字段描述
-	  * nullable:true,length:128
+	  * nullable:true,length:256
 	  */
 	@Column(comment = "字段描述")	
 	private String fieldMemo;
@@ -224,6 +224,13 @@ public class MetadataFieldModel extends MetadataFieldBase implements Serializabl
 	@Column(comment = "显示颜色")	
 	@NotNull
 	private String displayColor;
+	/**
+	  * 
+	  * nullable:false,length:19
+	  */
+	@Column(comment = "")	
+	@NotNull
+	private Date createTime;
     public Integer getFieldId(){
     	return this.fieldId;
     }
@@ -236,10 +243,10 @@ public class MetadataFieldModel extends MetadataFieldBase implements Serializabl
     public void setMetadataId(Integer metadataId){
     	this.metadataId = metadataId;
     }
-    public Short getFieldOrder(){
+    public Integer getFieldOrder(){
     	return this.fieldOrder;
     }
-    public void setFieldOrder(Short fieldOrder){
+    public void setFieldOrder(Integer fieldOrder){
     	this.fieldOrder = fieldOrder;
     }
     public String getFieldName(){
@@ -404,6 +411,12 @@ public class MetadataFieldModel extends MetadataFieldBase implements Serializabl
     public void setDisplayColor(String displayColor){
     	this.displayColor = displayColor;
     }
+    public Date getCreateTime(){
+    	return this.createTime;
+    }
+    public void setCreateTime(Date createTime){
+    	this.createTime = createTime;
+    }
 
     public static class EntityNode extends AbstractEntityNode<MetadataFieldModel> {
         public static final EntityNode INSTANCE = new EntityNode("mf");;
@@ -412,7 +425,7 @@ public class MetadataFieldModel extends MetadataFieldBase implements Serializabl
     	/** 元数据主表ID */
         public FieldNode<MetadataFieldModel, Integer> metadataId =  createFieldNode("metadataId","metadata_id",Integer.class,JdbcType.INTEGER);
     	/** 显示顺序 */
-        public FieldNode<MetadataFieldModel, Short> fieldOrder =  createFieldNode("fieldOrder","field_order",Short.class,JdbcType.SMALLINT);
+        public FieldNode<MetadataFieldModel, Integer> fieldOrder =  createFieldNode("fieldOrder","field_order",Integer.class,JdbcType.INTEGER);
     	/** 字段名称 */
         public FieldNode<MetadataFieldModel, String> fieldName =  createFieldNode("fieldName","field_name",String.class,JdbcType.VARCHAR);
     	/** 字段描述 */
@@ -467,6 +480,8 @@ public class MetadataFieldModel extends MetadataFieldBase implements Serializabl
         public FieldNode<MetadataFieldModel, Integer> fieldDecimal =  createFieldNode("fieldDecimal","field_decimal",Integer.class,JdbcType.INTEGER);
     	/** 显示颜色 */
         public FieldNode<MetadataFieldModel, String> displayColor =  createFieldNode("displayColor","display_color",String.class,JdbcType.VARCHAR);
+    	/**  */
+        public FieldNode<MetadataFieldModel, Date> createTime =  createFieldNode("createTime","create_time",Date.class,JdbcType.TIMESTAMP);
 	
         /**
          * @param alias 别名

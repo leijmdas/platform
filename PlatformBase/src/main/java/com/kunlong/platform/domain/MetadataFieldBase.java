@@ -71,6 +71,9 @@ public class MetadataFieldBase extends KunlongModel implements Serializable {
     public String getFieldType() {
         return "VARCHAR";
     }
+    public boolean isDateOnly() {
+        return getFieldType().equals("DATE");
+    }
 
     public boolean isDate() {
         return getFieldType().equals("DATE") || getFieldType().equals("TIMESTAMP") || getFieldType().equalsIgnoreCase("DATETIME");

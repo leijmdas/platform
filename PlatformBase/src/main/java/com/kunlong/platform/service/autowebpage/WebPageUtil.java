@@ -34,12 +34,12 @@ public class WebPageUtil {
     public List<String> makeWebPage(MetadataJoinService  metadataJoinService,Integer metadataId) throws IOException {
         this.metadataJoinService=metadataJoinService;
         String filename=makeWebPageTable(metadataId);
-        List<String> list=new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add(filename);
-        filename=makeWebPageEdit(metadataId);
+        filename = makeWebPageEdit(metadataId);
         list.add(filename);
 
-        filename= makeWebPageDefaultValue(metadataId);
+        filename = makeWebPageDefaultValue(metadataId);
         list.add(filename);
         return list;
     }
@@ -81,7 +81,12 @@ public class WebPageUtil {
                     webPageTable.append(String.format("\n\t\t\t\t{{row.%s?'是':'否'}}", fieldName));
                     webPageTable.append("\n\t\t\t</span>");
 
-                } else if (hasSrcDisplay) {
+                }
+//                else if (model.isDateOnly()) {
+//
+//                }
+//
+                else if (hasSrcDisplay) {
                     webPageTable.append(String.format("<span style='color:%s'>", model.getDisplayColor()));
                     webPageTable.append(String.format("\n\t\t\t{{row.%s}}", model.getRefObject().trim()));
                     webPageTable.append("</span>");
@@ -225,7 +230,13 @@ public class WebPageUtil {
             logger.info("model:{}", model);
             page.append(String.format("style='width:100%%' label='%s' prop='%s'>", model.getFieldMemo(), model.getFieldName()));
             // add BIT select BOOL类型
-            if (model.getFieldType().equals("BIT")) {
+            if (model.isDateOnly()) {
+                page.append("<el-date-picker style='width:100%'");
+                page.append(String.format("v-model='entity.%s'", model.getFieldName().trim()));
+                page.append(" format='yyyy 年 MM 月 dd 日'");
+                page.append(" value-format='yyyy-MM-dd HH:mm:ss'  type='date'");
+                page.append(" placeholder='选择日期'>  </el-date-picker>");
+            } else if (model.isBoolean()) {
                 page.append(String.format("\n\t\t\t<el-select style='width:100%%' v-model='entity.%s' ", model.getFieldName()));
                 if (model.getFieldReadonly()) {
                     page.append(" disabled");

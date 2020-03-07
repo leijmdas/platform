@@ -94,7 +94,7 @@ public class WebFileUtil  {
 	private void setJsonHeader(String fileName) throws UnsupportedEncodingException {
 		response.setHeader("content-disposition", "attachment;  filename=" + new String(fileName.getBytes("utf-8"), "ISO8859-1"));
 		response.setHeader("attachment-name", URLEncoder.encode(fileName,"utf-8"));
-		response.setContentType("text/plain;charset=UTF-8");
+		response.setContentType("text/plain;charset=utf-8");
 	}
 
 	//easyExcel

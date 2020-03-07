@@ -313,7 +313,7 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         for (String id : idss) {
             fieldModel = new MetadataFieldModel();
             fieldModel.setFieldId(Integer.valueOf(id));
-            fieldModel.setFieldOrder((short) (subsysId * 100 + ++i * 10));
+            fieldModel.setFieldOrder(  subsysId * 100 + ++i * 10 );
             metadataFieldModelService.updateNotNullPropsById(fieldModel);
         }
 
@@ -473,7 +473,7 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
             } else {
                 sql.append(fieldModel.getFieldIsNull() ? "  NULL " : "  NOT NULL ");
 
-                if (!fieldModel.isBlobText()
+                if (!fieldModel.isBlobText() && !fieldModel.getFieldIsNull()
                         && fieldModel.getFieldDefault() != null
                         && !fieldModel.getFieldDefault().isEmpty()) {
                     sql.append(" DEFAULT ");

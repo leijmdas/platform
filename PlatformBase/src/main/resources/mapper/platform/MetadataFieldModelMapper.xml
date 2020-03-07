@@ -4,7 +4,7 @@
 	<resultMap id="BaseResultMap" type="com.kunlong.platform.domain.MetadataFieldModel" >
 	    <id column="field_id" property="fieldId" jdbcType="INTEGER" />	
 	  	<result column="metadata_id" property="metadataId" jdbcType="INTEGER" />
-	  	<result column="field_order" property="fieldOrder" jdbcType="SMALLINT" />
+	  	<result column="field_order" property="fieldOrder" jdbcType="INTEGER" />
 	  	<result column="field_name" property="fieldName" jdbcType="VARCHAR" />
 	  	<result column="field_memo" property="fieldMemo" jdbcType="VARCHAR" />
 	  	<result column="field_type" property="fieldType" jdbcType="VARCHAR" />
@@ -32,11 +32,12 @@
 	  	<result column="field_max" property="fieldMax" jdbcType="VARCHAR" />
 	  	<result column="field_decimal" property="fieldDecimal" jdbcType="INTEGER" />
 	  	<result column="display_color" property="displayColor" jdbcType="VARCHAR" />
+	  	<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     </resultMap>
     <resultMap id="BaseResultMap_MetadataFieldModel" type="com.kunlong.platform.domain.MetadataFieldModel" >
 	    <id column="mf_field_id" property="fieldId" jdbcType="INTEGER" />	
 	  	<result column="mf_metadata_id" property="metadataId" jdbcType="INTEGER" />
-	  	<result column="mf_field_order" property="fieldOrder" jdbcType="SMALLINT" />
+	  	<result column="mf_field_order" property="fieldOrder" jdbcType="INTEGER" />
 	  	<result column="mf_field_name" property="fieldName" jdbcType="VARCHAR" />
 	  	<result column="mf_field_memo" property="fieldMemo" jdbcType="VARCHAR" />
 	  	<result column="mf_field_type" property="fieldType" jdbcType="VARCHAR" />
@@ -64,12 +65,13 @@
 	  	<result column="mf_field_max" property="fieldMax" jdbcType="VARCHAR" />
 	  	<result column="mf_field_decimal" property="fieldDecimal" jdbcType="INTEGER" />
 	  	<result column="mf_display_color" property="displayColor" jdbcType="VARCHAR" />
+	  	<result column="mf_create_time" property="createTime" jdbcType="TIMESTAMP" />
     </resultMap>
     <sql id="Base_Column_List" >
-  		field_id,metadata_id,field_order,field_name,field_memo,field_type,field_pk,field_auto,field_visible,field_size,field_displaysize,field_readonly,field_default,field_src,ref_object,ref_parameter,ref_field,ref_displayID,ref_filter,field_iscal,field_remark,field_isNull,ref_table,field_format,field_component,ref_pool,field_min,field_max,field_decimal,display_color
+  		field_id,metadata_id,field_order,field_name,field_memo,field_type,field_pk,field_auto,field_visible,field_size,field_displaysize,field_readonly,field_default,field_src,ref_object,ref_parameter,ref_field,ref_displayID,ref_filter,field_iscal,field_remark,field_isNull,ref_table,field_format,field_component,ref_pool,field_min,field_max,field_decimal,display_color,create_time
 	</sql>
   	<sql id="Base_Column_List_MetadataFieldModel" >
-  		mf.field_id mf_field_id,mf.metadata_id mf_metadata_id,mf.field_order mf_field_order,mf.field_name mf_field_name,mf.field_memo mf_field_memo,mf.field_type mf_field_type,mf.field_pk mf_field_pk,mf.field_auto mf_field_auto,mf.field_visible mf_field_visible,mf.field_size mf_field_size,mf.field_displaysize mf_field_displaysize,mf.field_readonly mf_field_readonly,mf.field_default mf_field_default,mf.field_src mf_field_src,mf.ref_object mf_ref_object,mf.ref_parameter mf_ref_parameter,mf.ref_field mf_ref_field,mf.ref_displayID mf_ref_displayID,mf.ref_filter mf_ref_filter,mf.field_iscal mf_field_iscal,mf.field_remark mf_field_remark,mf.field_isNull mf_field_isNull,mf.ref_table mf_ref_table,mf.field_format mf_field_format,mf.field_component mf_field_component,mf.ref_pool mf_ref_pool,mf.field_min mf_field_min,mf.field_max mf_field_max,mf.field_decimal mf_field_decimal,mf.display_color mf_display_color
+  		mf.field_id mf_field_id,mf.metadata_id mf_metadata_id,mf.field_order mf_field_order,mf.field_name mf_field_name,mf.field_memo mf_field_memo,mf.field_type mf_field_type,mf.field_pk mf_field_pk,mf.field_auto mf_field_auto,mf.field_visible mf_field_visible,mf.field_size mf_field_size,mf.field_displaysize mf_field_displaysize,mf.field_readonly mf_field_readonly,mf.field_default mf_field_default,mf.field_src mf_field_src,mf.ref_object mf_ref_object,mf.ref_parameter mf_ref_parameter,mf.ref_field mf_ref_field,mf.ref_displayID mf_ref_displayID,mf.ref_filter mf_ref_filter,mf.field_iscal mf_field_iscal,mf.field_remark mf_field_remark,mf.field_isNull mf_field_isNull,mf.ref_table mf_ref_table,mf.field_format mf_field_format,mf.field_component mf_field_component,mf.ref_pool mf_ref_pool,mf.field_min mf_field_min,mf.field_max mf_field_max,mf.field_decimal mf_field_decimal,mf.display_color mf_display_color,mf.create_time mf_create_time
 	</sql>
 	
 	<!-- 系统自定义 -->
@@ -170,6 +172,9 @@
 		    </if>
 			<if test="p.displayColor!=null and p.displayColor!=''">
 		    	and mf.display_color like #{p.displayColor}
+		    </if>
+			<if test="p.createTime!=null ">
+		    	and mf.create_time=#{p.createTime}
 		    </if>
 		</if>
 		<!--
