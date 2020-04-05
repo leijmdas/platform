@@ -8,7 +8,7 @@ import com.kunlong.platform.domain.MetadataDictModel;
 import com.kunlong.platform.model.KunlongError;
 import com.kunlong.platform.service.MetadataDictModelService;
 import com.kunlong.platform.utils.KunlongUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

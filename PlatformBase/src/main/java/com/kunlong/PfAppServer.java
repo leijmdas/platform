@@ -1,7 +1,7 @@
 package com.kunlong;
 
-import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
-import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubboConfig;
 import org.apache.ibatis.transaction.Transaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;

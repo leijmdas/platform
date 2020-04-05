@@ -4,7 +4,7 @@ package com.kunlong.platform.controller.web;
 import com.kunlong.dubbo.api.dto.FileInfoDTO;
 import com.kunlong.dubbo.api.service.FileApiService;
 import com.kunlong.platform.util.FileHelper;
-import org.apache.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

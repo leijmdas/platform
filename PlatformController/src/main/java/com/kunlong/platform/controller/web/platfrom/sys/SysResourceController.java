@@ -7,7 +7,7 @@ import com.kunlong.dubbo.sys.model.SysResourceGroupDTO;
 import com.kunlong.dubbo.sys.service.SysResourceApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.controller.web.BaseController;
-import org.apache.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

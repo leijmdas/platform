@@ -5,7 +5,7 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>kunlong</groupId>
-        <version>2.0</version>
+        <version>12.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
@@ -15,7 +15,7 @@
         <dependency>
             <groupId>kunlong</groupId>
             <artifactId>DubboApi</artifactId>
-            <version>2.0</version>
+            <version>12.0</version>
 
         </dependency>
         <dependency>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>kunlong</groupId>
             <artifactId>plat</artifactId>
-            <version>2.0</version>
+            <version>12.0</version>
         </dependency>
 
 

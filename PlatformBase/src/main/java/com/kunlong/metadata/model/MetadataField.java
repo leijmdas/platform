@@ -2,7 +2,8 @@ package com.kunlong.metadata.model;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.google.gson.Gson;
+import com.kunlong.platform.utils.KunlongUtils;
+
 
 import java.io.Serializable;
 
@@ -351,8 +352,8 @@ public class MetadataField implements Serializable {
 
 
     }
-
     public String toJson() {
-        return new Gson().toJson(this);
+        return KunlongUtils.toJSONString(this);
+
     }
 }

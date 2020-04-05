@@ -1,20 +1,20 @@
-package testcase;
+package com.kunlong.dubbo.pf.testcase;
 
-import com.kunlong.dubbo.api.service.AuthApiService;
-import com.kunlong.dubbo.sys.service.SysUserApiService;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.kunlong.dubbo.api.dto.queryParam.MetadataFieldModelQueryDTO;
 import com.kunlong.dubbo.api.model.MetadataDictModelDTO;
 import com.kunlong.dubbo.api.model.MetadataFieldModelDTO;
+import com.kunlong.dubbo.api.service.AuthApiService;
 import com.kunlong.dubbo.api.service.MailApiService;
 import com.kunlong.dubbo.api.service.MetadataDictApiService;
-import com.kunlong.dubbo.api.service.MetadataFieldApiService; ;
-import com.kunlong.platform.PfCtlApp;
+import com.kunlong.dubbo.api.service.MetadataFieldApiService;
+import com.kunlong.dubbo.sys.service.SysUserApiService;
+import com.kunlong.platform.PlatformDubboServer;
 import com.kunlong.platform.dao.TasklogMapper;
 import com.kunlong.platform.domain.Tasklog;
 import com.kunlong.platform.model.LoginSso;
 import com.kunlong.platform.service.RedisService;
 import com.kunlong.platform.utils.KunlongUtils;
-import com.alibaba.dubbo.config.annotation.Reference;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +26,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Date;
 import java.util.List;
 
+;
+
 /**
  * 
  * @name BaseTest
@@ -34,7 +36,7 @@ import java.util.List;
  * @description:
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = PfCtlApp.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = PlatformDubboServer.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 public class TestDubbo {
     @Reference(lazy = true, version = "1.0.0")

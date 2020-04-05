@@ -4,7 +4,7 @@ import com.kunlong.dubbo.sys.model.SysUserDTO;
 import com.kunlong.dubbo.sys.service.SysUserApiService;
 import com.kunlong.platform.context.PfContext;
 import com.kunlong.platform.exception.ApiBusinessException;
-import org.apache.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

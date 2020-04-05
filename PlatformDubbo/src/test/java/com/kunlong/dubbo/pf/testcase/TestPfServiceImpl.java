@@ -6,7 +6,7 @@ import com.kunlong.platform.PlatformDubboServer;
 import com.kunlong.metadata.model.DictDatatype;
 import com.kunlong.metadata.service.DictDataTypeService;
 import com.kunlong.platform.utils.KunlongUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

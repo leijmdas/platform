@@ -9,7 +9,7 @@ import com.kunlong.dubbo.sys.service.SysHttpJobApiService;
 import com.kunlong.dubbo.sys.service.SysJobGroupApiService;
 import com.kunlong.platform.consts.ApiConstants;
 import com.kunlong.platform.util.ValueFieldHelper;
-import org.apache.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

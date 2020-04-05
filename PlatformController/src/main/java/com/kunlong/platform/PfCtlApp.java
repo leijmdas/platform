@@ -1,7 +1,7 @@
 package com.kunlong.platform;
 
-import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
-import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubboConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +24,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 //@EnableCaching
 @EnableAsync
-@ImportResource(locations= {"classpath:appcontext.xml","classpath:/dubbo-provider.xml","classpath:/dubbo-consumer.xml"})
+//@ImportResource(locations= {"classpath:appcontext.xml","classpath:/dubbo-provider.xml","classpath:/dubbo-consumer.xml"})
+@ImportResource(locations= { "classpath:appcontext.xml" })
 public class PfCtlApp {
 
     public static void main(String[] args) {

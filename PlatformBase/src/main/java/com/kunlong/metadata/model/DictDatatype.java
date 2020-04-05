@@ -1,6 +1,8 @@
 package com.kunlong.metadata.model;
 
-import com.google.gson.Gson;
+
+import com.kunlong.platform.model.KunlongModel;
+import com.kunlong.platform.utils.KunlongUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,7 +10,7 @@ import java.util.Date;
 /**
  * @author 
  */
-public class DictDatatype implements Serializable {
+public class DictDatatype extends KunlongModel implements Serializable {
     /**
      * 字典ID
      */
@@ -134,6 +136,6 @@ public class DictDatatype implements Serializable {
     }
 
     public String toJson() {
-        return new Gson().toJson(this);
+        return KunlongUtils.toJSONString(this);
     }
 }

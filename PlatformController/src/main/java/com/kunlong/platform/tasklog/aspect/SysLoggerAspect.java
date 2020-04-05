@@ -6,7 +6,7 @@ import com.kunlong.platform.domain.Tasklog;
 import com.kunlong.platform.tasklog.service.LoggerService;
 import com.kunlong.platform.util.SecurityUtil;
 import com.kunlong.platform.utils.KunlongUtils;
-import org.apache.dubbo.common.utils.StringUtils;
+import com.alibaba.dubbo.common.utils.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

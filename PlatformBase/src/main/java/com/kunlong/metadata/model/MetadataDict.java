@@ -1,7 +1,7 @@
 package com.kunlong.metadata.model;
 
-import com.google.gson.Gson;
 import com.kunlong.platform.model.KunlongModel;
+import com.kunlong.platform.utils.KunlongUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -268,8 +268,8 @@ public class MetadataDict extends KunlongModel implements Serializable {
         this.metadataRemark = metadataRemark;
     }
 
-    public String toJson() {
-        return new Gson().toJson(this);
+    public String toJson() {   return KunlongUtils.toJSONString(this);
+
     }
 
 

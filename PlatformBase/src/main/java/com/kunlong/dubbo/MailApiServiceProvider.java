@@ -2,7 +2,7 @@ package com.kunlong.dubbo;
 
 import com.kunlong.dubbo.api.service.MailApiService;
 import com.kunlong.platform.service.impl.MailServiceImpl;
-import org.apache.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

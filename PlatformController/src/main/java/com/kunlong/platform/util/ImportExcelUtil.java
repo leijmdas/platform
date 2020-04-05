@@ -1,6 +1,6 @@
 package com.kunlong.platform.util;
 
-import org.apache.dubbo.common.utils.StringUtils;
+import com.alibaba.dubbo.common.utils.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;

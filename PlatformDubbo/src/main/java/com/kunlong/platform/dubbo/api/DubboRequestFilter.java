@@ -55,7 +55,7 @@ public class DubboRequestFilter implements Filter {
 			apiEx = new AppException("error_unknown",ex.getMessage());
 		}
 		RpcException rpcException = new RpcException(RpcException.BIZ_EXCEPTION,ex.getMessage(),apiEx);
-		r.setException(rpcException);
+		//r.setException(rpcException);
 		return r;
 	}
 	private AppException wrapDataAccessException(DataAccessException dEx) {

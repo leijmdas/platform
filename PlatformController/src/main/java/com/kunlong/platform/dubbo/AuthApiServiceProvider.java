@@ -6,7 +6,7 @@ import com.kunlong.dubbo.api.service.AuthApiService;
 import com.kunlong.platform.consts.SessionKeyEnum;
 import com.kunlong.platform.support.service.AuthService;
 import com.kunlong.platform.util.SessionHolder;
-import org.apache.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 

@@ -11,7 +11,7 @@ import com.kunlong.platform.context.PfContext;
 import com.kunlong.platform.controller.web.BaseController;
 import com.kunlong.platform.tasklog.aspect.SysLoggerAnnotation;
 import com.kunlong.platform.utils.KunlongUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

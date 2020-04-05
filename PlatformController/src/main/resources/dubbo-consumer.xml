@@ -8,10 +8,9 @@
            http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
 
-<!-- 通过refenerce注解无效->null(可能是因为springboot版本问题)，故采用xml -->
     
-    <dubbo:consumer retries="0" timeout="5000" check="false"></dubbo:consumer>
-    <dubbo:reference retries="2" interface="**">
+    <dubbo:consumer retries="0" timeout="5000" ></dubbo:consumer>
+    <dubbo:reference retries="2" interface="**" check="false">
     	<dubbo:method name="query**"></dubbo:method>
     	<dubbo:method name="find**"></dubbo:method>
     </dubbo:reference>

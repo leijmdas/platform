@@ -6,7 +6,7 @@ import com.kunlong.dubbo.sys.dto.queryParam.SysJobGroupQueryDTO;
 import com.kunlong.dubbo.sys.model.SysJobGroupDTO;
 import com.kunlong.dubbo.sys.service.SysJobGroupApiService;
 import com.kunlong.platform.consts.ApiConstants;
-import org.apache.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

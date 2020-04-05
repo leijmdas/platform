@@ -2,7 +2,7 @@ package com.kunlong.platform.controller.web.exceptionHandler;
 
 import app.support.exception.AppException;
 import com.alibaba.dubbo.rpc.RpcException;
-import org.apache.dubbo.remoting.TimeoutException;
+import com.alibaba.dubbo.remoting.TimeoutException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 
 import java.util.HashMap;

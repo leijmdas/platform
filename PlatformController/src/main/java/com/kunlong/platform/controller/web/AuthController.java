@@ -12,7 +12,7 @@ import com.kunlong.platform.util.SessionHolder;
 import com.kunlong.platform.support.service.AuthService;
 
 import com.kunlong.platform.utils.JsonResult;
-import org.apache.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
