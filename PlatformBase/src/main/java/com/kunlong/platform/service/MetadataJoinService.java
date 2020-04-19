@@ -49,5 +49,7 @@ public interface MetadataJoinService {
 
     int dbImportTableFields(Integer metadataId);
     List<Integer> dbImportTables(Integer subsysId);
+    List<Integer> dbImportTablesAsync(Integer subsysId);
+    List<Integer> dbImportTablesInc(Integer subsysId);
 
 }

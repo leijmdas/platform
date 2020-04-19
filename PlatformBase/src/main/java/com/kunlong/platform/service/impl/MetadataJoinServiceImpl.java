@@ -15,6 +15,7 @@ import com.kunlong.platform.utils.SqlSessionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,10 +24,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Service
 public class MetadataJoinServiceImpl implements MetadataJoinService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static ExecutorService EXECUTORS = Executors.newCachedThreadPool();
+
     @Autowired
     SubsysDictService subsysDictService;
 
@@ -178,9 +183,87 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
 
     }
 
+    public List<Integer> dbImportTablesInc(Integer subsysId) {
+        List<Integer> result = new ArrayList<>();
+        SubsysDict subsysDict = subsysDictService.findById(subsysId);
+        if (subsysDict == null) {
+            logger.warn("dbImportTables dataModel is null! subsysId:{}",subsysId);
+            return  result;
+        }
+
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" select * from v_table  where metadata_db='");
+        sql.append( subsysDict.getRemark().trim() ).append("'");
+        sql.append(" order by metadata_name ");
+
+        List<MetadataDictModel> dictModels = sqlSessionUtil.selectList(sql, MetadataDictModel.class);
+        if (dictModels.size() == 0) {
+            logger.info("dbImportTables dictModels is empty! sql :{}", sql);
+            return result;
+        }  else {
+            importDbInc(result, subsysId, dictModels);
+        }
+        return result;
+    }
+    void importDbInc(List<Integer> result, int subsysId, List<MetadataDictModel> dictModels) {
+        int i = 10;
+        MetadataDictModel.QueryParam queryParam = new MetadataDictModel.QueryParam();
+        queryParam.setParam(new MetadataDictModel());
+        queryParam.getParam().setSubsysId(subsysId);
+        for (MetadataDictModel dictModel : dictModels) {
+            dictModel.setSubsysId(subsysId);
+            dictModel.setMetadataType(1);
+            dictModel.setMetadataAutocreate(true);
+            dictModel.setMetadataSortFields(" ");
+            dictModel.setExpTagtableHead(false);
+            dictModel.setMetadataOrder(i++);
+            dictModel.setMetadataAddDel(false);
+            dictModel.setMetadataReadonly(false);
+            dictModel.setRefSrc((byte) 0);
+            dictModel.setRefObject(" ");
+            dictModel.setRefParam(" ");
+            if (dictModel.getMetadataAlias().trim().isEmpty()
+                    || dictModel.getMetadataAlias().trim().equalsIgnoreCase("VIEW")) {
+                dictModel.setMetadataAlias(dictModel.getMetadataName().trim());
+            }
+            queryParam.getParam().setMetadataName(dictModel.getMetadataName().trim());
+            List<MetadataDictModel> metadataDictModels = metadataDictModelService.findByQueryParam(queryParam);
+            if (metadataDictModels != null && metadataDictModels.size() > 0) {
+                continue;
+            }
+            metadataDictModelService.save(dictModel);
+            result.add(dictModel.getMetadataId());
+            dbImportTableFields(dictModel.getMetadataId());
+        }
+    }
+    @Async
+    public List<Integer> dbImportTablesAsync(Integer subsysId) {
+        List<Integer> result = new ArrayList<>();
+        SubsysDict subsysDict = subsysDictService.findById(subsysId);
+        if (subsysDict == null) {
+            logger.warn("dbImportTables dataModel is null! subsysId:{}",subsysId);
+            return  result;
+        }
+
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" select * from v_table  where metadata_db='");
+        sql.append( subsysDict.getRemark().trim() ).append("'");
+        sql.append(" order by metadata_name ");
+
+        List<MetadataDictModel> dictModels = sqlSessionUtil.selectList(sql, MetadataDictModel.class);
+        if (dictModels.size() == 0) {
+            logger.info("dbImportTables dictModels is empty! sql :{}", sql);
+            return result;
+        }  else {
+            importDb(result, subsysId, dictModels);
+        }
+        return result;
+    }
+
     // @Transactional(rollbackFor=Exception.class) select * from v_table  where metadata_db='dmp' limit 1 transactionManager="pfTransactionManager"
-    //@Transactional(rollbackFor=Exception.class)
-    @PfTransactional()
+    // @Transactional(rollbackFor=Exception.class)
+    // @PfTransactional()
+    // @Async
     public List<Integer> dbImportTables(Integer subsysId) {
         List<Integer> result = new ArrayList<>();
         SubsysDict subsysDict = subsysDictService.findById(subsysId);
@@ -198,9 +281,26 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
         if (dictModels.size() == 0) {
             logger.info("dbImportTables dictModels is empty! sql :{}", sql);
             return result;
-        }
-        int i = 10;
+        } else if (dictModels.size() > 100) {
+            result.add(-1);//execute submit
+            EXECUTORS.execute(new Runnable() {
+                @Override
+                public void run() {
+                    importDb(result, subsysId, dictModels);
+                }
+            });
+        } else {
+            importDb(result, subsysId, dictModels);
 
+        }
+        return result;
+    }
+
+    void importDb(List<Integer> result, int subsysId, List<MetadataDictModel> dictModels) {
+        int i = 10;
+        MetadataDictModel.QueryParam queryParam = new MetadataDictModel.QueryParam();
+        queryParam.setParam(new MetadataDictModel());
+        queryParam.getParam().setSubsysId(subsysId);
         for (MetadataDictModel dictModel : dictModels) {
             dictModel.setSubsysId(subsysId);
             dictModel.setMetadataType(1);
@@ -210,21 +310,31 @@ public class MetadataJoinServiceImpl implements MetadataJoinService {
             dictModel.setMetadataOrder(i++);
             dictModel.setMetadataAddDel(false);
             dictModel.setMetadataReadonly(false);
-            dictModel.setRefSrc((byte)0);
+            dictModel.setRefSrc((byte) 0);
             dictModel.setRefObject(" ");
             dictModel.setRefParam(" ");
-            if(dictModel.getMetadataAlias().trim().isEmpty()){
-                dictModel.setMetadataAlias(dictModel.getMetadataName());
+            if (dictModel.getMetadataAlias().trim().isEmpty()
+                    || dictModel.getMetadataAlias().trim().equalsIgnoreCase("VIEW")) {
+                dictModel.setMetadataAlias(dictModel.getMetadataName().trim());
             }
-            metadataDictModelService.save(dictModel);
+            queryParam.getParam().setMetadataName(dictModel.getMetadataName().trim());
+            List<MetadataDictModel> metadataDictModels = metadataDictModelService.findByQueryParam(queryParam);
+            if (metadataDictModels != null && metadataDictModels.size() > 0) {
+                dictModel.setMetadataId(metadataDictModels.get(0).getMetadataId());
+                if (dictModels.size() <= 100) {
+                    metadataDictModelService.update(dictModel);
+                }
+            } else {
+                metadataDictModelService.save(dictModel);
+            }
+
             result.add(dictModel.getMetadataId());
             dbImportTableFields(dictModel.getMetadataId());
         }
-        return result;
     }
-
     // select * from v_col where db_name="dongxw" and table_name='bom'
     //@Transactional(transactionManager="pfTransactionManager",rollbackFor=Exception.class)
+    @Async
     @PfTransactional()
     public int dbImportTableFields(Integer metadataId) {
         MetadataDictModel dictModel = metadataDictModelService.findById(metadataId);

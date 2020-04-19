@@ -149,7 +149,30 @@ public class MetadataTableController extends BaseController {
         }
         return JsonResult.success(result);
     }
+    //异步刷新
+    @PostMapping("/dbImportTablesAsync/{subsysId}")
+    public @ResponseBody
+    JsonResult<List<Integer>> dbImportTablesAsync(@PathVariable("subsysId") Integer subsysId) {
+        if (subsysId == null) {
+            return JsonResult.failure(null, "subsysId is null!");
+        }
+        List<Integer> result = metadataJoinService.dbImportTablesAsync(subsysId);
 
+        return JsonResult.success(result);
+    }
+    //增量刷新
+    @PostMapping("/dbImportTablesInc/{subsysId}")
+    public @ResponseBody
+    JsonResult<List<Integer>> dbImportTablesInc(@PathVariable("subsysId") Integer subsysId) {
+        if (subsysId == null) {
+            return JsonResult.failure(null, "subsysId is null!");
+        }
+        List<Integer> result = metadataJoinService.dbImportTablesInc(subsysId);
+        if (result.size() == 0) {
+            return JsonResult.failure(result, "数据库无增量表需要刷新！");
+        }
+        return JsonResult.success(result);
+    }
 
     // 处理文件上传
     @RequestMapping(value = "/uploadDict", method = RequestMethod.POST)

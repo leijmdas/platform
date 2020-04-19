@@ -2,6 +2,7 @@ package com.kunlong.platform.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.kunlong.platform.domain.MetadataDictModel;
 import com.kunlong.platform.dao.MetadataDictModelMapper;
@@ -32,6 +33,7 @@ public class MetadataDictModelServiceImpl implements MetadataDictModelService {
 	 * 修改
 	 * @param entity
 	 */
+	@Async
 	public void update(MetadataDictModel entity){
 		this.checkEntity(entity);
 		repo.update(entity);
