@@ -124,7 +124,14 @@ public class JsonResult<T> extends KunlongModel implements java.io.Serializable 
 	}
 
 
-    public static <T> JsonResult<T> failure(T data) {
+	public static <T> JsonResult<T> failure( String msg) {
+		JsonResult<T> result = new JsonResult(CODE_FAIL);
+		result.setMsg(msg);
+		return result;
+	}
+
+
+	public static <T> JsonResult<T> failure(T data) {
         JsonResult<T> result = new JsonResult<T>(CODE_FAIL, data);
         result.setMsg("失败");
         return result;
