@@ -60,22 +60,22 @@
 
 	<!--myibatis log configure -->
 	<logger name="com.apache.ibatis" level="TRACE" />
-	<logger name="java.sql" level="INFO" />
+	<logger name="java.sql" level="ERROR" />
 	<!-- oauth -->
-	<logger name="org.springframework.security.oauth2" level="INFO" />
-	<logger name="com.netflix" level="INFO" />
-	<logger name="org.apache.http" level="INFO" />
-	<logger name="org.springframework.amqp.rabbit" level="INFO" />
+	<logger name="org.springframework.security.oauth2" level="ERROR" />
+	<logger name="com.netflix" level="ERROR" />
+	<logger name="org.apache.http" level="ERROR" />
+	<logger name="org.springframework.amqp.rabbit" level="ERROR" />
 	<!-- quartz -->
-	<logger name="org.quartz.core.QuartzSchedulerThread" level="INFO" />
+	<logger name="org.quartz.core.QuartzSchedulerThread" level="ERROR" />
 
-	<logger name="org.activiti" level="INFO"></logger>
-	<logger name="com.kunlong"  level="INFO"></logger>
-	<logger name="testcase"  level="INFO"></logger>
-	<!--<logger name="com.kunlong.metadata.service.impl.SysMetaDataServiceImpl"  level="INFO"></logger>-->
+	<logger name="org.activiti" level="ERROR"></logger>
+	<logger name="com.kunlong"  level="ERROR"></logger>
+	<logger name="testcase"  level="ERROR"></logger>
+	<!--<logger name="com.kunlong.metadata.service.impl.SysMetaDataServiceImpl"  level="ERROR"></logger>-->
 
 	<!-- async log -->
-	<logger name="AsyncLog" level="INFO" additivity="false">
+	<logger name="AsyncLog" level="ERROR" additivity="false">
 		<appender-ref ref="ASYNCOUT" />
 	</logger>
 	<!-- swagger -->
@@ -83,21 +83,21 @@
 	<!-- 日志输出级别 -->
 	<!--开发环境 -->
 	<springProfile name="dev">
-		<root level="DEBUG">
+		<root level="ERROR">
 			<appender-ref ref="FILE" />
 			<appender-ref ref="STDOUT" />
 		</root>
 	</springProfile>
 	<!--测试环境 -->
 	<springProfile name="test">
-		<root level="DEBUG">
+		<root level="ERROR">
 			<appender-ref ref="FILE" />
 			<appender-ref ref="STDOUT" />
 		</root>
 	</springProfile>
 	<!--生产环境 -->
 	<springProfile name="prd">
-		<root level="INFO">
+		<root level="ERROR">
 			<appender-ref ref="FILE" />
 		</root>
 	</springProfile>
