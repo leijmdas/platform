@@ -207,5 +207,21 @@ public final class KunlongUtils {
         return new BigDecimal(value).setScale(newScale, BigDecimal.ROUND_HALF_UP);
     }
 
+    public static Date getFirstDayOfMonth (Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set( Calendar.DAY_OF_MONTH,1);
+        return calendar.getTime();
+
+    }
+
+    public static Date getLastDayOfMonth (Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set( Calendar.DAY_OF_MONTH,1);
+        calendar.add( Calendar.MONTH,1);
+        calendar.add( Calendar.DAY_OF_MONTH,-1);
+        return calendar.getTime();
+    }
 }
 
