@@ -1,7 +1,7 @@
 package com.kunlong.platform.model;
 
  
-import com.alibaba.excel.metadata.BaseRowModel;
+//import com.alibaba.excel.metadata.BaseRowModel;
 import com.kunlong.platform.utils.KunlongUtils;
 
 import java.lang.reflect.Field;

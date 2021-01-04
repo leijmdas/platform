@@ -1,18 +1,18 @@
 package com.kunlong.platform.util;
 
 
-import com.alibaba.excel.ExcelWriter;
+/*import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
-import com.alibaba.excel.support.ExcelTypeEnum;
+import com.alibaba.excel.support.ExcelTypeEnum;*/
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.Arrays;
+//import java.util.List;
 import java.util.Map;
 
 
@@ -81,7 +81,7 @@ public class WebFileUtil  {
 	public void export2Excel(String templateName,Map<String,Object> params,String fileName) throws FileNotFoundException, IOException {
 		setExcelHeader(fileName);
 		
-		JxlsUtil.exportExcel(resovePath(dir+"/"+templateName),  params,this.response.getOutputStream());
+	//	JxlsUtil.exportExcel(resovePath(dir+"/"+templateName),  params,this.response.getOutputStream());
 		
 	}
 	public void export2JsonFile(String fileName,String content,HttpServletResponse rsp) throws IOException {
@@ -98,29 +98,29 @@ public class WebFileUtil  {
 	}
 
 	//easyExcel
-	public void export2EasyExcel(String fileName, List<String> titleNames, List<List<String>> records) throws IOException {
-		setExcelHeader(fileName);
-		OutputStream out = response.getOutputStream();
-
-		ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
-
-		// 设置SHEET
-		Sheet sheet = new Sheet(1, 0);
-		sheet.setSheetName("明细单");
-
-		// 设置标题
-		Table table = new Table(1);
-		List<List<String>> titles = new ArrayList<List<String>>();
-		for(String name:titleNames){
-			titles.add(Arrays.asList(name));
-
-		}
-		table.setHead(titles);
-
-		writer.write0(records, sheet, table);
-		writer.finish();
-
-	}
+//	public void export2EasyExcel(String fileName, List<String> titleNames, List<List<String>> records) throws IOException {
+//		setExcelHeader(fileName);
+//		OutputStream out = response.getOutputStream();
+//
+//		ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
+//
+//		// 设置SHEET
+//		Sheet sheet = new Sheet(1, 0);
+//		sheet.setSheetName("明细单");
+//
+//		// 设置标题
+//		Table table = new Table(1);
+//		List<List<String>> titles = new ArrayList<List<String>>();
+//		for(String name:titleNames){
+//			titles.add(Arrays.asList(name));
+//
+//		}
+//		table.setHead(titles);
+//
+//		writer.write0(records, sheet, table);
+//		writer.finish();
+//
+//	}
 
 	private static String resovePath(String path) {
 		return StringUtil.resolveUrl(path);

@@ -1,11 +1,11 @@
 package com.kunlong.platform.model;
 
-import com.alibaba.excel.metadata.BaseRowModel;
+//mport com.alibaba.excel.metadata.BaseRowModel;
 import com.kunlong.platform.utils.KunlongUtils;
 
 import java.math.BigDecimal;
 
-public class BaseRowKlModel extends BaseRowModel{
+public class BaseRowKlModel  { //extends BaseRowModel{
 
     @Override
     public String toString() {

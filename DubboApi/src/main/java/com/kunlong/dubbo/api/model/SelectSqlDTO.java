@@ -2,7 +2,6 @@ package com.kunlong.dubbo.api.model;
 
 import org.mockito.internal.util.StringUtil;
 
-//import org.apache.poi.util.StringUtil;
 
 /**
  * Created by ZYB on 2018/9/13 14:43
