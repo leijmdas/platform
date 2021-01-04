@@ -40,7 +40,7 @@
         <spring.version>5.1.9.RELEASE</spring.version>
         <project.version>1.0</project.version>
 
-        <zookeeper.version>3.4.7</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
         <zkclient.version>0.1</zkclient.version>
         <curator.version>4.0.1</curator.version>
 
